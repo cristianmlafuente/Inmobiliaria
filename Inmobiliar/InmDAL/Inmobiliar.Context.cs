@@ -27,5 +27,12 @@ namespace InmDAL
     
         public virtual DbSet<Domicilios> Domicilios { get; set; }
         public virtual DbSet<Personas> Personas { get; set; }
+        public virtual DbSet<Contrato_ImpuestoServicio> Contrato_ImpuestoServicio { get; set; }
+        public virtual DbSet<Propiedades> Propiedades { get; set; }
+        public virtual DbSet<Contratos> Contratos { get; set; }
+        public virtual DbSet<TiposImpuestosServicios> TiposImpuestosServicios { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
+        public virtual DbSet<Usuario_Rol> Usuario_Rol { get; set; }
     }
 }

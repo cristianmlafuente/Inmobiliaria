@@ -7,6 +7,21 @@
       <Diagram DiagramId="a9e13702312e4b0f94848a616f2634ab" Name="Diagram1">
         <EntityTypeShape EntityType="ClientesModel.Domicilios" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ClientesModel.Personas" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientesModel.Contrato_ImpuestoServicio" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ClientesModel.Propiedades" Width="1.5" PointX="5" PointY="0.75" />
+        <AssociationConnector Association="ClientesModel.FK_Propiedades_Domicilios" />
+        <AssociationConnector Association="ClientesModel.FK_Propiedades_Propietario" />
+        <EntityTypeShape EntityType="ClientesModel.Contratos" Width="1.5" PointX="7.25" PointY="0.75" />
+        <EntityTypeShape EntityType="ClientesModel.TiposImpuestosServicios" Width="1.5" PointX="0.75" PointY="9.25" />
+        <AssociationConnector Association="ClientesModel.FK_Contrato_Inquilino" />
+        <AssociationConnector Association="ClientesModel.FK_Contrato_Propiedad" />
+        <AssociationConnector Association="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato" />
+        <AssociationConnector Association="ClientesModel.FK_Contrato_ImpuestoServicio_ImpuestoServicio" />
+        <EntityTypeShape EntityType="ClientesModel.Roles" Width="1.5" PointX="3.25" PointY="5.75" />
+        <EntityTypeShape EntityType="ClientesModel.Usuarios" Width="1.5" PointX="8.5" PointY="5.625" />
+        <EntityTypeShape EntityType="ClientesModel.Usuario_Rol" Width="1.5" PointX="6" PointY="5.625" />
+        <AssociationConnector Association="ClientesModel.FK_Usuario_Rol_Rol" />
+        <AssociationConnector Association="ClientesModel.FK_Usuario_Rol_Usuarios" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

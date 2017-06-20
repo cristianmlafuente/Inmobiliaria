@@ -12,6 +12,7 @@
     <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Numero" Type="Int32" />
     <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Propiedades" Relationship="ClientesModel.FK_Propiedades_Domicilios" FromRole="Domicilios" ToRole="Propiedades" />
   </EntityType>
   <EntityType Name="Personas">
     <Key>
@@ -25,9 +26,235 @@
     <Property Name="Celular" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="TelefonoLaboral" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="DU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Propiedades" Relationship="ClientesModel.FK_Propiedades_Propietario" FromRole="Personas" ToRole="Propiedades" />
+    <NavigationProperty Name="Contratos" Relationship="ClientesModel.FK_Contrato_Inquilino" FromRole="Personas" ToRole="Contratos" />
   </EntityType>
   <EntityContainer Name="ClientesEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Domicilios" EntityType="Self.Domicilios" />
     <EntitySet Name="Personas" EntityType="Self.Personas" />
+    <EntitySet Name="Contrato_ImpuestoServicio" EntityType="ClientesModel.Contrato_ImpuestoServicio" />
+    <EntitySet Name="Propiedades" EntityType="ClientesModel.Propiedades" />
+    <AssociationSet Name="FK_Propiedades_Domicilios" Association="ClientesModel.FK_Propiedades_Domicilios">
+      <End Role="Domicilios" EntitySet="Domicilios" />
+      <End Role="Propiedades" EntitySet="Propiedades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Propiedades_Propietario" Association="ClientesModel.FK_Propiedades_Propietario">
+      <End Role="Personas" EntitySet="Personas" />
+      <End Role="Propiedades" EntitySet="Propiedades" />
+    </AssociationSet>
+    <EntitySet Name="Contratos" EntityType="ClientesModel.Contratos" />
+    <EntitySet Name="TiposImpuestosServicios" EntityType="ClientesModel.TiposImpuestosServicios" />
+    <AssociationSet Name="FK_Contrato_Inquilino" Association="ClientesModel.FK_Contrato_Inquilino">
+      <End Role="Personas" EntitySet="Personas" />
+      <End Role="Contratos" EntitySet="Contratos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contrato_Propiedad" Association="ClientesModel.FK_Contrato_Propiedad">
+      <End Role="Propiedades" EntitySet="Propiedades" />
+      <End Role="Contratos" EntitySet="Contratos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contrato_ImpuestoServicio_Contrato" Association="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato">
+      <End Role="Contratos" EntitySet="Contratos" />
+      <End Role="Contrato_ImpuestoServicio" EntitySet="Contrato_ImpuestoServicio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contrato_ImpuestoServicio_ImpuestoServicio" Association="ClientesModel.FK_Contrato_ImpuestoServicio_ImpuestoServicio">
+      <End Role="TiposImpuestosServicios" EntitySet="TiposImpuestosServicios" />
+      <End Role="Contrato_ImpuestoServicio" EntitySet="Contrato_ImpuestoServicio" />
+    </AssociationSet>
+    <EntitySet Name="Roles" EntityType="ClientesModel.Roles" />
+    <EntitySet Name="Usuarios" EntityType="ClientesModel.Usuarios" />
+    <EntitySet Name="Usuario_Rol" EntityType="ClientesModel.Usuario_Rol" />
+    <AssociationSet Name="FK_Usuario_Rol_Rol" Association="ClientesModel.FK_Usuario_Rol_Rol">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_Rol_Usuarios" Association="ClientesModel.FK_Usuario_Rol_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Contrato_ImpuestoServicio">
+    <Key>
+      <PropertyRef Name="CodImpuesto" />
+      <PropertyRef Name="IdContrato" />
+    </Key>
+    <Property Name="CodImpuesto" Type="Int32" Nullable="false" />
+    <Property Name="IdContrato" Type="Int32" Nullable="false" />
+    <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Contratos" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato" FromRole="Contrato_ImpuestoServicio" ToRole="Contratos" />
+    <NavigationProperty Name="TiposImpuestosServicios" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_ImpuestoServicio" FromRole="Contrato_ImpuestoServicio" ToRole="TiposImpuestosServicios" />
+  </EntityType>
+  <EntityType Name="Propiedades">
+    <Key>
+      <PropertyRef Name="IdEstate" />
+    </Key>
+    <Property Name="IdEstate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdAddress" Type="Int32" />
+    <Property Name="IdOwner" Type="Int32" />
+    <Property Name="Propiedad" Type="Int32" />
+    <Property Name="NomenclaturaCatastral" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NumeroCtaRenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdAdmConsorcio" Type="Int32" />
+    <Property Name="UnidadFacturacion" Type="Int32" />
+    <Property Name="NroFactura" Type="Int32" />
+    <Property Name="NroContratoEpec" Type="Int32" />
+    <NavigationProperty Name="Domicilios" Relationship="ClientesModel.FK_Propiedades_Domicilios" FromRole="Propiedades" ToRole="Domicilios" />
+    <NavigationProperty Name="Personas" Relationship="ClientesModel.FK_Propiedades_Propietario" FromRole="Propiedades" ToRole="Personas" />
+    <NavigationProperty Name="Contratos" Relationship="ClientesModel.FK_Contrato_Propiedad" FromRole="Propiedades" ToRole="Contratos" />
+  </EntityType>
+  <Association Name="FK_Propiedades_Domicilios">
+    <End Type="ClientesModel.Domicilios" Role="Domicilios" Multiplicity="0..1" />
+    <End Type="ClientesModel.Propiedades" Role="Propiedades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Domicilios">
+        <PropertyRef Name="IdAddress" />
+      </Principal>
+      <Dependent Role="Propiedades">
+        <PropertyRef Name="IdAddress" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Propiedades_Propietario">
+    <End Type="ClientesModel.Personas" Role="Personas" Multiplicity="0..1" />
+    <End Type="ClientesModel.Propiedades" Role="Propiedades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personas">
+        <PropertyRef Name="IdPeople" />
+      </Principal>
+      <Dependent Role="Propiedades">
+        <PropertyRef Name="IdOwner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Contratos">
+    <Key>
+      <PropertyRef Name="IdContrato" />
+    </Key>
+    <Property Name="IdContrato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NroContrato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdEstate" Type="Int32" />
+    <Property Name="IdInquilino" Type="Int32" />
+    <Property Name="FechaContrato" Type="DateTime" Precision="3" />
+    <Property Name="PeriodoMeses" Type="Int32" />
+    <Property Name="Incrementos" Type="Int32" />
+    <Property Name="Porsentaje" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="IdGarantePropietario" Type="Int32" />
+    <Property Name="IdGaranteLaboral1" Type="Int32" />
+    <Property Name="IdGaranteLaboral2" Type="Int32" />
+    <Property Name="IdGatanteLaboral3" Type="Int32" />
+    <Property Name="MontoInicialAlquiler" Type="Decimal" Precision="12" Scale="2" />
+    <NavigationProperty Name="Personas" Relationship="ClientesModel.FK_Contrato_Inquilino" FromRole="Contratos" ToRole="Personas" />
+    <NavigationProperty Name="Propiedades" Relationship="ClientesModel.FK_Contrato_Propiedad" FromRole="Contratos" ToRole="Propiedades" />
+    <NavigationProperty Name="Contrato_ImpuestoServicio" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato" FromRole="Contratos" ToRole="Contrato_ImpuestoServicio" />
+  </EntityType>
+  <EntityType Name="TiposImpuestosServicios">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Contrato_ImpuestoServicio" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_ImpuestoServicio" FromRole="TiposImpuestosServicios" ToRole="Contrato_ImpuestoServicio" />
+  </EntityType>
+  <Association Name="FK_Contrato_Inquilino">
+    <End Type="ClientesModel.Personas" Role="Personas" Multiplicity="1" />
+    <End Type="ClientesModel.Contratos" Role="Contratos" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Personas">
+        <PropertyRef Name="IdPeople" />
+      </Principal>
+      <Dependent Role="Contratos">
+        <PropertyRef Name="IdContrato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contrato_Propiedad">
+    <End Type="ClientesModel.Propiedades" Role="Propiedades" Multiplicity="0..1" />
+    <End Type="ClientesModel.Contratos" Role="Contratos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propiedades">
+        <PropertyRef Name="IdEstate" />
+      </Principal>
+      <Dependent Role="Contratos">
+        <PropertyRef Name="IdEstate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contrato_ImpuestoServicio_Contrato">
+    <End Type="ClientesModel.Contratos" Role="Contratos" Multiplicity="1" />
+    <End Type="ClientesModel.Contrato_ImpuestoServicio" Role="Contrato_ImpuestoServicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contratos">
+        <PropertyRef Name="IdContrato" />
+      </Principal>
+      <Dependent Role="Contrato_ImpuestoServicio">
+        <PropertyRef Name="IdContrato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contrato_ImpuestoServicio_ImpuestoServicio">
+    <End Type="ClientesModel.TiposImpuestosServicios" Role="TiposImpuestosServicios" Multiplicity="1" />
+    <End Type="ClientesModel.Contrato_ImpuestoServicio" Role="Contrato_ImpuestoServicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposImpuestosServicios">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Contrato_ImpuestoServicio">
+        <PropertyRef Name="CodImpuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="IdRol" />
+    </Key>
+    <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuario_Rol" Relationship="ClientesModel.FK_Usuario_Rol_Rol" FromRole="Roles" ToRole="Usuario_Rol" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="SecondName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Pass" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuario_Rol" Relationship="ClientesModel.FK_Usuario_Rol_Usuarios" FromRole="Usuarios" ToRole="Usuario_Rol" />
+  </EntityType>
+  <EntityType Name="Usuario_Rol">
+    <Key>
+      <PropertyRef Name="IdUser" />
+      <PropertyRef Name="IdRol" />
+    </Key>
+    <Property Name="IdUser" Type="Int32" Nullable="false" />
+    <Property Name="IdRol" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="DownDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Roles" Relationship="ClientesModel.FK_Usuario_Rol_Rol" FromRole="Usuario_Rol" ToRole="Roles" />
+    <NavigationProperty Name="Usuarios" Relationship="ClientesModel.FK_Usuario_Rol_Usuarios" FromRole="Usuario_Rol" ToRole="Usuarios" />
+  </EntityType>
+  <Association Name="FK_Usuario_Rol_Rol">
+    <End Type="ClientesModel.Roles" Role="Roles" Multiplicity="1" />
+    <End Type="ClientesModel.Usuario_Rol" Role="Usuario_Rol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="Usuario_Rol">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_Rol_Usuarios">
+    <End Type="ClientesModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+    <End Type="ClientesModel.Usuario_Rol" Role="Usuario_Rol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Usuario_Rol">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

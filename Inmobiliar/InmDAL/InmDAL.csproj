@@ -55,7 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Contratos.cs">
+      <DependentUpon>Inmobiliar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contrato_ImpuestoServicio.cs">
+      <DependentUpon>Inmobiliar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domicilios.cs">
       <DependentUpon>Inmobiliar.tt</DependentUpon>
     </Compile>
@@ -78,6 +83,21 @@
       <DependentUpon>Inmobiliar.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Propiedades.cs">
+      <DependentUpon>Inmobiliar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Roles.cs">
+      <DependentUpon>Inmobiliar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TiposImpuestosServicios.cs">
+      <DependentUpon>Inmobiliar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios.cs">
+      <DependentUpon>Inmobiliar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario_Rol.cs">
+      <DependentUpon>Inmobiliar.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

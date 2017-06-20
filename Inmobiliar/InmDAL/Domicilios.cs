@@ -14,6 +14,12 @@ namespace InmDAL
     
     public partial class Domicilios
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Domicilios()
+        {
+            this.Propiedades = new HashSet<Propiedades>();
+        }
+    
         public int IdAddress { get; set; }
         public string Calle { get; set; }
         public string Ciudad { get; set; }
@@ -22,5 +28,8 @@ namespace InmDAL
         public string Dto { get; set; }
         public Nullable<int> Numero { get; set; }
         public string Barrio { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Propiedades> Propiedades { get; set; }
     }
 }

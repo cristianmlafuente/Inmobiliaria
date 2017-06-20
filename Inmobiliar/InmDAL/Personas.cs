@@ -14,6 +14,12 @@ namespace InmDAL
     
     public partial class Personas
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Personas()
+        {
+            this.Propiedades = new HashSet<Propiedades>();
+        }
+    
         public int IdPeople { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -22,5 +28,9 @@ namespace InmDAL
         public string Celular { get; set; }
         public string TelefonoLaboral { get; set; }
         public string DU { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Propiedades> Propiedades { get; set; }
+        public virtual Contratos Contratos { get; set; }
     }
 }
