@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inmobiliar", "Inmobiliar\Inmobiliar.csproj", "{921BDC47-2F84-490E-BACE-41A58EB704BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AE350170-1589-436F-B1AD-E4B5CA55F5F4}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InmBLL", "InmBLL\InmBLL.csproj", "{5CBFBF80-A7D7-4030-98E9-B6821755BD52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InmDAL", "InmDAL\InmDAL.csproj", "{61D48FB0-9BDC-445D-9854-EC7A3EA642B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{921BDC47-2F84-490E-BACE-41A58EB704BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{921BDC47-2F84-490E-BACE-41A58EB704BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{921BDC47-2F84-490E-BACE-41A58EB704BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{921BDC47-2F84-490E-BACE-41A58EB704BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CBFBF80-A7D7-4030-98E9-B6821755BD52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CBFBF80-A7D7-4030-98E9-B6821755BD52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CBFBF80-A7D7-4030-98E9-B6821755BD52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CBFBF80-A7D7-4030-98E9-B6821755BD52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61D48FB0-9BDC-445D-9854-EC7A3EA642B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61D48FB0-9BDC-445D-9854-EC7A3EA642B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61D48FB0-9BDC-445D-9854-EC7A3EA642B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61D48FB0-9BDC-445D-9854-EC7A3EA642B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
