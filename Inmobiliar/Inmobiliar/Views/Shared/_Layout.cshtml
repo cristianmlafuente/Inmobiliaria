@@ -39,7 +39,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>                
-                <a class="navbar-brand" href="index.html">Dream</a>
+                <a class="navbar-brand" href="index.html">Panel</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -47,7 +47,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-messages">
+                    @*<ul class="dropdown-menu dropdown-messages">
                         <li>
                             <a href="#">
                                 <div>
@@ -90,7 +90,7 @@
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
-                    </ul>
+                    </ul>*@
                     <!-- /.dropdown-messages -->
                 </li>
                 <!-- /.dropdown -->
@@ -98,7 +98,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-tasks">
+                    @*<ul class="dropdown-menu dropdown-tasks">
                         <li>
                             <a href="#">
                                 <div>
@@ -169,7 +169,7 @@
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
-                    </ul>
+                    </ul>*@
                     <!-- /.dropdown-tasks -->
                 </li>
                 <!-- /.dropdown -->
@@ -260,12 +260,12 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        @Html.ActionLink("    Principal", "Index", new { area = "" }, new { @class = "fa fa-dashboard active-menu" })
+                        @Html.ActionLink("Principal", "Index", new { area = "" }, new { @class = "fa fa-dashboard active-menu" })
 
                         @*<a class="active-menu" href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>*@
                     </li>
                     <li>
-                        @Html.ActionLink("    UI Elements", "About", "Home", new { @class = "fa fa-desktop" })
+                        @Html.ActionLink("UI Elements", "About", "Home", new { area = "" }, new { @class = "fa fa-dashboard active-menu" })
                         @*<a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>*@
                     </li>
                     <li>
@@ -274,40 +274,17 @@
                     <li>
                         <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
                     </li>
-
-                    <li>
-                        <a href="table.html"><i class="fa fa-table"></i> Responsive Tables</a>
-                    </li>
                     <li>
                         <a href="form.html"><i class="fa fa-edit"></i> Forms </a>
                     </li>
-
+                    <li>
+                        <a href="form.html"><i class="fa fa-edit"></i>Propiedades</a>
+                    </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-sitemap"></i>Clientes <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
+                        
                         </ul>
                     </li>
                     <li>
