@@ -1,0 +1,24 @@
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmBLL\bin\Debug\InmBLL.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmBLL\bin\Debug\InmBLL.pdb
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmBLL\obj\Debug\InmBLL.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmBLL\obj\Debug\InmBLL.pdb
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmBLL\bin\Debug\InmBLL.dll.config
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmBLL\bin\Debug\EntityFramework.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmBLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmBLL\bin\Debug\EntityFramework.xml
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmBLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmBLL\bin\Debug\InmDAL.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmBLL\bin\Debug\InmDAL.pdb
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmBLL\obj\Debug\InmBLL.csprojResolveAssemblyReference.cache
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmBLL\bin\Debug\InmBLL.dll.config
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmBLL\bin\Debug\InmBLL.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmBLL\bin\Debug\InmBLL.pdb
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmBLL\bin\Debug\EntityFramework.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmBLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmBLL\bin\Debug\InmDAL.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmBLL\bin\Debug\InmDAL.pdb
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmBLL\bin\Debug\EntityFramework.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmBLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmBLL\obj\Debug\InmBLL.csprojResolveAssemblyReference.cache
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmBLL\obj\Debug\InmBLL.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmBLL\obj\Debug\InmBLL.pdb

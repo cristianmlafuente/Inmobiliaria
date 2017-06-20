@@ -1,0 +1,18 @@
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmDAL\bin\Debug\InmDAL.dll.config
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmDAL\bin\Debug\InmDAL.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmDAL\bin\Debug\InmDAL.pdb
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmDAL\obj\Debug\InmDAL.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmDAL\obj\Debug\InmDAL.pdb
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmDAL\bin\Debug\EntityFramework.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmDAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmDAL\bin\Debug\EntityFramework.xml
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\InmDAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\InmDAL.dll.config
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\InmDAL.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\InmDAL.pdb
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\EntityFramework.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\EntityFramework.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmDAL\obj\Debug\InmDAL.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmDAL\obj\Debug\InmDAL.pdb

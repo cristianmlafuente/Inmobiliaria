@@ -1,0 +1,64 @@
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\Inmobiliar.dll.config
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\Inmobiliar.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\Inmobiliar.pdb
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\Antlr3.Runtime.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\Newtonsoft.Json.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.Helpers.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.Mvc.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.Optimization.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.Razor.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.WebPages.Deployment.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.WebPages.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.WebPages.Razor.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\WebGrease.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.Helpers.xml
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.Mvc.xml
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.Optimization.xml
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.Razor.xml
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.WebPages.xml
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.WebPages.Deployment.xml
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\System.Web.WebPages.Razor.xml
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\Antlr3.Runtime.pdb
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\Newtonsoft.Json.xml
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\obj\Debug\Inmobiliar.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\obj\Debug\Inmobiliar.pdb
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\EntityFramework.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\EntityFramework.SqlServer.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\EntityFramework.xml
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\EntityFramework.SqlServer.xml
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\InmBLL.dll
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\bin\InmBLL.pdb
+C:\Users\guille\Documents\Visual Studio 2013\Projects\Inmobiliar\Inmobiliar\obj\Debug\Inmobiliar.csprojResolveAssemblyReference.cache
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\Inmobiliar.dll.config
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\Inmobiliar.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\Inmobiliar.pdb
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\Antlr3.Runtime.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\EntityFramework.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\EntityFramework.SqlServer.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\InmBLL.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\Newtonsoft.Json.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.Helpers.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.Mvc.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.Optimization.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.Razor.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.WebPages.Deployment.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.WebPages.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.WebPages.Razor.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\WebGrease.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\InmBLL.pdb
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\EntityFramework.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\EntityFramework.SqlServer.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.Helpers.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.Mvc.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.Optimization.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.Razor.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.WebPages.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.WebPages.Deployment.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\System.Web.WebPages.Razor.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\Antlr3.Runtime.pdb
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\bin\Newtonsoft.Json.xml
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\obj\Debug\Inmobiliar.csprojResolveAssemblyReference.cache
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\obj\Debug\Inmobiliar.dll
+C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inmobiliar\obj\Debug\Inmobiliar.pdb
