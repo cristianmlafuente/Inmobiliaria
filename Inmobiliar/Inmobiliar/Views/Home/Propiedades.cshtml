@@ -1,9 +1,54 @@
-﻿
+﻿@model Inmobiliar.Models.PropiedadesModel
+
 @{
     ViewBag.Title = "Propiedades";
 }
 <div id="page-wrapper">
     <div id="page-inner">
         <p>Propiedades</p>
+
+
+        
+        <div id="exTab1" class="container">
+            <ul class="nav nav-pills">
+                <li class="active">
+                    <a href="#1a" data-toggle="tab">Alta</a>
+                </li>
+                <li>
+                    <a href="#2a" data-toggle="tab">Baja</a>
+                </li>
+                <li>
+                    <a href="#3a" data-toggle="tab">Editar</a>
+                </li>
+            </ul>
+
+            <div class="tab-content clearfix">
+                <div class="tab-pane active" id="1a">
+                    @Html.ActionLink("Create", "../Propiedades/Create")
+                </div>
+                <div class="tab-pane" id="2a">
+                    <h3>We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab</h3>
+                </div>
+                <div class="tab-pane" id="3a">
+                    <h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>
+                </div>
+                <div class="tab-pane" id="4a">
+                    <h3>We use css to change the background color of the content to be equal to the tab</h3>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        @*<div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        @Html.ActionLink("Alta", "Create", "Propiedades", new { area = "" }, new { @class = "fa fa-dashboard active-menu" })
+                        @*<a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>
+                    </li>
+                </ul>
+            </div>*@
     </div>
 </div>

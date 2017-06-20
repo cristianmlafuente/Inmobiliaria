@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5CBFBF80-A7D7-4030-98E9-B6821755BD52}</ProjectGuid>
+    <ProjectGuid>{2F950398-0B0E-4278-A1BF-B137B2F33730}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>InmBLL</RootNamespace>
