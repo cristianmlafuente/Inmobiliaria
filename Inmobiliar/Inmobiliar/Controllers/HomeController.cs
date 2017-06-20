@@ -26,5 +26,11 @@ namespace Inmobiliar.Controllers
 
             return View();
         }
+        public ActionResult Propiedades()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
     }
 }
