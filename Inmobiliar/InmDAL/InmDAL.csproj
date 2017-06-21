@@ -45,6 +45,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -61,6 +62,9 @@
     <Compile Include="Contrato_ImpuestoServicio.cs">
       <DependentUpon>Inmobiliar.tt</DependentUpon>
     </Compile>
+    <Compile Include="DALException.cs" />
+    <Compile Include="DALSqlServerConnection.cs" />
+    <Compile Include="DALUsuarios.cs" />
     <Compile Include="Domicilios.cs">
       <DependentUpon>Inmobiliar.tt</DependentUpon>
     </Compile>
