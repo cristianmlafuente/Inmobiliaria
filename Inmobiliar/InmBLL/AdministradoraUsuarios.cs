@@ -5,18 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using InmDAL;
 
+
 namespace InmBLL
 {
     public class AdministradoraUsuarios
     {
         public bool LogueoUsuario(string nombreUsuario, string Password)
         {
-            InmDAL.Usuarios oUsuario = new Usuarios();
-            oUsuario.UserName = nombreUsuario;
-            oUsuario.Pass = Password;
+            
+            try
+            {
+                DALUsuarios dalUsuario = new DALUsuarios();
+                return dalUsuario.LogueoUsuario(nombreUsuario, Password);
+            }
 
-            return true;
-        }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+               
+       }
+            
+            
 
     }
 }
