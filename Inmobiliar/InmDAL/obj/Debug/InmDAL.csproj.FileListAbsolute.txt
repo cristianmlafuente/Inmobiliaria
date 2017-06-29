@@ -17,3 +17,13 @@ C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\Inm
 C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmDAL\obj\Debug\InmDAL.csprojResolveAssemblyReference.cache
 C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmDAL\obj\Debug\InmDAL.dll
 C:\Users\guille\Documents\Desarrollos\Aplicacion Web\Inmobiliaria\Inmobiliar\InmDAL\obj\Debug\InmDAL.pdb
+C:\Git\Inmobiliaria\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\InmDAL.dll.config
+C:\Git\Inmobiliaria\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\InmDAL.dll
+C:\Git\Inmobiliaria\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\InmDAL.pdb
+C:\Git\Inmobiliaria\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\EntityFramework.dll
+C:\Git\Inmobiliaria\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Git\Inmobiliaria\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\EntityFramework.xml
+C:\Git\Inmobiliaria\Inmobiliaria\Inmobiliar\InmDAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Git\Inmobiliaria\Inmobiliaria\Inmobiliar\InmDAL\obj\Debug\InmDAL.csprojResolveAssemblyReference.cache
+C:\Git\Inmobiliaria\Inmobiliaria\Inmobiliar\InmDAL\obj\Debug\InmDAL.dll
+C:\Git\Inmobiliaria\Inmobiliaria\Inmobiliar\InmDAL\obj\Debug\InmDAL.pdb
