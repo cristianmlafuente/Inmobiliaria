@@ -19,8 +19,9 @@ namespace InmDAL
             try
             {
                 SqlCommand command = new SqlCommand();                
-                sql = @"SELECT Codigo, Apellido, Nombre, Contraseña, Bloqueado, FechaAlta, FechaBaja, NombreUsuario, Email, Rol
-                        FROM Usuarios WHERE NombreUsuario = @nameusuario";
+                sql = @"SELECT IdUser, UserName, FirstName, SecondName, Pass, Locked, DateAdded, LowDate, Email
+                        FROM Usuarios 
+                        WHERE UserName = @nameusuario";
 
                 command.Connection = conexion.Conexion;
                 command.CommandText = sql;
@@ -32,12 +33,18 @@ namespace InmDAL
                 {
                     oUsuario = new Usuarios();
                     oUsuario.UserName = reader["UserName"].ToString();
-
-
-
+                    oUsuario.FirstName = reader["FirstName"].ToString();
+                    oUsuario.SecondName = reader["SecondName"].ToString();
+                    oUsuario.IdUser = int.Parse(reader["IdUser"].ToString());
+                    oUsuario.Pass = reader["Pass"].ToString();
+                    oUsuario.Locked = long.Parse(reader["Locked"].ToString());
+                    oUsuario.DateAdded = DateTime.Parse(reader["DateAdded"].ToString());
+                    oUsuario.LowDate = DateTime.Parse(reader["LowDate"].ToString());
+                    oUsuario.Email = reader["Email"].ToString();                    
                 }        
                 reader.Close();
                 command.Connection.Close();
+                
                 return true;
             }
             catch (SqlException ex)

@@ -25,6 +25,10 @@ namespace InmDAL
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string Pass { get; set; }
+        public Nullable<long> Locked { get; set; }
+        public Nullable<System.DateTime> DateAdded { get; set; }
+        public Nullable<System.DateTime> LowDate { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario_Rol> Usuario_Rol { get; set; }

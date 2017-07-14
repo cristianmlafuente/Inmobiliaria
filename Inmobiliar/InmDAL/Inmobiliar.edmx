@@ -108,6 +108,10 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <Property Name="FirstName" Type="varchar" MaxLength="250" />
           <Property Name="SecondName" Type="varchar" MaxLength="100" />
           <Property Name="Pass" Type="varchar" MaxLength="100" />
+          <Property Name="Locked" Type="bigint" />
+          <Property Name="DateAdded" Type="datetime" />
+          <Property Name="LowDate" Type="datetime" />
+          <Property Name="Email" Type="varchar" MaxLength="200" />
         </EntityType>
         <Association Name="FK_Contrato_Inquilino">
           <End Role="Personas" Type="Self.Personas" Multiplicity="1" />
@@ -478,6 +482,10 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <Property Name="SecondName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Pass" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario_Rol" Relationship="ClientesModel.FK_Usuario_Rol_Usuarios" FromRole="Usuarios" ToRole="Usuario_Rol" />
+          <Property Name="Locked" Type="Int64" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <Property Name="LowDate" Type="DateTime" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Usuario_Rol">
           <Key>
@@ -612,6 +620,10 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="ClientesModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LowDate" ColumnName="LowDate" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Locked" ColumnName="Locked" />
                 <ScalarProperty Name="Pass" ColumnName="Pass" />
                 <ScalarProperty Name="SecondName" ColumnName="SecondName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
