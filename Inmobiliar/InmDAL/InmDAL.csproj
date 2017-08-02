@@ -68,6 +68,7 @@
     <Compile Include="Domicilios.cs">
       <DependentUpon>Inmobiliar.tt</DependentUpon>
     </Compile>
+    <Compile Include="Encriptador.cs" />
     <Compile Include="Inmobiliar.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
