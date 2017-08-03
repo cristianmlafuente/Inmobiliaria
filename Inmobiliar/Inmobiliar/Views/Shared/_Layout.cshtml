@@ -49,41 +49,16 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-
                     <li>
                         @Html.ActionLink("Principal", "Index", new { area = "" }, new { @class = "fa fa-dashboard active-menu" })
-
-                        @*<a class="active-menu" href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>*@
-                    </li>
-                    <li>
-                        @Html.ActionLink("UI Elements", "About", "Home", new { area = "" }, new { @class = "fa fa-dashboard active-menu" })
-                        @*<a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>*@
-                    </li>
-                    <li>
-                        <a href="chart.html"><i class="fa fa-bar-chart-o"></i> Charts</a>
-                    </li>
-                    <li>
-                        <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
-                    </li>
-                    <li>
-                        <a href="form.html"><i class="fa fa-edit"></i> Forms </a>
                     </li>
                     <li>
                         @Html.ActionLink("Propiedades", "Propiedades", "Home", new { area = "" }, new { @class = "fa fa-dashboard active-menu" })
-                        @*<a href="form.html"><i class="fa fa-edit"></i>Propiedades</a>*@
-                    </li>
-
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap"></i>Clientes <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                        
-                        </ul>
                     </li>
                     <li>
-                        <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
+                        @Html.ActionLink("Clientes", "Clientes", "Home", new { area = "" }, new { @class = "fa fa-dashboard active-menu" })
                     </li>
                 </ul>
-
             </div>
 
         </nav>
