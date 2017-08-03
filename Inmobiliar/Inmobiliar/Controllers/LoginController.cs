@@ -36,7 +36,7 @@ namespace Inmobiliar.Controllers
                 // TODO: Add insert logic here
                 AdministradoraUsuarios oAdmUsuario = new AdministradoraUsuarios();
                 if (oAdmUsuario.LogueoUsuario(collection.NombreUsuario, collection.Password))
-                    return PartialView("../Home/Index");                    
+                    return RedirectToAction("Index");                    
                 else
                     return RedirectToAction("Index");
             }

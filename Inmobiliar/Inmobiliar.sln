@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InmBLL", "InmBLL\InmBLL.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InmDAL", "InmDAL\InmDAL.csproj", "{D9FDE0E4-F81E-436F-868D-D0880017A9FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{620405AD-09BA-488B-89D6-8AB3F7F95503}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{D9FDE0E4-F81E-436F-868D-D0880017A9FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9FDE0E4-F81E-436F-868D-D0880017A9FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9FDE0E4-F81E-436F-868D-D0880017A9FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{620405AD-09BA-488B-89D6-8AB3F7F95503}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{620405AD-09BA-488B-89D6-8AB3F7F95503}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{620405AD-09BA-488B-89D6-8AB3F7F95503}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{620405AD-09BA-488B-89D6-8AB3F7F95503}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
