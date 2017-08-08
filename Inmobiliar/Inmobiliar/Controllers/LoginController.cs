@@ -35,8 +35,14 @@ namespace Inmobiliar.Controllers
             {
                 // TODO: Add insert logic here
                 AdministradoraUsuarios oAdmUsuario = new AdministradoraUsuarios();
-                if (oAdmUsuario.LogueoUsuario(collection.NombreUsuario, collection.Password))
-                    return RedirectToAction("Index");                    
+                var usuarioValido = oAdmUsuario.LogueoUsuario(collection.NombreUsuario, collection.Password);
+                if (usuarioValido != null)
+                {
+                    Session["Usuario"] = usuarioValido;
+                    //ViewBag.UsuarioLogueado = true;
+                    
+                    return RedirectToAction("Index", "Home");                    
+                }
                 else
                     return RedirectToAction("Index");
             }
@@ -83,6 +89,25 @@ namespace Inmobiliar.Controllers
                 // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        
+        public ActionResult Logout()
+        {
+            try
+            {
+                // TODO: Add insert logic here
+                
+                    Session["Usuario"] = null;
+                    //ViewBag.UsuarioLogueado = true;
+
+                    return RedirectToAction("Index", "Home");
+               
             }
             catch
             {

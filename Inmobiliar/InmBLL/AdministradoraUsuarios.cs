@@ -4,19 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InmDAL;
-
+using System.Web;
 
 namespace InmBLL
 {
     public class AdministradoraUsuarios
     {
-        public bool LogueoUsuario(string nombreUsuario, string Password)
+        public Usuarios LogueoUsuario(string nombreUsuario, string Password)
         {
-            
+            Usuarios ousu = null;
             try
             {
                 DALUsuarios dalUsuario = new DALUsuarios();
-                return dalUsuario.LogueoUsuario(nombreUsuario, Password);
+                ousu = dalUsuario.LogueoUsuario(nombreUsuario, Password);
+                if (ousu != null)
+                {
+                    ousu.Roles = dalUsuario.RolesUsuario(ousu.IdUser);                                         
+                }
+                
+                return ousu;
             }
 
             catch (Exception ex)

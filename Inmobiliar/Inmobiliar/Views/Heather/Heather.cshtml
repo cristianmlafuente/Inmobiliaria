@@ -4,10 +4,12 @@
         <li class="dropdown">
             <a name="NombreUsuario"></a>            
         </li>
-        
-        @{Html.RenderPartial("../Heather/_Tareas");}
-        @{Html.RenderPartial("../Heather/_Mensajes");}
-        
+        @if (ViewBag.UsuarioLogueado == true)
+          {         
+            Html.RenderPartial("../Heather/_Tareas");
+            Html.RenderPartial("../Heather/_Mensajes");
+          }
+         
             <!-- /.dropdown -->
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
@@ -15,6 +17,7 @@
             </a>
             <ul class="dropdown-menu dropdown-user">
                 <li>
+                    
                     <a href="../Login/Index"><i class="fa fa-user fa-fw"></i> Login</a>
                 </li>
                 <li>
@@ -22,7 +25,8 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    @Html.ActionLink("Logout", "Logout", "Login", new { area = "" }, new { @class = "fa fa-sign-out fa-fw" })
+                    @*<a href="../Login/Logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>*@
                 </li>
             </ul>
             <!-- /.dropdown-user -->

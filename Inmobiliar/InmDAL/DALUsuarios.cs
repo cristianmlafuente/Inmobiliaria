@@ -12,7 +12,7 @@ namespace InmDAL
         protected DALSqlServerConnection conexion;
         protected string sql;
 
-        public bool LogueoUsuario(string nombreUsuario, string Password)
+        public Usuarios LogueoUsuario(string nombreUsuario, string Password)
         {
             Usuarios oUsuario = null;
             SqlDataReader reader = null;
@@ -56,7 +56,7 @@ namespace InmDAL
                 reader.Close();
                 command.Connection.Close();
 
-                return true;
+                return oUsuario;
             }
             catch (SqlException ex)
             {
@@ -77,6 +77,59 @@ namespace InmDAL
             }
         }
 
+
+        public List<Roles> RolesUsuario(int idUsuario)
+        {
+            List<Roles> lstRoles = null;
+            SqlDataReader reader = null;
+            SqlCommand command = null;
+            try
+            {
+                command = new SqlCommand();
+                sql = @"SELECT R.IdRol, R.Description
+                        FROM Roles AS R INNER JOIN
+                                Usuario_Rol AS RU ON R.IdRol = RU.IdRol
+                        WHERE (RU.IdUser = @idUsuario)";
+
+                command.Connection = conexion.Conexion;
+                command.CommandText = sql;
+                command.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    lstRoles = new List<Roles>();
+                    while (reader.Read())
+                    {
+                        Roles rol = new Roles();
+                        rol.IdRol = int.Parse(reader["IdRol"].ToString());
+                        rol.Description = reader["Description"].ToString();
+                        lstRoles.Add(rol);
+                    }
+                    reader.Close();
+                    command.Connection.Close();
+                }
+                return lstRoles;
+            }
+            catch (SqlException ex)
+            {
+                throw new DALException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (reader != null && !reader.IsClosed) reader.Close();
+                if (command != null && command.Connection != null)
+                {
+                    command.Connection.Close();
+                    command.Connection.Dispose();
+                }
+            }
+        }
 
         public DALUsuarios()
         {

@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using InmBLL;
+using InmDAL;
 
 namespace Inmobiliar.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
-        {
+        {            
+            if (Session["Usuario"] != null)
+                ViewBag.UsuarioLogueado = true;
+            else
+                ViewBag.UsuarioLogueado = false;
             return View();
         }
-
+        
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -28,9 +34,29 @@ namespace Inmobiliar.Controllers
         }
         public ActionResult Propiedades()
         {
-            ViewBag.Message = "Your application description page.";
+            if (Session["Usuario"] != null)
+            {
+                Usuarios usuario = (Usuarios)Session["Usuario"];
 
-            return View();
+                if (usuario.Roles.Contains(new Roles(){IdRol = 3 , Description = "Propiedades"}))
+                    return View();                
+                else
+                {
+                    
+                    ViewBag.TipoMsj = "Info";
+                    ViewBag.Message = "No tiene autorización para trabajar con esta funcionalidad.";
+                    return RedirectToAction("Index", "Home");
+                }    
+            }
+            else
+            {
+                ViewBag.TipoMsj = "Error";
+                ViewBag.Message = "Usuario no logueado.";
+                return RedirectToAction("Index");
+            }
+            
+
+            
         }
     }
 }
