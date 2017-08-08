@@ -11,3 +11,4 @@
 /// <reference path="morris/raphael-2.1.0.min.js" />
 /// <reference path="datatables/dataTables.bootstrap.js" />
 /// <reference path="datatables/jquery.dataTables.js" />
+/// <reference path="propiedades.js" />
