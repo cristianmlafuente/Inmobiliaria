@@ -87,6 +87,8 @@
     <Compile Include="Personas.cs">
       <DependentUpon>Inmobiliar.tt</DependentUpon>
     </Compile>
+    <Compile Include="PersonasBLL.cs" />
+    <Compile Include="PersonasDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Propiedades.cs">
       <DependentUpon>Inmobiliar.tt</DependentUpon>

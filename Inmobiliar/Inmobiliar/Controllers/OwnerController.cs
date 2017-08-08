@@ -1,4 +1,8 @@
-﻿using System;
+﻿using AutoMapper;
+using InmBLL;
+using InmBLL.Entities;
+using Inmobiliar.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -84,6 +88,24 @@ namespace Inmobiliar.Controllers
             {
                 return View();
             }
+        }
+        [HttpPost]
+        public JsonResult GetUser(string nombre)
+        {
+            //var owner = new PersonasModel();
+            var personsList = new PersonasBLL();
+            var listPersons = personsList.GetAllPersons();
+            //Type type = listPersons..GetType();
+            var personViews = Mapper.Map<List<Personas>, List<PersonasModel>>(listPersons);
+
+            var CityName = (from person in personViews
+                            where person.Nombre.StartsWith(nombre)
+                            select new
+                            {
+                                label = person.Nombre,
+                                val = person.Apellido
+                            }).ToList();
+            return Json(CityName, JsonRequestBehavior.AllowGet);  
         }
     }
 }
