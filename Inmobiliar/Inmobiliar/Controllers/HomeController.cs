@@ -53,10 +53,13 @@ namespace Inmobiliar.Controllers
                 ViewBag.TipoMsj = "Error";
                 ViewBag.Message = "Usuario no logueado.";
                 return RedirectToAction("Index");
-            }
-            
+            }            
+        }
+        public ActionResult Clientes()
+        {
+            ViewBag.Message = "Your contact page.";
 
-            
+            return View();
         }
     }
 }
