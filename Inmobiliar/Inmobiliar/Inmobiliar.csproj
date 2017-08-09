@@ -194,11 +194,12 @@
     <Content Include="Views\Heather\Heather.cshtml" />
     <Content Include="Views\Heather\_Mensajes.cshtml" />
     <Content Include="Views\Heather\_Tareas.cshtml" />
+    <Content Include="Views\Home\Clientes.cshtml" />
+    <Content Include="Views\Owner\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Login\" />
-    <Folder Include="Views\Owner\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
