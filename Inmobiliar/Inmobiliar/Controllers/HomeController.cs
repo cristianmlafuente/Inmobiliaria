@@ -32,34 +32,16 @@ namespace Inmobiliar.Controllers
 
             return View();
         }
+        [PermisoAtribute(Rol = 3)]
         public ActionResult Propiedades()
-        {
-            if (Session["Usuario"] != null)
-            {
-                Usuarios usuario = (Usuarios)Session["Usuario"];
-
-                if (usuario.Roles.Contains(new Roles(){IdRol = 3 , Description = "Propiedades"}))
-                    return View();                
-                else
-                {
-                    
-                    ViewBag.TipoMsj = "Info";
-                    ViewBag.Message = "No tiene autorización para trabajar con esta funcionalidad.";
-                    return RedirectToAction("Index", "Home");
-                }    
-            }
-            else
-            {
-                ViewBag.TipoMsj = "Error";
-                ViewBag.Message = "Usuario no logueado.";
-                return RedirectToAction("Index");
-            }            
+        {            
+            return View();                
         }
+
+        [PermisoAtribute(Rol = 4)]
         public ActionResult Clientes()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View();                
         }
     }
 }
