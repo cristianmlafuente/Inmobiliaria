@@ -21,7 +21,11 @@ namespace Inmobiliar
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Scripts/jquery-ui-1.12.1.js",
+                      "~/Scripts/jquery-ui-1.12.1.min.js",
+                      "~/Scripts/Propiedades.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

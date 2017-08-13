@@ -13,7 +13,8 @@ namespace InmBLL
         public List<Personas> GetAllPersons()
         {
             var PersonasDal = new InmDAL.PersonasDAL();
-            return Mapper.Map<List<InmDAL.Personas>, List<Personas>>(PersonasDal.GetAllPersons());
+            var response = PersonasDal.GetAll<InmDAL.Personas>();
+            return Mapper.Map<List<InmDAL.Personas>, List<Personas>>(response);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿$(function () {
-    $("#ownerName").autocomplete({
+    debugger;
+    $("#ownerName").autocomplete({        
         source: function (request, response) {
             $.ajax({
                 url: '/Owner/GetUser/',
