@@ -28,7 +28,7 @@ namespace InmDAL
         public string Celular { get; set; }
         public string TelefonoLaboral { get; set; }
         public string DU { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Propiedades> Propiedades { get; set; }
         public virtual Contratos Contratos { get; set; }
