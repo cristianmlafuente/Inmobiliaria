@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Common.Emum;
 
 namespace Inmobiliar.Controllers
 {
     public class PermisoAtribute : ActionFilterAttribute
     {
-        public int Rol { get; set; }
+        public RolesPermisos Rol { get; set; }
         
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -32,7 +33,7 @@ namespace Inmobiliar.Controllers
             }
             else
             {
-                if (!user.Roles.Any(xx => xx.IdRol == this.Rol))
+                if (!user.Roles.Any(xx => xx.IdRol == (int) this.Rol))
                 {
                     filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                     {

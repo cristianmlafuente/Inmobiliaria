@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using InmBLL;
 using InmDAL;
+using Common.Emum;
 
 namespace Inmobiliar.Controllers
 {
@@ -32,13 +33,14 @@ namespace Inmobiliar.Controllers
 
             return View();
         }
-        [PermisoAtribute(Rol = 3)]
+
+        [PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Propiedades)]
         public ActionResult Propiedades()
         {            
             return View();                
         }
 
-        [PermisoAtribute(Rol = 4)]
+        [PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Clientes)]
         public ActionResult Clientes()
         {
             return View();                
