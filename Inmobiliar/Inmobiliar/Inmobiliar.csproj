@@ -125,6 +125,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\PermisoAtribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OwnerController.cs" />
@@ -260,6 +261,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{620405ad-09ba-488b-89d6-8ab3f7f95503}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InmBLL\InmBLL.csproj">
       <Project>{2f950398-0b0e-4278-a1bf-b137b2f33730}</Project>
       <Name>InmBLL</Name>

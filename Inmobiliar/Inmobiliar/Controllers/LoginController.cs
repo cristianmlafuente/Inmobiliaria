@@ -46,8 +46,10 @@ namespace Inmobiliar.Controllers
                 else
                     return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
+                ViewBag.TipoMsj = "Error";
+                ViewBag.Message = ex.Message;
                 return View();
             }
         }
@@ -78,6 +80,7 @@ namespace Inmobiliar.Controllers
         public ActionResult Delete(int id)
         {
             return View();
+            
         }
 
         // POST: Login/Delete/5

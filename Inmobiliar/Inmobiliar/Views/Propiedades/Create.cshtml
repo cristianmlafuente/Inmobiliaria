@@ -1,56 +1,88 @@
 ﻿@model Inmobiliar.Models.PropiedadesModel
 @Scripts.Render("~/Scripts/Propiedades");
 @*@{
-    ViewBag.Title = "Create";
-}*@
-
+        ViewBag.Title = "Create";
+    }*@
 <div id="page-wrapper">
     <div id="page-inner">
-        <h2>Create</h2>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1 class="page-header">
+                            <small>Nueva Propiedad</small>
+                        </h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <form role="form" action="Create" method="post">
+                                    <div class="form-group has-success">
+                                        <label class="control-label" for="inputSuccess">Calle</label>
+                                        <input type="text" class="form-control" id="" name="domicilio.Calle">
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="control-label" for="inputSuccess">Piso</label>
+                                        <input type="text" class="form-control" id="" name="domicilio.Piso">
+                                    </div>
 
-        <form role="form" action="Create" method="post" >
-            <div class="form-group has-success">
-                <label class="control-label" for="inputSuccess">Calle</label>
-                <input type="text" class="form-control" id="" name="domicilio.Calle">
-                
+                                    <div class="form-group has-success">
+                                        <label class="control-label" for="inputSuccess">Barrio</label>
+                                        <input type="text" class="form-control" id="" name="domicilio.Barrio">
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="control-label" for="inputSuccess">CP</label>
+                                        <input type="text" class="form-control" id="" name="domicilio.CP">
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="control-label" for="inputSuccess">Nro Contrato Epec</label>
+                                        <input type="text" class="form-control" id="" name="NroContratoEpec">
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="control-label" for="inputSuccess">Numero Cuenta Renta</label>
+                                        <input type="text" class="form-control" id="" name="NumeroCtaRenta">
+                                    </div>
+                                    <div class="form-group has-error">
+                                        <label class="control-label" for="inputError">Dueño</label>
+                                        @*<input type="text" class="form-control" id="" name="Dueño">*@
+                                        <input type="text" class="form-control" id="ownerName" name="Dueño.Nombre" />
+                                    </div>
+                                    <div class="controls">
+                                        <input type="submit" class="btn btn-primary" value="Enviar" />
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-6">
+                                <form role="form" action="Create" method="post">
+                                    <div class="form-group has-success">
+                                        <label class="control-label" for="inputSuccess">Número</label>
+                                        <input type="text" class="form-control" id="" name="domicilio.Numero">
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="control-label" for="inputSuccess">Dto</label>
+                                        <input type="text" class="form-control" id="" name="domicilio.Dto">
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="control-label" for="inputSuccess">Ciudad</label>
+                                        <input type="text" class="form-control" id="inputSuccess" name="domicilio.Ciudad">
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <br /><br /><br />
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="control-label" for="inputSuccess">Nomenclatura Catastral</label>
+                                        <input type="text" class="form-control" id="inputSuccess" name="NomenclaturaCatastral">
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <label class="control-label" for="inputSuccess">Unidad Facturacion</label>
+                                        <input type="text" class="form-control" id="inputSuccess" name="UnidadFacturacion">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group has-success">
-                <label class="control-label" for="inputSuccess">Ciudad</label>
-                <input type="text" class="form-control" id="" name="domicilio.Ciudad">
-
-            </div>
-            <div class="form-group has-success">
-                <label class="control-label" for="inputSuccess">CP</label>
-                <input type="text" class="form-control" id="" name="domicilio.CP">
-
-            </div>
-            <div class="form-group has-success">
-                <label class="control-label" for="inputSuccess">Piso</label>
-                <input type="text" class="form-control" id="" name="domicilio.Piso">
-
-            </div>
-            <div class="form-group has-success">
-                <label class="control-label" for="inputSuccess">Dto</label>
-                <input type="text" class="form-control" id="" name="domicilio.Dto">
-
-            </div>
-            <div class="form-group has-success">
-                <label class="control-label" for="inputSuccess">Barrio</label>
-                <input type="text" class="form-control" id="" name="domicilio.Barrio">
-
-            </div>
-            <div class="form-group has-success">
-                <label class="control-label" for="inputSuccess">Calle</label>
-                <input type="text" class="form-control" id="" name="domicilio.Numero">
-            </div>
-            <div class="form-group has-error">
-                <label class="control-label" for="inputError">Dueño</label>
-                <input type="text" class="form-control" id="" name="Dueño">
-                <input type="text" id="ownerName" name="Dueño.Nombre" />
-            </div>
-            <div class="controls">
-                <input type="submit" class="btn btn-primary" value="Enviar" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using InmBLL;
 using InmDAL;
+using Common.Emum;
 
 namespace Inmobiliar.Controllers
 {
@@ -32,34 +33,17 @@ namespace Inmobiliar.Controllers
 
             return View();
         }
-        public ActionResult Propiedades()
-        {
-            if (Session["Usuario"] != null)
-            {
-                Usuarios usuario = (Usuarios)Session["Usuario"];
 
-                if (usuario.Roles.Contains(new Roles(){IdRol = 3 , Description = "Propiedades"}))
-                    return View();                
-                else
-                {
-                    
-                    ViewBag.TipoMsj = "Info";
-                    ViewBag.Message = "No tiene autorización para trabajar con esta funcionalidad.";
-                    return RedirectToAction("Index", "Home");
-                }    
-            }
-            else
-            {
-                ViewBag.TipoMsj = "Error";
-                ViewBag.Message = "Usuario no logueado.";
-                return RedirectToAction("Index");
-            }            
+        [PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Propiedades)]
+        public ActionResult Propiedades()
+        {            
+            return View();                
         }
+
+        [PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Clientes)]
         public ActionResult Clientes()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View();                
         }
     }
 }
