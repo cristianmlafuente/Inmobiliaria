@@ -38,6 +38,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -47,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministradoraAlquileres.cs" />
     <Compile Include="AdministradoraUsuarios.cs" />
+    <Compile Include="Entities\PagoAlquiler.cs" />
     <Compile Include="Entities\Personas.cs" />
     <Compile Include="PersonasBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
