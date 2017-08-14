@@ -102,8 +102,9 @@ namespace Inmobiliar.Controllers
                             where person.Nombre.StartsWith(nombre)
                             select new
                             {
-                                label = person.Nombre,
-                                val = person.Apellido
+                                nombre = person.Nombre,
+                                apellido = person.Apellido,
+                                idpeople = person.IdPeople
                             }).ToList();
             return Json(CityName, JsonRequestBehavior.AllowGet);  
         }

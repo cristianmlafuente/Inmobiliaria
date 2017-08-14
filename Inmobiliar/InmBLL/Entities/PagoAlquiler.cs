@@ -13,10 +13,10 @@ namespace InmBLL.Entities
         public DateTime FechaPago { get; set;}
         public int idInquilino { get; set; }
         public int idPropiedad { get; set; }
-        private InmDAL.Propiedades _propiedad;
-        private InmDAL.Personas _inquilino;
+        private Propiedades _propiedad;
+        private Personas _inquilino;
 
-        public ReadOnly Propiedades Propiedad
+        public Propiedades Propiedad
         {
             get
             {        
@@ -24,8 +24,9 @@ namespace InmBLL.Entities
                 {
                     if (idPropiedad != 0)
                     {
-                        _propiedad = new InmDAL.Propiedades();
-                        return _propiedad;
+                        var dalpropiedad = new InmDAL.GenericDAL();
+                        var response = dalpropiedad.GetById<InmDAL.Propiedades>(idPropiedad.ToString());
+                        return _propiedad = AutoMapper.Mapper.Map<InmDAL.Propiedades, Propiedades>(response);
                     }
                     else return null;
                 }
@@ -33,7 +34,7 @@ namespace InmBLL.Entities
             }
         }
 
-        public ReadOnly InmDAL.Personas Inquilino
+        public Personas Inquilino
         {
             get
             {
@@ -41,9 +42,12 @@ namespace InmBLL.Entities
                 {
                     if (idInquilino != 0)
                     {
-                        _inquilino = new InmDAL.Personas();
-                        return _inquilino;
+                        var dalinquilino = new InmDAL.GenericDAL();
+                        var response = dalinquilino.GetById<InmDAL.Personas>(idPropiedad.ToString());
+                        return _inquilino = AutoMapper.Mapper.Map<InmDAL.Personas, Personas>(response);
                     }
+                    else 
+                        return null;
                 }
                 else
                     return _inquilino;
