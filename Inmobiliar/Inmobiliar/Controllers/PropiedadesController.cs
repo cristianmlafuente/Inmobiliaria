@@ -1,4 +1,7 @@
-﻿using Inmobiliar.Models;
+﻿using AutoMapper;
+using InmBLL;
+using InmBLL.Entities;
+using Inmobiliar.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,15 +36,17 @@ namespace Inmobiliar.Controllers
         {
             try
             {
+                var propiedades = new PropiedadesBLL();
                 if(ModelState.IsValid)
                 {
-
+                    var response = Mapper.Map<PropiedadesModel, Propiedades>(model);
+                    var result = propiedades.add(response);
                 }
                 // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }

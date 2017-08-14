@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InmDAL
 {
-    public class PersonasDAL
+    public class GenericDAL
     {
         public List<T> GetAll<T>() where T : class
         {
@@ -17,11 +17,11 @@ namespace InmDAL
                 return context.Set<T>().ToList();
             }
         }
-        public List<T> GetById<T>(string id) where T : class
+        public T GetById<T>(string id) where T : class
         {
             using (var context = new ClientesEntities())
             {
-                return context.Set<T>().ToList();
+                return context.Set<T>().Find(id);
             }
         }
         public T Add<T>(T entity) where T : class

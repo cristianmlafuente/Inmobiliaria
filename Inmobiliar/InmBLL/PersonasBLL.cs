@@ -12,8 +12,8 @@ namespace InmBLL
     {
         public List<Personas> GetAllPersons()
         {
-            var PersonasDal = new InmDAL.PersonasDAL();
-            var response = PersonasDal.GetAll<InmDAL.Personas>();            
+            var genericDal = new InmDAL.GenericDAL();
+            var response = genericDal.GetAll<InmDAL.Personas>();       
             
             return Mapper.Map<List<InmDAL.Personas>, List<Personas>>(response);
         }
