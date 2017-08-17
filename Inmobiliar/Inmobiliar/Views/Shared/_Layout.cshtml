@@ -49,13 +49,16 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li>
-                        @Html.ActionLink("Principal", "Index", new { area = "" }, new { @class = "fa fa-dashboard active-menu" })
+                        @Html.ActionLink("  Principal", "Index", new { area = "" }, new { @class = "fa fa-dashboard active-menu" })
                     </li>
                     <li>
-                        @Html.ActionLink("Propiedades", "Propiedades", "Home", new { area = "" }, new { @class = "fa fa-dashboard active-menu" })
+                        @Html.ActionLink("  Propiedades", "Propiedades", "Home", new { area = "" }, new { @class = "fa fa-building-o active-menu" })
                     </li>
                     <li>
-                        @Html.ActionLink("Clientes", "Clientes", "Home", new { area = "" }, new { @class = "fa fa-dashboard active-menu" })
+                        @Html.ActionLink("  Clientes", "Clientes", "Home", new { area = "" }, new { @class = "fa fa-users active-menu" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("  Cobro Alquiler", "CobroAlquiler", "Home", new { area = "" }, new { @class = "fa fa-usd active-menu" })
                     </li>
                 </ul>
             </div>

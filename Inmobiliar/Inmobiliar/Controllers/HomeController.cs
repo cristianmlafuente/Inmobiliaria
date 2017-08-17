@@ -45,5 +45,11 @@ namespace Inmobiliar.Controllers
         {
             return View();                
         }
+
+        [PermisoAtribute(Rol = RolesPermisos.Rol_Cobro_Alquiler)]
+        public ActionResult CobroAlquiler()
+        {
+            return View();
+        }
     }
 }
