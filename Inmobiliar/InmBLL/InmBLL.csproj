@@ -37,6 +37,10 @@
       <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SautinSoft.ExcelToPdf, Version=4.2.7.24, Culture=neutral, PublicKeyToken=239046b8a1e8c07b, processorArchitecture=MSIL">
+      <HintPath>..\packages\sautinsoft.exceltopdf.4.2.7.24\lib\net45\SautinSoft.ExcelToPdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -53,6 +57,7 @@
     <Compile Include="Entities\PagoAlquiler.cs" />
     <Compile Include="Entities\Contratos.cs" />
     <Compile Include="Entities\Domicilios.cs" />
+    <Compile Include="Entities\PagoAlquiler_Detalle.cs" />
     <Compile Include="Entities\Personas.cs" />
     <Compile Include="Entities\Propiedades.cs" />
     <Compile Include="PersonasBLL.cs" />
@@ -60,6 +65,10 @@
     <Compile Include="PropiedadesBLL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{620405ad-09ba-488b-89d6-8ab3f7f95503}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InmDAL\InmDAL.csproj">
       <Project>{d9fde0e4-f81e-436f-868d-d0880017a9fa}</Project>
       <Name>InmDAL</Name>

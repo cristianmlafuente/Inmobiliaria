@@ -13,8 +13,11 @@ namespace InmBLL.Entities
         public DateTime FechaPago { get; set;}
         public int idInquilino { get; set; }
         public int idPropiedad { get; set; }
+        public int idContrato { get; set; }
         private Propiedades _propiedad;
         private Personas _inquilino;
+        private Contratos _contrato;
+        public decimal MontoTotal { get; set; }
 
         public Propiedades Propiedad
         {
@@ -53,6 +56,30 @@ namespace InmBLL.Entities
                     return _inquilino;
             }            
         }
+
+        public Contratos Contrato
+        {
+            get
+            {
+                if (_contrato == null)
+                {
+                    if (idContrato != 0)
+                    {
+                        var dalinquilino = new InmDAL.GenericDAL();
+                        var response = dalinquilino.GetById<InmDAL.Contratos>(idContrato.ToString());
+                        return _contrato = AutoMapper.Mapper.Map<InmDAL.Contratos, Contratos>(response);
+                    }
+                    else
+                        return null;
+                }
+                else
+                    return _contrato;
+            }
+        }
+
+        public List<PagoAlquiler_Detalle> DetallePago { get; set; }
+
+        public string Observaciones { get; set; }
 
     }
 }
