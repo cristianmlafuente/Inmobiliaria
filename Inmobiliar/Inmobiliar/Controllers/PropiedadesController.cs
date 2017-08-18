@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Common.Emum;
 using InmBLL;
 using InmBLL.Entities;
 using Inmobiliar.Models;
@@ -25,6 +26,7 @@ namespace Inmobiliar.Controllers
         }
 
         // GET: Propiedades/Create
+        [PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Propiedades)]
         public ActionResult Create()
         {
             return View();

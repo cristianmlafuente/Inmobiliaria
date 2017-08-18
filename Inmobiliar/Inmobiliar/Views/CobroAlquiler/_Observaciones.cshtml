@@ -1,0 +1,37 @@
+﻿<div class="well">
+    <form role="form" action="Create" method="post">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Observaciones
+            </div>
+            <div class="panel-body">
+                <div class="panel-group" id="accordion">
+                    @foreach (var item in Model.Notas)
+                    {
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="@("#collapse" + item.id)" class="collapsed">@item.fecha</a>
+                                </h4>
+                            </div>
+                            <div id="@("collapse" + item.id)" class="panel-collapse collapse" style="height: 0px;">
+                                <div class="panel-body">
+                                    @item.detalle
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <br />
+                <div class="form-group">
+                    <label>Nueva Observación</label>
+                    <textarea class="form-control" rows="3"></textarea>
+                    <br />
+                    <input type="submit" class="btn btn-primary" value="Guardar" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

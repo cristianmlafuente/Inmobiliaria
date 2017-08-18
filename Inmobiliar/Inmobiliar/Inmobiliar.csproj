@@ -250,6 +250,7 @@
     <Content Include="Views\Owner\Create.cshtml" />
     <Content Include="Views\CobroAlquiler\Create.cshtml" />
     <Content Include="Views\Home\CobroAlquiler.cshtml" />
+    <Content Include="Views\CobroAlquiler\_Observaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Common.Emum;
+using Inmobiliar.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,9 +23,11 @@ namespace Inmobiliar.Controllers
         }
 
         // GET: CobroAlquiler/Create
+        [PermisoAtribute(Rol = RolesPermisos.Rol_Cobro_Alquiler)]
         public ActionResult Create()
         {
-            return View();
+            var model = new CobroAlquilerModel();
+            return View("Create", model);
         }
 
         // POST: CobroAlquiler/Create
