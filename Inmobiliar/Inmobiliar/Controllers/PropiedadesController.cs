@@ -42,7 +42,7 @@ namespace Inmobiliar.Controllers
                 if(ModelState.IsValid)
                 {
                     var response = Mapper.Map<PropiedadesModel, Propiedades>(model);
-                    var result = propiedades.add(response);
+                    var result = propiedades.Add(response);
                 }
                 // TODO: Add insert logic here
 

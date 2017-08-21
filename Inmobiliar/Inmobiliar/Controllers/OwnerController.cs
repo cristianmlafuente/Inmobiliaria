@@ -34,11 +34,15 @@ namespace Inmobiliar.Controllers
 
         // POST: Owner/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(PersonasModel collection)
         {
             try
             {
                 // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+ 
+                }
 
                 return RedirectToAction("Index");
             }
@@ -96,7 +100,7 @@ namespace Inmobiliar.Controllers
         {
             //var owner = new PersonasModel();
             var personsList = new PersonasBLL();
-            var listPersons = personsList.GetAllPersons();
+            var listPersons = personsList.GetAll();
             //Type type = listPersons..GetType();
             var personViews = Mapper.Map<List<Personas>, List<PersonasModel>>(listPersons);
 

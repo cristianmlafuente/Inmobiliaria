@@ -60,6 +60,7 @@
     <Compile Include="Entities\PagoAlquiler_Detalle.cs" />
     <Compile Include="Entities\Personas.cs" />
     <Compile Include="Entities\Propiedades.cs" />
+    <Compile Include="IGenericBLL.cs" />
     <Compile Include="PersonasBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropiedadesBLL.cs" />
