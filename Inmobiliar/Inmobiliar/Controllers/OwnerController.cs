@@ -26,7 +26,7 @@ namespace Inmobiliar.Controllers
         }
 
         // GET: Owner/Create
-        [PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Clientes)]
+        //[PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Clientes)]
         public ActionResult Create()
         {
             return View();
@@ -34,11 +34,26 @@ namespace Inmobiliar.Controllers
 
         // POST: Owner/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(PersonasModel collection)
         {
             try
-            {
+            {               
                 // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    var personasBll = new PersonasBLL();
+                    var persona = new Personas
+                    {
+                        Apellido = collection.Apellido,
+                        Nombre = collection.Nombre,
+                        Email = collection.Email,
+                        DU = collection.DU,
+                        Telefono = collection.Telefono,
+                        TelefonoLaboral = collection.TelefonoLaboral,
+                        Celular = collection.Celular
+                    };
+                    personasBll.Add(persona);
+                }
 
                 return RedirectToAction("Index");
             }
@@ -96,7 +111,7 @@ namespace Inmobiliar.Controllers
         {
             //var owner = new PersonasModel();
             var personsList = new PersonasBLL();
-            var listPersons = personsList.GetAllPersons();
+            var listPersons = personsList.GetAll();
             //Type type = listPersons..GetType();
             var personViews = Mapper.Map<List<Personas>, List<PersonasModel>>(listPersons);
 
@@ -108,7 +123,7 @@ namespace Inmobiliar.Controllers
                                 apellido = person.Apellido,
                                 idpeople = person.IdPeople
                             }).ToList();
-            return Json(CityName, JsonRequestBehavior.AllowGet);  
+            return Json(CityName, JsonRequestBehavior.AllowGet);
         }
     }
 }

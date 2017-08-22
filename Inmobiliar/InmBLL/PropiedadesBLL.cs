@@ -8,20 +8,49 @@ using System.Threading.Tasks;
 
 namespace InmBLL
 {
-    public class PropiedadesBLL
+    public class PropiedadesBLL : IGenericBLL<Propiedades>
     {
-        public bool add(Propiedades entity)
+        private InmDAL.GenericDAL genericDal;
+        public PropiedadesBLL()
+        {
+            genericDal = new InmDAL.GenericDAL();
+        }
+
+        public bool Add(Propiedades entity)
         {
             var entityDAL = new InmDAL.Propiedades();
-            var genericDal = new InmDAL.GenericDAL();
             var response = genericDal.Add<InmDAL.Propiedades>(entityDAL);
             if (response != null)
                 return true;
-            return false;           
+            return false;         
         }
-        public Propiedades getbyid(string id)
+
+        public bool Delete(Propiedades entity)
         {
-            var genericDal = new InmDAL.GenericDAL();
+            var entityDAL = new InmDAL.Propiedades();
+            var response = genericDal.Delete<InmDAL.Propiedades>(entityDAL);
+            if (response != null)
+                return true;
+            return false;      
+        }
+
+        public bool Update(Propiedades entity)
+        {
+            var entityDAL = new InmDAL.Propiedades();
+            var response = genericDal.Update<InmDAL.Propiedades>(entityDAL);
+            if (response != null)
+                return true;
+            return false;   
+        }
+
+        public List<Propiedades> GetAll()
+        {
+            var response = genericDal.GetAll<InmDAL.Propiedades>();
+            return Mapper.Map<List<InmDAL.Propiedades>, List<Propiedades>>(response);
+        }
+
+        public Propiedades GetById(string id)
+        {
             var response = genericDal.GetById<InmDAL.Propiedades>(id);
             return Mapper.Map<InmDAL.Propiedades, Propiedades>(response);
         }
