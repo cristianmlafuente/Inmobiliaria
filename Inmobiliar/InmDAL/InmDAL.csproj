@@ -69,6 +69,7 @@
     <Compile Include="DALException.cs" />
     <Compile Include="DALSqlServerConnection.cs" />
     <Compile Include="DALUsuarios.cs" />
+    <Compile Include="DataConnection.cs" />
     <Compile Include="Domicilios.cs">
       <DependentUpon>Inmobiliar.tt</DependentUpon>
     </Compile>
