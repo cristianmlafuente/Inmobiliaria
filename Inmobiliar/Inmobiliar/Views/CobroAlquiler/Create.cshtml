@@ -20,11 +20,11 @@
                                             <form role="form" action="Create" method="post">
                                                 <div class="form-group has-success">
                                                     <label class="control-label" for="inputSuccess">Apellido</label>
-                                                    <input type="text" class="form-control" id="" name="Apellido">
+                                                    <input type="text" class="form-control" id="ownerApellido" name="Apellido">
                                                 </div>
                                                 <div class="form-group has-success">
                                                     <label class="control-label" for="inputSuccess">Nombre</label>
-                                                    <input type="text" class="form-control" id="" name="Nombre">
+                                                    <input type="text" class="form-control" id="ownerName" name="Nombre">
                                                 </div>
                                                 <div class="form-group has-success">
                                                     <label class="control-label" for="inputSuccess">DU</label>
@@ -38,34 +38,9 @@
                                         </div>                                        
                                     </div>
                                 </div>
-                                <div class="col-lg-6" id="Propiedad">                                    
-                                    <div class="panel panel-info">
-                                        <div class="panel-heading">
-                                            Datos de la Propiedad
-                                        </div>
-                                        <div class="panel-body">
-                                            <form role="form" action="Create" method="post">
-                                                <div class="form-group">
-                                                    <label class="control-label" for="disabledSelect">Calle</label>
-                                                    <input type="text" class="form-control" id="" name="domicilio.Calle" disabled="">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label" for="disabledSelect">Piso</label>
-                                                    <input type="text" class="form-control" id="" name="domicilio.Piso" disabled="">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="control-label" for="disabledSelect">Barrio</label>
-                                                    <input type="text" class="form-control" id="" name="domicilio.Barrio" disabled="">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label" for="disabledSelect">CP</label>
-                                                    <input type="text" class="form-control" id="" name="domicilio.CP" disabled="">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>                                
+                                <div class="col-lg-6" id="Propiedad">
+                                    @{Html.RenderPartial("../Propiedades/_PropiedadResumida");}
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12" id="Cobro">

@@ -1,4 +1,7 @@
-﻿using Common.Emum;
+﻿using AutoMapper;
+using Common.Emum;
+using InmBLL;
+using InmBLL.Entities;
 using Inmobiliar.Models;
 using System;
 using System.Collections.Generic;
@@ -89,5 +92,26 @@ namespace Inmobiliar.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+        public JsonResult GetInquilino(string nombre, string apellido, string dni, string telefono)
+        {            
+            var personsList = new PersonasBLL();
+            var listPersons = personsList.GetAllPersons();
+            //Type type = listPersons..GetType();
+            var personViews = Mapper.Map<List<Personas>, List<PersonasModel>>(listPersons);
+
+            var CityName = (from person in personViews
+                            where person.Nombre.StartsWith(nombre)
+                            select new
+                            {
+                                nombre = person.Nombre,
+                                apellido = person.Apellido,
+                                idpeople = person.IdPeople
+                            }).ToList();
+
+            return Json(CityName, JsonRequestBehavior.AllowGet);
+        }
+    
     }
 }
