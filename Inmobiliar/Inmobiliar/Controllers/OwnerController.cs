@@ -26,7 +26,7 @@ namespace Inmobiliar.Controllers
         }
 
         // GET: Owner/Create
-        [PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Clientes)]
+        //[PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Clientes)]
         public ActionResult Create()
         {
             return View();
