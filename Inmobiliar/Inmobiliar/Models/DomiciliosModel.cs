@@ -8,7 +8,7 @@ namespace Inmobiliar.Models
 {
     public class DomiciliosModel
     {
-        public int IdAddress { get; set; }
+        public int DomiciliosId { get; set; }
 
         //[Required(ErrorMessage = "El nombre de la calle es requerido")]
         [DataType(DataType.Text)]

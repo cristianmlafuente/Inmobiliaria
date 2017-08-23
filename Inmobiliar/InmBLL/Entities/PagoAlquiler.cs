@@ -11,9 +11,9 @@ namespace InmBLL.Entities
     {
         public DateTime Periodo { get; set; }
         public DateTime FechaPago { get; set;}
-        public int idInquilino { get; set; }
-        public int idPropiedad { get; set; }
-        public int idContrato { get; set; }
+        public int InquilinoId { get; set; }
+        public int PropiedadId { get; set; }
+        public int ContratoId { get; set; }
         private Propiedades _propiedad;
         private Personas _inquilino;
         private Contratos _contrato;
@@ -25,10 +25,10 @@ namespace InmBLL.Entities
             {        
                 if (_propiedad == null)
                 {
-                    if (idPropiedad != 0)
+                    if (PropiedadId != 0)
                     {
                         var dalpropiedad = new InmDAL.GenericDAL();
-                        var response = dalpropiedad.GetById<InmDAL.Propiedades>(idPropiedad.ToString());
+                        var response = dalpropiedad.GetById<InmDAL.Propiedades>(PropiedadId.ToString());
                         return _propiedad = AutoMapper.Mapper.Map<InmDAL.Propiedades, Propiedades>(response);
                     }
                     else return null;
@@ -43,10 +43,10 @@ namespace InmBLL.Entities
             {
                 if (_inquilino == null)
                 {
-                    if (idInquilino != 0)
+                    if (InquilinoId != 0)
                     {
                         var dalinquilino = new InmDAL.GenericDAL();
-                        var response = dalinquilino.GetById<InmDAL.Personas>(idPropiedad.ToString());
+                        var response = dalinquilino.GetById<InmDAL.Personas>(PropiedadId.ToString());
                         return _inquilino = AutoMapper.Mapper.Map<InmDAL.Personas, Personas>(response);
                     }
                     else 
@@ -63,10 +63,10 @@ namespace InmBLL.Entities
             {
                 if (_contrato == null)
                 {
-                    if (idContrato != 0)
+                    if (ContratoId != 0)
                     {
                         var dalinquilino = new InmDAL.GenericDAL();
-                        var response = dalinquilino.GetById<InmDAL.Contratos>(idContrato.ToString());
+                        var response = dalinquilino.GetById<InmDAL.Contratos>(ContratoId.ToString());
                         return _contrato = AutoMapper.Mapper.Map<InmDAL.Contratos, Contratos>(response);
                     }
                     else

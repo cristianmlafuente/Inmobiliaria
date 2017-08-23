@@ -8,8 +8,8 @@ namespace InmBLL.Entities
 {
     public class PagoAlquiler_Detalle
     {
-        public int idTipo { get; set; }
-        public int idPago { get; set; }
+        public int TipoId { get; set; }
+        public int PagoId { get; set; }
         public decimal Monto { get; set; }
         public DateTime PeriodoPago { get; set; }
     }
