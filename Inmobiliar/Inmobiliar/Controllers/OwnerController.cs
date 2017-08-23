@@ -113,10 +113,10 @@ namespace Inmobiliar.Controllers
             var personsList = new PersonasBLL();
             var listPersons = personsList.GetAll();
             //Type type = listPersons..GetType();
-            var personViews = Mapper.Map<List<Personas>, List<PersonasModel>>(listPersons);
+            //var personViews = Mapper.Map<List<Personas>, List<PersonasModel>>(listPersons);
 
-            var CityName = (from person in personViews
-                            where person.Nombre.StartsWith(nombre)
+            var CityName = (from person in listPersons
+                            where (person.Nombre.Contains(nombre) || person.Apellido.Contains(nombre))
                             select new
                             {
                                 nombre = person.Nombre,
