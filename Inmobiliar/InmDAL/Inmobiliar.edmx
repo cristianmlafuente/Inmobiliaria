@@ -22,8 +22,8 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           </Key>
           <Property Name="IdContrato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NroContrato" Type="varchar" MaxLength="50" />
-          <Property Name="IdEstate" Type="int" />
-          <Property Name="IdInquilino" Type="int" />
+          <Property Name="PropiedadesId" Type="int" />
+          <Property Name="InquilinoId" Type="int" />
           <Property Name="FechaContrato" Type="datetime" />
           <Property Name="PeriodoMeses" Type="int" />
           <Property Name="Incrementos" Type="int" />
@@ -36,9 +36,9 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
         </EntityType>
         <EntityType Name="Domicilios">
           <Key>
-            <PropertyRef Name="IdAddress" />
+            <PropertyRef Name="DomiciliosId" />
           </Key>
-          <Property Name="IdAddress" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DomiciliosId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Calle" Type="varchar" MaxLength="500" />
           <Property Name="Ciudad" Type="varchar" MaxLength="100" />
           <Property Name="CP" Type="varchar" MaxLength="15" />
@@ -62,11 +62,11 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
         </EntityType>
         <EntityType Name="Propiedades">
           <Key>
-            <PropertyRef Name="IdEstate" />
+            <PropertyRef Name="PropiedadesId" />
           </Key>
-          <Property Name="IdEstate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdAddress" Type="int" />
-          <Property Name="IdOwner" Type="int" />
+          <Property Name="PropiedadesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DomiciliosId" Type="int" />
+          <Property Name="PersonasId" Type="int" />
           <Property Name="Propiedad" Type="int" />
           <Property Name="NomenclaturaCatastral" Type="varchar" MaxLength="50" />
           <Property Name="NumeroCtaRenta" Type="varchar" MaxLength="50" />
@@ -130,10 +130,10 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <End Role="Contratos" Type="Self.Contratos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Propiedades">
-              <PropertyRef Name="IdEstate" />
+              <PropertyRef Name="PropiedadesId" />
             </Principal>
             <Dependent Role="Contratos">
-              <PropertyRef Name="IdEstate" />
+              <PropertyRef Name="PropiedadesId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -166,10 +166,10 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <End Role="Propiedades" Type="Self.Propiedades" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Domicilios">
-              <PropertyRef Name="IdAddress" />
+              <PropertyRef Name="DomiciliosId" />
             </Principal>
             <Dependent Role="Propiedades">
-              <PropertyRef Name="IdAddress" />
+              <PropertyRef Name="DomiciliosId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -181,7 +181,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
               <PropertyRef Name="PersonasId" />
             </Principal>
             <Dependent Role="Propiedades">
-              <PropertyRef Name="IdOwner" />
+              <PropertyRef Name="PersonasId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -264,9 +264,9 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
       <Schema Namespace="ClientesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Domicilios">
           <Key>
-            <PropertyRef Name="IdAddress" />
+            <PropertyRef Name="DomiciliosId" />
           </Key>
-          <Property Name="IdAddress" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DomiciliosId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Calle" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="CP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
@@ -347,11 +347,11 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
         </EntityType>
         <EntityType Name="Propiedades">
           <Key>
-            <PropertyRef Name="IdEstate" />
+            <PropertyRef Name="PropiedadesId" />
           </Key>
-          <Property Name="IdEstate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdAddress" Type="Int32" />
-          <Property Name="IdOwner" Type="Int32" />
+          <Property Name="PropiedadesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DomiciliosId" Type="Int32" />
+          <Property Name="PersonasId" Type="Int32" />
           <Property Name="Propiedad" Type="Int32" />
           <Property Name="NomenclaturaCatastral" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NumeroCtaRenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -368,10 +368,10 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <End Type="ClientesModel.Propiedades" Role="Propiedades" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Domicilios">
-              <PropertyRef Name="IdAddress" />
+              <PropertyRef Name="DomiciliosId" />
             </Principal>
             <Dependent Role="Propiedades">
-              <PropertyRef Name="IdAddress" />
+              <PropertyRef Name="DomiciliosId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -383,7 +383,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
               <PropertyRef Name="PersonasId" />
             </Principal>
             <Dependent Role="Propiedades">
-              <PropertyRef Name="IdOwner" />
+              <PropertyRef Name="PersonasId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -393,8 +393,8 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           </Key>
           <Property Name="IdContrato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NroContrato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdEstate" Type="Int32" />
-          <Property Name="IdInquilino" Type="Int32" />
+          <Property Name="PropiedadesId" Type="Int32" />
+          <Property Name="InquilinoId" Type="Int32" />
           <Property Name="FechaContrato" Type="DateTime" Precision="3" />
           <Property Name="PeriodoMeses" Type="Int32" />
           <Property Name="Incrementos" Type="Int32" />
@@ -433,10 +433,10 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <End Type="ClientesModel.Contratos" Role="Contratos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Propiedades">
-              <PropertyRef Name="IdEstate" />
+              <PropertyRef Name="PropiedadesId" />
             </Principal>
             <Dependent Role="Contratos">
-              <PropertyRef Name="IdEstate" />
+              <PropertyRef Name="PropiedadesId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -532,7 +532,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <EntitySetMapping Name="Domicilios">
             <EntityTypeMapping TypeName="ClientesModel.Domicilios">
               <MappingFragment StoreEntitySet="Domicilios">
-                <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
+                <ScalarProperty Name="DomiciliosId" ColumnName="DomiciliosId" />
                 <ScalarProperty Name="Calle" ColumnName="Calle" />
                 <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
                 <ScalarProperty Name="CP" ColumnName="CP" />
@@ -576,9 +576,9 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
                 <ScalarProperty Name="NumeroCtaRenta" ColumnName="NumeroCtaRenta" />
                 <ScalarProperty Name="NomenclaturaCatastral" ColumnName="NomenclaturaCatastral" />
                 <ScalarProperty Name="Propiedad" ColumnName="Propiedad" />
-                <ScalarProperty Name="IdOwner" ColumnName="IdOwner" />
-                <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
-                <ScalarProperty Name="IdEstate" ColumnName="IdEstate" />
+                <ScalarProperty Name="PersonasId" ColumnName="PersonasId" />
+                <ScalarProperty Name="DomiciliosId" ColumnName="DomiciliosId" />
+                <ScalarProperty Name="PropiedadesId" ColumnName="PropiedadesId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -594,8 +594,8 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
                 <ScalarProperty Name="Incrementos" ColumnName="Incrementos" />
                 <ScalarProperty Name="PeriodoMeses" ColumnName="PeriodoMeses" />
                 <ScalarProperty Name="FechaContrato" ColumnName="FechaContrato" />
-                <ScalarProperty Name="IdInquilino" ColumnName="IdInquilino" />
-                <ScalarProperty Name="IdEstate" ColumnName="IdEstate" />
+                <ScalarProperty Name="InquilinoId" ColumnName="InquilinoId" />
+                <ScalarProperty Name="PropiedadesId" ColumnName="PropiedadesId" />
                 <ScalarProperty Name="NroContrato" ColumnName="NroContrato" />
                 <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
               </MappingFragment>

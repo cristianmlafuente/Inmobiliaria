@@ -8,9 +8,9 @@ namespace InmBLL.Entities
 {
     public class Propiedades
     {
-        public int IdEstate { get; set; }
-        public Nullable<int> IdAddress { get; set; }
-        public Nullable<int> IdOwner { get; set; }
+        public int PropiedadesId { get; set; }
+        public Nullable<int> DomiciliosId { get; set; }
+        public Nullable<int> PersonasId { get; set; }
         public Nullable<int> Propiedad { get; set; }
         public string NomenclaturaCatastral { get; set; }
         public string NumeroCtaRenta { get; set; }

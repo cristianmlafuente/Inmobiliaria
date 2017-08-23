@@ -28,7 +28,7 @@ namespace InmBLL
             string PATH_DIRECTORIO_ARCHIVOS = ConfigurationManager.AppSettings["PathArchivosOriginal"];
             string ReciboAlquiler = ConfigurationManager.AppSettings["ArchivoReciboAlquiler"];
             string PATH_DIRECTORIO_TEMP = ConfigurationManager.AppSettings["PathArchivosTemp"];
-            string NombreArchFinal = ReciboAlquiler.Split('.')[0] + Pago.Periodo.ToString("MMyy") + Pago.idInquilino.ToString() + Pago.idPropiedad.ToString();
+            string NombreArchFinal = ReciboAlquiler.Split('.')[0] + Pago.Periodo.ToString("MMyy") + Pago.InquilinoId.ToString() + Pago.PropiedadId.ToString();
             try
             {
                 string ArchivoOriginalRecibo = PATH_DIRECTORIO_ARCHIVOS + ReciboAlquiler;
@@ -73,7 +73,7 @@ namespace InmBLL
                         foreach (PagoAlquiler_Detalle item in Pago.DetallePago)
                         {
                             int fila;
-                            switch (item.idTipo)
+                            switch (item.TipoId)
                             {
                                 case 1:
                                     fila = 20;
@@ -155,7 +155,7 @@ namespace InmBLL
             string PATH_DIRECTORIO_ARCHIVOS = ConfigurationManager.AppSettings["PathArchivosOriginal"];
             string ReciboPropietario = ConfigurationManager.AppSettings["ArchivoReciboPropietario"];
             string PATH_DIRECTORIO_TEMP = ConfigurationManager.AppSettings["PathArchivosTemp"];
-            string NombreArchFinal = ReciboPropietario.Split('.')[0] + Pago.Periodo.ToString("MMyy") + Pago.idInquilino.ToString() + Pago.idPropiedad.ToString();
+            string NombreArchFinal = ReciboPropietario.Split('.')[0] + Pago.Periodo.ToString("MMyy") + Pago.InquilinoId.ToString() + Pago.PropiedadId.ToString();
             try
             {
                 string ArchivoOriginalRecibo = PATH_DIRECTORIO_ARCHIVOS + ReciboPropietario;
@@ -193,9 +193,9 @@ namespace InmBLL
                         comando.ExecuteNonQuery();
                         comando.CommandText = "UPDATE [Hoja1 0$H28:H28] SET F1= '" + Pago.Observaciones + "'";
                         comando.ExecuteNonQuery();
-                        if (Pago.DetallePago.Any(xx => xx.idTipo == (int)TipoImpuestoServicio.Alquiler))
+                        if (Pago.DetallePago.Any(xx => xx.TipoId == (int)TipoImpuestoServicio.Alquiler))
                         {
-                            var alquiler = Pago.DetallePago.First(x => x.idTipo == (int)TipoImpuestoServicio.Alquiler);
+                            var alquiler = Pago.DetallePago.First(x => x.TipoId == (int)TipoImpuestoServicio.Alquiler);
                             comando.CommandText = "UPDATE [Hoja1 0$C17:C17] SET F1= '" + Enum.GetName(typeof(Meses), alquiler.PeriodoPago.Month) + "'";
                             comando.ExecuteNonQuery();
                             comando.CommandText = "UPDATE [Hoja1 0$J17:J17] SET F1= '" + Enum.GetName(typeof(Meses), alquiler.PeriodoPago.Month) + "'";

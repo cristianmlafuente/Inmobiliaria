@@ -8,7 +8,7 @@ namespace InmBLL.Entities
 {
     public class Domicilios
     {
-        public int IdAddress { get; set; }
+        public int DomiciliosId { get; set; }
         public string Calle { get; set; }
         public string Ciudad { get; set; }
         public string CP { get; set; }

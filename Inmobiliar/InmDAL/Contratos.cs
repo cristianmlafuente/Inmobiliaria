@@ -22,8 +22,8 @@ namespace InmDAL
     
         public int IdContrato { get; set; }
         public string NroContrato { get; set; }
-        public Nullable<int> IdEstate { get; set; }
-        public Nullable<int> IdInquilino { get; set; }
+        public Nullable<int> PropiedadesId { get; set; }
+        public Nullable<int> InquilinoId { get; set; }
         public Nullable<System.DateTime> FechaContrato { get; set; }
         public Nullable<int> PeriodoMeses { get; set; }
         public Nullable<int> Incrementos { get; set; }
