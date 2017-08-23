@@ -18,7 +18,7 @@ namespace InmDAL
         {
             try
             {
-                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["conn"].ConnectionString))
+                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AySConexionDesarrollo"].ConnectionString))
                 {
                     db.Open();
                     var sqlQuery = string.Format("SELECT * FROM [{0}]", typeof(T).Name);
@@ -36,7 +36,7 @@ namespace InmDAL
         {
             try
             {
-                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["conn"].ConnectionString))
+                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AySConexionDesarrollo"].ConnectionString))
                 {
                     db.Open();
                     var sqlQuery = string.Format("SELECT * FROM [{0}] WHERE ID=@ID", typeof(T).Name, new { ID = id });
@@ -66,16 +66,16 @@ namespace InmDAL
                 using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["conn"].ConnectionString))
                 {
                     db.Open();
-                    var id = db.Query<T>(sql, propertyContainer.ValuePairs, commandType: CommandType.Text).First();
+                    return db.Query<T>(sql, propertyContainer.ValuePairs, commandType: CommandType.Text).First();
                 }
 
-                using (var context = new ClientesEntities())
-                {
-                    context.Set<T>().Add(entity);
-                    context.SaveChanges();
-                    return entity;
+                //using (var context = new ClientesEntities())
+                //{
+                //    context.Set<T>().Add(entity);
+                //    context.SaveChanges();
+                //    return entity;
 
-                }
+                //}
             }
             catch (Exception ex)
             {
@@ -119,7 +119,7 @@ namespace InmDAL
             }
             
         }
-        
+
         private static PropertyContainer ParseProperties<T>(T obj)
         {
             try
@@ -128,7 +128,7 @@ namespace InmDAL
 
                 var typeName = typeof(T).Name;
                 var validKeyNames = new[] { "Id", 
-                string.Format("{0}Id", typeName), string.Format("{0}_Id", typeName) };
+               string.Format("{0}Id", typeName), string.Format("{0}_Id", typeName) };
 
                 var properties = typeof(T).GetProperties();
                 foreach (var property in properties)
@@ -167,7 +167,7 @@ namespace InmDAL
             {
                 throw new Exception(ex.Message);
             }
-            
+
         }
         
         private class PropertyContainer
