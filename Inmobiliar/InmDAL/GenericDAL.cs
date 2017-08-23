@@ -145,6 +145,9 @@ namespace InmDAL
                     if (property.IsDefined(typeof(DapperIgnore), false))
                         continue;
 
+                    if (property.PropertyType.IsAbstract)
+                        continue;
+
                     var name = property.Name;
                     var value = typeof(T).GetProperty(property.Name).GetValue(obj, null);
 

@@ -49,9 +49,9 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
         </EntityType>
         <EntityType Name="Personas">
           <Key>
-            <PropertyRef Name="IdPeople" />
+            <PropertyRef Name="PersonasId" />
           </Key>
-          <Property Name="IdPeople" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonasId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="250" />
           <Property Name="Apellido" Type="varchar" MaxLength="100" />
           <Property Name="Email" Type="varchar" MaxLength="250" />
@@ -118,7 +118,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <End Role="Contratos" Type="Self.Contratos" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Personas">
-              <PropertyRef Name="IdPeople" />
+              <PropertyRef Name="PersonasId" />
             </Principal>
             <Dependent Role="Contratos">
               <PropertyRef Name="IdContrato" />
@@ -178,7 +178,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <End Role="Propiedades" Type="Self.Propiedades" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Personas">
-              <PropertyRef Name="IdPeople" />
+              <PropertyRef Name="PersonasId" />
             </Principal>
             <Dependent Role="Propiedades">
               <PropertyRef Name="IdOwner" />
@@ -278,9 +278,9 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
         </EntityType>
         <EntityType Name="Personas">
           <Key>
-            <PropertyRef Name="IdPeople" />
+            <PropertyRef Name="PersonasId" />
           </Key>
-          <Property Name="IdPeople" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonasId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -380,7 +380,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <End Type="ClientesModel.Propiedades" Role="Propiedades" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Personas">
-              <PropertyRef Name="IdPeople" />
+              <PropertyRef Name="PersonasId" />
             </Principal>
             <Dependent Role="Propiedades">
               <PropertyRef Name="IdOwner" />
@@ -421,7 +421,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <End Type="ClientesModel.Contratos" Role="Contratos" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Personas">
-              <PropertyRef Name="IdPeople" />
+              <PropertyRef Name="PersonasId" />
             </Principal>
             <Dependent Role="Contratos">
               <PropertyRef Name="IdContrato" />
@@ -546,7 +546,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <EntitySetMapping Name="Personas">
             <EntityTypeMapping TypeName="ClientesModel.Personas">
               <MappingFragment StoreEntitySet="Personas">
-                <ScalarProperty Name="IdPeople" ColumnName="IdPeople" />
+                <ScalarProperty Name="PersonasId" ColumnName="PersonasId" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

@@ -14,6 +14,6 @@ namespace Inmobiliar.Models
         public string Celular { get; set; }
         public string TelefonoLaboral { get; set; }
         public string DU { get; set; }
-        public Nullable<int> IdPeople { get; set; }
+        public Nullable<int> PersonasId { get; set; }
     }
 }

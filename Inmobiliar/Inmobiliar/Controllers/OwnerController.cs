@@ -121,7 +121,7 @@ namespace Inmobiliar.Controllers
                             {
                                 nombre = person.Nombre,
                                 apellido = person.Apellido,
-                                idpeople = person.IdPeople
+                                PersonasId = person.PersonasId
                             }).ToList();
             return Json(CityName, JsonRequestBehavior.AllowGet);
         }

@@ -19,8 +19,8 @@ namespace InmDAL
         {
             this.Propiedades = new HashSet<Propiedades>();
         }
-    
-        public int IdPeople { get; set; }
+
+        public int PersonasId { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Email { get; set; }
