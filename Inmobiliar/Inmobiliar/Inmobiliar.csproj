@@ -127,6 +127,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attributes\PermisoAtribute.cs" />
     <Compile Include="Controllers\CobroAlquilerController.cs" />
+    <Compile Include="Controllers\ContratosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OwnerController.cs" />
@@ -135,6 +136,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CobroAlquilerModel.cs" />
+    <Compile Include="Models\ContratosModel.cs" />
     <Compile Include="Models\DatosUsuario.cs" />
     <Compile Include="Models\DomiciliosModel.cs" />
     <Compile Include="Models\Login.cs" />
@@ -252,6 +254,10 @@
     <Content Include="Views\Home\CobroAlquiler.cshtml" />
     <Content Include="Views\CobroAlquiler\_Observaciones.cshtml" />
     <Content Include="Views\Propiedades\_PropiedadResumida.cshtml" />
+    <Content Include="Views\Contratos\Create.cshtml" />
+    <Content Include="Views\Home\Contratos.cshtml" />
+    <Content Include="Views\Owner\_Busqueda.cshtml" />
+    <Content Include="Views\Contratos\_GarantePropietario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

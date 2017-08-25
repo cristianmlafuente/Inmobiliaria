@@ -1,5 +1,7 @@
 ﻿
     <div class="panel panel-info">
+        @if (Model.Propiedad != null)
+        { 
         <div class="panel-heading">
             Datos de la Propiedad
         </div>
@@ -24,5 +26,37 @@
                 </div>
             </form>
         </div>
+        }
+        else
+        {
+            <div class="panel-heading">
+                Buscar Propiedad
+            </div>
+            <div class="panel-body">
+                <form role="form" action="Create" method="post">
+                    <div class="form-group">
+                        <label class="control-label" for="disabledSelect">Propiedad</label>
+                        <input type="text" class="form-control" id="" name="prop">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="disabledSelect">Calle</label>
+                        <input type="text" class="form-control" id="" name="domicilio.Calle" disabled="">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="disabledSelect">Piso</label>
+                        <input type="text" class="form-control" id="" name="domicilio.Piso" disabled="">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="disabledSelect">Barrio</label>
+                        <input type="text" class="form-control" id="" name="domicilio.Barrio" disabled="">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="disabledSelect">CP</label>
+                        <input type="text" class="form-control" id="" name="domicilio.CP" disabled="">
+                    </div>
+                </form>
+            </div>
+        }
     </div>
 

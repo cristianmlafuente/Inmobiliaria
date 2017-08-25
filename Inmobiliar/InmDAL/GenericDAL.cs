@@ -38,14 +38,13 @@ namespace InmDAL
             {
                 using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AySConexionDesarrollo"].ConnectionString))
                 {
+                    int i = 0;
+                    
                     db.Open();
-                    var sqlQuery = string.Format("SELECT * FROM [{0}] WHERE ID=@ID", typeof(T).Name, new { ID = id });
+                    var sqlQuery = string.Format("SELECT * FROM [{0}] WHERE {0}ID={1}", typeof(T).Name, new { ID = id });
                     return db.QueryFirstOrDefault<T>(sqlQuery);
                 }
-                using (var context = new ClientesEntities())
-                {
-                    return context.Set<T>().Find(id);
-                }
+                
             }
             catch (Exception ex)
             {

@@ -10,17 +10,17 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
         <EntityType Name="Contrato-ImpuestoServicio">
           <Key>
             <PropertyRef Name="CodImpuesto" />
-            <PropertyRef Name="IdContrato" />
+            <PropertyRef Name="ContratosId" />
           </Key>
           <Property Name="CodImpuesto" Type="int" Nullable="false" />
-          <Property Name="IdContrato" Type="int" Nullable="false" />
+          <Property Name="ContratosId" Type="int" Nullable="false" />
           <Property Name="FechaAlta" Type="datetime" />
         </EntityType>
         <EntityType Name="Contratos">
           <Key>
-            <PropertyRef Name="IdContrato" />
+            <PropertyRef Name="ContratosId" />
           </Key>
-          <Property Name="IdContrato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContratosId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NroContrato" Type="varchar" MaxLength="50" />
           <Property Name="PropiedadesId" Type="int" />
           <Property Name="InquilinoId" Type="int" />
@@ -121,7 +121,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
               <PropertyRef Name="PersonasId" />
             </Principal>
             <Dependent Role="Contratos">
-              <PropertyRef Name="IdContrato" />
+              <PropertyRef Name="ContratosId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -142,10 +142,10 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <End Role="Contrato-ImpuestoServicio" Type="Self.Contrato-ImpuestoServicio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contratos">
-              <PropertyRef Name="IdContrato" />
+              <PropertyRef Name="ContratosId" />
             </Principal>
             <Dependent Role="Contrato-ImpuestoServicio">
-              <PropertyRef Name="IdContrato" />
+              <PropertyRef Name="ContratosId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -221,7 +221,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <EntitySet Name="Contrato-ImpuestoServicio" EntityType="Self.Contrato-ImpuestoServicio" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Contrato-ImpuestoServicio].[CodImpuesto] AS [CodImpuesto], 
-    [Contrato-ImpuestoServicio].[IdContrato] AS [IdContrato], 
+    [Contrato-ImpuestoServicio].[ContratosId] AS [ContratosId], 
     [Contrato-ImpuestoServicio].[FechaAlta] AS [FechaAlta]
     FROM [dbo].[Contrato-ImpuestoServicio] AS [Contrato-ImpuestoServicio]</DefiningQuery>
           </EntitySet>
@@ -337,10 +337,10 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
         <EntityType Name="Contrato_ImpuestoServicio">
           <Key>
             <PropertyRef Name="CodImpuesto" />
-            <PropertyRef Name="IdContrato" />
+            <PropertyRef Name="ContratosId" />
           </Key>
           <Property Name="CodImpuesto" Type="Int32" Nullable="false" />
-          <Property Name="IdContrato" Type="Int32" Nullable="false" />
+          <Property Name="ContratosId" Type="Int32" Nullable="false" />
           <Property Name="FechaAlta" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Contratos" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato" FromRole="Contrato_ImpuestoServicio" ToRole="Contratos" />
           <NavigationProperty Name="TiposImpuestosServicios" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_ImpuestoServicio" FromRole="Contrato_ImpuestoServicio" ToRole="TiposImpuestosServicios" />
@@ -389,9 +389,9 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
         </Association>
         <EntityType Name="Contratos">
           <Key>
-            <PropertyRef Name="IdContrato" />
+            <PropertyRef Name="ContratosId" />
           </Key>
-          <Property Name="IdContrato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContratosId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NroContrato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PropiedadesId" Type="Int32" />
           <Property Name="InquilinoId" Type="Int32" />
@@ -424,7 +424,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
               <PropertyRef Name="PersonasId" />
             </Principal>
             <Dependent Role="Contratos">
-              <PropertyRef Name="IdContrato" />
+              <PropertyRef Name="ContratosId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -445,10 +445,10 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <End Type="ClientesModel.Contrato_ImpuestoServicio" Role="Contrato_ImpuestoServicio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contratos">
-              <PropertyRef Name="IdContrato" />
+              <PropertyRef Name="ContratosId" />
             </Principal>
             <Dependent Role="Contrato_ImpuestoServicio">
-              <PropertyRef Name="IdContrato" />
+              <PropertyRef Name="ContratosId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -561,7 +561,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
             <EntityTypeMapping TypeName="ClientesModel.Contrato_ImpuestoServicio">
               <MappingFragment StoreEntitySet="Contrato-ImpuestoServicio">
                 <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-                <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
+                <ScalarProperty Name="ContratosId" ColumnName="ContratosId" />
                 <ScalarProperty Name="CodImpuesto" ColumnName="CodImpuesto" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -597,7 +597,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
                 <ScalarProperty Name="InquilinoId" ColumnName="InquilinoId" />
                 <ScalarProperty Name="PropiedadesId" ColumnName="PropiedadesId" />
                 <ScalarProperty Name="NroContrato" ColumnName="NroContrato" />
-                <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
+                <ScalarProperty Name="ContratosId" ColumnName="ContratosId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

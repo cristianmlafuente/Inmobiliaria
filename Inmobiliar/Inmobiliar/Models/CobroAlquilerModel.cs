@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Common.Emum;
+using InmBLL.Entities;
 
 namespace Inmobiliar.Models
 {
@@ -39,6 +40,12 @@ namespace Inmobiliar.Models
             }
         }
 
+        public Contratos Contrato { get; set; }
+
+        public CobroAlquilerModel()
+        {
+            this.Contrato = new Contratos();
+        }
     }
 
     public class PeriodosAdeudados

@@ -29,7 +29,7 @@ namespace Inmobiliar.Controllers
         [PermisoAtribute(Rol = RolesPermisos.Rol_Cobro_Alquiler)]
         public ActionResult Create()
         {
-            var model = new CobroAlquilerModel();
+            var model = new CobroAlquilerModel();            
             return View("Create", model);
         }
 

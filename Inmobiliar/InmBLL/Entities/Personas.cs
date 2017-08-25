@@ -16,5 +16,6 @@ namespace InmBLL.Entities
         public string TelefonoLaboral { get; set; }
         public string DU { get; set; }
         public Nullable<int> PersonasId { get; set; }
+        public string Detalle = "";
     }
 }

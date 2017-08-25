@@ -45,14 +45,36 @@ namespace InmBLL
 
         public List<Propiedades> GetAll()
         {
+            try
+            {
             var response = genericDal.GetAll<InmDAL.Propiedades>();
             return Mapper.Map<List<InmDAL.Propiedades>, List<Propiedades>>(response);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public Propiedades GetById(string id)
         {
-            var response = genericDal.GetById<InmDAL.Propiedades>(id);
-            return Mapper.Map<InmDAL.Propiedades, Propiedades>(response);
+            try
+            {
+                var propie = new Propiedades();
+                if (!string.IsNullOrEmpty(id))
+                {
+                    var response = genericDal.GetById<InmDAL.Propiedades>(id);
+                    if (response != null)
+                        propie = Mapper.Map<InmDAL.Propiedades, Propiedades>(response);
+                }
+
+                return propie;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
