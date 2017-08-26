@@ -1,5 +1,4 @@
-﻿$(function () {
-    debugger;
+﻿$(function () {    
     $("#ownerName").autocomplete({        
 
         source: function (request, response) {

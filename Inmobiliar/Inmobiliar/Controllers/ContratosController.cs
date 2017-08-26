@@ -95,6 +95,8 @@ namespace Inmobiliar.Controllers
         {
             var propiedadList = new  PropiedadesBLL();
             var listPropiedad = propiedadList.GetAll();
+            
+            
             var PropiedadName = (from prope in listPropiedad
                                  where (prope.Domicilio.Calle.Contains(prop) || prope.Domicilio.Barrio.Contains(prop) || prope.Domicilio.Ciudad.Contains(prop) || prope.Domicilio.CP.Contains(prop))
                             select new
@@ -105,7 +107,8 @@ namespace Inmobiliar.Controllers
                                 Barrio = prope.Domicilio.Barrio,
                                 Piso = prope.Domicilio.Piso,
                                 Dto = prope.Domicilio.Dto,
-                                CP = prope.Domicilio.CP
+                                CP = prope.Domicilio.CP,
+                                Id = prope.Domicilio.DomiciliosId
                             }).ToList();
             return Json(PropiedadName, JsonRequestBehavior.AllowGet);
         }
