@@ -5,21 +5,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InmDAL.Contracts;
 
 namespace InmBLL
 {
     public class PropiedadesBLL : IGenericBLL<Propiedades>
     {
-        private InmDAL.GenericDAL genericDal;
+
+        private InmDAL.Contracts.IGenericDAL<InmDAL.Propiedades> genericDal;
         public PropiedadesBLL()
         {
-            genericDal = new InmDAL.GenericDAL();
+            
         }
 
         public bool Add(Propiedades entity)
         {
             var entityDAL = new InmDAL.Propiedades();
-            var response = genericDal.Add<InmDAL.Propiedades>(entityDAL);
+            var response = genericDal.Add(entityDAL);
             if (response != null)
                 return true;
             return false;         
@@ -28,7 +30,7 @@ namespace InmBLL
         public bool Delete(Propiedades entity)
         {
             var entityDAL = new InmDAL.Propiedades();
-            var response = genericDal.Delete<InmDAL.Propiedades>(entityDAL);
+            var response = genericDal.Delete(entityDAL);
             if (response != null)
                 return true;
             return false;      
@@ -37,7 +39,7 @@ namespace InmBLL
         public bool Update(Propiedades entity)
         {
             var entityDAL = new InmDAL.Propiedades();
-            var response = genericDal.Update<InmDAL.Propiedades>(entityDAL);
+            var response = genericDal.Update(entityDAL);
             if (response != null)
                 return true;
             return false;   
@@ -47,7 +49,7 @@ namespace InmBLL
         {
             try
             {
-                var response = genericDal.GetAll<InmDAL.Propiedades>();
+                var response = genericDal.GetAll();
                 var listPropie = new List<Propiedades>();
                 foreach (var propiedad in response)
 	            {
@@ -83,7 +85,7 @@ namespace InmBLL
                 var propie = new Propiedades();
                 if (!string.IsNullOrEmpty(id))
                 {
-                    var response = genericDal.GetById<InmDAL.Propiedades>(id);
+                    var response = genericDal.GetById(id);
                     if (response != null)
                         propie = new Propiedades
                         {                    

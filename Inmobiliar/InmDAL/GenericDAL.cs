@@ -9,11 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using InmDAL.Contracts;
 
 namespace InmDAL
 {
-    public class GenericDAL 
-    {
+    public class GenericDAL<T> : IGenericDAL <T>
+    {/*
         public List<T> GetAll<T>() where T : class
         {
             try
@@ -117,7 +118,7 @@ namespace InmDAL
                 throw new Exception(ex.Message);
             }
             
-        }
+        } * */
 
         private static PropertyContainer ParseProperties<T>(T obj)
         {
@@ -231,6 +232,64 @@ namespace InmDAL
             }
 
             #endregion
+        }
+     
+        public bool Add(T entity)
+        {
+            try
+            {
+                var propertyContainer = ParseProperties(entity);
+                var sql = string.Format("INSERT INTO [{0}] ({1}) VALUES (@{2}) SELECT CAST(scope_identity() AS int)",
+                    typeof(T).Name,
+                    string.Join(", ", propertyContainer.ValueNames),
+                    string.Join(", @", propertyContainer.ValueNames));
+
+                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["conn"].ConnectionString))
+                {
+                    db.Open();
+                    var response = db.Query<T>(sql, propertyContainer.ValuePairs, commandType: CommandType.Text).First();
+                    if (response != null)
+                        return true;
+                    return false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public bool Delete(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<T> GetAll()
+        {
+            try
+            {
+                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AySConexionDesarrollo"].ConnectionString))
+                {
+                    db.Open();
+                    var sqlQuery = string.Format("SELECT * FROM [{0}]", typeof(T).Name);
+                    return db.Query<T>(sqlQuery).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public T GetById(string id)
+        {
+            throw new NotImplementedException();
         }
     }
     [AttributeUsage(AttributeTargets.Property)]

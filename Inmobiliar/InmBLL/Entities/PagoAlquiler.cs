@@ -27,9 +27,7 @@ namespace InmBLL.Entities
                 {
                     if (PropiedadId != 0)
                     {
-                        var dalpropiedad = new InmDAL.GenericDAL();
-                        var response = dalpropiedad.GetById<InmDAL.Propiedades>(PropiedadId.ToString());
-                        return _propiedad = AutoMapper.Mapper.Map<InmDAL.Propiedades, Propiedades>(response);
+                        return _propiedad = (getPropiedades(_propiedad.PropiedadesId.ToString()));
                     }
                     else return null;
                 }
@@ -38,16 +36,14 @@ namespace InmBLL.Entities
         }
 
         public Personas Inquilino
-        {
+        {   
             get
-            {
+            {                
                 if (_inquilino == null)
-                {
+                {   
                     if (InquilinoId != 0)
                     {
-                        var dalinquilino = new InmDAL.GenericDAL();
-                        var response = dalinquilino.GetById<InmDAL.Personas>(PropiedadId.ToString());
-                        return _inquilino = AutoMapper.Mapper.Map<InmDAL.Personas, Personas>(response);
+                        return _inquilino = getPersonas(InquilinoId.ToString());
                     }
                     else 
                         return null;
@@ -65,9 +61,7 @@ namespace InmBLL.Entities
                 {
                     if (ContratoId != 0)
                     {
-                        var dalinquilino = new InmDAL.GenericDAL();
-                        var response = dalinquilino.GetById<InmDAL.Contratos>(ContratoId.ToString());
-                        return _contrato = AutoMapper.Mapper.Map<InmDAL.Contratos, Contratos>(response);
+                        return _contrato = getContratos(ContratoId.ToString());
                     }
                     else
                         return null;
@@ -76,7 +70,24 @@ namespace InmBLL.Entities
                     return _contrato;
             }
         }
-
+        private Contratos getContratos(string id)
+        {
+            InmDAL.Contracts.IGenericDAL<InmDAL.Contratos> genericDal = null;
+            var response = genericDal.GetById(id);
+            return AutoMapper.Mapper.Map<InmDAL.Contratos, Contratos>(response);
+        }
+        private Personas getPersonas(string id)
+        {
+            InmDAL.Contracts.IGenericDAL<InmDAL.Personas> genericDal = null;
+            var response = genericDal.GetById(id);
+            return AutoMapper.Mapper.Map<InmDAL.Personas, Personas>(response);
+        }
+        private Propiedades getPropiedades(string id)
+        {
+            InmDAL.Contracts.IGenericDAL<InmDAL.Propiedades> genericDal = null;
+            var response = genericDal.GetById(id);
+            return AutoMapper.Mapper.Map<InmDAL.Propiedades, Propiedades>(response);
+        }
         public List<PagoAlquiler_Detalle> DetallePago { get; set; }
 
         public string Observaciones { get; set; }
