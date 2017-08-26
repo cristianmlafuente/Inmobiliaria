@@ -14,6 +14,7 @@ namespace Common.Emum
         Rol_Alta_Propiedades = 3,
         Rol_Alta_Clientes = 4,
         Rol_Cobro_Alquiler = 5,
+        Rol_AltaContratos = 6,
         #endregion
     }
 

@@ -19,27 +19,31 @@
                                         <div class="panel-body">
                                             <form role="form" action="Create" method="post">
                                                 <div class="form-group has-success">
+                                                    <label class="control-label" for="inputSuccess">Inquilino</label>
+                                                    <input type="text" class="form-control" id="ownerInquilino" name="Inquilino">
+                                                </div>
+                                                <div class="form-group has-success">
                                                     <label class="control-label" for="inputSuccess">Apellido</label>
-                                                    <input type="text" class="form-control" id="ownerApellido" name="Apellido">
+                                                    <input type="text" class="form-control" id="ownerApellido" name="Apellido" disabled="" placeholder="@Model.Contrato.Inquilino.Apellido">
                                                 </div>
                                                 <div class="form-group has-success">
                                                     <label class="control-label" for="inputSuccess">Nombre</label>
-                                                    <input type="text" class="form-control" id="ownerName" name="Nombre">
+                                                    <input type="text" class="form-control" id="ownerName" name="Nombre" disabled="" placeholder="@Model.Contrato.Inquilino.Nombre">
                                                 </div>
                                                 <div class="form-group has-success">
                                                     <label class="control-label" for="inputSuccess">DU</label>
-                                                    <input type="text" class="form-control" id="" name="DU">
+                                                    <input type="text" class="form-control" id="" name="DU" disabled="" placeholder="@Model.Contrato.Inquilino.DU">
                                                 </div>
                                                 <div class="form-group has-success">
                                                     <label class="control-label" for="inputSuccess">TelefonoLaboral</label>
-                                                    <input type="text" class="form-control" id="" name="TelefonoLaboral">
-                                                </div>                                                
+                                                    <input type="text" class="form-control" id="" name="TelefonoLaboral" disabled="" placeholder="@Model.Contrato.Inquilino.TelefonoLaboral">
+                                                </div>
                                             </form>
-                                        </div>                                        
-                                    </div>
+                                        </div>
+                                    </div>                                    
                                 </div>
                                 <div class="col-lg-6" id="Propiedad">
-                                    @{Html.RenderPartial("../Propiedades/_PropiedadResumida", Model);}
+                                    @{Html.RenderPartial("../Propiedades/_PropiedadResumida", Model.Contrato.Propiedades);}
                                 </div>
                             </div>
                             <div class="row">

@@ -77,9 +77,14 @@ namespace InmBLL
 
         public Personas GetById(string id)
         {
-            var response = genericDal.GetById<InmDAL.Personas>(id);
-
-            return Mapper.Map<InmDAL.Personas, Personas>(response);
+            var person = new Personas();
+            if (!string.IsNullOrEmpty(id))
+            {
+                var response = genericDal.GetById<InmDAL.Personas>(id);
+                if (response != null)
+                    person = Mapper.Map<InmDAL.Personas, Personas>(response);                
+            }
+            return person;
         }
     }
 }

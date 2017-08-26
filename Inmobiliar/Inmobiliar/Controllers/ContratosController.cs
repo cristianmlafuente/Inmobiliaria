@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using Common.Emum;
-using InmBLL;
-using InmBLL.Entities;
+﻿using InmBLL;
 using Inmobiliar.Models;
 using System;
 using System.Collections.Generic;
@@ -11,29 +8,29 @@ using System.Web.Mvc;
 
 namespace Inmobiliar.Controllers
 {
-    public class CobroAlquilerController : Controller
+    public class ContratosController : Controller
     {
-        // GET: CobroAlquiler
+        // GET: Contratos
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: CobroAlquiler/Details/5
+        // GET: Contratos/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: CobroAlquiler/Create
-        [PermisoAtribute(Rol = RolesPermisos.Rol_Cobro_Alquiler)]
+        // GET: Contratos/Create
         public ActionResult Create()
         {
-            var model = new CobroAlquilerModel();            
-            return View("Create", model);
+            ViewBag.Propietarios = "Propietario";
+            ContratosModel model = new ContratosModel();
+            return View(model);
         }
 
-        // POST: CobroAlquiler/Create
+        // POST: Contratos/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -49,13 +46,13 @@ namespace Inmobiliar.Controllers
             }
         }
 
-        // GET: CobroAlquiler/Edit/5
+        // GET: Contratos/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: CobroAlquiler/Edit/5
+        // POST: Contratos/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -71,13 +68,13 @@ namespace Inmobiliar.Controllers
             }
         }
 
-        // GET: CobroAlquiler/Delete/5
+        // GET: Contratos/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: CobroAlquiler/Delete/5
+        // POST: Contratos/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -93,25 +90,24 @@ namespace Inmobiliar.Controllers
             }
         }
 
-        //[HttpPost]
-        //public JsonResult GetInquilino(string nombre, string apellido, string dni, string telefono)
-        //{            
-        //    //var personsList = new PersonasBLL();
-        //    //var listPersons = personsList.GetAllPersons();
-        //    ////Type type = listPersons..GetType();
-        //    //var personViews = Mapper.Map<List<Personas>, List<PersonasModel>>(listPersons);
-
-        //    //var CityName = (from person in personViews
-        //    //                where person.Nombre.StartsWith(nombre)
-        //    //                select new
-        //    //                {
-        //    //                    nombre = person.Nombre,
-        //    //                    apellido = person.Apellido,
-        //    //                    idpeople = person.IdPeople
-        //    //                }).ToList();
-
-        //    return Json(CityName, JsonRequestBehavior.AllowGet);
-        //}
-    
+        [HttpPost]
+        public JsonResult GetPropiedad(string prop)
+        {
+            var propiedadList = new  PropiedadesBLL();
+            var listPropiedad = propiedadList.GetAll();
+            var PropiedadName = (from prope in listPropiedad
+                                 where (prope.Domicilio.Calle.Contains(prop) || prope.Domicilio.Barrio.Contains(prop) || prope.Domicilio.Ciudad.Contains(prop) || prope.Domicilio.CP.Contains(prop))
+                            select new
+                            {
+                                Calle = prope.Domicilio.Calle,
+                                Numero = prope.Domicilio.Numero,
+                                PropiedadId = prope.PropiedadesId,
+                                Barrio = prope.Domicilio.Barrio,
+                                Piso = prope.Domicilio.Piso,
+                                Dto = prope.Domicilio.Dto,
+                                CP = prope.Domicilio.CP
+                            }).ToList();
+            return Json(PropiedadName, JsonRequestBehavior.AllowGet);
+        }
     }
 }

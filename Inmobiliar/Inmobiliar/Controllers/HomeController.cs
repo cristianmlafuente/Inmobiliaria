@@ -51,5 +51,11 @@ namespace Inmobiliar.Controllers
         {
             return View();
         }
+
+        [PermisoAtribute(Rol = RolesPermisos.Rol_AltaContratos)]
+        public ActionResult Contratos()
+        {
+            return View();
+        }
     }
 }

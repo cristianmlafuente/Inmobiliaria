@@ -19,8 +19,8 @@ namespace InmDAL
         {
             this.Contrato_ImpuestoServicio = new HashSet<Contrato_ImpuestoServicio>();
         }
-    
-        public int IdContrato { get; set; }
+
+        public int ContratosId { get; set; }
         public string NroContrato { get; set; }
         public Nullable<int> PropiedadesId { get; set; }
         public Nullable<int> InquilinoId { get; set; }
@@ -31,7 +31,7 @@ namespace InmDAL
         public Nullable<int> IdGarantePropietario { get; set; }
         public Nullable<int> IdGaranteLaboral1 { get; set; }
         public Nullable<int> IdGaranteLaboral2 { get; set; }
-        public Nullable<int> IdGatanteLaboral3 { get; set; }
+        public Nullable<int> IdGaranteLaboral3 { get; set; }
         public Nullable<decimal> MontoInicialAlquiler { get; set; }
         public Nullable<decimal> PorcentajeInmobiliaria { get; set; }
 

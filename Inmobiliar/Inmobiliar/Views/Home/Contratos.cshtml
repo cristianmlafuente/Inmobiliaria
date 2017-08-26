@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Contratos";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <!-- Mensaje de error global -->
+        @if (ViewBag.TipoMsj == "Info")
+        {
+            <div class="alert alert-info alert-inline">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong id="strMsj">@ViewBag.Message</strong>
+            </div>
+        }
+        @if (ViewBag.TipoMsj == "Error")
+        {
+            <div class="alert alert-danger alert-inline margin-top-50 margin-bottom-50">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>@ViewBag.Message</strong>
+            </div>
+        }
+        @if (ViewBag.TipoMsj == "Success")
+        {
+            <div class="alert alert-success alert-inline margin-top-50 margin-bottom-50">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>@ViewBag.Message</strong>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1 class="page-header">
+                            <small>Contratos</small>
+                        </h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div id="exTab1" class="container">
+                                    <ul class="nav nav-pills">
+                                        <li class="active">
+                                            <a href="#1a" data-toggle="tab">Alta</a>
+                                        </li>
+                                        <li>
+                                            <a href="#2a" data-toggle="tab">Baja</a>
+                                        </li>
+                                        <li>
+                                            <a href="#3a" data-toggle="tab">Editar</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content clearfix">
+                                        <div class="tab-pane active" id="1a">
+                                            <br />
+                                            @Html.ActionLink("Nuevo Contrato", "../Contratos/Create")
+                                        </div>
+                                        <div class="tab-pane" id="2a">
+                                            <h3>We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab</h3>
+                                        </div>
+                                        <div class="tab-pane" id="3a">
+                                            <h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>
+                                        </div>
+                                        <div class="tab-pane" id="4a">
+                                            <h3>We use css to change the background color of the content to be equal to the tab</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

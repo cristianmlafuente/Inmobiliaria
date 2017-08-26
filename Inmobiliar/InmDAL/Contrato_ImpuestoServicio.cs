@@ -15,7 +15,7 @@ namespace InmDAL
     public partial class Contrato_ImpuestoServicio
     {
         public int CodImpuesto { get; set; }
-        public int IdContrato { get; set; }
+        public int ContratosId { get; set; }
         public Nullable<System.DateTime> FechaAlta { get; set; }
     
         public virtual Contratos Contratos { get; set; }

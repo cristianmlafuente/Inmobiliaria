@@ -45,14 +45,66 @@ namespace InmBLL
 
         public List<Propiedades> GetAll()
         {
-            var response = genericDal.GetAll<InmDAL.Propiedades>();
-            return Mapper.Map<List<InmDAL.Propiedades>, List<Propiedades>>(response);
+            try
+            {
+                var response = genericDal.GetAll<InmDAL.Propiedades>();
+                var listPropie = new List<Propiedades>();
+                foreach (var propiedad in response)
+	            {
+                    var data = new Propiedades
+                    {                    
+                        DomiciliosId = propiedad.DomiciliosId,
+                        IdAdmConsorcio = propiedad.IdAdmConsorcio,
+                        NomenclaturaCatastral = propiedad.NomenclaturaCatastral,
+                        NroContratoEpec = propiedad.NroContratoEpec,
+                        NroFactura = propiedad.NroFactura,
+                        NumeroCtaRenta = propiedad.NumeroCtaRenta,
+                        PersonasId = propiedad.PersonasId,
+                        PropiedadesId = propiedad.PropiedadesId,
+                        UnidadFacturacion = propiedad.UnidadFacturacion
+                    
+                    };
+                    listPropie.Add(data);
+	            }
+
+                return listPropie;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public Propiedades GetById(string id)
         {
-            var response = genericDal.GetById<InmDAL.Propiedades>(id);
-            return Mapper.Map<InmDAL.Propiedades, Propiedades>(response);
+            try
+            {
+                var propie = new Propiedades();
+                if (!string.IsNullOrEmpty(id))
+                {
+                    var response = genericDal.GetById<InmDAL.Propiedades>(id);
+                    if (response != null)
+                        propie = new Propiedades
+                        {                    
+                            DomiciliosId = response.DomiciliosId,
+                            IdAdmConsorcio = response.IdAdmConsorcio,
+                            NomenclaturaCatastral = response.NomenclaturaCatastral,
+                            NroContratoEpec = response.NroContratoEpec,
+                            NroFactura = response.NroFactura,
+                            NumeroCtaRenta = response.NumeroCtaRenta,
+                            PersonasId = response.PersonasId,
+                            PropiedadesId = response.PropiedadesId,
+                            UnidadFacturacion = response.UnidadFacturacion
+                    
+                        };
+                }
+                return propie;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

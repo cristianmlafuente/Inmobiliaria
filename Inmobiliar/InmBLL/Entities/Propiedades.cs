@@ -18,8 +18,40 @@ namespace InmBLL.Entities
         public Nullable<int> UnidadFacturacion { get; set; }
         public Nullable<int> NroFactura { get; set; }
         public Nullable<int> NroContratoEpec { get; set; }
+        private Domicilios _domicilio { get; set; }
+        private Personas _personas { get; set; }
 
-        public virtual Domicilios Domicilios { get; set; }
-        public virtual Personas Personas { get; set; }
+        public Domicilios Domicilio {
+            get {
+                if (_domicilio != null)
+                    return _domicilio;
+                else
+                {
+                    _domicilio = new Domicilios();
+                    if (DomiciliosId != 0)
+                    {
+                        _domicilio = new DomiciliosBLL().GetById(DomiciliosId.ToString());
+                    }
+                    return _domicilio;
+                }
+            }
+        }
+        public Personas Personas {
+            get
+            {
+                if (_personas != null)
+                    return _personas;
+                else
+                {
+                    if (PersonasId != 0)
+                    {
+                        _personas = new PersonasBLL().GetById(PersonasId.ToString());
+                        return _personas;
+                    }
+                    else
+                        return null;
+                }
+            } 
+        }
     }
 }
