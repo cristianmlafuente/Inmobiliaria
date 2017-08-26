@@ -10,17 +10,17 @@ namespace InmBLL
 {
     public class DomiciliosBLL : IGenericBLL<Domicilios>
     {
-        private InmDAL.GenericDAL genericDal;
+        private InmDAL.Contracts.IGenericDAL<InmDAL.Domicilios> genericDal;
 
         public DomiciliosBLL()
         {
-            genericDal = new InmDAL.GenericDAL();
+            //genericDal = new InmDAL.GenericDAL();
         }
 
         public bool Add(Domicilios entity)
         {
             var entityDAL = new InmDAL.Domicilios();
-            var response = genericDal.Add<InmDAL.Domicilios>(entityDAL);
+            var response = genericDal.Add(entityDAL);
             if (response != null)
                 return true;
             return false;         
@@ -29,7 +29,7 @@ namespace InmBLL
         public bool Delete(Domicilios entity)
         {
             var entityDAL = new InmDAL.Domicilios();
-            var response = genericDal.Delete<InmDAL.Domicilios>(entityDAL);
+            var response = genericDal.Delete(entityDAL);
             if (response != null)
                 return true;
             return false;      
@@ -38,7 +38,7 @@ namespace InmBLL
         public bool Update(Domicilios entity)
         {
             var entityDAL = new InmDAL.Domicilios();
-            var response = genericDal.Update<InmDAL.Domicilios>(entityDAL);
+            var response = genericDal.Update(entityDAL);
             if (response != null)
                 return true;
             return false;   
@@ -48,7 +48,7 @@ namespace InmBLL
         {
             try
             {
-                var response = genericDal.GetAll<InmDAL.Domicilios>();
+                var response = genericDal.GetAll();
 
                 return Mapper.Map<List<InmDAL.Domicilios>, List<Domicilios>>(response);
             }
@@ -66,7 +66,7 @@ namespace InmBLL
                 var propie = new Domicilios();
                 if (!string.IsNullOrEmpty(id))
                 {
-                    var response = genericDal.GetById<InmDAL.Domicilios>(id);
+                    var response = genericDal.GetById(id);
                     if (response != null)
                         propie = new Domicilios()
                         { 

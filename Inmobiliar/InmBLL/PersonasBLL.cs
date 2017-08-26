@@ -10,10 +10,10 @@ namespace InmBLL
 {
     public class PersonasBLL : IGenericBLL<Personas>
     {
-        private InmDAL.GenericDAL genericDal;
+        private InmDAL.Contracts.IGenericDAL<InmDAL.Personas> genericDal;
         public PersonasBLL()
         {
-            genericDal = new InmDAL.GenericDAL();
+            //genericDal = new InmDAL.GenericDAL();
         }
 
         public bool Add(Personas entity)
@@ -28,7 +28,7 @@ namespace InmBLL
                 TelefonoLaboral = entity.TelefonoLaboral,
                 Celular = entity.Celular
             };
-            var response = genericDal.Add<InmDAL.Personas>(data);
+            var response = genericDal.Add(data);
             if (response != null)
                 return true;
             return false;
@@ -37,7 +37,7 @@ namespace InmBLL
         public bool Delete(Personas entity)
         {
             var data = new InmDAL.Personas();
-            var response = genericDal.Delete<InmDAL.Personas>(data);
+            var response = genericDal.Delete(data);
             if (response != null)
                 return true;
             return false;
@@ -46,7 +46,7 @@ namespace InmBLL
         public bool Update(Personas entity)
         {
             var data = new InmDAL.Personas();
-            var response = genericDal.Update<InmDAL.Personas>(data);
+            var response = genericDal.Update(data);
             if (response != null)
                 return true;
             return false;
@@ -55,7 +55,7 @@ namespace InmBLL
 
         public List<Personas> GetAll()
         {
-            var response = genericDal.GetAll<InmDAL.Personas>();
+            var response = genericDal.GetAll();
             var listPerson = new List<Personas>();
             foreach(var person in response)
             {
@@ -80,7 +80,7 @@ namespace InmBLL
             var person = new Personas();
             if (!string.IsNullOrEmpty(id))
             {
-                var response = genericDal.GetById<InmDAL.Personas>(id);
+                var response = genericDal.GetById(id);
                 if (response != null)
                     person = Mapper.Map<InmDAL.Personas, Personas>(response);                
             }
