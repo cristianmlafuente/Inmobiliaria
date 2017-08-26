@@ -1,4 +1,5 @@
-﻿using Inmobiliar.Models;
+﻿using InmBLL;
+using Inmobiliar.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,6 +88,26 @@ namespace Inmobiliar.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public JsonResult GetPropiedad(string prop)
+        {
+            var propiedadList = new  PropiedadesBLL();
+            var listPropiedad = propiedadList.GetAll();
+            var PropiedadName = (from prope in listPropiedad
+                                 where (prope.Domicilio.Calle.Contains(prop) || prope.Domicilio.Barrio.Contains(prop) || prope.Domicilio.Ciudad.Contains(prop) || prope.Domicilio.CP.Contains(prop))
+                            select new
+                            {
+                                Calle = prope.Domicilio.Calle,
+                                Numero = prope.Domicilio.Numero,
+                                PropiedadId = prope.PropiedadesId,
+                                Barrio = prope.Domicilio.Barrio,
+                                Piso = prope.Domicilio.Piso,
+                                Dto = prope.Domicilio.Dto,
+                                CP = prope.Domicilio.CP
+                            }).ToList();
+            return Json(PropiedadName, JsonRequestBehavior.AllowGet);
         }
     }
 }

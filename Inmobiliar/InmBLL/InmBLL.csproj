@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AdministradoraAlquileres.cs" />
     <Compile Include="AdministradoraUsuarios.cs" />
+    <Compile Include="DomiciliosBLL.cs" />
     <Compile Include="Entities\PagoAlquiler.cs" />
     <Compile Include="Entities\Contratos.cs" />
     <Compile Include="Entities\Domicilios.cs" />

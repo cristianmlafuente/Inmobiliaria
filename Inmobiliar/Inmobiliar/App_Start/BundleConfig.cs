@@ -24,7 +24,8 @@ namespace Inmobiliar
                       "~/Scripts/respond.js",
                       "~/Scripts/jquery-ui-1.12.1.js",
                       "~/Scripts/jquery-ui-1.12.1.min.js",
-                      "~/Scripts/Propiedades.js"
+                      "~/Scripts/Propiedades.js",
+                      "~/Scripts/Contrato.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

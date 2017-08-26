@@ -46,9 +46,9 @@ namespace InmBLL
                         comando.ExecuteNonQuery();
                         comando.CommandText = "UPDATE [Hoja1 0$L2:L2] SET F1= '" + Pago.FechaPago.ToShortDateString() + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$B7:B7] SET F1= '" + Pago.Propiedad.Domicilios.Calle + "'";
+                        comando.CommandText = "UPDATE [Hoja1 0$B7:B7] SET F1= '" + Pago.Propiedad.Domicilio.Calle + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$I7:I7] SET F1= '" + Pago.Propiedad.Domicilios.Calle + "'";
+                        comando.CommandText = "UPDATE [Hoja1 0$I7:I7] SET F1= '" + Pago.Propiedad.Domicilio.Calle + "'";
                         comando.ExecuteNonQuery();
                         comando.CommandText = "UPDATE [Hoja1 0$B8:B8] SET F1= '" + Pago.Inquilino.Apellido + "'";
                         comando.ExecuteNonQuery();
@@ -173,9 +173,9 @@ namespace InmBLL
                         comando.ExecuteNonQuery();
                         comando.CommandText = "UPDATE [Hoja1 0$L2:L2] SET F1= '" + Pago.FechaPago.ToShortDateString() + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$B7:B7] SET F1= '" + Pago.Propiedad.Domicilios.Calle + "'";
+                        comando.CommandText = "UPDATE [Hoja1 0$B7:B7] SET F1= '" + Pago.Propiedad.Domicilio.Calle + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$I7:I7] SET F1= '" + Pago.Propiedad.Domicilios.Calle + "'";
+                        comando.CommandText = "UPDATE [Hoja1 0$I7:I7] SET F1= '" + Pago.Propiedad.Domicilio.Calle + "'";
                         comando.ExecuteNonQuery();
                         comando.CommandText = "UPDATE [Hoja1 0$B8:B8] SET F1= '" + Pago.Propiedad.Personas.Apellido + "'";
                         comando.ExecuteNonQuery();

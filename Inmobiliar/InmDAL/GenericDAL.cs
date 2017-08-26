@@ -41,7 +41,7 @@ namespace InmDAL
                     int i = 0;
                     
                     db.Open();
-                    var sqlQuery = string.Format("SELECT * FROM [{0}] WHERE {0}ID={1}", typeof(T).Name, new { ID = id });
+                    var sqlQuery = string.Format("SELECT * FROM [{0}] WHERE {0}ID = {1}", typeof(T).Name, id);
                     return db.QueryFirstOrDefault<T>(sqlQuery);
                 }
                 
