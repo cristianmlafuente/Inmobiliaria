@@ -116,14 +116,14 @@ namespace Inmobiliar.Controllers
             //var personViews = Mapper.Map<List<Personas>, List<PersonasModel>>(listPersons);
 
             var CityName = (from person in listPersons
-                            where (person.Nombre.Contains(nombre) || person.Apellido.Contains(nombre))
+                            where (person.Nombre.Contains(nombre) || person.Apellido.Contains(nombre)|| person.DU.Contains(nombre))
                             select new
                             {
-                                nombre = person.Nombre,
-                                apellido = person.Apellido,
-                                PersonasId = person.PersonasId
+                                person.Nombre,
+                                person.Apellido,
+                                person.PersonasId
                             }).ToList();
-            return Json(CityName, JsonRequestBehavior.AllowGet);
+           return Json(CityName, JsonRequestBehavior.AllowGet);
         }
     }
 }
