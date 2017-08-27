@@ -11,7 +11,7 @@
                 success: function (data) {
                     debugger;
                     response($.map(data, function (item) {                        
-                        //return { label: item.Nombre + item.Apellido, value: item.PersonasId };                    
+                        return { label: item.Nombre + item.Apellido, value: item.PersonasId };                    
                     }))
                 },
                 error: function (response) {                    
