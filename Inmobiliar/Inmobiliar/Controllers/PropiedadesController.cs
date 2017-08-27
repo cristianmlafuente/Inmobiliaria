@@ -13,6 +13,11 @@ namespace Inmobiliar.Controllers
 {
     public class PropiedadesController : Controller
     {
+        private InmBLL.IGenericBLL<Propiedades> generic;
+        public PropiedadesController(IGenericBLL<Propiedades> _generic)
+        {
+            generic = _generic;
+        }
         // GET: Propiedades
         public ActionResult Index()
         {
@@ -38,6 +43,7 @@ namespace Inmobiliar.Controllers
         {
             try
             {
+                
                 //var propiedades = new PropiedadesBLL();
                 //if(ModelState.IsValid)
                 //{
