@@ -20,8 +20,7 @@
                                 @{Html.RenderPartial("../Propiedades/_PropiedadResumida", Model.Contrato.Propiedades);}
                             </div>
                             <div class="col-lg-6" id="Propiedad">
-                                @if (Model.Contrato.PropietarioId != null && Model.Contrato.PropietarioId != 0)
-                                {
+                                @{
                                     Model.Contrato.Propietario.Detalle = "Propietario";
                                     { Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.Propietario); }
                                 }
