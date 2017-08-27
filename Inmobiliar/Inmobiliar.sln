@@ -18,6 +18,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InmDAL", "InmDAL\InmDAL.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{620405AD-09BA-488B-89D6-8AB3F7F95503}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inm.IoC.Services.Configuration", "IoC.Services.Configuration\Inm.IoC.Services.Configuration.csproj", "{626AC027-61CF-40AC-AFF3-C3E846554AC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inm.IoC", "Inm.IoC\Inm.IoC.csproj", "{D8C3DC5E-BA26-4A80-B302-CF7BD56926C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +44,14 @@ Global
 		{620405AD-09BA-488B-89D6-8AB3F7F95503}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{620405AD-09BA-488B-89D6-8AB3F7F95503}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{620405AD-09BA-488B-89D6-8AB3F7F95503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{626AC027-61CF-40AC-AFF3-C3E846554AC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{626AC027-61CF-40AC-AFF3-C3E846554AC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{626AC027-61CF-40AC-AFF3-C3E846554AC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{626AC027-61CF-40AC-AFF3-C3E846554AC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8C3DC5E-BA26-4A80-B302-CF7BD56926C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8C3DC5E-BA26-4A80-B302-CF7BD56926C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8C3DC5E-BA26-4A80-B302-CF7BD56926C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8C3DC5E-BA26-4A80-B302-CF7BD56926C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
