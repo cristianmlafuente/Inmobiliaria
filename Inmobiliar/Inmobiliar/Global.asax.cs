@@ -1,3 +1,4 @@
+﻿using Inmobiliar.App_Start;
 ﻿using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Inmobiliar
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DependencyInjector.Initialise();
             var _configuration = new ConfigurationIoCAPI();
             var _container = _configuration.ConfigurationIoC();
             var _dependencyResolver = new Inmobiliar.Resolvers.UnityDependencyResolver(_container);

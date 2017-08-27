@@ -13,7 +13,7 @@ namespace Inmobiliar.Controllers
     public class ContratosController : Controller
     {
         private IGenericBLL<Propiedades> _PropiedadesBll;
-
+        //public ContratosController() { }
         public ContratosController(IGenericBLL<Propiedades> _genericProp) 
         {
             _PropiedadesBll = _genericProp;
