@@ -13,36 +13,32 @@ namespace InmBLL
     {
 
         private InmDAL.Contracts.IGenericDAL<InmDAL.Propiedades> genericDal;
-        public PropiedadesBLL()
+
+        public PropiedadesBLL(IGenericDAL<InmDAL.Propiedades> _generic)
         {
-            
+            genericDal = _generic;
         }
 
         public bool Add(Propiedades entity)
         {
             var entityDAL = new InmDAL.Propiedades();
             var response = genericDal.Add(entityDAL);
-            if (response != null)
-                return true;
-            return false;         
+            
+            return response;             
         }
 
         public bool Delete(Propiedades entity)
         {
             var entityDAL = new InmDAL.Propiedades();
             var response = genericDal.Delete(entityDAL);
-            if (response != null)
-                return true;
-            return false;      
+            return response;     
         }
 
         public bool Update(Propiedades entity)
         {
             var entityDAL = new InmDAL.Propiedades();
             var response = genericDal.Update(entityDAL);
-            if (response != null)
-                return true;
-            return false;   
+            return response;   
         }
 
         public List<Propiedades> GetAll()

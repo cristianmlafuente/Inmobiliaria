@@ -38,13 +38,13 @@ namespace Inmobiliar.Controllers
         {
             try
             {
-                var propiedades = new PropiedadesBLL();
-                if(ModelState.IsValid)
-                {
-                    var response = Mapper.Map<PropiedadesModel, Propiedades>(model);
-                    var result = propiedades.Add(response);
-                }
-                // TODO: Add insert logic here
+                //var propiedades = new PropiedadesBLL();
+                //if(ModelState.IsValid)
+                //{
+                //    var response = Mapper.Map<PropiedadesModel, Propiedades>(model);
+                //    var result = propiedades.Add(response);
+                //}
+                //// TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }

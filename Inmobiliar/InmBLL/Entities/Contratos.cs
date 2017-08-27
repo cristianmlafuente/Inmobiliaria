@@ -130,7 +130,9 @@ namespace InmBLL.Entities
                     _Propiedad = new Propiedades();
                     if (PropiedadesId != 0)
                     {
-                        _Propiedad = new PropiedadesBLL().GetById(PropiedadesId.ToString());                        
+
+                        //_Propiedad = new PropiedadesBLL().GetById(PropiedadesId.ToString());    
+                        _Propiedad = new Propiedades();
                     }
                     return _Propiedad; 
                 }

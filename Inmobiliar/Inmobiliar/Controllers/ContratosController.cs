@@ -5,11 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using InmBLL.Entities;
 
 namespace Inmobiliar.Controllers
 {
+
     public class ContratosController : Controller
     {
+        private IGenericBLL<Propiedades> _PropiedadesBll;
+
+        public ContratosController(IGenericBLL<Propiedades> _genericProp) 
+        {
+            _PropiedadesBll = _genericProp;
+        }
+        
         // GET: Contratos
         public ActionResult Index()
         {
@@ -93,10 +102,9 @@ namespace Inmobiliar.Controllers
         [HttpPost]
         public JsonResult GetPropiedad(string prop)
         {
-            var propiedadList = new  PropiedadesBLL();
-            var listPropiedad = propiedadList.GetAll();
-            
-            
+            //var propiedadList = new  PropiedadesBLL();
+            var listPropiedad = _PropiedadesBll.GetAll();
+                        
             var PropiedadName = (from prope in listPropiedad
                                  where (prope.Domicilio.Calle.Contains(prop) || prope.Domicilio.Barrio.Contains(prop) || prope.Domicilio.Ciudad.Contains(prop) || prope.Domicilio.CP.Contains(prop))
                             select new
@@ -110,6 +118,7 @@ namespace Inmobiliar.Controllers
                                 CP = prope.Domicilio.CP,
                                 Id = prope.Domicilio.DomiciliosId
                             }).ToList();
+
             return Json(PropiedadName, JsonRequestBehavior.AllowGet);
         }
     }
