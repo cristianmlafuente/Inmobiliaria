@@ -14,9 +14,9 @@ namespace InmBLL
 
         private InmDAL.Contracts.IGenericDAL<InmDAL.Propiedades> genericDal;
 
-        public PropiedadesBLL(IGenericDAL<InmDAL.Propiedades> _generic)
+        public PropiedadesBLL()
         {
-            genericDal = _generic;
+            genericDal = new InmDAL.GenericDAL<InmDAL.Propiedades>();
         }
 
         public bool Add(Propiedades entity)

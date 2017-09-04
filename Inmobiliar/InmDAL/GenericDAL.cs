@@ -289,7 +289,22 @@ namespace InmDAL
 
         public T GetById(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AySConexionDesarrollo"].ConnectionString))
+                {
+                    int i = 0;
+
+                    db.Open();
+                    var sqlQuery = string.Format("SELECT * FROM [{0}] WHERE {0}ID = {1}", typeof(T).Name, id);
+                    return db.QueryFirstOrDefault<T>(sqlQuery);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }            
         }
     }
     [AttributeUsage(AttributeTargets.Property)]

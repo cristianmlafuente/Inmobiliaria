@@ -14,7 +14,7 @@ namespace InmBLL
 
         public DomiciliosBLL()
         {
-            //genericDal = new InmDAL.GenericDAL();
+            genericDal = new InmDAL.GenericDAL<InmDAL.Domicilios>();
         }
 
         public bool Add(Domicilios entity)
