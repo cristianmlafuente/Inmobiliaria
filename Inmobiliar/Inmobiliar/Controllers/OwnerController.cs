@@ -44,6 +44,7 @@ namespace Inmobiliar.Controllers
                     var personasBll = new PersonasBLL();
                     var persona = new Personas
                     {
+                        PersonasId = collection.PersonasId,
                         Apellido = collection.Apellido,
                         Nombre = collection.Nombre,
                         Email = collection.Email,

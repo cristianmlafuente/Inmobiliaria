@@ -116,7 +116,12 @@ namespace Inmobiliar.Controllers
                                 Piso = prope.Domicilio.Piso,
                                 Dto = prope.Domicilio.Dto,
                                 CP = prope.Domicilio.CP,
-                                Id = prope.Domicilio.DomiciliosId
+                                IdPropiedad = prope.Domicilio.DomiciliosId,
+                                IdPropietario = prope.PersonasId,
+                                Apellido = prope.Personas.Apellido,
+                                Nombre = prope.Personas.Nombre,
+                                Du = prope.Personas.DU,
+                                TelLabo = prope.Personas.TelefonoLaboral
                             }).ToList();
 
             return Json(PropiedadName, JsonRequestBehavior.AllowGet);
