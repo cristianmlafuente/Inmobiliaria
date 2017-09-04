@@ -11,19 +11,11 @@
                 success: function (data)
                 {                    
                     response($.map(data, function (item)
-                    {                       
-                        
-                        //return
-                        //{
-                        //    $("#domicilio.Calle").val(item.Calle);
-
-                        //}
-
+                    {                                                                       
                         return {
                             label: item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Dto + ', ' + item.Barrio + ', ' + item.CP,
                             value: item.Id 
-                        };
-                        
+                        };                        
                     }))
                 },
                 error: function (response) {
@@ -46,7 +38,8 @@
             $("#Dto").val(arr[3]);
             $("#Barrio").val(arr[4]);
             $("#CP").val(arr[5]);
-            $("#datosPropiedad").val(ui.item.value);
+            $("#datosPropiedad").val(ui.item.label);
+            $("#datosPropiedad").addClass("data-idtarjeta=" + ui.item.value);
     },
     open: function() {
         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
