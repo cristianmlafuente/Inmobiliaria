@@ -12,12 +12,12 @@ namespace Inmobiliar.Controllers
 
     public class ContratosController : Controller
     {
-        private IGenericBLL<Propiedades> _PropiedadesBll;
+        
         //public ContratosController() { }
-        public ContratosController(IGenericBLL<Propiedades> _genericProp) 
-        {
-            _PropiedadesBll = _genericProp;
-        }
+        //public ContratosController(IGenericBLL<Propiedades> _genericProp) 
+        //{
+        //    _PropiedadesBll = _genericProp;
+        //}
         
         // GET: Contratos
         public ActionResult Index()
@@ -102,8 +102,8 @@ namespace Inmobiliar.Controllers
         [HttpPost]
         public JsonResult GetPropiedad(string prop)
         {
-            //var propiedadList = new  PropiedadesBLL();
-            var listPropiedad = _PropiedadesBll.GetAll();
+            var propiedadList = new  PropiedadesBLL();
+            var listPropiedad = propiedadList.GetAll();
                         
             var PropiedadName = (from prope in listPropiedad
                                  where (prope.Domicilio.Calle.Contains(prop) || prope.Domicilio.Barrio.Contains(prop) || prope.Domicilio.Ciudad.Contains(prop) || prope.Domicilio.CP.Contains(prop))

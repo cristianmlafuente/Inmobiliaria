@@ -13,11 +13,11 @@ namespace Inmobiliar.Controllers
 {
     public class PropiedadesController : Controller
     {
-        private InmBLL.IGenericBLL<Propiedades> generic;
-        public PropiedadesController(IGenericBLL<Propiedades> _generic)
-        {
-            generic = _generic;
-        }
+        //private InmBLL.IGenericBLL<Propiedades> generic;
+        //public PropiedadesController(IGenericBLL<Propiedades> _generic)
+        //{
+        //    generic = _generic;
+        //}
         // GET: Propiedades
         public ActionResult Index()
         {
@@ -43,14 +43,14 @@ namespace Inmobiliar.Controllers
         {
             try
             {
-                
-                //var propiedades = new PropiedadesBLL();
-                //if(ModelState.IsValid)
-                //{
-                //    var response = Mapper.Map<PropiedadesModel, Propiedades>(model);
-                //    var result = propiedades.Add(response);
-                //}
-                //// TODO: Add insert logic here
+
+                var propiedades = new PropiedadesBLL();
+                if (ModelState.IsValid)
+                {
+                    var response = Mapper.Map<PropiedadesModel, Propiedades>(model);
+                    var result = propiedades.Add(response);
+                }
+                // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }
