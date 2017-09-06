@@ -91,7 +91,7 @@ namespace InmBLL
                     person.PersonasId = response.PersonasId;
                     person.Telefono = response.Telefono;
                     person.TelefonoLaboral = response.TelefonoLaboral;
-                }          
+                }                              
             }
             return person;
         }

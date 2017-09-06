@@ -121,7 +121,7 @@ namespace Inmobiliar.Controllers
                                 Apellido = prope.Personas.Apellido,
                                 Nombre = prope.Personas.Nombre,
                                 Du = prope.Personas.DU,
-                                TelLabo = prope.Personas.TelefonoLaboral
+                                TelLabo = prope.Personas.TelefonoLaboral != null ? prope.Personas.TelefonoLaboral : ""
                             }).ToList();
 
             return Json(PropiedadName, JsonRequestBehavior.AllowGet);

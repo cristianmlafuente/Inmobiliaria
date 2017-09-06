@@ -13,8 +13,8 @@
                     response($.map(data, function (item)
                     {                                                                       
                         return {
-                            label: item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Dto + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.Apellido + ', ' + item.Nombre + ', ' + item.Du + ', ' + item.TelLabo,
-                            value: item.IdPropiedad + ', ' + item.PersonasId
+                            label: item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Dto + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.Apellido + ', ' + item.Nombre + ', ' + item.Du + ', ' + item.TelLabo + ', ' + item.IdPropiedad + ', ' + item.IdPropietario,
+                            value: '.'
                         };                        
                     }))
                 },
@@ -30,26 +30,27 @@
         select: function (event, ui)
         {
             debugger;
-            var idName = $("#ownerinquilino").attr("#data-id");
-            var arr = ui.item.label.split(',');
-            var id = ui.item.value.split(',');
+            var idName = $("#owner").attr("data-detalle");
+            var arr = ui.item.label.split(',');            
             $("#Calle").val(arr[0]);           
             $("#Numero").val(arr[1]);
             $("#Piso").val(arr[2]);
             $("#Dto").val(arr[3]);
             $("#Barrio").val(arr[4]);
-            $("#CP").val(arr[5]);
-            $("#datosPropiedad").val(ui.item.label);
-            $("#datosPropiedad").addClass("data-idtarjeta=" + id[0]);
-            if ($("#ownerinquilino").attr("#data-id") == idName)
+            $("#CP").val(arr[5]);            
+            $("#datosPropiedad").addClass("data-idtarjeta=" + arr[10]);
+            $("#datosPropiedad").attr("placeholder", "Seleccione...");
+            $("#datosPropiedad").val('');
+            if ("Propietario" == idName)
             {
-                $("#ownerInquilino").addClass("data-idtarjeta=" + id[1]);
+                $("#owner").addClass("data-idtarjeta=" + arr[11]);
+                $("#divBuscarPropietario").hide();
+                $("#ownerApellidoPropietario").val(arr[6]);
+                $("#ownerNamePropietario").val(arr[7]);
+                $("#DUPropietario").val(arr[8]);
+                $("#TelLaboralPropietario").val(arr[9]);
             }            
-            $("#divBuscarPropietario").hide();
-            $("#PropietarioownerApellido").val(arr[6]);
-            $("#PropietarioownerName").val(arr[7]);
-            $("#PropietarioDU").val(arr[8]);
-            $("#PropietarioTelefonoLaboral").val(arr[9]);                        
+            
             
     },
     open: function() {
@@ -60,8 +61,190 @@
     }
     });
 
-    $("#ownerinquilino").autocomplete({ 
-        idName: $("#ownerinquilino").attr("#data-id"),
+    $('input[data-detalle=Inquilino]').autocomplete({ 
+        idName: $("#owner").attr("#data-id"),
+        source: function (request, response) {
+            $.ajax({
+                url: '/Owner/GetUser/',
+                data: "{ 'nombre': '" + request.term + "'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) 
+                {                               
+                    response($.map(data, function (item)
+                    {                                                                       
+                        return {
+                            label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral + ', ' + item.PersonasId,
+                            value: "Seleccione..."
+                        };                        
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        minLength: 1, 
+        select: function (event, ui)
+        {
+            debugger;
+            var arr = ui.item.label.split(',');            
+            $('input[data-detalle=Inquilino]').addClass("data-idtarjeta=" + arr[4]);
+            $("#ownerApellidoInquilino").val(arr[1]);
+            $("#ownerNameInquilino").val(arr[0]);
+            $("#DUInquilino").val(arr[2]);
+            $("#TelLaboralInquilino").val(arr[3]);
+
+
+        },
+        open: function() {
+            $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+        },
+        close: function() {
+            $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+        }
+
+    });
+
+    $('input[data-detalle=1er_Garante]').autocomplete({        
+        source: function (request, response) {
+            $.ajax({
+                url: '/Owner/GetUser/',
+                data: "{ 'nombre': '" + request.term + "'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral + ', ' + item.PersonasId,
+                            value: "Seleccione..."
+                        };
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            debugger;
+            var arr = ui.item.label.split(',');            
+            $('input[data-detalle=1er_Garante]').addClass("data-idtarjeta=" + arr[4]);            
+            $("#ownerApellido1er_Garante").val(arr[1]);
+            $("#ownerName1er_Garante").val(arr[0]);
+            $("#DU1er_Garante").val(arr[2]);
+            $("#TelLaboral1er_Garante").val(arr[3]);
+        },
+        open: function () {
+            $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+        },
+        close: function () {
+            $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+        }
+
+    });
+
+    $('input[data-detalle=2do_Garante]').autocomplete({        
+        source: function (request, response) {
+            $.ajax({
+                url: '/Owner/GetUser/',
+                data: "{ 'nombre': '" + request.term + "'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral + ', ' + item.PersonasId,
+                            value: "Seleccione..."
+                        };
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            debugger;
+            var arr = ui.item.label.split(',');
+            $('input[data-detalle=2do_Garante]').addClass("data-idtarjeta=" + arr[4]);
+            $("#ownerApellido2do_Garante").val(arr[1]);
+            $("#ownerName2do_Garante").val(arr[0]);
+            $("#DU2do_Garante").val(arr[2]);
+            $("#TelLaboral2do_Garante").val(arr[3]);
+
+
+        },
+        open: function () {
+            $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+        },
+        close: function () {
+            $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+        }
+
+    });
+
+    $('input[data-detalle=3er_Garante]').autocomplete({        
+        source: function (request, response) {
+            $.ajax({
+                url: '/Owner/GetUser/',
+                data: "{ 'nombre': '" + request.term + "'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral + ', ' + item.PersonasId,
+                            value: "Seleccione..."
+                        };
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            debugger;
+            var arr = ui.item.label.split(',');            
+            $('input[data-detalle=3er_Garante]').addClass("data-idtarjeta=" + arr[4]);
+            $("#ownerApellido3er_Garante").val(arr[1]);
+            $("#ownerName3er_Garante").val(arr[0]);
+            $("#DU3er_Garante").val(arr[2]);
+            $("#TelLaboral3er_Garante").val(arr[3]);
+
+
+        },
+        open: function () {
+            $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+        },
+        close: function () {
+            $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+        }
+
+    });
+
+    $("#owner").autocomplete({ 
+        idName: $("#owner").attr("#data-id"),
         source: function (request, response) {
             $.ajax({
                 url: '/Owner/GetUser/',
@@ -90,6 +273,7 @@
         minLength: 1, 
         select: function (event, ui)
         {
+            debugger;
             var arr = ui.item.label.split(',');
             if ($("#ownerinquilino").attr("#data-id") == idName) {
                 $("#ownerInquilino").addClass("data-idtarjeta=" + value);
@@ -112,12 +296,9 @@
     });
 
     $("#RegistrarContrato").click({
+        //var isvalido: validarContrato(),
+
         
-        if (validarContrato() == true)
-        {
-        source: function (request, response) {
-    }
-        }
 
     });
 

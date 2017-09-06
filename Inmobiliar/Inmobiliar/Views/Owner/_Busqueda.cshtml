@@ -1,29 +1,30 @@
-﻿<div class="panel panel-default">
+﻿
+<div class="panel panel-default">
     <div class="panel-heading">
         Buscar @Model.Detalle
     </div>
     <div class="panel-body">
-        <form role="form" action="Create" method="post">
+        @*<form role="form" action="Create" method="post">*@
             <div class="form-group has-success" id="@("divBuscar"+ @Model.Detalle)">
                 <label class="control-label" for="inputSuccess">@Model.Detalle</label>
-                <input type="text" class="form-control" id="@("ownerinquilino"+ @Model.Detalle)" name="Inquilino" data-detalle="@(Model.Detalle)">
-            ></div>            
+                <input type="text" class="form-control" id="owner" name="Inquilino" data-detalle="@(Model.Detalle)">
+            </div>            
             <div class="form-group has-success">
                 <label class="control-label" for="inputSuccess">Apellido</label>
                 <input type="text" class="form-control" id="@("ownerApellido"+ @Model.Detalle)" name="Apellido" disabled="" placeholder="">
-            ></div>
+            </div>
             <div class="form-group has-success">
                 <label class="control-label" for="inputSuccess">Nombre</label>
                 <input type="text" class="form-control" id="@("ownerName"+ @Model.Detalle)" name="Nombre" disabled="" placeholder="">
-            ></div>
+            </div>
             <div class="form-group has-success">
                 <label class="control-label" for="inputSuccess">DU</label>
-                <input type="text" class="form-control" id="" name="@("DU" + @Model.Detalle )" disabled="" placeholder="">
+                <input type="text" class="form-control" id="@("DU" + @Model.Detalle )" name="DU" disabled="" placeholder="">
             </div>
             <div class="form-group has-success">
                 <label class="control-label" for="inputSuccess">TelefonoLaboral</label>
                 <input type="text" class="form-control" id="@("TelLaboral" + @Model.Detalle )" name="TelefonoLaboral" disabled="" placeholder="">
-            ></div>
-        </form>
+            </div>
+        @*</form>*@
     </div>
 </div>    
