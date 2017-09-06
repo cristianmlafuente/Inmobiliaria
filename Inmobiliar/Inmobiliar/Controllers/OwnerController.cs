@@ -120,9 +120,11 @@ namespace Inmobiliar.Controllers
                             where (person.Nombre.Contains(nombre) || person.Apellido.Contains(nombre)|| person.DU.Contains(nombre))
                             select new
                             {
-                                person.Nombre,
-                                person.Apellido,
-                                person.PersonasId
+                                Nombre = person.Nombre,
+                                Apellido = person.Apellido,
+                                DU = person.DU != null ? person.DU : "",
+                                TelefonoLaboral = person.TelefonoLaboral != null ? person.TelefonoLaboral : "",
+                                PersonasId = person.PersonasId
                             }).ToList();
            return Json(CityName, JsonRequestBehavior.AllowGet);
         }

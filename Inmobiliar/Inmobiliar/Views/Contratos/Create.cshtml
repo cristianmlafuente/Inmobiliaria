@@ -1,181 +1,182 @@
 ﻿@model Inmobiliar.Models.ContratosModel
-@Scripts.Render("~/Scripts/Contrato");
+@*@Scripts.Render("~/Scripts/Contrato");*@
 @{
     ViewBag.Title = "Create";
 }
-
 <div id="page-wrapper">
     <div id="page-inner">
         <div class="row">
             <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h1 class="page-header">
-                            <small>Nuevo Contrato</small>
-                        </h1>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                @{Html.RenderPartial("../Propiedades/_PropiedadResumida", Model.Contrato.Propiedades);}
-                            </div>
-                            <div class="col-lg-6" id="Propiedad">
-                                @{
-                                    Model.Contrato.Propietario.Detalle = "Propietario";
-                                    { Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.Propietario); }
-                                }
-                            </div>
+                <form role="form" action="Create" method="post">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h1 class="page-header">
+                                <small>Nuevo Contrato</small>
+                            </h1>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Datos del Locatario
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="panel-group" id="accordion">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion" href="#Inquilino" class="collapsed">
-                                                            Datos del Inquilino
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="Inquilino" class="panel-collapse collapse" style="height: 0px;">
-                                                    <div class="panel-body">
-                                                        @{
-                                                            Model.Contrato.Inquilino.Detalle = "Inquilino";
-                                                            Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.Inquilino);
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion" href="#Laboral1" class="collapsed">
-                                                            Datos del Garante Propietario
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="Laboral1" class="panel-collapse collapse" style="height: 0px;">
-                                                    <div class="panel-body">
-                                                        @{
-                                                            Model.Contrato.Inquilino.Detalle = "Garante Propietario";
-                                                            Html.RenderPartial("../Contratos/_GarantePropietario", Model.Contrato.GaranteLaboral1);
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion" href="#Laboral1" class="collapsed">
-                                                            Datos del 1er. Garante
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="Laboral1" class="panel-collapse collapse" style="height: 0px;">
-                                                    <div class="panel-body">
-                                                        @{
-                                                            Model.Contrato.GaranteLaboral1.Detalle = "1er. Garante";
-                                                            Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.GaranteLaboral1);
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion" href="#Laboral2" class="collapsed">
-                                                            Datos del 2do. Garante
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="Laboral2" class="panel-collapse collapse" style="height: 0px;">
-                                                    <div class="panel-body">
-                                                        @{
-                                                            Model.Contrato.GaranteLaboral2.Detalle = "2do. Garante";
-                                                            Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.GaranteLaboral2);
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion" href="#Laboral3" class="collapsed">
-                                                            Datos del 3er. Garante
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="Laboral3" class="panel-collapse collapse" style="height: 0px;">
-                                                    <div class="panel-body">
-                                                        @{
-                                                            Model.Contrato.GaranteLaboral3.Detalle = "3er. Garante";
-                                                            Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.GaranteLaboral3);
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    @{Html.RenderPartial("../Propiedades/_PropiedadResumida", Model.Contrato.Propiedades);}
+                                </div>
+                                <div class="col-lg-6" id="Propiedad">
+                                    @{
+                                        Model.Contrato.Propietario.Detalle = "Propietario";
+                                        { Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.Propietario); }
+                                    }
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12" id="Cobro">
-                                <div class="panel panel-warning">
-                                    <div class="panel-heading">
-                                        Detalles del Contrato
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Datos del Locatario
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="panel-group" id="accordion">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#Inquilino" class="collapsed">
+                                                                Datos del Inquilino
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="Inquilino" class="panel-collapse collapse" style="height: 0px;">
+                                                        <div class="panel-body">
+                                                            @{
+                                                                Model.Contrato.Inquilino.Detalle = "Inquilino";
+                                                                Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.Inquilino);
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#Propietario" class="collapsed">
+                                                                Datos del Garante Propietario
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="Propietario" class="panel-collapse collapse" style="height: 0px;">
+                                                        <div class="panel-body">
+                                                            @{
+                                                                Model.Contrato.Inquilino.Detalle = "Garante_Propietario";
+                                                                Html.RenderPartial("../Contratos/_GarantePropietario", Model.Contrato.GaranteLaboral1);
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#Laboral1" class="collapsed">
+                                                                Datos del 1er. Garante
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="Laboral1" class="panel-collapse collapse" style="height: 0px;">
+                                                        <div class="panel-body">
+                                                            @{
+                                                                Model.Contrato.GaranteLaboral1.Detalle = "1er_Garante";
+                                                                Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.GaranteLaboral1);
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#Laboral2" class="collapsed">
+                                                                Datos del 2do. Garante
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="Laboral2" class="panel-collapse collapse" style="height: 0px;">
+                                                        <div class="panel-body">
+                                                            @{
+                                                                Model.Contrato.GaranteLaboral2.Detalle = "2do_Garante";
+                                                                Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.GaranteLaboral2);
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#Laboral3" class="collapsed">
+                                                                Datos del 3er. Garante
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="Laboral3" class="panel-collapse collapse" style="height: 0px;">
+                                                        <div class="panel-body">
+                                                            @{
+                                                                Model.Contrato.GaranteLaboral3.Detalle = "3er_Garante";
+                                                                Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.GaranteLaboral3);
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div class="panel-body">
-                                        <div class="form-group has-success col-lg-6">
-                                            <label class="control-label" for="inputSuccess">Nro Contrato</label>
-                                            <input type="text" class="form-control" id="contratoNumero" name="NroContrato">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12" id="Cobro">
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Detalles del Contrato
                                         </div>
-                                        <div class="form-group has-success col-lg-6">
-                                            <label class="control-label" for="inputSuccess">Fecha de Inicio del Contrato</label>
-                                            <input type="date" class="form-control" id="contratoFechaInicio" name="InicioContrato">
-                                        </div>
-                                        <div class="form-group has-success col-lg-6">
-                                            <label class="control-label" for="inputSuccess">Duracion Contrato</label>
-                                            <input type="text" class="form-control" id="contratoDuracion" name="Duracion" placeholder="Periodo en Meses">
-                                        </div>
-                                        <div class="form-group has-success col-lg-6">
-                                            <label class="control-label" for="inputSuccess">Cantidad de Incrementos</label>
-                                            <input type="text" class="form-control" id="contratoIncremento" name="Incrementos">
-                                        </div>
-                                        <div class="form-group has-success col-lg-6">
-                                            <label class="control-label" for="inputSuccess">Porcentaje de cada Incremento</label>                                            
-                                            <input type="text" class="form-control" id="contratoPorcentajeIncremento" name="PorcentajeIncremento">                                                                                          
-                                        </div>
-                                        <div class="form-group has-success col-lg-6">
-                                            <label class="control-label" for="inputSuccess">Monto Inicial Alquiler</label>
-                                            <input type="text" class="form-control" id="contratoMontoInicial" name="MontoInicial">
-                                        </div>
-                                        <div class="form-group has-success col-lg-6">
-                                            <label class="control-label" for="inputSuccess">Porcentaje Administracion Inmobiliaria</label>                                            
-                                            <input type="text" class="form-control" id="contratoPorcentajeInmibiliaria" name="PorcentajeInmobiliaria">                                               
-                                        </div>
-                                        <div class="form-group has-success col-lg-6">
+                                        <div class="panel-body">
                                             <div class="form-group has-success col-lg-6">
-                                                <br /><br /><br />
+                                                <label class="control-label" for="inputSuccess">Nro Contrato</label>
+                                                <input type="text" class="form-control" id="contratoNumero" name="NroContrato">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Fecha de Inicio del Contrato</label>
+                                                <input type="date" class="form-control" id="contratoFechaInicio" name="InicioContrato">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Duracion Contrato</label>
+                                                <input type="text" class="form-control" id="contratoDuracion" name="Duracion" placeholder="Periodo en Meses">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Cantidad de Incrementos</label>
+                                                <input type="text" class="form-control" id="contratoIncremento" name="Incrementos">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Porcentaje de cada Incremento</label>
+                                                <input type="text" class="form-control" id="contratoPorcentajeIncremento" name="PorcentajeIncremento">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Monto Inicial Alquiler</label>
+                                                <input type="text" class="form-control" id="contratoMontoInicial" name="MontoInicial">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Porcentaje Administracion Inmobiliaria</label>
+                                                <input type="text" class="form-control" id="contratoPorcentajeInmibiliaria" name="PorcentajeInmobiliaria">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <div class="form-group has-success col-lg-6">
+                                                    <br /><br /><br />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="panel-footer">
+                            <input type="submit" class="btn btn-primary" value="Registrar" id="RegistrarContrato" />
+                        </div>
                     </div>
-                    <div class="panel-footer">                        
-                        <input type="submit" class="btn btn-primary" value="Registrar" id="RegistrarContrato"/>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

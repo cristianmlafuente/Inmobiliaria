@@ -13,7 +13,7 @@ namespace InmBLL
         private InmDAL.Contracts.IGenericDAL<InmDAL.Personas> genericDal;
         public PersonasBLL()
         {
-            //genericDal = new InmDAL.GenericDAL();
+            genericDal = new InmDAL.GenericDAL<InmDAL.Personas>();
         }
 
         public bool Add(Personas entity)
@@ -82,7 +82,19 @@ namespace InmBLL
             {
                 var response = genericDal.GetById(id);
                 if (response != null)
-                    person = Mapper.Map<InmDAL.Personas, Personas>(response);                
+                {
+                    person = new Personas
+                    {
+                        Apellido = response.Apellido,
+                        Nombre = response.Nombre,
+                        Email = response.Email,
+                        DU = response.DU,
+                        Telefono = response.Telefono,
+                        TelefonoLaboral = response.TelefonoLaboral,
+                        Celular = response.Celular,
+                        PersonasId = response.PersonasId
+                    };                   
+                }                                    
             }
             return person;
         }
