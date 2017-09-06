@@ -47,8 +47,22 @@ namespace Inmobiliar.Controllers
                 var propiedades = new PropiedadesBLL();
                 if (ModelState.IsValid)
                 {
-                    var response = Mapper.Map<PropiedadesModel, Propiedades>(model);
-                    var result = propiedades.Add(response);
+                    var propiedad = new Propiedades
+                    {
+                        PersonasId = model.Dueño.PersonasId,
+                        Domicilio = new Domicilios { 
+                            Barrio = model.domicilio.Barrio,
+                            Calle = model.domicilio.Calle,
+                            Ciudad = model.domicilio.Ciudad,
+                            CP = model.domicilio.CP,
+                            Numero = model.domicilio.Numero,
+                            Piso = model.domicilio.Piso,
+                            Dto = model.domicilio.Dto
+                        },
+                        NroFactura = model.UnidadFacturacion,
+                        
+                    };
+                    var result = propiedades.Add(propiedad);
                 }
                 // TODO: Add insert logic here
 

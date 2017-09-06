@@ -35,6 +35,7 @@ namespace InmBLL.Entities
                     return _domicilio;
                 }
             }
+            set { }
         }
         public Personas Personas {
             get

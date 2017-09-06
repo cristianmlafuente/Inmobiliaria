@@ -10,8 +10,9 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     debugger;
-                    response($.map(data, function (item) {                        
-                        return { label: item.Nombre + item.Apellido, value: item.PersonasId };                    
+                    response($.map(data, function (item) {
+                        $('#idPersona').val(item.PersonasId);
+                        return { label: item.Nombre + item.Apellido, value: item.Nombre };
                     }))
                 },
                 error: function (response) {                    
