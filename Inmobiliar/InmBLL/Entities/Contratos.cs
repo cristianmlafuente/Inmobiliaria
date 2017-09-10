@@ -245,17 +245,17 @@ namespace InmBLL.Entities
         {
             get 
             {
+                var a = new List<PeriodosAdeudados>();
+                
                 if (ContratosId != 0)
                 {
                     var PeriodosCobrados = new CobrosBLL().GetByContrato(ContratosId.ToString());
-
-                    return PeriodosCobrados;
+                    
+                    //return PeriodosCobrados;
                 }
+                return a;
             }
-            set 
-            {
- 
-            }
+            
         }
     }
 

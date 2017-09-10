@@ -14,12 +14,6 @@ namespace InmDAL
     
     public partial class Contratos
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Contratos()
-        {
-            this.Contrato_ImpuestoServicio = new HashSet<Contrato_ImpuestoServicio>();
-        }
-    
         public int ContratosId { get; set; }
         public string NroContrato { get; set; }
         public Nullable<int> PropiedadesId { get; set; }
@@ -41,9 +35,5 @@ namespace InmDAL
     
         public virtual Personas Personas { get; set; }
         public virtual Propiedades Propiedades { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contrato_ImpuestoServicio> Contrato_ImpuestoServicio { get; set; }
-        
-        
     }
 }

@@ -98,7 +98,8 @@ namespace InmBLL
 
         public List<PagoAlquiler> GetByContrato(string contratoId)
         {
- 
+            var a = new List<PagoAlquiler>();
+            return a;
         }
     }
 }
