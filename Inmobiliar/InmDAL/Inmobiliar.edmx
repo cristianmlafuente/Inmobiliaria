@@ -10,10 +10,10 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
         <EntityType Name="Contrato-ImpuestoServicio">
           <Key>
             <PropertyRef Name="CodImpuesto" />
-            <PropertyRef Name="ContratosId" />
+            <PropertyRef Name="IdContrato" />
           </Key>
           <Property Name="CodImpuesto" Type="int" Nullable="false" />
-          <Property Name="ContratosId" Type="int" Nullable="false" />
+          <Property Name="IdContrato" Type="int" Nullable="false" />
           <Property Name="FechaAlta" Type="datetime" />
         </EntityType>
         <EntityType Name="Contratos">
@@ -23,16 +23,19 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <Property Name="ContratosId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NroContrato" Type="varchar" MaxLength="50" />
           <Property Name="PropiedadesId" Type="int" />
+          <Property Name="IdEstate" Type="int" />
           <Property Name="InquilinoId" Type="int" />
+          <Property Name="IdPropietario" Type="int" />
           <Property Name="FechaContrato" Type="datetime" />
           <Property Name="PeriodoMeses" Type="int" />
           <Property Name="Incrementos" Type="int" />
-          <Property Name="Porsentaje" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeIncremento" Type="decimal" Precision="5" Scale="2" />
           <Property Name="IdGarantePropietario" Type="int" />
           <Property Name="IdGaranteLaboral1" Type="int" />
           <Property Name="IdGaranteLaboral2" Type="int" />
-          <Property Name="IdGatanteLaboral3" Type="int" />
+          <Property Name="IdGaranteLaboral3" Type="int" />
           <Property Name="MontoInicialAlquiler" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="PorcentajeInmobiliaria" Type="decimal" Precision="5" Scale="2" />
         </EntityType>
         <EntityType Name="Domicilios">
           <Key>
@@ -46,6 +49,38 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <Property Name="Dto" Type="varchar" MaxLength="50" />
           <Property Name="Numero" Type="int" />
           <Property Name="Barrio" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GarantePropietario">
+          <Key>
+            <PropertyRef Name="GarantePropietarioId" />
+          </Key>
+          <Property Name="GarantePropietarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonasId" Type="int" />
+          <Property Name="DomiciliosId" Type="int" />
+          <Property Name="Matricula" Type="int" />
+        </EntityType>
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="PagoId" />
+          </Key>
+          <Property Name="PagoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InquilinoId" Type="int" />
+          <Property Name="PropiedadId" Type="int" />
+          <Property Name="ContratoId" Type="int" />
+          <Property Name="Periodo" Type="date" />
+          <Property Name="FechaPago" Type="date" />
+          <Property Name="MontoTotal" Type="money" />
+          <Property Name="Observaciones" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Pagos_Detalle">
+          <Key>
+            <PropertyRef Name="PagoId" />
+            <PropertyRef Name="TipoId" />
+          </Key>
+          <Property Name="PagoId" Type="int" Nullable="false" />
+          <Property Name="TipoId" Type="int" Nullable="false" />
+          <Property Name="Monto" Type="money" />
+          <Property Name="PeriodoPago" Type="date" />
         </EntityType>
         <EntityType Name="Personas">
           <Key>
@@ -114,14 +149,14 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <Property Name="Email" Type="varchar" MaxLength="200" />
         </EntityType>
         <Association Name="FK_Contrato_Inquilino">
-          <End Role="Personas" Type="Self.Personas" Multiplicity="1" />
-          <End Role="Contratos" Type="Self.Contratos" Multiplicity="0..1" />
+          <End Role="Personas" Type="Self.Personas" Multiplicity="0..1" />
+          <End Role="Contratos" Type="Self.Contratos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Personas">
               <PropertyRef Name="PersonasId" />
             </Principal>
             <Dependent Role="Contratos">
-              <PropertyRef Name="ContratosId" />
+              <PropertyRef Name="InquilinoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -133,7 +168,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
               <PropertyRef Name="PropiedadesId" />
             </Principal>
             <Dependent Role="Contratos">
-              <PropertyRef Name="PropiedadesId" />
+              <PropertyRef Name="IdEstate" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -145,7 +180,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
               <PropertyRef Name="ContratosId" />
             </Principal>
             <Dependent Role="Contrato-ImpuestoServicio">
-              <PropertyRef Name="ContratosId" />
+              <PropertyRef Name="IdContrato" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -158,6 +193,18 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
             </Principal>
             <Dependent Role="Contrato-ImpuestoServicio">
               <PropertyRef Name="CodImpuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pagos_Detalle_TiposImpuestosServicios">
+          <End Role="TiposImpuestosServicios" Type="Self.TiposImpuestosServicios" Multiplicity="1" />
+          <End Role="Pagos_Detalle" Type="Self.Pagos_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposImpuestosServicios">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Pagos_Detalle">
+              <PropertyRef Name="TipoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -212,6 +259,9 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
         <EntityContainer Name="ClientesModelStoreContainer">
           <EntitySet Name="Contratos" EntityType="Self.Contratos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Domicilios" EntityType="Self.Domicilios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GarantePropietario" EntityType="Self.GarantePropietario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pagos_Detalle" EntityType="Self.Pagos_Detalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personas" EntityType="Self.Personas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Propiedades" EntityType="Self.Propiedades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
@@ -221,7 +271,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <EntitySet Name="Contrato-ImpuestoServicio" EntityType="Self.Contrato-ImpuestoServicio" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Contrato-ImpuestoServicio].[CodImpuesto] AS [CodImpuesto], 
-    [Contrato-ImpuestoServicio].[ContratosId] AS [ContratosId], 
+    [Contrato-ImpuestoServicio].[IdContrato] AS [IdContrato], 
     [Contrato-ImpuestoServicio].[FechaAlta] AS [FechaAlta]
     FROM [dbo].[Contrato-ImpuestoServicio] AS [Contrato-ImpuestoServicio]</DefiningQuery>
           </EntitySet>
@@ -240,6 +290,10 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <AssociationSet Name="FK_Contrato-ImpuestoServicio_ImpuestoServicio" Association="Self.FK_Contrato-ImpuestoServicio_ImpuestoServicio">
             <End Role="TiposImpuestosServicios" EntitySet="TiposImpuestosServicios" />
             <End Role="Contrato-ImpuestoServicio" EntitySet="Contrato-ImpuestoServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pagos_Detalle_TiposImpuestosServicios" Association="Self.FK_Pagos_Detalle_TiposImpuestosServicios">
+            <End Role="TiposImpuestosServicios" EntitySet="TiposImpuestosServicios" />
+            <End Role="Pagos_Detalle" EntitySet="Pagos_Detalle" />
           </AssociationSet>
           <AssociationSet Name="FK_Propiedades_Domicilios" Association="Self.FK_Propiedades_Domicilios">
             <End Role="Domicilios" EntitySet="Domicilios" />
@@ -290,6 +344,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <Property Name="DU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Propiedades" Relationship="ClientesModel.FK_Propiedades_Propietario" FromRole="Personas" ToRole="Propiedades" />
           <NavigationProperty Name="Contratos" Relationship="ClientesModel.FK_Contrato_Inquilino" FromRole="Personas" ToRole="Contratos" />
+          <NavigationProperty Name="Contratos1" Relationship="ClientesModel.FK_Contrato_Inquilino1" FromRole="Personas" ToRole="Contratos" />
         </EntityType>
         <EntityContainer Name="ClientesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Domicilios" EntityType="Self.Domicilios" />
@@ -333,17 +388,39 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
           </AssociationSet>
+          <EntitySet Name="GarantePropietario" EntityType="ClientesModel.GarantePropietario" />
+          <EntitySet Name="Pagos" EntityType="ClientesModel.Pagos" />
+          <EntitySet Name="Pagos_Detalle" EntityType="ClientesModel.Pagos_Detalle" />
+          <AssociationSet Name="FK_Contrato_Inquilino1" Association="ClientesModel.FK_Contrato_Inquilino1">
+            <End Role="Personas" EntitySet="Personas" />
+            <End Role="Contratos" EntitySet="Contratos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contrato_Propiedad1" Association="ClientesModel.FK_Contrato_Propiedad1">
+            <End Role="Propiedades" EntitySet="Propiedades" />
+            <End Role="Contratos" EntitySet="Contratos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contrato_ImpuestoServicio_Contrato1" Association="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato1">
+            <End Role="Contratos" EntitySet="Contratos" />
+            <End Role="Contrato_ImpuestoServicio" EntitySet="Contrato_ImpuestoServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pagos_Detalle_TiposImpuestosServicios" Association="ClientesModel.FK_Pagos_Detalle_TiposImpuestosServicios">
+            <End Role="TiposImpuestosServicios" EntitySet="TiposImpuestosServicios" />
+            <End Role="Pagos_Detalle" EntitySet="Pagos_Detalle" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Contrato_ImpuestoServicio">
           <Key>
             <PropertyRef Name="CodImpuesto" />
             <PropertyRef Name="ContratosId" />
+            <PropertyRef Name="IdContrato" />
           </Key>
           <Property Name="CodImpuesto" Type="Int32" Nullable="false" />
           <Property Name="ContratosId" Type="Int32" Nullable="false" />
           <Property Name="FechaAlta" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Contratos" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato" FromRole="Contrato_ImpuestoServicio" ToRole="Contratos" />
           <NavigationProperty Name="TiposImpuestosServicios" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_ImpuestoServicio" FromRole="Contrato_ImpuestoServicio" ToRole="TiposImpuestosServicios" />
+          <Property Name="IdContrato" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contratos1" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato1" FromRole="Contrato_ImpuestoServicio" ToRole="Contratos" />
         </EntityType>
         <EntityType Name="Propiedades">
           <Key>
@@ -362,6 +439,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <NavigationProperty Name="Domicilios" Relationship="ClientesModel.FK_Propiedades_Domicilios" FromRole="Propiedades" ToRole="Domicilios" />
           <NavigationProperty Name="Personas" Relationship="ClientesModel.FK_Propiedades_Propietario" FromRole="Propiedades" ToRole="Personas" />
           <NavigationProperty Name="Contratos" Relationship="ClientesModel.FK_Contrato_Propiedad" FromRole="Propiedades" ToRole="Contratos" />
+          <NavigationProperty Name="Contratos1" Relationship="ClientesModel.FK_Contrato_Propiedad1" FromRole="Propiedades" ToRole="Contratos" />
         </EntityType>
         <Association Name="FK_Propiedades_Domicilios">
           <End Type="ClientesModel.Domicilios" Role="Domicilios" Multiplicity="0..1" />
@@ -407,6 +485,14 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <NavigationProperty Name="Personas" Relationship="ClientesModel.FK_Contrato_Inquilino" FromRole="Contratos" ToRole="Personas" />
           <NavigationProperty Name="Propiedades" Relationship="ClientesModel.FK_Contrato_Propiedad" FromRole="Contratos" ToRole="Propiedades" />
           <NavigationProperty Name="Contrato_ImpuestoServicio" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato" FromRole="Contratos" ToRole="Contrato_ImpuestoServicio" />
+          <Property Name="IdEstate" Type="Int32" />
+          <Property Name="IdPropietario" Type="Int32" />
+          <Property Name="PorcentajeIncremento" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="IdGaranteLaboral3" Type="Int32" />
+          <Property Name="PorcentajeInmobiliaria" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="Personas1" Relationship="ClientesModel.FK_Contrato_Inquilino1" FromRole="Contratos" ToRole="Personas" />
+          <NavigationProperty Name="Propiedades1" Relationship="ClientesModel.FK_Contrato_Propiedad1" FromRole="Contratos" ToRole="Propiedades" />
+          <NavigationProperty Name="Contrato_ImpuestoServicio1" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato1" FromRole="Contratos" ToRole="Contrato_ImpuestoServicio" />
         </EntityType>
         <EntityType Name="TiposImpuestosServicios">
           <Key>
@@ -415,6 +501,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <Property Name="Codigo" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Contrato_ImpuestoServicio" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_ImpuestoServicio" FromRole="TiposImpuestosServicios" ToRole="Contrato_ImpuestoServicio" />
+          <NavigationProperty Name="Pagos_Detalle" Relationship="ClientesModel.FK_Pagos_Detalle_TiposImpuestosServicios" FromRole="TiposImpuestosServicios" ToRole="Pagos_Detalle" />
         </EntityType>
         <Association Name="FK_Contrato_Inquilino">
           <End Type="ClientesModel.Personas" Role="Personas" Multiplicity="1" />
@@ -523,6 +610,87 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="GarantePropietario">
+          <Key>
+            <PropertyRef Name="GarantePropietarioId" />
+          </Key>
+          <Property Name="GarantePropietarioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonasId" Type="Int32" />
+          <Property Name="DomiciliosId" Type="Int32" />
+          <Property Name="Matricula" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="PagoId" />
+          </Key>
+          <Property Name="PagoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InquilinoId" Type="Int32" />
+          <Property Name="PropiedadId" Type="Int32" />
+          <Property Name="ContratoId" Type="Int32" />
+          <Property Name="Periodo" Type="DateTime" Precision="0" />
+          <Property Name="FechaPago" Type="DateTime" Precision="0" />
+          <Property Name="MontoTotal" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Pagos_Detalle">
+          <Key>
+            <PropertyRef Name="PagoId" />
+            <PropertyRef Name="TipoId" />
+          </Key>
+          <Property Name="PagoId" Type="Int32" Nullable="false" />
+          <Property Name="TipoId" Type="Int32" Nullable="false" />
+          <Property Name="Monto" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PeriodoPago" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="TiposImpuestosServicios" Relationship="ClientesModel.FK_Pagos_Detalle_TiposImpuestosServicios" FromRole="Pagos_Detalle" ToRole="TiposImpuestosServicios" />
+        </EntityType>
+        <Association Name="FK_Contrato_Inquilino1">
+          <End Type="ClientesModel.Personas" Role="Personas" Multiplicity="0..1" />
+          <End Type="ClientesModel.Contratos" Role="Contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personas">
+              <PropertyRef Name="PersonasId" />
+            </Principal>
+            <Dependent Role="Contratos">
+              <PropertyRef Name="InquilinoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contrato_Propiedad1">
+          <End Type="ClientesModel.Propiedades" Role="Propiedades" Multiplicity="0..1" />
+          <End Type="ClientesModel.Contratos" Role="Contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propiedades">
+              <PropertyRef Name="PropiedadesId" />
+            </Principal>
+            <Dependent Role="Contratos">
+              <PropertyRef Name="IdEstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contrato_ImpuestoServicio_Contrato1">
+          <End Type="ClientesModel.Contratos" Role="Contratos" Multiplicity="1" />
+          <End Type="ClientesModel.Contrato_ImpuestoServicio" Role="Contrato_ImpuestoServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contratos">
+              <PropertyRef Name="ContratosId" />
+            </Principal>
+            <Dependent Role="Contrato_ImpuestoServicio">
+              <PropertyRef Name="IdContrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pagos_Detalle_TiposImpuestosServicios">
+          <End Type="ClientesModel.TiposImpuestosServicios" Role="TiposImpuestosServicios" Multiplicity="1" />
+          <End Type="ClientesModel.Pagos_Detalle" Role="Pagos_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposImpuestosServicios">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Pagos_Detalle">
+              <PropertyRef Name="TipoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -560,8 +728,8 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <EntitySetMapping Name="Contrato_ImpuestoServicio">
             <EntityTypeMapping TypeName="ClientesModel.Contrato_ImpuestoServicio">
               <MappingFragment StoreEntitySet="Contrato-ImpuestoServicio">
+                <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
                 <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-                <ScalarProperty Name="ContratosId" ColumnName="ContratosId" />
                 <ScalarProperty Name="CodImpuesto" ColumnName="CodImpuesto" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -585,12 +753,15 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <EntitySetMapping Name="Contratos">
             <EntityTypeMapping TypeName="ClientesModel.Contratos">
               <MappingFragment StoreEntitySet="Contratos">
+                <ScalarProperty Name="PorcentajeInmobiliaria" ColumnName="PorcentajeInmobiliaria" />
+                <ScalarProperty Name="IdGaranteLaboral3" ColumnName="IdGaranteLaboral3" />
+                <ScalarProperty Name="PorcentajeIncremento" ColumnName="PorcentajeIncremento" />
+                <ScalarProperty Name="IdPropietario" ColumnName="IdPropietario" />
+                <ScalarProperty Name="IdEstate" ColumnName="IdEstate" />
                 <ScalarProperty Name="MontoInicialAlquiler" ColumnName="MontoInicialAlquiler" />
-                <ScalarProperty Name="IdGatanteLaboral3" ColumnName="IdGatanteLaboral3" />
                 <ScalarProperty Name="IdGaranteLaboral2" ColumnName="IdGaranteLaboral2" />
                 <ScalarProperty Name="IdGaranteLaboral1" ColumnName="IdGaranteLaboral1" />
                 <ScalarProperty Name="IdGarantePropietario" ColumnName="IdGarantePropietario" />
-                <ScalarProperty Name="Porsentaje" ColumnName="Porsentaje" />
                 <ScalarProperty Name="Incrementos" ColumnName="Incrementos" />
                 <ScalarProperty Name="PeriodoMeses" ColumnName="PeriodoMeses" />
                 <ScalarProperty Name="FechaContrato" ColumnName="FechaContrato" />
@@ -639,6 +810,40 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GarantePropietario">
+            <EntityTypeMapping TypeName="ClientesModel.GarantePropietario">
+              <MappingFragment StoreEntitySet="GarantePropietario">
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="DomiciliosId" ColumnName="DomiciliosId" />
+                <ScalarProperty Name="PersonasId" ColumnName="PersonasId" />
+                <ScalarProperty Name="GarantePropietarioId" ColumnName="GarantePropietarioId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pagos">
+            <EntityTypeMapping TypeName="ClientesModel.Pagos">
+              <MappingFragment StoreEntitySet="Pagos">
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="ContratoId" ColumnName="ContratoId" />
+                <ScalarProperty Name="PropiedadId" ColumnName="PropiedadId" />
+                <ScalarProperty Name="InquilinoId" ColumnName="InquilinoId" />
+                <ScalarProperty Name="PagoId" ColumnName="PagoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pagos_Detalle">
+            <EntityTypeMapping TypeName="ClientesModel.Pagos_Detalle">
+              <MappingFragment StoreEntitySet="Pagos_Detalle">
+                <ScalarProperty Name="PeriodoPago" ColumnName="PeriodoPago" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="TipoId" ColumnName="TipoId" />
+                <ScalarProperty Name="PagoId" ColumnName="PagoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

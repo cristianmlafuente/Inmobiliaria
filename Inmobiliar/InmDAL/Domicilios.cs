@@ -19,7 +19,7 @@ namespace InmDAL
         {
             this.Propiedades = new HashSet<Propiedades>();
         }
-
+    
         public int DomiciliosId { get; set; }
         public string Calle { get; set; }
         public string Ciudad { get; set; }

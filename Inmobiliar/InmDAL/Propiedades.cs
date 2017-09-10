@@ -17,9 +17,9 @@ namespace InmDAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Propiedades()
         {
-            this.Contratos = new HashSet<Contratos>();
+            this.Contratos = new HashSet<Contratos>();            
         }
-
+    
         public int PropiedadesId { get; set; }
         public Nullable<int> DomiciliosId { get; set; }
         public Nullable<int> PersonasId { get; set; }
@@ -35,5 +35,6 @@ namespace InmDAL
         public virtual Personas Personas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contratos> Contratos { get; set; }
+        
     }
 }

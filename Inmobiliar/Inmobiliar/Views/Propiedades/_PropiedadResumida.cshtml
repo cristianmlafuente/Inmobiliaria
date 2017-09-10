@@ -1,69 +1,39 @@
 ﻿
-    <div class="panel panel-info">
-        @if (Model.Propiedad != null)
-        { 
+    <div class="panel panel-info">       
         <div class="panel-heading">
-            Datos de la Propiedad
+            Buscar Propiedad
         </div>
-        <div class="panel-body">
-            @*<form role="form" action="Create" method="post">*@
-                <div class="form-group">
-                    <label class="control-label" for="disabledSelect">Calle</label>
-                    <input type="text" class="form-control" id="" name="domicilio.Calle" disabled="">
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="disabledSelect">Piso</label>
-                    <input type="text" class="form-control" id="" name="domicilio.Piso" disabled="">
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="disabledSelect">Barrio</label>
-                    <input type="text" class="form-control" id="" name="domicilio.Barrio" disabled="">
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="disabledSelect">CP</label>
-                    <input type="text" class="form-control" id="" name="domicilio.CP" disabled="">
-                </div>
-            @*</form>*@
+        <div class="panel-body">               
+            <div class="form-group">
+                <label class="control-label" for="disabledSelect">Propiedad</label>
+                <input type="text" class="form-control required" id="datosPropiedad" name="prop">
+                
+                <input type="hidden" id="idPropiedad" name=@Model.sPropietarioId>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="disabledSelect">Calle</label>
+                <input type="text" class="form-control" id="Calle" name="domicilio.Calle" disabled="">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="disabledSelect">Numero</label>
+                <input type="text" class="form-control" id="Numero" name="domicilio.Numero" disabled="">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="disabledSelect">Piso</label>
+                <input type="text" class="form-control" id="Piso" name="domicilio.Piso" disabled="">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="disabledSelect">Departamento</label>
+                <input type="text" class="form-control" id="Dto" name="domicilio.Dto" disabled="">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="disabledSelect">Barrio</label>
+                <input type="text" class="form-control" id="Barrio" name="domicilio.Barrio" disabled="">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="disabledSelect">CP</label>
+                <input type="text" class="form-control" id="CP" name="domicilio.CP" disabled="">
+            </div>                
         </div>
-        }
-        else
-        {
-            <div class="panel-heading">
-                Buscar Propiedad
-            </div>
-            <div class="panel-body">
-                @*<form role="form" action="Create" method="post">*@
-                    <div class="form-group">
-                        <label class="control-label" for="disabledSelect">Propiedad</label>
-                        <input type="text" class="form-control" id="datosPropiedad" name="prop">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="disabledSelect">Calle</label>
-                        <input type="text" class="form-control" id="Calle" name="domicilio.Calle" disabled="">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="disabledSelect">Numero</label>
-                        <input type="text" class="form-control" id="Numero" name="domicilio.Numero" disabled="">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="disabledSelect">Piso</label>
-                        <input type="text" class="form-control" id="Piso" name="domicilio.Piso" disabled="">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="disabledSelect">Departamento</label>
-                        <input type="text" class="form-control" id="Dto" name="domicilio.Dto" disabled="">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="disabledSelect">Barrio</label>
-                        <input type="text" class="form-control" id="Barrio" name="domicilio.Barrio" disabled="">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="disabledSelect">CP</label>
-                        <input type="text" class="form-control" id="CP" name="domicilio.CP" disabled="">
-                    </div>
-                @*</form>*@
-            </div>
-        }
     </div>
 

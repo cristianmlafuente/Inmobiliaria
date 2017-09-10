@@ -41,11 +41,32 @@ namespace Inmobiliar.Controllers
 
         // POST: Contratos/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(ContratosModel collection)
         {
             try
             {
                 // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    var contratoBll = new ContratosBLL();
+                    var contrato = new Contratos
+                    {
+                        FechaContrato = collection.Contrato.FechaContrato,
+                        IdGaranteLaboral1 = collection.Contrato.IdGaranteLaboral1,
+                        IdGaranteLaboral2 = collection.Contrato.IdGaranteLaboral2,
+                        IdGaranteLaboral3 = collection.Contrato.IdGaranteLaboral3,
+                        IdGarantePropietario = collection.Contrato.IdGarantePropietario,
+                        Incrementos = collection.Contrato.Incrementos,
+                        InquilinoId = collection.Contrato.InquilinoId,
+                        MontoInicialAlquiler = collection.Contrato.MontoInicialAlquiler,
+                        NroContrato = collection.Contrato.NroContrato,
+                        PeriodoMeses = collection.Contrato.PeriodoMeses,
+                        PorcentajeIncremento = collection.Contrato.PorcentajeIncremento,
+                        PorcentajeInmobiliaria = collection.Contrato.PorcentajeInmobiliaria,
+                        PropiedadesId = collection.Contrato.PropiedadesId                         
+                    };
+                    contratoBll.Add(contrato);
+                }
 
                 return RedirectToAction("Index");
             }
@@ -126,5 +147,34 @@ namespace Inmobiliar.Controllers
 
             return Json(PropiedadName, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult GetInquilino(string nombre)
+        {
+            var contratoList = new ContratosBLL();
+            var listContrato = contratoList.GetAll();
+
+            var inquilinoName = (from contrato in listContrato
+                                 where (contrato.Inquilino.Nombre.Contains(nombre) || contrato.Inquilino.Apellido.Contains(nombre) || contrato.Inquilino.DU.Contains(nombre))
+                                 select new
+                                 {
+                                     InquilinoId = contrato.InquilinoId,
+                                     Nombre = contrato.Inquilino.Nombre,
+                                     Apellido = contrato.Inquilino.Apellido,
+                                     DU = contrato.Inquilino.DU,
+                                     TelefonoLaboral = contrato.Inquilino.TelefonoLaboral,
+                                     PropiedadId = contrato.sPropiedadId,
+                                     Calle = contrato.Propiedades.Domicilio.Calle,
+                                     Numero = contrato.Propiedades.Domicilio.Numero,
+                                     Piso = contrato.Propiedades.Domicilio.Piso,
+                                     Departamento = contrato.Propiedades.Domicilio.Dto,
+                                     Barrio = contrato.Propiedades.Domicilio.Barrio,
+                                     CP = contrato.Propiedades.Domicilio.CP,
+                                     PeriodosAdeudados = contrato.PeriodosAdeudados
+                                 }).ToList();
+            return Json(inquilinoName, JsonRequestBehavior.AllowGet);
+            
+        }
+
     }
 }

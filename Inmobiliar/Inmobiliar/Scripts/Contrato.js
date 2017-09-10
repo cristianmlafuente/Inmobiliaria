@@ -1,4 +1,12 @@
-﻿$(function () {    
+﻿$(function () {
+    $("#AltaContrato").val({
+        debugger: true,
+        rules: {
+            datosPropiedad: {
+                required: true,
+            minLength:2}
+        }
+    });
     $("#datosPropiedad").autocomplete({ 
         
         source: function (request, response) {
@@ -14,7 +22,7 @@
                     {                                                                       
                         return {
                             label: item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Dto + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.Apellido + ', ' + item.Nombre + ', ' + item.Du + ', ' + item.TelLabo + ', ' + item.IdPropiedad + ', ' + item.IdPropietario,
-                            value: '.'
+                            value: item.Calle + ', ' + item.Numero
                         };                        
                     }))
                 },
@@ -39,11 +47,12 @@
             $("#Barrio").val(arr[4]);
             $("#CP").val(arr[5]);            
             $("#datosPropiedad").addClass("data-idtarjeta=" + arr[10]);
+            $("#idPropiedad").val($.trim(arr[10]));
             $("#datosPropiedad").attr("placeholder", "Seleccione...");
             $("#datosPropiedad").val('');
             if ("Propietario" == idName)
             {
-                $("#owner").addClass("data-idtarjeta=" + arr[11]);
+                $("#idPropietario").val($.trim(arr[11]));
                 $("#divBuscarPropietario").hide();
                 $("#ownerApellidoPropietario").val(arr[6]);
                 $("#ownerNamePropietario").val(arr[7]);
@@ -92,8 +101,8 @@
         select: function (event, ui)
         {
             debugger;
-            var arr = ui.item.label.split(',');            
-            $('input[data-detalle=Inquilino]').addClass("data-idtarjeta=" + arr[4]);
+            var arr = ui.item.label.split(',');                        
+            $('#idInquilino').val($.trim(arr[4]));
             $("#ownerApellidoInquilino").val(arr[1]);
             $("#ownerNameInquilino").val(arr[0]);
             $("#DUInquilino").val(arr[2]);
@@ -138,7 +147,7 @@
         select: function (event, ui) {
             debugger;
             var arr = ui.item.label.split(',');            
-            $('input[data-detalle=1er_Garante]').addClass("data-idtarjeta=" + arr[4]);            
+            $('#idGaranteLaboral1').val($.trim(arr[4]));
             $("#ownerApellido1er_Garante").val(arr[1]);
             $("#ownerName1er_Garante").val(arr[0]);
             $("#DU1er_Garante").val(arr[2]);
@@ -181,7 +190,7 @@
         select: function (event, ui) {
             debugger;
             var arr = ui.item.label.split(',');
-            $('input[data-detalle=2do_Garante]').addClass("data-idtarjeta=" + arr[4]);
+            $('#idGaranteLaboral2').val($.trim(arr[4]));
             $("#ownerApellido2do_Garante").val(arr[1]);
             $("#ownerName2do_Garante").val(arr[0]);
             $("#DU2do_Garante").val(arr[2]);
@@ -226,7 +235,7 @@
         select: function (event, ui) {
             debugger;
             var arr = ui.item.label.split(',');            
-            $('input[data-detalle=3er_Garante]').addClass("data-idtarjeta=" + arr[4]);
+            $('#idGaranteLaboral3').val($.trim(arr[4]));
             $("#ownerApellido3er_Garante").val(arr[1]);
             $("#ownerName3er_Garante").val(arr[0]);
             $("#DU3er_Garante").val(arr[2]);

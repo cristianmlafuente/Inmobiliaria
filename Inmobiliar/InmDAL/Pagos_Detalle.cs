@@ -12,15 +12,13 @@ namespace InmDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Contrato_ImpuestoServicio
+    public partial class Pagos_Detalle
     {
-        public int CodImpuesto { get; set; }
-        public int ContratosId { get; set; }
-        public Nullable<System.DateTime> FechaAlta { get; set; }
-        public int IdContrato { get; set; }
+        public int PagoId { get; set; }
+        public int TipoId { get; set; }
+        public Nullable<decimal> Monto { get; set; }
+        public Nullable<System.DateTime> PeriodoPago { get; set; }
     
-        public virtual Contratos Contratos { get; set; }
         public virtual TiposImpuestosServicios TiposImpuestosServicios { get; set; }
-        public virtual Contratos Contratos1 { get; set; }
     }
 }

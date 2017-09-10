@@ -24,12 +24,115 @@ namespace InmBLL.Entities
         public Nullable<decimal> MontoInicialAlquiler { get; set; }
         public Nullable<decimal> PorcentajeInmobiliaria { get; set; }
 
+        public string sPropietarioId
+        {
+            get
+            {
+                if (PropietarioId != null && PropietarioId != 0)
+                    return PropietarioId.ToString();
+                else
+                    return "";
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    PropietarioId = null;
+                else
+                    PropietarioId = int.Parse(value);
+            }
+        }
+        public string sPropiedadId
+        {
+            get
+            {
+                if (PropiedadesId != null && PropiedadesId != 0)
+                    return PropiedadesId.ToString();
+                else
+                    return "";
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    PropiedadesId = null;
+                else
+                    PropiedadesId = int.Parse(value);
+            }
+        }
+        public string sInquilinoId
+        {
+            get
+            {
+                if (InquilinoId != null && InquilinoId != 0)
+                    return InquilinoId.ToString();
+                else
+                    return "";
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    InquilinoId = null;
+                else
+                    InquilinoId = int.Parse(value);
+            }
+        }
+        public string sIdGaranteLaboral1
+        {
+            get
+            {
+                if (IdGaranteLaboral1 != null && IdGaranteLaboral1 != 0)
+                    return IdGaranteLaboral1.ToString();
+                else
+                    return "";
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    IdGaranteLaboral1 = null;
+                else
+                    IdGaranteLaboral1 = int.Parse(value);
+            }
+        }
+        public string sIdGaranteLaboral2
+        {
+            get
+            {
+                if (IdGaranteLaboral2 != null && IdGaranteLaboral2 != 0)
+                    return IdGaranteLaboral2.ToString();
+                else
+                    return "";
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    IdGaranteLaboral2 = null;
+                else
+                    IdGaranteLaboral2 = int.Parse(value);
+            }
+        }
+        public string sIdGaranteLaboral3
+        {
+            get
+            {
+                if (IdGaranteLaboral3 != null && IdGaranteLaboral3 != 0)
+                    return IdGaranteLaboral3.ToString();
+                else
+                    return "";
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    IdGaranteLaboral3 = null;
+                else
+                    IdGaranteLaboral3 = int.Parse(value);
+            }
+        }
+            
         private Personas _Inquilino;
         private Personas _Propietario;
         private Personas _GaranteLaboral1;
         private Personas _GaranteLaboral2;
         private Personas _GaranteLaboral3;
-        private Propiedades _Propiedad;
+        private Propiedades _Propiedad;        
 
         public virtual Personas Inquilino { 
             get 
@@ -118,7 +221,6 @@ namespace InmBLL.Entities
                 }
             }
         }
-
         public virtual Propiedades Propiedades
         {
             get
@@ -131,14 +233,35 @@ namespace InmBLL.Entities
                     if (PropiedadesId != 0)
                     {
 
-                        //_Propiedad = new PropiedadesBLL().GetById(PropiedadesId.ToString());    
-                        _Propiedad = new Propiedades();
+                        _Propiedad = new PropiedadesBLL().GetById(PropiedadesId.ToString());    
+                       
                     }
                     return _Propiedad; 
                 }
             }
         }
 
-        
+        public List<PeriodosAdeudados> PeriodosAdeudados 
+        {
+            get 
+            {
+                if (ContratosId != 0)
+                {
+                    var PeriodosCobrados = new CobrosBLL().GetByContrato(ContratosId.ToString());
+
+                    return PeriodosCobrados;
+                }
+            }
+            set 
+            {
+ 
+            }
+        }
+    }
+
+    public class PeriodosAdeudados
+    {
+        public DateTime MesAño {get; set;}
+        public string Detalle {get; set;}
     }
 }

@@ -4,15 +4,18 @@ using System.Linq;
 using System.Web;
 using Common.Emum;
 using InmBLL.Entities;
+using System.Web.Mvc;
 
 namespace Inmobiliar.Models
 {
     public class CobroAlquilerModel
     {
-        public List<PeriodosAdeudados> Periodos 
+        public IEnumerable<SelectListItem> Periodos 
         { 
             get
             {
+
+
                 var a = new List<PeriodosAdeudados>();
                 a.Add(new PeriodosAdeudados() { MesAño = DateTime.Now, Detalle = Enum.GetName(typeof(Meses), DateTime.Now.Month) + ' ' + DateTime.Now.Year });
                 var fe = DateTime.Now;
@@ -24,7 +27,12 @@ namespace Inmobiliar.Models
                 a.Add(new PeriodosAdeudados() { MesAño = fe, Detalle = Enum.GetName(typeof(Meses), fe.Month) + ' ' + DateTime.Now.Year });
                 fe = fe.AddMonths(1);
                 a.Add(new PeriodosAdeudados() { MesAño = fe, Detalle = Enum.GetName(typeof(Meses), fe.Month) + ' ' + DateTime.Now.Year });
-                return a;
+                var s = a.Select(x => new SelectListItem
+                    {
+                        Value = x.MesAño.ToShortDateString(),
+                        Text = x.Detalle
+                    });
+                return s;
             }
         }
 

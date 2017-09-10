@@ -75,6 +75,9 @@
       <DependentUpon>Inmobiliar.tt</DependentUpon>
     </Compile>
     <Compile Include="Encriptador.cs" />
+    <Compile Include="GarantePropietario.cs">
+      <DependentUpon>Inmobiliar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Inmobiliar.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -89,6 +92,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Inmobiliar.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Pagos.cs">
+      <DependentUpon>Inmobiliar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pagos_Detalle.cs">
+      <DependentUpon>Inmobiliar.tt</DependentUpon>
     </Compile>
     <Compile Include="Personas.cs">
       <DependentUpon>Inmobiliar.tt</DependentUpon>

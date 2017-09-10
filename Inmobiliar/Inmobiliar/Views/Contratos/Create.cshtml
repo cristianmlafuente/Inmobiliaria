@@ -1,13 +1,14 @@
 ﻿@model Inmobiliar.Models.ContratosModel
-@*@Scripts.Render("~/Scripts/Contrato");*@
 @{
     ViewBag.Title = "Create";
 }
+
 <div id="page-wrapper">
     <div id="page-inner">
         <div class="row">
             <div class="col-lg-12">
-                <form role="form" action="Create" method="post">
+                @using (Html.BeginForm("Create", "Contratos", FormMethod.Post))
+                {                
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h1 class="page-header">
@@ -17,13 +18,73 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    @{Html.RenderPartial("../Propiedades/_PropiedadResumida", Model.Contrato.Propiedades);}
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            Buscar Propiedad
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Propiedad</label>
+                                                <input type="text" class="form-control required" id="datosPropiedad" name="prop">                                               
+                                                @Html.HiddenFor(Model => Model.Contrato.sPropiedadId, new { id = "idPropiedad" })                                               
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Calle</label>
+                                                <input type="text" class="form-control" id="Calle" name="domicilio.Calle" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Numero</label>
+                                                <input type="text" class="form-control" id="Numero" name="domicilio.Numero" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Piso</label>
+                                                <input type="text" class="form-control" id="Piso" name="domicilio.Piso" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Departamento</label>
+                                                <input type="text" class="form-control" id="Dto" name="domicilio.Dto" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Barrio</label>
+                                                <input type="text" class="form-control" id="Barrio" name="domicilio.Barrio" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">CP</label>
+                                                <input type="text" class="form-control" id="CP" name="domicilio.CP" disabled="">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6" id="Propiedad">
-                                    @{
-                                        Model.Contrato.Propietario.Detalle = "Propietario";
-                                        { Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.Propietario); }
-                                    }
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Buscar Propietario
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group has-success" id="divBuscarPropietario">
+                                                <label class="control-label" for="inputSuccess">Propietario</label>
+                                                <input type="text" class="form-control" id="owner" name="Inquilino" data-detalle="Propietario">
+                                                @Html.HiddenFor(Model => Model.Contrato.sPropietarioId, new { id = "idPropietario" })
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">Apellido</label>
+                                                <input type="text" class="form-control" id="ownerApellidoPropietario" name="Apellido" disabled="" placeholder="">
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">Nombre</label>
+                                                <input type="text" class="form-control" id="ownerNamePropietario" name="Nombre" disabled="" placeholder="">
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">DU</label>
+                                                <input type="text" class="form-control" id="DUPropietario" name="DU" disabled="" placeholder="">
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">TelefonoLaboral</label>
+                                                <input type="text" class="form-control" id="TelLaboralPropietario" name="TelefonoLaboral" disabled="" placeholder="">
+                                            </div>
+
+                                        </div>
+                                    </div>        
                                 </div>
                             </div>
                             <div class="row">
@@ -44,10 +105,39 @@
                                                     </div>
                                                     <div id="Inquilino" class="panel-collapse collapse" style="height: 0px;">
                                                         <div class="panel-body">
-                                                            @{
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    Buscar Inquilino
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <div class="form-group has-success" id="divBuscarInquilino">
+                                                                        <label class="control-label" for="inputSuccess">Inquilino</label>
+                                                                        <input type="text" class="form-control" id="owner" name="Inquilino" data-detalle="Inquilino">
+                                                                        @Html.HiddenFor(Model => Model.Contrato.sInquilinoId, new { id = "idInquilino" })
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Apellido</label>
+                                                                        <input type="text" class="form-control" id="ownerApellidoInquilino" name="Apellido" disabled="" placeholder="">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Nombre</label>
+                                                                        <input type="text" class="form-control" id="ownerNameInquilino" name="Nombre" disabled="" placeholder="">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">DU</label>
+                                                                        <input type="text" class="form-control" id="DUInquilino" name="DU" disabled="" placeholder="">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">TelefonoLaboral</label>
+                                                                        <input type="text" class="form-control" id="TelLaboralInquilino" name="TelefonoLaboral" disabled="" placeholder="">
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>  
+                                                            @*@{
                                                                 Model.Contrato.Inquilino.Detalle = "Inquilino";
                                                                 Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.Inquilino);
-                                                            }
+                                                            }*@
                                                         </div>
                                                     </div>
                                                 </div>
@@ -61,10 +151,42 @@
                                                     </div>
                                                     <div id="Propietario" class="panel-collapse collapse" style="height: 0px;">
                                                         <div class="panel-body">
-                                                            @{
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    Buscar Garante_Propietario
+                                                                </div>
+                                                                <div class="panel-body">                                                                   
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Apellido</label>
+                                                                        <input type="text" class="form-control" id="garanteApellido" name="garanteApellido" placeholder="Apellido">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Nombre</label>
+                                                                        <input type="text" class="form-control" id="garanteName" name="garanteNombre" placeholder="Nombre">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">DU</label>
+                                                                        <input type="text" class="form-control" id="garanteDU" name="garanteDU" placeholder="Documento Único">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">TelefonoLaboral</label>
+                                                                        <input type="text" class="form-control" id="garanteTelefonoLaboral" name="garanteTelefonoLaboral" placeholder="Telefono Laboral">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Domicilio</label>
+                                                                        <input type="text" class="form-control" id="garanteDomicilio" name="garanteDomicilio" placeholder="Domicilio">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Nro. Matricula</label>
+                                                                        <input type="text" class="form-control" id="garanteMatricula" name="garanteMatricula" placeholder="Matricula">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            @*@{
                                                                 Model.Contrato.Inquilino.Detalle = "Garante_Propietario";
                                                                 Html.RenderPartial("../Contratos/_GarantePropietario", Model.Contrato.GaranteLaboral1);
-                                                            }
+                                                            }*@
                                                         </div>
                                                     </div>
                                                 </div>
@@ -78,10 +200,39 @@
                                                     </div>
                                                     <div id="Laboral1" class="panel-collapse collapse" style="height: 0px;">
                                                         <div class="panel-body">
-                                                            @{
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    Buscar 1er_Garante
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <div class="form-group has-success" id="divBuscar1er_Garante">
+                                                                        <label class="control-label" for="inputSuccess">1er_Garante</label>
+                                                                        <input type="text" class="form-control" id="owner" name="Inquilino" data-detalle="1er_Garante">
+                                                                        @Html.HiddenFor(Model => Model.Contrato.sIdGaranteLaboral1, new { id = "idGaranteLaboral1" })                                                                        
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Apellido</label>
+                                                                        <input type="text" class="form-control" id="ownerApellido1er_Garante" name="Apellido" disabled="" placeholder="">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Nombre</label>
+                                                                        <input type="text" class="form-control" id="ownerName1er_Garante" name="Nombre" disabled="" placeholder="">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">DU</label>
+                                                                        <input type="text" class="form-control" id="DU1er_Garante" name="DU" disabled="" placeholder="">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">TelefonoLaboral</label>
+                                                                        <input type="text" class="form-control" id="TelLaboral1er_Garante" name="TelefonoLaboral" disabled="" placeholder="">
+                                                                    </div>
+
+                                                                </div>
+                                                            </div> 
+                                                            @*@{
                                                                 Model.Contrato.GaranteLaboral1.Detalle = "1er_Garante";
                                                                 Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.GaranteLaboral1);
-                                                            }
+                                                            }*@
                                                         </div>
                                                     </div>
                                                 </div>
@@ -95,10 +246,39 @@
                                                     </div>
                                                     <div id="Laboral2" class="panel-collapse collapse" style="height: 0px;">
                                                         <div class="panel-body">
-                                                            @{
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    Buscar 2do_Garante
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <div class="form-group has-success" id="divBuscar2do_Garante">
+                                                                        <label class="control-label" for="inputSuccess">2do_Garante</label>
+                                                                        <input type="text" class="form-control" id="owner" name="Inquilino" data-detalle="2do_Garante">
+                                                                        @Html.HiddenFor(Model => Model.Contrato.sIdGaranteLaboral2, new { id = "idGaranteLaboral2" })                                                                        
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Apellido</label>
+                                                                        <input type="text" class="form-control" id="ownerApellido2do_Garante" name="Apellido" disabled="" placeholder="">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Nombre</label>
+                                                                        <input type="text" class="form-control" id="ownerName2do_Garante" name="Nombre" disabled="" placeholder="">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">DU</label>
+                                                                        <input type="text" class="form-control" id="DU2do_Garante" name="DU" disabled="" placeholder="">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">TelefonoLaboral</label>
+                                                                        <input type="text" class="form-control" id="TelLaboral2do_Garante" name="TelefonoLaboral" disabled="" placeholder="">
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            @*@{
                                                                 Model.Contrato.GaranteLaboral2.Detalle = "2do_Garante";
                                                                 Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.GaranteLaboral2);
-                                                            }
+                                                            }*@
                                                         </div>
                                                     </div>
                                                 </div>
@@ -112,10 +292,39 @@
                                                     </div>
                                                     <div id="Laboral3" class="panel-collapse collapse" style="height: 0px;">
                                                         <div class="panel-body">
-                                                            @{
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    Buscar 3er_Garante
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <div class="form-group has-success" id="divBuscar3er_Garante">
+                                                                        <label class="control-label" for="inputSuccess">3er_Garante</label>
+                                                                        <input type="text" class="form-control" id="owner" name="Inquilino" data-detalle="3er_Garante">
+                                                                        @Html.HiddenFor(Model => Model.Contrato.sIdGaranteLaboral3, new { id = "idGaranteLaboral3" })                                                                        
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Apellido</label>
+                                                                        <input type="text" class="form-control" id="ownerApellido3er_Garante" name="Apellido" disabled="" placeholder="">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Nombre</label>
+                                                                        <input type="text" class="form-control" id="ownerName3er_Garante" name="Nombre" disabled="" placeholder="">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">DU</label>
+                                                                        <input type="text" class="form-control" id="DU3er_Garante" name="DU" disabled="" placeholder="">
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">TelefonoLaboral</label>
+                                                                        <input type="text" class="form-control" id="TelLaboral3er_Garante" name="TelefonoLaboral" disabled="" placeholder="">
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            @*@{
                                                                 Model.Contrato.GaranteLaboral3.Detalle = "3er_Garante";
                                                                 Html.RenderPartial("../Owner/_Busqueda", Model.Contrato.GaranteLaboral3);
-                                                            }
+                                                            }*@
                                                         </div>
                                                     </div>
                                                 </div>
@@ -134,33 +343,38 @@
                                             Detalles del Contrato
                                         </div>
                                         <div class="panel-body">
-                                            <div class="form-group has-success col-lg-6">
-                                                <label class="control-label" for="inputSuccess">Nro Contrato</label>
-                                                <input type="text" class="form-control" id="contratoNumero" name="NroContrato">
+                                            <div class="form-group has-success col-lg-6">                                               
+                                                <label class="control-label" for="inputSuccess">Nro Contrato</label>                                               
+                                                @Html.TextBoxFor(model => model.Contrato.NroContrato, new { @class = "form-control" })                                               
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Fecha de Inicio del Contrato</label>
-                                                <input type="date" class="form-control" id="contratoFechaInicio" name="InicioContrato">
+                                                @Html.TextBoxFor(model => model.Contrato.FechaContrato, new { @class = "form-control", type = "date" })                                                                                                
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Duracion Contrato</label>
-                                                <input type="text" class="form-control" id="contratoDuracion" name="Duracion" placeholder="Periodo en Meses">
+                                                @Html.TextBoxFor(model => model.Contrato.PeriodoMeses, new { @class = "form-control", placeholder = "Periodo en Meses" })
+                                                @*<input type="text" class="form-control" id="contratoDuracion" name="Duracion" placeholder="Periodo en Meses">*@
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Cantidad de Incrementos</label>
-                                                <input type="text" class="form-control" id="contratoIncremento" name="Incrementos">
+                                                @Html.TextBoxFor(model => model.Contrato.Incrementos, new { @class = "form-control" })
+                                                @*<input type="text" class="form-control" id="contratoIncremento" name="Incrementos">*@
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Porcentaje de cada Incremento</label>
-                                                <input type="text" class="form-control" id="contratoPorcentajeIncremento" name="PorcentajeIncremento">
+                                                @Html.TextBoxFor(model => model.Contrato.PorcentajeIncremento, new { @class = "form-control" })
+                                                @*<input type="text" class="form-control" id="contratoPorcentajeIncremento" name="PorcentajeIncremento">*@
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Monto Inicial Alquiler</label>
-                                                <input type="text" class="form-control" id="contratoMontoInicial" name="MontoInicial">
+                                                @Html.TextBoxFor(model => model.Contrato.MontoInicialAlquiler, new { @class = "form-control" })
+                                                @*<input type="text" class="form-control" id="contratoMontoInicial" name="MontoInicial">*@
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Porcentaje Administracion Inmobiliaria</label>
-                                                <input type="text" class="form-control" id="contratoPorcentajeInmibiliaria" name="PorcentajeInmobiliaria">
+                                                @Html.TextBoxFor(model => model.Contrato.PorcentajeInmobiliaria, new { @class = "form-control" })
+                                                @*<input type="text" class="form-control" id="contratoPorcentajeInmibiliaria" name=Model.PorcentajeInmobiliaria>*@
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <div class="form-group has-success col-lg-6">
@@ -176,7 +390,7 @@
                             <input type="submit" class="btn btn-primary" value="Registrar" id="RegistrarContrato" />
                         </div>
                     </div>
-                </form>
+                }                    
             </div>
         </div>
     </div>

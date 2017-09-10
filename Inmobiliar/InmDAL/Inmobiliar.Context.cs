@@ -34,5 +34,8 @@ namespace InmDAL
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Usuario_Rol> Usuario_Rol { get; set; }
+        public virtual DbSet<GarantePropietario> GarantePropietario { get; set; }
+        public virtual DbSet<Pagos> Pagos { get; set; }
+        public virtual DbSet<Pagos_Detalle> Pagos_Detalle { get; set; }
     }
 }
