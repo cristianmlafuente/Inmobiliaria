@@ -247,7 +247,8 @@ namespace InmDAL
                 using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["conn"].ConnectionString))
                 {
                     db.Open();
-                    var response = db.Query<T>(sql, propertyContainer.ValuePairs, commandType: CommandType.Text).First();
+                    //var response = db.Query<T>(sql, propertyContainer.ValuePairs, commandType: CommandType.Text,).First();
+                    var response = db.Execute(sql, propertyContainer.ValuePairs);
                     if (response != null)
                         return true;
                     return false;
