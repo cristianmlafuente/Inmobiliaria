@@ -83,18 +83,15 @@ namespace InmBLL
                 var response = genericDal.GetById(id);
                 if (response != null)
                 {
-                    person = new Personas
-                    {
-                        Apellido = response.Apellido,
-                        Nombre = response.Nombre,
-                        Email = response.Email,
-                        DU = response.DU,
-                        Telefono = response.Telefono,
-                        TelefonoLaboral = response.TelefonoLaboral,
-                        Celular = response.Celular,
-                        PersonasId = response.PersonasId
-                    };                   
-                }                                    
+                    person.Apellido = response.Apellido;
+                    person.Celular = response.Celular;
+                    person.DU = response.DU;
+                    person.Email = response.Email;
+                    person.Nombre = response.Nombre;
+                    person.PersonasId = response.PersonasId;
+                    person.Telefono = response.Telefono;
+                    person.TelefonoLaboral = response.TelefonoLaboral;
+                }                              
             }
             return person;
         }
