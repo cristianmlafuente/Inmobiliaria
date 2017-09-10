@@ -19,7 +19,7 @@ namespace InmBLL
                 ousu = dalUsuario.LogueoUsuario(nombreUsuario, Password);
                 if (ousu != null)
                 {
-                    ousu.Roles = dalUsuario.RolesUsuario(ousu.IdUser);                                         
+                    ousu.Usuario_Rol = (ICollection<Usuario_Rol>)dalUsuario.RolesUsuario(ousu.IdUser);                                         
                 }
                 
                 return ousu;

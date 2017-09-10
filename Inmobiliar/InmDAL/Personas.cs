@@ -18,6 +18,7 @@ namespace InmDAL
         public Personas()
         {
             this.Propiedades = new HashSet<Propiedades>();
+            this.Contratos1 = new HashSet<Contratos>();
         }
     
         public int PersonasId { get; set; }
@@ -31,6 +32,8 @@ namespace InmDAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Propiedades> Propiedades { get; set; }
-        public virtual Contratos Contratos { get; set; }        
+        public virtual Contratos Contratos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contratos> Contratos1 { get; set; }
     }
 }

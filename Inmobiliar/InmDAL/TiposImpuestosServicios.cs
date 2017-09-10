@@ -14,7 +14,19 @@ namespace InmDAL
     
     public partial class TiposImpuestosServicios
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TiposImpuestosServicios()
+        {
+            this.Contrato_ImpuestoServicio = new HashSet<Contrato_ImpuestoServicio>();
+            this.Pagos_Detalle = new HashSet<Pagos_Detalle>();
+        }
+    
         public int Codigo { get; set; }
         public string Descripcion { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contrato_ImpuestoServicio> Contrato_ImpuestoServicio { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pagos_Detalle> Pagos_Detalle { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace Inmobiliar.Controllers
             }
             else
             {
-                if (!user.Roles.Any(xx => xx.IdRol == (int) this.Rol))
+                if (!user.Usuario_Rol.Any(xx => xx.IdRol == (int)this.Rol))
                 {
                     filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                     {

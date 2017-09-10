@@ -32,8 +32,5 @@ namespace InmDAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario_Rol> Usuario_Rol { get; set; }
-
-        public List<Roles> Roles  { get; set; }
-
     }
 }
