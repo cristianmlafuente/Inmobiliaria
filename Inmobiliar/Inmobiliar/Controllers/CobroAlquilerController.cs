@@ -94,26 +94,15 @@ namespace Inmobiliar.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetInquilino(string nombre)
-        {            
-            var personsList = new PersonasBLL();
-            var listPersons = personsList.GetAll();
-            //Type type = listPersons..GetType();
-            //var personViews = Mapper.Map<List<Personas>, List<PersonasModel>>(listPersons);
-
-            var CityName = (from person in listPersons
-                            where (person.Nombre.Contains(nombre) || person.Apellido.Contains(nombre) || person.DU.Contains(nombre))
-                            select new
-                            {
-                                Nombre = person.Nombre,
-                                Apellido = person.Apellido,
-                                DU = person.DU != null ? person.DU : "",
-                                TelefonoLaboral = person.TelefonoLaboral != null ? person.TelefonoLaboral : "",
-                                PersonasId = person.PersonasId                                
-                            }).ToList();
+        public JsonResult GetCobro(string fecha, string idContrato)
+        {
+            var contratoList = new ContratosBLL();
+            var contrato = contratoList.GetById(idContrato);
             
+           
 
-            return Json(CityName, JsonRequestBehavior.AllowGet);
+
+            return Json(contrato, JsonRequestBehavior.AllowGet);
         }
     
     }

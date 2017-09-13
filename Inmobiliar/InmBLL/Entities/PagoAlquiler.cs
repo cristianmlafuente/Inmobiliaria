@@ -9,15 +9,15 @@ namespace InmBLL.Entities
 {
     public class PagoAlquiler
     {
-        public DateTime Periodo { get; set; }
-        public DateTime FechaPago { get; set;}
-        public int InquilinoId { get; set; }
-        public int PropiedadId { get; set; }
-        public int ContratoId { get; set; }
+        public Nullable<System.DateTime> Periodo { get; set; }
+        public Nullable<System.DateTime> FechaPago { get; set; }
+        public Nullable<int> InquilinoId { get; set; }
+        public Nullable<int> PropiedadId { get; set; }
+        public Nullable<int> ContratoId { get; set; }
         private Propiedades _propiedad;
         private Personas _inquilino;
         private Contratos _contrato;
-        public decimal MontoTotal { get; set; }
+        public Nullable<decimal> MontoTotal { get; set; }
 
         public Propiedades Propiedad
         {

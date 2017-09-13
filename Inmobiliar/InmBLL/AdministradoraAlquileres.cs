@@ -28,7 +28,7 @@ namespace InmBLL
             string PATH_DIRECTORIO_ARCHIVOS = ConfigurationManager.AppSettings["PathArchivosOriginal"];
             string ReciboAlquiler = ConfigurationManager.AppSettings["ArchivoReciboAlquiler"];
             string PATH_DIRECTORIO_TEMP = ConfigurationManager.AppSettings["PathArchivosTemp"];
-            string NombreArchFinal = ReciboAlquiler.Split('.')[0] + Pago.Periodo.ToString("MMyy") + Pago.InquilinoId.ToString() + Pago.PropiedadId.ToString();
+            string NombreArchFinal = ReciboAlquiler.Split('.')[0] + Pago.Periodo.Value.ToString("MMyy") + Pago.InquilinoId.ToString() + Pago.PropiedadId.ToString();
             try
             {
                 string ArchivoOriginalRecibo = PATH_DIRECTORIO_ARCHIVOS + ReciboAlquiler;
@@ -42,9 +42,9 @@ namespace InmBLL
                     conexion.Open();
                     using (OleDbCommand comando = conexion.CreateCommand())
                     {
-                        comando.CommandText = "UPDATE [Hoja1 0$E2:E2] SET F1= '" + Pago.FechaPago.ToShortDateString() + "'";
+                        comando.CommandText = "UPDATE [Hoja1 0$E2:E2] SET F1= '" + Pago.FechaPago.Value.ToShortDateString() + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$L2:L2] SET F1= '" + Pago.FechaPago.ToShortDateString() + "'";
+                        comando.CommandText = "UPDATE [Hoja1 0$L2:L2] SET F1= '" + Pago.FechaPago.Value.ToShortDateString() + "'";
                         comando.ExecuteNonQuery();
                         comando.CommandText = "UPDATE [Hoja1 0$B7:B7] SET F1= '" + Pago.Propiedad.Domicilio.Calle + "'";
                         comando.ExecuteNonQuery();
@@ -62,9 +62,9 @@ namespace InmBLL
                         comando.ExecuteNonQuery();
                         comando.CommandText = "UPDATE [Hoja1 0$H13:H13] SET F1= '" + Funciones.NumeroALetras(Pago.MontoTotal.ToString()) + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$C17:C17] SET F1= '" + Enum.GetName(typeof(Meses), Pago.Periodo.Month) + "'";
+                        comando.CommandText = "UPDATE [Hoja1 0$C17:C17] SET F1= '" + Enum.GetName(typeof(Meses), Pago.Periodo.Value.Month) + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$J17:J17] SET F1= '" + Enum.GetName(typeof(Meses), Pago.Periodo.Month) + "'";
+                        comando.CommandText = "UPDATE [Hoja1 0$J17:J17] SET F1= '" + Enum.GetName(typeof(Meses), Pago.Periodo.Value.Month) + "'";
                         comando.ExecuteNonQuery();
                         comando.CommandText = "UPDATE [Hoja1 0$A29:A29] SET F1= '" + Pago.Observaciones + "'";
                         comando.ExecuteNonQuery();
@@ -155,7 +155,7 @@ namespace InmBLL
             string PATH_DIRECTORIO_ARCHIVOS = ConfigurationManager.AppSettings["PathArchivosOriginal"];
             string ReciboPropietario = ConfigurationManager.AppSettings["ArchivoReciboPropietario"];
             string PATH_DIRECTORIO_TEMP = ConfigurationManager.AppSettings["PathArchivosTemp"];
-            string NombreArchFinal = ReciboPropietario.Split('.')[0] + Pago.Periodo.ToString("MMyy") + Pago.InquilinoId.ToString() + Pago.PropiedadId.ToString();
+            string NombreArchFinal = ReciboPropietario.Split('.')[0] + Pago.Periodo.Value.ToString("MMyy") + Pago.InquilinoId.ToString() + Pago.PropiedadId.ToString();
             try
             {
                 string ArchivoOriginalRecibo = PATH_DIRECTORIO_ARCHIVOS + ReciboPropietario;
@@ -169,9 +169,9 @@ namespace InmBLL
                     conexion.Open();
                     using (OleDbCommand comando = conexion.CreateCommand())
                     {
-                        comando.CommandText = "UPDATE [Hoja1 0$E2:E2] SET F1= '" + Pago.FechaPago.ToShortDateString() + "'";
+                        comando.CommandText = "UPDATE [Hoja1 0$E2:E2] SET F1= '" + Pago.FechaPago.Value.ToShortDateString() + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$L2:L2] SET F1= '" + Pago.FechaPago.ToShortDateString() + "'";
+                        comando.CommandText = "UPDATE [Hoja1 0$L2:L2] SET F1= '" + Pago.FechaPago.Value.ToShortDateString() + "'";
                         comando.ExecuteNonQuery();
                         comando.CommandText = "UPDATE [Hoja1 0$B7:B7] SET F1= '" + Pago.Propiedad.Domicilio.Calle + "'";
                         comando.ExecuteNonQuery();
@@ -185,9 +185,9 @@ namespace InmBLL
                         comando.ExecuteNonQuery();
                         comando.CommandText = "UPDATE [Hoja1 0$H13:H13] SET F1= '" + Funciones.NumeroALetras(Pago.MontoTotal.ToString()) + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$D14:D14] SET F1= '" + Enum.GetName(typeof(Meses), Pago.Periodo.Month) + "'";
+                        comando.CommandText = "UPDATE [Hoja1 0$D14:D14] SET F1= '" + Enum.GetName(typeof(Meses), Pago.Periodo.Value.Month) + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$K14:K14] SET F1= '" + Enum.GetName(typeof(Meses), Pago.Periodo.Month) + "'";
+                        comando.CommandText = "UPDATE [Hoja1 0$K14:K14] SET F1= '" + Enum.GetName(typeof(Meses), Pago.Periodo.Value.Month) + "'";
                         comando.ExecuteNonQuery();
                         comando.CommandText = "UPDATE [Hoja1 0$A28:A28] SET F1= '" + Pago.Observaciones + "'";
                         comando.ExecuteNonQuery();
