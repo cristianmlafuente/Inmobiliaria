@@ -30,12 +30,12 @@ namespace InmDAL
         public Nullable<int> Incrementos { get; set; }        
         public Nullable<int> IdGarantePropietario { get; set; }
         public Nullable<int> IdGaranteLaboral1 { get; set; }
-        public Nullable<int> IdGaranteLaboral2 { get; set; }
-        public Nullable<int> IdGaranteLaboral3 { get; set; }
+        public Nullable<int> IdGaranteLaboral2 { get; set; }        
         public Nullable<decimal> MontoInicialAlquiler { get; set; }
         public Nullable<int> IdEstate { get; set; }
         public Nullable<int> IdPropietario { get; set; }
-        public Nullable<decimal> PorcentajeIncremento { get; set; }        
+        public Nullable<decimal> PorcentajeIncremento { get; set; }
+        public Nullable<int> IdGaranteLaboral3 { get; set; }
         public Nullable<decimal> PorcentajeInmobiliaria { get; set; }
     
         public virtual Personas Personas { get; set; }

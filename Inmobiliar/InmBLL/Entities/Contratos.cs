@@ -259,6 +259,26 @@ namespace InmBLL.Entities
                 }
             }
         }
+        public virtual List<Observacion> Observaciones
+        {
+            get 
+            {
+                var listObs = new List<Observacion>();
+                var observaciones = new ObservacionesBLL().GetAll();
+
+                listObs = (from obse in observaciones
+                           where (obse.ContratosId == this.ContratosId)
+                           select new Observacion
+                           {
+                               ContratosId = obse.ContratosId,
+                               ObservacionId = obse.ObservacionId,
+                               Descripcion = obse.Descripcion,
+                               Fecha = obse.Fecha
+                           }).ToList();
+
+                return listObs;
+            }            
+        }
 
         public List<PeriodosAdeudados> PeriodosAdeudados 
         {
@@ -281,7 +301,7 @@ namespace InmBLL.Entities
             
         }
 
-        public List<PeriodosAdeudados> GenerarPeriodos()
+        private List<PeriodosAdeudados> GenerarPeriodos()
         {
             var response = new List<PeriodosAdeudados>();
             for (int i = 0; i < PeriodoMeses; i++)
@@ -295,6 +315,8 @@ namespace InmBLL.Entities
 
             return response;
         }
+    
+    
     }
 
     public class PeriodosAdeudados
@@ -302,7 +324,6 @@ namespace InmBLL.Entities
         public DateTime MesAño {get; set;}
         public string Detalle {get; set;}
         public string sMesAño { get; set; }
-    }
-
+    }    
     
 }

@@ -14,7 +14,8 @@
 
                         return {
                             label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral + ', ' + item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Departamento + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.InquilinoId + ', ' + item.PropiedadId + ', ' + item.ContratoId,
-                            object: item.PeriodosAdeudados,
+                            periodos: item.PeriodosAdeudados,
+                            observaciones : item.Observaciones,
                             value: "Seleccione..."
                         };                        
                     }))
@@ -47,7 +48,7 @@
             $("#PropiedadBarrio").val(arr[8]);
             $("#PropiedadCP").val(arr[9]);
                                   
-            var datos = ui.item.object;
+            var datos = ui.item.periodos;
             var sele = $(document.createElement('option'));
             sele.text('Periodo...');
             sele.val('-1');
@@ -61,8 +62,14 @@
                 $("#Periodo").append(option);
             });
             
-
-            //$('#Periodo option[value=' + ui.object + ']').attr('selected', true);
+            var obs = ui.item.observaciones;
+            //obs.each(obj, function (key, value)
+            $.each(obs, function (key, value)
+            {
+                debugger;
+                //$("#o1").append("viva lura");
+                $("#o" + key).append("<div class='panel-heading'><h4 class='panel-title'><a data-toggle='collapse' data-parent='#accordion' href='#collapse" + key + "' class='collapsed'>" + value.sFecha + "</a></h4></div><div id='collapse" + key + "' class='panel-collapse collapse' style='height: 0px;'><div class='panel-body'>" + value.Descripcion + "</div> </div>");
+            })                
         },
         open: function() {
             $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );

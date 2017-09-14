@@ -171,7 +171,8 @@ namespace Inmobiliar.Controllers
                                      Departamento = contrato.Propiedades.Domicilio.Dto,
                                      Barrio = contrato.Propiedades.Domicilio.Barrio,
                                      CP = contrato.Propiedades.Domicilio.CP,
-                                     PeriodosAdeudados = contrato.PeriodosAdeudados
+                                     PeriodosAdeudados = contrato.PeriodosAdeudados,
+                                     Observaciones = contrato.Observaciones
                                  }).ToList();
             
             return Json(inquilinoName, JsonRequestBehavior.AllowGet);

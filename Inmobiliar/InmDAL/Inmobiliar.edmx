@@ -5,17 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ClientesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Contrato-ImpuestoServicio">
-          <Key>
-            <PropertyRef Name="CodImpuesto" />
-            <PropertyRef Name="IdContrato" />
-          </Key>
-          <Property Name="CodImpuesto" Type="int" Nullable="false" />
-          <Property Name="IdContrato" Type="int" Nullable="false" />
-          <Property Name="FechaAlta" Type="datetime" />
-        </EntityType>
         <EntityType Name="Contratos">
           <Key>
             <PropertyRef Name="ContratosId" />
@@ -58,6 +47,15 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <Property Name="PersonasId" Type="int" />
           <Property Name="DomiciliosId" Type="int" />
           <Property Name="Matricula" Type="int" />
+        </EntityType>
+        <EntityType Name="Observaciones">
+          <Key>
+            <PropertyRef Name="ObservacionId" />
+          </Key>
+          <Property Name="ObservacionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContratosId" Type="nchar" MaxLength="10" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="Pagos">
           <Key>
@@ -172,30 +170,6 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Contrato-ImpuestoServicio_Contrato">
-          <End Role="Contratos" Type="Self.Contratos" Multiplicity="1" />
-          <End Role="Contrato-ImpuestoServicio" Type="Self.Contrato-ImpuestoServicio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contratos">
-              <PropertyRef Name="ContratosId" />
-            </Principal>
-            <Dependent Role="Contrato-ImpuestoServicio">
-              <PropertyRef Name="IdContrato" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contrato-ImpuestoServicio_ImpuestoServicio">
-          <End Role="TiposImpuestosServicios" Type="Self.TiposImpuestosServicios" Multiplicity="1" />
-          <End Role="Contrato-ImpuestoServicio" Type="Self.Contrato-ImpuestoServicio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TiposImpuestosServicios">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Contrato-ImpuestoServicio">
-              <PropertyRef Name="CodImpuesto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Pagos_Detalle_TiposImpuestosServicios">
           <End Role="TiposImpuestosServicios" Type="Self.TiposImpuestosServicios" Multiplicity="1" />
           <End Role="Pagos_Detalle" Type="Self.Pagos_Detalle" Multiplicity="*" />
@@ -260,6 +234,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <EntitySet Name="Contratos" EntityType="Self.Contratos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Domicilios" EntityType="Self.Domicilios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GarantePropietario" EntityType="Self.GarantePropietario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Observaciones" EntityType="Self.Observaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pagos_Detalle" EntityType="Self.Pagos_Detalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personas" EntityType="Self.Personas" Schema="dbo" store:Type="Tables" />
@@ -268,13 +243,6 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <EntitySet Name="TiposImpuestosServicios" EntityType="Self.TiposImpuestosServicios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario_Rol" EntityType="Self.Usuario_Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Contrato-ImpuestoServicio" EntityType="Self.Contrato-ImpuestoServicio" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Contrato-ImpuestoServicio].[CodImpuesto] AS [CodImpuesto], 
-    [Contrato-ImpuestoServicio].[IdContrato] AS [IdContrato], 
-    [Contrato-ImpuestoServicio].[FechaAlta] AS [FechaAlta]
-    FROM [dbo].[Contrato-ImpuestoServicio] AS [Contrato-ImpuestoServicio]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Contrato_Inquilino" Association="Self.FK_Contrato_Inquilino">
             <End Role="Personas" EntitySet="Personas" />
             <End Role="Contratos" EntitySet="Contratos" />
@@ -282,14 +250,6 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <AssociationSet Name="FK_Contrato_Propiedad" Association="Self.FK_Contrato_Propiedad">
             <End Role="Propiedades" EntitySet="Propiedades" />
             <End Role="Contratos" EntitySet="Contratos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contrato-ImpuestoServicio_Contrato" Association="Self.FK_Contrato-ImpuestoServicio_Contrato">
-            <End Role="Contratos" EntitySet="Contratos" />
-            <End Role="Contrato-ImpuestoServicio" EntitySet="Contrato-ImpuestoServicio" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contrato-ImpuestoServicio_ImpuestoServicio" Association="Self.FK_Contrato-ImpuestoServicio_ImpuestoServicio">
-            <End Role="TiposImpuestosServicios" EntitySet="TiposImpuestosServicios" />
-            <End Role="Contrato-ImpuestoServicio" EntitySet="Contrato-ImpuestoServicio" />
           </AssociationSet>
           <AssociationSet Name="FK_Pagos_Detalle_TiposImpuestosServicios" Association="Self.FK_Pagos_Detalle_TiposImpuestosServicios">
             <End Role="TiposImpuestosServicios" EntitySet="TiposImpuestosServicios" />
@@ -348,8 +308,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
         </EntityType>
         <EntityContainer Name="ClientesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Domicilios" EntityType="Self.Domicilios" />
-          <EntitySet Name="Personas" EntityType="Self.Personas" />
-          <EntitySet Name="Contrato_ImpuestoServicio" EntityType="ClientesModel.Contrato_ImpuestoServicio" />
+          <EntitySet Name="Personas" EntityType="Self.Personas" />          
           <EntitySet Name="Propiedades" EntityType="ClientesModel.Propiedades" />
           <AssociationSet Name="FK_Propiedades_Domicilios" Association="ClientesModel.FK_Propiedades_Domicilios">
             <End Role="Domicilios" EntitySet="Domicilios" />
@@ -368,15 +327,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <AssociationSet Name="FK_Contrato_Propiedad" Association="ClientesModel.FK_Contrato_Propiedad">
             <End Role="Propiedades" EntitySet="Propiedades" />
             <End Role="Contratos" EntitySet="Contratos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contrato_ImpuestoServicio_Contrato" Association="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato">
-            <End Role="Contratos" EntitySet="Contratos" />
-            <End Role="Contrato_ImpuestoServicio" EntitySet="Contrato_ImpuestoServicio" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contrato_ImpuestoServicio_ImpuestoServicio" Association="ClientesModel.FK_Contrato_ImpuestoServicio_ImpuestoServicio">
-            <End Role="TiposImpuestosServicios" EntitySet="TiposImpuestosServicios" />
-            <End Role="Contrato_ImpuestoServicio" EntitySet="Contrato_ImpuestoServicio" />
-          </AssociationSet>
+          </AssociationSet>          
           <EntitySet Name="Roles" EntityType="ClientesModel.Roles" />
           <EntitySet Name="Usuarios" EntityType="ClientesModel.Usuarios" />
           <EntitySet Name="Usuario_Rol" EntityType="ClientesModel.Usuario_Rol" />
@@ -398,30 +349,13 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <AssociationSet Name="FK_Contrato_Propiedad1" Association="ClientesModel.FK_Contrato_Propiedad1">
             <End Role="Propiedades" EntitySet="Propiedades" />
             <End Role="Contratos" EntitySet="Contratos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contrato_ImpuestoServicio_Contrato1" Association="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato1">
-            <End Role="Contratos" EntitySet="Contratos" />
-            <End Role="Contrato_ImpuestoServicio" EntitySet="Contrato_ImpuestoServicio" />
-          </AssociationSet>
+          </AssociationSet>          
           <AssociationSet Name="FK_Pagos_Detalle_TiposImpuestosServicios" Association="ClientesModel.FK_Pagos_Detalle_TiposImpuestosServicios">
             <End Role="TiposImpuestosServicios" EntitySet="TiposImpuestosServicios" />
             <End Role="Pagos_Detalle" EntitySet="Pagos_Detalle" />
           </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Contrato_ImpuestoServicio">
-          <Key>
-            <PropertyRef Name="CodImpuesto" />
-            <PropertyRef Name="ContratosId" />
-            <PropertyRef Name="IdContrato" />
-          </Key>
-          <Property Name="CodImpuesto" Type="Int32" Nullable="false" />
-          <Property Name="ContratosId" Type="Int32" Nullable="false" />
-          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Contratos" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato" FromRole="Contrato_ImpuestoServicio" ToRole="Contratos" />
-          <NavigationProperty Name="TiposImpuestosServicios" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_ImpuestoServicio" FromRole="Contrato_ImpuestoServicio" ToRole="TiposImpuestosServicios" />
-          <Property Name="IdContrato" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Contratos1" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato1" FromRole="Contrato_ImpuestoServicio" ToRole="Contratos" />
-        </EntityType>
+          <EntitySet Name="Observaciones" EntityType="ClientesModel.Observaciones" />
+        </EntityContainer>        
         <EntityType Name="Propiedades">
           <Key>
             <PropertyRef Name="PropiedadesId" />
@@ -476,31 +410,26 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
           <Property Name="FechaContrato" Type="DateTime" Precision="3" />
           <Property Name="PeriodoMeses" Type="Int32" />
           <Property Name="Incrementos" Type="Int32" />
-          <Property Name="Porsentaje" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeIncremento" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="IdGarantePropietario" Type="Int32" />
           <Property Name="IdGaranteLaboral1" Type="Int32" />
           <Property Name="IdGaranteLaboral2" Type="Int32" />
-          <Property Name="IdGatanteLaboral3" Type="Int32" />
+          <Property Name="IdGaranteLaboral3" Type="Int32" />
           <Property Name="MontoInicialAlquiler" Type="Decimal" Precision="12" Scale="2" />
           <NavigationProperty Name="Personas" Relationship="ClientesModel.FK_Contrato_Inquilino" FromRole="Contratos" ToRole="Personas" />
-          <NavigationProperty Name="Propiedades" Relationship="ClientesModel.FK_Contrato_Propiedad" FromRole="Contratos" ToRole="Propiedades" />
-          <NavigationProperty Name="Contrato_ImpuestoServicio" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato" FromRole="Contratos" ToRole="Contrato_ImpuestoServicio" />
+          <NavigationProperty Name="Propiedades" Relationship="ClientesModel.FK_Contrato_Propiedad" FromRole="Contratos" ToRole="Propiedades" />          
           <Property Name="IdEstate" Type="Int32" />
-          <Property Name="IdPropietario" Type="Int32" />
-          <Property Name="PorcentajeIncremento" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="IdGaranteLaboral3" Type="Int32" />
+          <Property Name="IdPropietario" Type="Int32" />          
           <Property Name="PorcentajeInmobiliaria" Type="Decimal" Precision="5" Scale="2" />
           <NavigationProperty Name="Personas1" Relationship="ClientesModel.FK_Contrato_Inquilino1" FromRole="Contratos" ToRole="Personas" />
-          <NavigationProperty Name="Propiedades1" Relationship="ClientesModel.FK_Contrato_Propiedad1" FromRole="Contratos" ToRole="Propiedades" />
-          <NavigationProperty Name="Contrato_ImpuestoServicio1" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_Contrato1" FromRole="Contratos" ToRole="Contrato_ImpuestoServicio" />
+          <NavigationProperty Name="Propiedades1" Relationship="ClientesModel.FK_Contrato_Propiedad1" FromRole="Contratos" ToRole="Propiedades" />          
         </EntityType>
         <EntityType Name="TiposImpuestosServicios">
           <Key>
             <PropertyRef Name="Codigo" />
           </Key>
           <Property Name="Codigo" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Contrato_ImpuestoServicio" Relationship="ClientesModel.FK_Contrato_ImpuestoServicio_ImpuestoServicio" FromRole="TiposImpuestosServicios" ToRole="Contrato_ImpuestoServicio" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />          
           <NavigationProperty Name="Pagos_Detalle" Relationship="ClientesModel.FK_Pagos_Detalle_TiposImpuestosServicios" FromRole="TiposImpuestosServicios" ToRole="Pagos_Detalle" />
         </EntityType>
         <Association Name="FK_Contrato_Inquilino">
@@ -526,31 +455,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
               <PropertyRef Name="PropiedadesId" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contrato_ImpuestoServicio_Contrato">
-          <End Type="ClientesModel.Contratos" Role="Contratos" Multiplicity="1" />
-          <End Type="ClientesModel.Contrato_ImpuestoServicio" Role="Contrato_ImpuestoServicio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contratos">
-              <PropertyRef Name="ContratosId" />
-            </Principal>
-            <Dependent Role="Contrato_ImpuestoServicio">
-              <PropertyRef Name="ContratosId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contrato_ImpuestoServicio_ImpuestoServicio">
-          <End Type="ClientesModel.TiposImpuestosServicios" Role="TiposImpuestosServicios" Multiplicity="1" />
-          <End Type="ClientesModel.Contrato_ImpuestoServicio" Role="Contrato_ImpuestoServicio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TiposImpuestosServicios">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Contrato_ImpuestoServicio">
-              <PropertyRef Name="CodImpuesto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        </Association>                
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="IdRol" />
@@ -666,19 +571,7 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
               <PropertyRef Name="IdEstate" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contrato_ImpuestoServicio_Contrato1">
-          <End Type="ClientesModel.Contratos" Role="Contratos" Multiplicity="1" />
-          <End Type="ClientesModel.Contrato_ImpuestoServicio" Role="Contrato_ImpuestoServicio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contratos">
-              <PropertyRef Name="ContratosId" />
-            </Principal>
-            <Dependent Role="Contrato_ImpuestoServicio">
-              <PropertyRef Name="IdContrato" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        </Association>        
         <Association Name="FK_Pagos_Detalle_TiposImpuestosServicios">
           <End Type="ClientesModel.TiposImpuestosServicios" Role="TiposImpuestosServicios" Multiplicity="1" />
           <End Type="ClientesModel.Pagos_Detalle" Role="Pagos_Detalle" Multiplicity="*" />
@@ -691,6 +584,15 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Observaciones">
+          <Key>
+            <PropertyRef Name="ObservacionId" />
+          </Key>
+          <Property Name="ObservacionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContratosId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -722,15 +624,6 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
                 <ScalarProperty Name="Celular" ColumnName="Celular" />
                 <ScalarProperty Name="TelefonoLaboral" ColumnName="TelefonoLaboral" />
                 <ScalarProperty Name="DU" ColumnName="DU" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Contrato_ImpuestoServicio">
-            <EntityTypeMapping TypeName="ClientesModel.Contrato_ImpuestoServicio">
-              <MappingFragment StoreEntitySet="Contrato-ImpuestoServicio">
-                <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
-                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-                <ScalarProperty Name="CodImpuesto" ColumnName="CodImpuesto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -844,6 +737,16 @@ warning 6002: The table/view 'Inmobiliar.dbo.Contrato-ImpuestoServicio' does not
                 <ScalarProperty Name="Monto" ColumnName="Monto" />
                 <ScalarProperty Name="TipoId" ColumnName="TipoId" />
                 <ScalarProperty Name="PagoId" ColumnName="PagoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Observaciones">
+            <EntityTypeMapping TypeName="ClientesModel.Observaciones">
+              <MappingFragment StoreEntitySet="Observaciones">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ContratosId" ColumnName="ContratosId" />
+                <ScalarProperty Name="ObservacionId" ColumnName="ObservacionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
