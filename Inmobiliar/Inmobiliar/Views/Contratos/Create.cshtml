@@ -395,8 +395,14 @@
                                                     <div class="entry input-group col-lg-12">
                                                         @*<input class="form-control" name="fields[]" type="text" placeholder="Type something" />*@
                                                         @Html.DropDownList("Impuestos", new SelectList(""), new { @class = "form-control" })
+                                                        <input type="text" class="form-control" id="listImpuestos" name="" >
+                                                        @Html.HiddenFor(Model => Model.Contrato.impuesto, new { id = "impuestoList" })
+                                                        
+                                                        <ul id="names-list">
+                                                        </ul>
+                                                        
                                                         <span class="input-group-btn">
-                                                            <button class="btn btn-success btn-add" type="button">
+                                                            <button id="btnAddImp" class="btn btn-success btn-add" type="button">
                                                                 <span class="glyphicon glyphicon-plus"></span>
                                                             </button>
                                                         </span>

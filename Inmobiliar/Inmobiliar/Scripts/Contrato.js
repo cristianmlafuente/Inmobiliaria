@@ -1,4 +1,5 @@
 ﻿$(function () {
+    var list = [];
     $("#AltaContrato").val({
         debugger: true,
         rules: {
@@ -6,6 +7,22 @@
                 required: true,
             minLength:2}
         }
+    });
+
+    $('#btnAddImp').click( function () {
+
+        $("select option:selected").each(function () {
+            debugger;
+            str = $(this).val() + "";
+            sel = $(this).text();                   
+            var object = { "idImpuesto": $(this).val(), "descripcionImp": $(this).text() }
+            list.push(object);
+            $('#listImpuestos').val(JSON.parse(list));
+            $('#impuestoList').val(JSON.parse(list));
+            
+            debugger;
+        });
+       
     });
     $("#datosPropiedad").autocomplete({ 
         
@@ -318,76 +335,6 @@
         }
 
     });
-
-    //$(".btn-add").click(function (event)
-    //    {
-    //        event.preventDefault();
-            
-    //        var control = $('.controls'),
-    //            currentEntry = $(this).parents('.entry:first'),
-    //            newEntry = $(currentEntry.clone()).appendTo(control);
-
-    //        controlForm.find('.entry:not(:last) .btn-add')
-    //        .removeClass('btn-add').addClass('btn-remove')
-    //        .removeClass('btn-success').addClass('btn-danger')
-    //        .html('<span class="glyphicon glyphicon-minus"></span>');
-    //    }
-    //).click();
-
-
-    $(function () {
-        $(document).on('click', '.btn-add', function (e) {
-            e.preventDefault();
-            debugger;
-            var sel = "";
-            var str = "";
-            
-            $("select option:selected").each(function () {
-                debugger;
-                str = $(this).val() + "";
-                sel = $(this).text();
-                $(this).parent('.select').attr('id', 'Impuestos' + str);
-                debugger;
-            });
-                       
-            var control = $('.controls'),
-                currentEntry = $(this).parents('.entry:first'),
-                newEntry = $(currentEntry.clone()).appendTo(control);
-            var sele = control.find('.entry .form-control');
-
-            
-
-            control.find('.entry:not(:last) .btn-add')
-                .removeClass('btn-add').addClass('btn-remove')
-                .removeClass('btn-success').addClass('btn-danger')
-                .html('<span class="glyphicon glyphicon-minus"></span>');
-            
-            sele.attr("id", "Impuestos" + str).before('<input type="text" class="form-control" id="inImpuesto" name="inImpuesto" value="' + sel + '" disabled="">');
-            //sele.hide();
-           
-        }).on('click', '.btn-remove', function (e) {
-            $(this).parents('.entry:first').remove();
-
-            e.preventDefault();
-            return false;
-        });
-    });
-
-    $("#RegistrarContrato").click({
-        //var isvalido: validarContrato(),
-
-        
-
-    });
-
-    var validarContrato = function ()
-    {
-
-
-
-
-        return true;
-    }
-
+    
 });
 

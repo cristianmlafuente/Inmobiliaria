@@ -24,7 +24,7 @@ namespace InmBLL.Entities
         public Nullable<int> IdGaranteLaboral3 { get; set; }
         public Nullable<decimal> MontoInicialAlquiler { get; set; }
         public Nullable<decimal> PorcentajeInmobiliaria { get; set; }
-
+        public List<Impuestos> impuesto { get; set; }
         public string sPropietarioId
         {
             get
