@@ -34,7 +34,7 @@ namespace InmBLL
                 entityDAL.PeriodoMeses = entity.PeriodoMeses;
                 entityDAL.PorcentajeIncremento = entity.PorcentajeIncremento;
                 entityDAL.PorcentajeInmobiliaria = entity.PorcentajeInmobiliaria;
-            
+                entityDAL.PropiedadesId = entity.PropiedadesId;
                 var response = genericDal.Add(entityDAL);
 
                 return response;

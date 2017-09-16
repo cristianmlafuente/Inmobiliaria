@@ -63,7 +63,8 @@ namespace Inmobiliar.Controllers
                         PeriodoMeses = collection.Contrato.PeriodoMeses,
                         PorcentajeIncremento = collection.Contrato.PorcentajeIncremento,
                         PorcentajeInmobiliaria = collection.Contrato.PorcentajeInmobiliaria,
-                        PropiedadesId = collection.Contrato.PropiedadesId                         
+                        PropiedadesId = collection.Contrato.PropiedadesId,
+                        PropietarioId = collection.Contrato.PropietarioId
                     };
                     contratoBll.Add(contrato);
                 }
