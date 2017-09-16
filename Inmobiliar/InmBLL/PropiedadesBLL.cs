@@ -21,32 +21,63 @@ namespace InmBLL
 
         public int Add(Propiedades entity)
         {
-            var entityDAL = new InmDAL.Propiedades
+            try
             {
-                DomiciliosId = entity.DomiciliosId,
-                NomenclaturaCatastral = entity.NomenclaturaCatastral,
-                NroContratoEpec = entity.NroContratoEpec,
-                PersonasId = entity.PersonasId,
-                UnidadFacturacion = entity.UnidadFacturacion,
-                NroFactura = entity.NroFactura
-            };
-            var response = genericDal.Add(entityDAL);
+                var entityDAL = new InmDAL.Propiedades
+                {
+                    DomiciliosId = entity.DomiciliosId,
+                    NomenclaturaCatastral = entity.NomenclaturaCatastral,
+                    NroContratoEpec = entity.NroContratoEpec,
+                    PersonasId = entity.PersonasId,
+                    UnidadFacturacion = entity.UnidadFacturacion,
+                    NroFactura = entity.NroFactura
+                };
+                var response = genericDal.Add(entityDAL);
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public bool Delete(Propiedades entity)
         {
-            var entityDAL = new InmDAL.Propiedades();
-            var response = genericDal.Delete(entityDAL);
-            return response;
+            try
+            {
+                var entityDAL = new InmDAL.Propiedades();
+                entityDAL.PropiedadesId = entity.PropiedadesId;
+                var response = genericDal.Delete(entityDAL);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public bool Update(Propiedades entity)
         {
-            var entityDAL = new InmDAL.Propiedades();
-            var response = genericDal.Update(entityDAL);
-            return response;
+            try
+            {
+                var entityDAL = new InmDAL.Propiedades();
+                entityDAL.DomiciliosId = entity.DomiciliosId;
+                entityDAL.IdAdmConsorcio = entity.DomiciliosId;
+                entityDAL.NomenclaturaCatastral = entity.NomenclaturaCatastral;
+                entity.NroContratoEpec = entity.NroContratoEpec;
+                entityDAL.NroFactura = entity.NroFactura;
+                entityDAL.NumeroCtaRenta = entity.NumeroCtaRenta;
+                entityDAL.PersonasId = entity.PersonasId;
+                entityDAL.PropiedadesId = entity.PropiedadesId;
+                entityDAL.UnidadFacturacion = entity.UnidadFacturacion;
+                var response = genericDal.Update(entityDAL);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public List<Propiedades> GetAll()
