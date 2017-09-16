@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Emum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -126,7 +127,25 @@ namespace InmBLL.Entities
                     IdGaranteLaboral3 = int.Parse(value);
             }
         }
-            
+        public string sIdContrato
+        {
+            get
+            {
+                if (ContratosId != null && ContratosId != 0)
+                    return ContratosId.ToString();
+                else
+                    return "";
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    ContratosId = 0;
+                else
+                    ContratosId = int.Parse(value);
+            }
+        }
+   
+
         private Personas _Inquilino;
         private Personas _Propietario;
         private Personas _GaranteLaboral1;
@@ -240,28 +259,71 @@ namespace InmBLL.Entities
                 }
             }
         }
+        public virtual List<Observacion> Observaciones
+        {
+            get 
+            {
+                var listObs = new List<Observacion>();
+                var observaciones = new ObservacionesBLL().GetAll();
+
+                listObs = (from obse in observaciones
+                           where (obse.ContratosId == this.ContratosId)
+                           select new Observacion
+                           {
+                               ContratosId = obse.ContratosId,
+                               ObservacionId = obse.ObservacionId,
+                               Descripcion = obse.Descripcion,
+                               Fecha = obse.Fecha
+                           }).ToList();
+
+                return listObs;
+            }            
+        }
 
         public List<PeriodosAdeudados> PeriodosAdeudados 
         {
             get 
             {
                 var a = new List<PeriodosAdeudados>();
-                
+                a = GenerarPeriodos();
                 if (ContratosId != 0)
                 {
                     var PeriodosCobrados = new CobrosBLL().GetByContrato(ContratosId.ToString());
-                    
+                    foreach (var item in PeriodosCobrados)
+                    {
+                        if (a.Any(x => x.MesAño.Month == item.Periodo.Value.Month && x.MesAño.Year == item.Periodo.Value.Year))
+                            a.RemoveAll(x => x.MesAño.Month == item.Periodo.Value.Month && x.MesAño.Year == item.Periodo.Value.Year);
+                    }
                     //return PeriodosCobrados;
                 }
                 return a;
             }
             
         }
+
+        private List<PeriodosAdeudados> GenerarPeriodos()
+        {
+            var response = new List<PeriodosAdeudados>();
+            for (int i = 0; i < PeriodoMeses; i++)
+            {
+                var per = new PeriodosAdeudados();
+                per.MesAño = FechaContrato.Value.AddMonths(i);
+                per.Detalle = Enum.GetName(typeof(Meses), per.MesAño.Month) + ' ' + per.MesAño.Year;
+                per.sMesAño = per.MesAño.Day.ToString().PadLeft(2, '0') + per.MesAño.Month.ToString().PadLeft(2, '0') + per.MesAño.Year;
+                response.Add(per);
+            }
+
+            return response;
+        }
+    
+    
     }
 
     public class PeriodosAdeudados
     {
         public DateTime MesAño {get; set;}
         public string Detalle {get; set;}
-    }
+        public string sMesAño { get; set; }
+    }    
+    
 }

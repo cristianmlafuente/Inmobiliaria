@@ -17,7 +17,7 @@ namespace InmDAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuarios()
         {
-            this.Usuario_Rol = new Usuario_Rol();
+            this.Usuario_Rol = new HashSet<Usuario_Rol>();
         }
     
         public int IdUser { get; set; }
@@ -29,10 +29,9 @@ namespace InmDAL
         public Nullable<System.DateTime> DateAdded { get; set; }
         public Nullable<System.DateTime> LowDate { get; set; }
         public string Email { get; set; }
-        public List<Roles> Roles { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual Usuario_Rol Usuario_Rol { get; set; }
-        
+        public virtual ICollection<Usuario_Rol> Usuario_Rol { get; set; }
+        public List<Roles> Roles { get; set; }
     }
 }

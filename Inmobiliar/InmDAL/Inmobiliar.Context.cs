@@ -37,5 +37,6 @@ namespace InmDAL
         public virtual DbSet<GarantePropietario> GarantePropietario { get; set; }
         public virtual DbSet<Pagos> Pagos { get; set; }
         public virtual DbSet<Pagos_Detalle> Pagos_Detalle { get; set; }
+        public virtual DbSet<Observaciones> Observaciones { get; set; }
     }
 }

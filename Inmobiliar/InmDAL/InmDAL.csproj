@@ -93,6 +93,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Inmobiliar.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Observaciones.cs">
+      <DependentUpon>Inmobiliar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Pagos.cs">
       <DependentUpon>Inmobiliar.tt</DependentUpon>
     </Compile>

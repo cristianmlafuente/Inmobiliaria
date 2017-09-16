@@ -1,4 +1,5 @@
 ﻿using InmBLL.Entities;
+using InmDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,8 +97,43 @@ namespace InmBLL
 
         public List<PagoAlquiler> GetByContrato(string contratoId)
         {
-            var a = new List<PagoAlquiler>();
-            return a;
+            try
+            {            
+                int contra = int.Parse(contratoId);
+                var nuevopago = new PagoAlquiler();
+                var a = new List<PagoAlquiler>();
+                if (!string.IsNullOrEmpty(contratoId))
+                {
+                    var response = genericDal.GetAll();
+                    if (response != null)
+                    {
+                        var filtro = response.Where(x => x.ContratoId == contra).ToList();
+                        if (filtro != null)
+                        {
+                            foreach (var pago in filtro)
+                            {
+                                nuevopago = new PagoAlquiler
+                                {
+                                    ContratoId = pago.ContratoId,
+                                    FechaPago = pago.FechaPago,
+                                    InquilinoId = pago.InquilinoId,
+                                    MontoTotal = pago.MontoTotal,
+                                    Observaciones = pago.Observaciones,
+                                    Periodo = pago.Periodo,
+                                    PropiedadId = pago.PropiedadId
+                                };
+                                a.Add(nuevopago);
+                            }
+                        }
+                    }
+                }
+
+                return a;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

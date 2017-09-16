@@ -155,9 +155,10 @@ namespace Inmobiliar.Controllers
             var listContrato = contratoList.GetAll();
 
             var inquilinoName = (from contrato in listContrato
-                                 where (contrato.Inquilino.Nombre.Contains(nombre) || contrato.Inquilino.Apellido.Contains(nombre) || contrato.Inquilino.DU.Contains(nombre))
+                                 where (contrato.Inquilino.Nombre.ToLower().Contains(nombre.ToLower()) || contrato.Inquilino.Apellido.ToLower().Contains(nombre.ToLower()) || contrato.Inquilino.DU.Contains(nombre))
                                  select new
                                  {
+                                     ContratoId = contrato.ContratosId,
                                      InquilinoId = contrato.InquilinoId,
                                      Nombre = contrato.Inquilino.Nombre,
                                      Apellido = contrato.Inquilino.Apellido,
@@ -170,8 +171,10 @@ namespace Inmobiliar.Controllers
                                      Departamento = contrato.Propiedades.Domicilio.Dto,
                                      Barrio = contrato.Propiedades.Domicilio.Barrio,
                                      CP = contrato.Propiedades.Domicilio.CP,
-                                     PeriodosAdeudados = contrato.PeriodosAdeudados
+                                     PeriodosAdeudados = contrato.PeriodosAdeudados,
+                                     Observaciones = contrato.Observaciones
                                  }).ToList();
+            
             return Json(inquilinoName, JsonRequestBehavior.AllowGet);
             
         }
