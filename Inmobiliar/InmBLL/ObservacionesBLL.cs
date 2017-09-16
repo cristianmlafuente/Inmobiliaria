@@ -18,24 +18,52 @@ namespace InmBLL
 
         public int Add(Observacion entity)
         {
-            var entityDAL = new InmDAL.Observaciones();
-            var response = genericDal.Add(entityDAL);
+            try
+            {
+                var entityDAL = new InmDAL.Observaciones();
+                entityDAL.ObservacionId = entity.ObservacionId;
+                entityDAL.Descripcion = entity.Descripcion;
+                entityDAL.Fecha = entity.Fecha;            
+                var response = genericDal.Add(entityDAL);
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public bool Delete(Observacion entity)
         {
-            var entityDAL = new InmDAL.Observaciones();
-            var response = genericDal.Delete(entityDAL);
-            return response;
+            try
+            {
+                var entityDAL = new InmDAL.Observaciones();
+                entityDAL.ObservacionId = entity.ObservacionId;
+                var response = genericDal.Delete(entityDAL);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public bool Update(Observacion entity)
         {
-            var entityDAL = new InmDAL.Observaciones();
-            var response = genericDal.Update(entityDAL);
-            return response;
+            try
+            {
+                var entityDAL = new InmDAL.Observaciones();
+                entityDAL.Descripcion = entity.Descripcion;
+                entityDAL.Fecha = entity.Fecha;
+                entityDAL.ObservacionId = entity.ObservacionId;
+                var response = genericDal.Update(entityDAL);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public List<Observacion> GetAll()

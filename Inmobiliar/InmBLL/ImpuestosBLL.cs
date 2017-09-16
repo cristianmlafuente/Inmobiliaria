@@ -18,26 +18,50 @@ namespace InmBLL
 
         public int Add(TipoImpuestosServicios entity)
         {
-            var entityDAL = new InmDAL.TiposImpuestosServicios();
-            entityDAL.Codigo = entity.Codigo;
-            entityDAL.Descripcion = entity.Descripcion;
-            var response = genericDal.Add(entityDAL);
+            try
+            {
+                var entityDAL = new InmDAL.TiposImpuestosServicios();
+                entityDAL.Codigo = entity.Codigo;
+                entityDAL.Descripcion = entity.Descripcion;
+                var response = genericDal.Add(entityDAL);
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public bool Delete(TipoImpuestosServicios entity)
         {
-            var entityDAL = new InmDAL.TiposImpuestosServicios();
-            var response = genericDal.Delete(entityDAL);
-            return response;
+            try
+            {
+                var entityDAL = new InmDAL.TiposImpuestosServicios();
+                entityDAL.Codigo = entity.Codigo;
+                var response = genericDal.Delete(entityDAL);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public bool Update(TipoImpuestosServicios entity)
         {
-            var entityDAL = new InmDAL.TiposImpuestosServicios();
-            var response = genericDal.Update(entityDAL);
-            return response;
+            try
+            {
+                var entityDAL = new InmDAL.TiposImpuestosServicios();
+                entityDAL.Codigo = entity.Codigo;
+                entityDAL.Descripcion = entity.Descripcion;
+                var response = genericDal.Update(entityDAL);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public List<TipoImpuestosServicios> GetAll()
@@ -51,8 +75,7 @@ namespace InmBLL
                     var data = new TipoImpuestosServicios
                     {
                         Codigo = Tipo.Codigo,
-                        Descripcion = Tipo.Descripcion                        
-                        
+                        Descripcion = Tipo.Descripcion                                                
                     };
                     listTipo.Add(data);
                 }

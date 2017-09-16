@@ -48,6 +48,7 @@ namespace InmBLL
         public bool Delete(Contratos entity)
         {
             var entityDAL = new InmDAL.Contratos();
+            entityDAL.ContratosId = entity.ContratosId;
             var response = genericDal.Delete(entityDAL);
             return response;
         }
