@@ -16,7 +16,7 @@ namespace InmBLL
             genericDal = new InmDAL.GenericDAL<InmDAL.TiposImpuestosServicios>();
         }
 
-        public bool Add(TipoImpuestosServicios entity)
+        public int Add(TipoImpuestosServicios entity)
         {
             var entityDAL = new InmDAL.TiposImpuestosServicios();
             entityDAL.Codigo = entity.Codigo;

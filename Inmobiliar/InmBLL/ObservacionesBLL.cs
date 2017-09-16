@@ -16,7 +16,7 @@ namespace InmBLL
             genericDal = new InmDAL.GenericDAL<InmDAL.Observaciones>();
         }
 
-        public bool Add(Observacion entity)
+        public int Add(Observacion entity)
         {
             var entityDAL = new InmDAL.Observaciones();
             var response = genericDal.Add(entityDAL);
