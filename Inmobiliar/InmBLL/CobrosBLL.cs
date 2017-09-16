@@ -17,7 +17,7 @@ namespace InmBLL
             genericDal = new InmDAL.GenericDAL<InmDAL.Pagos>();
         }
 
-        public bool Add(PagoAlquiler entity)
+        public int Add(PagoAlquiler entity)
         {
             var data = new InmDAL.Pagos
             {
@@ -30,9 +30,7 @@ namespace InmBLL
                 PropiedadId = entity.PropiedadId
             };
             var response = genericDal.Add(data);
-            if (response != null)
-                return true;
-            return false;
+            return response;
         }
 
         public bool Delete(PagoAlquiler entity)

@@ -17,13 +17,20 @@ namespace InmBLL
             genericDal = new InmDAL.GenericDAL<InmDAL.Domicilios>();
         }
 
-        public bool Add(Domicilios entity)
+        public int Add(Domicilios entity)
         {
-            var entityDAL = new InmDAL.Domicilios();
+            var entityDAL = new InmDAL.Domicilios { 
+            Barrio = entity.Barrio,
+            Calle = entity.Calle,
+            Ciudad = entity.Ciudad,
+            CP = entity.CP,
+            Dto = entity.Dto,
+            Numero = entity.Numero,
+            Piso = entity.Piso};
             var response = genericDal.Add(entityDAL);
             if (response != null)
-                return true;
-            return false;         
+                return response;
+            return response;         
         }
 
         public bool Delete(Domicilios entity)

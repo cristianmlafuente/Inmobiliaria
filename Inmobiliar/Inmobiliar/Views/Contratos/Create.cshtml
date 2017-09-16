@@ -26,11 +26,11 @@
                                             <div class="form-group">
                                                 <label class="control-label" for="disabledSelect">Propiedad</label>
                                                 <input type="text" class="form-control required" id="datosPropiedad" name="prop">                                               
-                                                @Html.HiddenFor(Model => Model.Contrato.sPropiedadId, new { id = "idPropiedad" })                                               
+                                                @Html.HiddenFor(Model => Model.Contrato.sPropiedadId, new { id = "idPropiedad", required = "Campo requerido" })                                               
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="disabledSelect">Calle</label>
-                                                <input type="text" class="form-control" id="Calle" name="domicilio.Calle" disabled="">
+                                                <input type="text" class="form-control" id="Calle" name="domicilio.Calle" disabled="" >
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="disabledSelect">Numero</label>

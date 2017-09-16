@@ -34,7 +34,7 @@ namespace Inmobiliar.Controllers
             return View();
         }
 
-        [PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Propiedades)]
+        //[PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Propiedades)]
         public ActionResult Propiedades()
         {            
             return View();                

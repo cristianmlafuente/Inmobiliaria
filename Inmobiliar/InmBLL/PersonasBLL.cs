@@ -16,7 +16,7 @@ namespace InmBLL
             genericDal = new InmDAL.GenericDAL<InmDAL.Personas>();
         }
 
-        public bool Add(Personas entity)
+        public int Add(Personas entity)
         {
             var data = new InmDAL.Personas
             {
@@ -29,9 +29,7 @@ namespace InmBLL
                 Celular = entity.Celular
             };
             var response = genericDal.Add(data);
-            if (response != null)
-                return true;
-            return false;
+            return response;
         }
 
         public bool Delete(Personas entity)
