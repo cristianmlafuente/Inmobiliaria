@@ -64,7 +64,9 @@
     <Compile Include="Entities\PagoAlquiler_Detalle.cs" />
     <Compile Include="Entities\Personas.cs" />
     <Compile Include="Entities\Propiedades.cs" />
+    <Compile Include="Entities\TipoImpuestosServicios.cs" />
     <Compile Include="IGenericBLL.cs" />
+    <Compile Include="ImpuestosBLL.cs" />
     <Compile Include="ObservacionesBLL.cs" />
     <Compile Include="PersonasBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -22,6 +22,7 @@
                     {                                                                       
                         return {
                             label: item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Dto + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.Apellido + ', ' + item.Nombre + ', ' + item.Du + ', ' + item.TelLabo + ', ' + item.IdPropiedad + ', ' + item.IdPropietario,
+                            impuesto: item.Impuesto,
                             value: item.Calle + ', ' + item.Numero
                         };                        
                     }))
@@ -36,8 +37,7 @@
         },
         minLength: 1, 
         select: function (event, ui)
-        {
-            debugger;
+        {          
             var idName = $("#owner").attr("data-detalle");
             var arr = ui.item.label.split(',');            
             $("#Calle").val(arr[0]);           
@@ -60,6 +60,21 @@
                 $("#TelLaboralPropietario").val(arr[9]);
             }            
             
+            var datos = ui.item.impuesto;
+            var sele = $(document.createElement('option'));
+            sele.text('Seleccione...');
+            sele.val('-1');
+            $("#Impuestos").append(sele);
+
+            $(datos).each(function () {
+                var option = $(document.createElement('option'));
+                option.text(this.Descripcion);
+                option.val(this.Codigo);
+
+                $("#Impuestos").append(option);
+            });
+
+
             
     },
     open: function() {
@@ -302,6 +317,60 @@
             $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
         }
 
+    });
+
+    //$(".btn-add").click(function (event)
+    //    {
+    //        event.preventDefault();
+            
+    //        var control = $('.controls'),
+    //            currentEntry = $(this).parents('.entry:first'),
+    //            newEntry = $(currentEntry.clone()).appendTo(control);
+
+    //        controlForm.find('.entry:not(:last) .btn-add')
+    //        .removeClass('btn-add').addClass('btn-remove')
+    //        .removeClass('btn-success').addClass('btn-danger')
+    //        .html('<span class="glyphicon glyphicon-minus"></span>');
+    //    }
+    //).click();
+
+
+    $(function () {
+        $(document).on('click', '.btn-add', function (e) {
+            e.preventDefault();
+            debugger;
+            var sel = "";
+            var str = "";
+            
+            $("select option:selected").each(function () {
+                debugger;
+                str = $(this).val() + "";
+                sel = $(this).text();
+                $(this).parent('.select').attr('id', 'Impuestos' + str);
+                debugger;
+            });
+                       
+            var control = $('.controls'),
+                currentEntry = $(this).parents('.entry:first'),
+                newEntry = $(currentEntry.clone()).appendTo(control);
+            var sele = control.find('.entry .form-control');
+
+            
+
+            control.find('.entry:not(:last) .btn-add')
+                .removeClass('btn-add').addClass('btn-remove')
+                .removeClass('btn-success').addClass('btn-danger')
+                .html('<span class="glyphicon glyphicon-minus"></span>');
+            
+            sele.attr("id", "Impuestos" + str).before('<input type="text" class="form-control" id="inImpuesto" name="inImpuesto" value="' + sel + '" disabled="">');
+            //sele.hide();
+           
+        }).on('click', '.btn-remove', function (e) {
+            $(this).parents('.entry:first').remove();
+
+            e.preventDefault();
+            return false;
+        });
     });
 
     $("#RegistrarContrato").click({

@@ -125,7 +125,7 @@ namespace Inmobiliar.Controllers
         {
             var propiedadList = new  PropiedadesBLL();
             var listPropiedad = propiedadList.GetAll();
-                        
+            var ImpuesService = new ImpuestosBLL().GetAll();             
             var PropiedadName = (from prope in listPropiedad
                                  where (prope.Domicilio.Calle.Contains(prop) || prope.Domicilio.Barrio.Contains(prop) || prope.Domicilio.Ciudad.Contains(prop) || prope.Domicilio.CP.Contains(prop))
                             select new
@@ -142,7 +142,8 @@ namespace Inmobiliar.Controllers
                                 Apellido = prope.Personas.Apellido,
                                 Nombre = prope.Personas.Nombre,
                                 Du = prope.Personas.DU,
-                                TelLabo = prope.Personas.TelefonoLaboral != null ? prope.Personas.TelefonoLaboral : ""
+                                TelLabo = prope.Personas.TelefonoLaboral != null ? prope.Personas.TelefonoLaboral : "",
+                                Impuesto = ImpuesService
                             }).ToList();
 
             return Json(PropiedadName, JsonRequestBehavior.AllowGet);

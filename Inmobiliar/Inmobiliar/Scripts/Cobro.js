@@ -30,8 +30,7 @@
         },
         minLength: 1, 
         select: function (event, ui)
-        {
-            debugger;
+        {            
             var arr = ui.item.label.split(',');                        
             $('#idInquilino').val($.trim(arr[10]));
             $("#InquilinoName").val(arr[0]);
@@ -65,8 +64,7 @@
             var obs = ui.item.observaciones;
             //obs.each(obj, function (key, value)
             $.each(obs, function (key, value)
-            {
-                debugger;
+            {                
                 //$("#o1").append("viva lura");
                 $("#o" + key).append("<div class='panel-heading'><h4 class='panel-title'><a data-toggle='collapse' data-parent='#accordion' href='#collapse" + key + "' class='collapsed'>" + value.sFecha + "</a></h4></div><div id='collapse" + key + "' class='panel-collapse collapse' style='height: 0px;'><div class='panel-body'>" + value.Descripcion + "</div> </div>");
             })                
@@ -78,7 +76,7 @@
             $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
         }
     });
-    debugger;
+
 
     $("#Periodo").change(function () {
         var str = "";

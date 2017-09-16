@@ -376,9 +376,31 @@
                                                 @Html.TextBoxFor(model => model.Contrato.PorcentajeInmobiliaria, new { @class = "form-control" })
                                                 @*<input type="text" class="form-control" id="contratoPorcentajeInmibiliaria" name=Model.PorcentajeInmobiliaria>*@
                                             </div>
+                                            <div class="form-group has-success col-lg-6">                                                
+                                                    <br /><br /><br /> <br>                                               
+                                            </div>
+                                            @*<div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Impuestos/Servicios</label>
+                                                @Html.DropDownList("Impuestos", new SelectList(""), new { @class = "form-control" })
+                                            </div>
                                             <div class="form-group has-success col-lg-6">
-                                                <div class="form-group has-success col-lg-6">
-                                                    <br /><br /><br />
+                                                <br />
+                                                <input type="button" class="btn btn-primary" value="Agregar" id="Agregar" />
+                                                <input type="button" class="btn btn-primary" value="Eliminar" id="Eliminar" />
+                                            </div>*@
+
+                                            <div class="control-groupcol-lg-12">
+                                                <label class="control-label" for="inputSuccess">Impuestos/Servicios</label>
+                                                <div class="controls">
+                                                    <div class="entry input-group col-lg-12">
+                                                        @*<input class="form-control" name="fields[]" type="text" placeholder="Type something" />*@
+                                                        @Html.DropDownList("Impuestos", new SelectList(""), new { @class = "form-control" })
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-success btn-add" type="button">
+                                                                <span class="glyphicon glyphicon-plus"></span>
+                                                            </button>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

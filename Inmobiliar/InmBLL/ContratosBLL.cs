@@ -18,10 +18,31 @@ namespace InmBLL
 
         public bool Add(Contratos entity)
         {
-            var entityDAL = new InmDAL.Contratos();
-            var response = genericDal.Add(entityDAL);
+            try
+            {
+                var entityDAL = new InmDAL.Contratos();
+                entityDAL.FechaContrato = entity.FechaContrato;
+                entityDAL.IdEstate = 0;
+                entityDAL.IdGaranteLaboral1 = entity.IdGaranteLaboral1;
+                entityDAL.IdGaranteLaboral2 = entity.IdGaranteLaboral2;
+                entityDAL.IdGaranteLaboral3 = entity.IdGaranteLaboral3;
+                entityDAL.IdGarantePropietario = entity.IdGarantePropietario;
+                entityDAL.IdPropietario = entity.PropietarioId;
+                entityDAL.InquilinoId = entity.InquilinoId;
+                entityDAL.MontoInicialAlquiler = entity.MontoInicialAlquiler;
+                entityDAL.NroContrato = entity.NroContrato;
+                entityDAL.PeriodoMeses = entity.PeriodoMeses;
+                entityDAL.PorcentajeIncremento = entity.PorcentajeIncremento;
+                entityDAL.PorcentajeInmobiliaria = entity.PorcentajeInmobiliaria;
+            
+                var response = genericDal.Add(entityDAL);
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public bool Delete(Contratos entity)
@@ -33,9 +54,29 @@ namespace InmBLL
 
         public bool Update(Contratos entity)
         {
-            var entityDAL = new InmDAL.Contratos();
-            var response = genericDal.Update(entityDAL);
-            return response;
+            try
+            {
+                var entityDAL = new InmDAL.Contratos();
+                entityDAL.FechaContrato = entity.FechaContrato;
+                entityDAL.IdEstate = 0;
+                entityDAL.IdGaranteLaboral1 = entity.IdGaranteLaboral1;
+                entityDAL.IdGaranteLaboral2 = entity.IdGaranteLaboral2;
+                entityDAL.IdGaranteLaboral3 = entity.IdGaranteLaboral3;
+                entityDAL.IdGarantePropietario = entity.IdGarantePropietario;
+                entityDAL.IdPropietario = entity.PropietarioId;
+                entityDAL.InquilinoId = entity.InquilinoId;
+                entityDAL.MontoInicialAlquiler = entity.MontoInicialAlquiler;
+                entityDAL.NroContrato = entity.NroContrato;
+                entityDAL.PeriodoMeses = entity.PeriodoMeses;
+                entityDAL.PorcentajeIncremento = entity.PorcentajeIncremento;
+                entityDAL.PorcentajeInmobiliaria = entity.PorcentajeInmobiliaria;
+                var response = genericDal.Update(entityDAL);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public List<Contratos> GetAll()
