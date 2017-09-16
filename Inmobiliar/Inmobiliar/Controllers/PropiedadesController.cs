@@ -31,7 +31,7 @@ namespace Inmobiliar.Controllers
         }
 
         // GET: Propiedades/Create
-        [PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Propiedades)]
+        //[PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Propiedades)]
         public ActionResult Create()
         {
             return View();
@@ -45,23 +45,36 @@ namespace Inmobiliar.Controllers
             {
 
                 var propiedades = new PropiedadesBLL();
+                var Domicilio = new DomiciliosBLL();
+
+               
                 if (ModelState.IsValid)
                 {
+                    var domicilio = new Domicilios
+                    {
+                        Barrio = model.domicilio.Barrio,
+                        Calle = model.domicilio.Calle,
+                        Ciudad = model.domicilio.Ciudad,
+                        CP = model.domicilio.CP,
+                        Numero = model.domicilio.Numero,
+                        Piso = model.domicilio.Piso,
+                        Dto = model.domicilio.Dto
+                    };
+
+                    var idDomicilio = Domicilio.Add(domicilio);
+
+
                     var propiedad = new Propiedades
                     {
                         PersonasId = model.Dueño.PersonasId,
-                        Domicilio = new Domicilios { 
-                            Barrio = model.domicilio.Barrio,
-                            Calle = model.domicilio.Calle,
-                            Ciudad = model.domicilio.Ciudad,
-                            CP = model.domicilio.CP,
-                            Numero = model.domicilio.Numero,
-                            Piso = model.domicilio.Piso,
-                            Dto = model.domicilio.Dto
-                        },
+                        DomiciliosId = idDomicilio,
                         NroFactura = model.UnidadFacturacion,
-                        
+                        NomenclaturaCatastral = model.NomenclaturaCatastral,
+                        NumeroCtaRenta = model.NumeroCtaRenta,
+                        NroContratoEpec = model.NroContratoEpec,
+                        UnidadFacturacion = model.UnidadFacturacion,
                     };
+
                     var result = propiedades.Add(propiedad);
                 }
                 // TODO: Add insert logic here

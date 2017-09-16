@@ -19,26 +19,34 @@ namespace InmBLL
             genericDal = new InmDAL.GenericDAL<InmDAL.Propiedades>();
         }
 
-        public bool Add(Propiedades entity)
+        public int Add(Propiedades entity)
         {
-            var entityDAL = new InmDAL.Propiedades();
+            var entityDAL = new InmDAL.Propiedades
+            {
+                DomiciliosId = entity.DomiciliosId,
+                NomenclaturaCatastral = entity.NomenclaturaCatastral,
+                NroContratoEpec = entity.NroContratoEpec,
+                PersonasId = entity.PersonasId,
+                UnidadFacturacion = entity.UnidadFacturacion,
+                NroFactura = entity.NroFactura
+            };
             var response = genericDal.Add(entityDAL);
-            
-            return response;             
+
+            return response;
         }
 
         public bool Delete(Propiedades entity)
         {
             var entityDAL = new InmDAL.Propiedades();
             var response = genericDal.Delete(entityDAL);
-            return response;     
+            return response;
         }
 
         public bool Update(Propiedades entity)
         {
             var entityDAL = new InmDAL.Propiedades();
             var response = genericDal.Update(entityDAL);
-            return response;   
+            return response;
         }
 
         public List<Propiedades> GetAll()
@@ -48,9 +56,9 @@ namespace InmBLL
                 var response = genericDal.GetAll();
                 var listPropie = new List<Propiedades>();
                 foreach (var propiedad in response)
-	            {
+                {
                     var data = new Propiedades
-                    {                    
+                    {
                         DomiciliosId = propiedad.DomiciliosId,
                         IdAdmConsorcio = propiedad.IdAdmConsorcio,
                         NomenclaturaCatastral = propiedad.NomenclaturaCatastral,
@@ -60,10 +68,10 @@ namespace InmBLL
                         PersonasId = propiedad.PersonasId,
                         PropiedadesId = propiedad.PropiedadesId,
                         UnidadFacturacion = propiedad.UnidadFacturacion
-                    
+
                     };
                     listPropie.Add(data);
-	            }
+                }
 
                 return listPropie;
             }
@@ -84,7 +92,7 @@ namespace InmBLL
                     var response = genericDal.GetById(id);
                     if (response != null)
                         propie = new Propiedades
-                        {                    
+                        {
                             DomiciliosId = response.DomiciliosId,
                             IdAdmConsorcio = response.IdAdmConsorcio,
                             NomenclaturaCatastral = response.NomenclaturaCatastral,
@@ -94,7 +102,7 @@ namespace InmBLL
                             PersonasId = response.PersonasId,
                             PropiedadesId = response.PropiedadesId,
                             UnidadFacturacion = response.UnidadFacturacion
-                    
+
                         };
                 }
                 return propie;

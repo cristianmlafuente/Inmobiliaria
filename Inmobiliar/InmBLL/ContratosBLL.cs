@@ -16,7 +16,7 @@ namespace InmBLL
             genericDal = new InmDAL.GenericDAL<InmDAL.Contratos>();
         }
 
-        public bool Add(Contratos entity)
+        public int Add(Contratos entity)
         {
             var entityDAL = new InmDAL.Contratos();
             var response = genericDal.Add(entityDAL);

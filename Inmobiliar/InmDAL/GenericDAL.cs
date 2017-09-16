@@ -14,111 +14,7 @@ using InmDAL.Contracts;
 namespace InmDAL
 {
     public class GenericDAL<T> : IGenericDAL <T>
-    {/*
-        public List<T> GetAll<T>() where T : class
-        {
-            try
-            {
-                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AySConexionDesarrollo"].ConnectionString))
-                {
-                    db.Open();
-                    var sqlQuery = string.Format("SELECT * FROM [{0}]", typeof(T).Name);
-                    return db.Query<T>(sqlQuery).ToList();
-                }
-            }
-            catch (Exception ex)
-            {                
-                throw new Exception(ex.Message);
-            }
-            
-        }
-
-        public T GetById<T>(string id) where T : class
-        {
-            try
-            {
-                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AySConexionDesarrollo"].ConnectionString))
-                {
-                    int i = 0;
-                    
-                    db.Open();
-                    var sqlQuery = string.Format("SELECT * FROM [{0}] WHERE {0}ID = {1}", typeof(T).Name, id);
-                    return db.QueryFirstOrDefault<T>(sqlQuery);
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }            
-        }
-
-        public T Add<T>(T entity) where T : class
-        {
-            try
-            {
-                var propertyContainer = ParseProperties(entity);
-                var sql = string.Format("INSERT INTO [{0}] ({1}) VALUES (@{2}) SELECT CAST(scope_identity() AS int)",
-                    typeof(T).Name,
-                    string.Join(", ", propertyContainer.ValueNames),
-                    string.Join(", @", propertyContainer.ValueNames));
-
-                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["conn"].ConnectionString))
-                {
-                    db.Open();
-                    return db.Query<T>(sql, propertyContainer.ValuePairs, commandType: CommandType.Text).First();
-                }
-
-                //using (var context = new ClientesEntities())
-                //{
-                //    context.Set<T>().Add(entity);
-                //    context.SaveChanges();
-                //    return entity;
-
-                //}
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            
-        }
-
-        public T Delete<T>(T entity) where T : class
-        {
-            try
-            {
-                using (var context = new ClientesEntities())
-                {
-                    context.Entry(entity).State = EntityState.Deleted;
-                    context.SaveChanges();
-                    return entity;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            
-        }
-        
-        public T Update<T>(T entity) where T : class
-        {
-            try
-            {
-                using (var context = new ClientesEntities())
-                {
-                    context.Entry(entity).State = EntityState.Modified;
-                    context.SaveChanges();
-                    return entity;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            
-        } * */
+    {
 
         private static PropertyContainer ParseProperties<T>(T obj)
         {
@@ -233,8 +129,8 @@ namespace InmDAL
 
             #endregion
         }
-     
-        public bool Add(T entity)
+
+        public int Add(T entity)
         {
             try
             {
@@ -248,10 +144,8 @@ namespace InmDAL
                 {
                     db.Open();
                     //var response = db.Query<T>(sql, propertyContainer.ValuePairs, commandType: CommandType.Text,).First();
-                    var response = db.Execute(sql, propertyContainer.ValuePairs);
-                    if (response != null)
-                        return true;
-                    return false;
+                    var id = db.Query<int>(sql, propertyContainer.ValuePairs).Single();
+                    return id;
                 }
 
             }

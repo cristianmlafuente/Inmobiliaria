@@ -8,7 +8,7 @@ namespace InmDAL.Contracts
 {
     public interface IGenericDAL <T>
     {
-        bool Add(T entity);
+        int Add(T entity);
         bool Delete(T entity);
         bool Update(T entity);
         List<T> GetAll();
