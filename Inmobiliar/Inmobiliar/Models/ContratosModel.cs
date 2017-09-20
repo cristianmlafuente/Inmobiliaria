@@ -14,7 +14,7 @@ namespace Inmobiliar.Models
         {
             this.Contrato = new Contratos();
         }
-
+        public string Impuestos {get;set;}
        
     }
 }

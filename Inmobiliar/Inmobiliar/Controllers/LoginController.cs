@@ -33,24 +33,36 @@ namespace Inmobiliar.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-                AdministradoraUsuarios oAdmUsuario = new AdministradoraUsuarios();
-                var usuarioValido = oAdmUsuario.LogueoUsuario(collection.NombreUsuario, collection.Password);
-                if (usuarioValido != null)
+                if (ModelState.IsValid)
                 {
-                    Session["Usuario"] = usuarioValido;
-                    //ViewBag.UsuarioLogueado = true;
-                    
-                    return RedirectToAction("Index", "Home");                    
+                    AdministradoraUsuarios oAdmUsuario = new AdministradoraUsuarios();
+                    var usuarioValido = oAdmUsuario.LogueoUsuario(collection.NombreUsuario, collection.Password);
+                    if (usuarioValido != null)
+                    {
+                        Session["Usuario"] = usuarioValido;
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ViewBag.TipoMsj = "Info";
+                        ViewBag.Message = "El usuario ingresado no se encuentra registrado en el sistema.";
+                        return RedirectToAction("Index");
+                    }
                 }
                 else
+                {
+                    ViewBag.TipoMsj = "Info";
+                    ViewBag.Message = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
                     return RedirectToAction("Index");
+                }
             }
             catch (Exception ex)
             {
                 ViewBag.TipoMsj = "Error";
                 ViewBag.Message = ex.Message;
-                return View();
+                return RedirectToAction("Index");
             }
         }
 

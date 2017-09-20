@@ -4,27 +4,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace InmBLL.Entities
 {
     public class Contratos
     {
         public int ContratosId { get; set; }
+        [Required]
         public string NroContrato { get; set; }
+        [Required(ErrorMessage = "Debe seleccionar una Propiedad")]
         public Nullable<int> PropiedadesId { get; set; }
+        [Required(ErrorMessage = "Debe seleccionar un Inquilino")]
         public Nullable<int> InquilinoId { get; set; }
         public Nullable<int> PropietarioId { get; set; }
+        [Required(ErrorMessage = "Debe Ingresar la fecha de inicio del contrato")]        
         public Nullable<System.DateTime> FechaContrato { get; set; }
+        [Required(ErrorMessage = "Debe ingresar los meses del contrato")]
         public Nullable<int> PeriodoMeses { get; set; }
+        [Required(ErrorMessage = "Debe ingresar la cantidad de incrementos del contrato")]
         public Nullable<int> Incrementos { get; set; }
+        [Required(ErrorMessage = "Debe ingresar el porcentaje de cada incremento")]
         public Nullable<decimal> PorcentajeIncremento { get; set; }
         public Nullable<int> IdGarantePropietario { get; set; }
         public Nullable<int> IdGaranteLaboral1 { get; set; }
         public Nullable<int> IdGaranteLaboral2 { get; set; }
         public Nullable<int> IdGaranteLaboral3 { get; set; }
+        [Required(ErrorMessage = "Debe ingresar el monto incial del alquiler")]
         public Nullable<decimal> MontoInicialAlquiler { get; set; }
+        [Required(ErrorMessage = "Debe ingresar el porcentaje de la inmobiliaria")]
         public Nullable<decimal> PorcentajeInmobiliaria { get; set; }
 
+        public List<TipoImpuestosServicios> ListaImpuestos { get; set; }
         public string sPropietarioId
         {
             get
@@ -314,9 +325,7 @@ namespace InmBLL.Entities
             }
 
             return response;
-        }
-    
-    
+        }        
     }
 
     public class PeriodosAdeudados

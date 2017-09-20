@@ -63,16 +63,35 @@ namespace Inmobiliar.Controllers
                         PeriodoMeses = collection.Contrato.PeriodoMeses,
                         PorcentajeIncremento = collection.Contrato.PorcentajeIncremento,
                         PorcentajeInmobiliaria = collection.Contrato.PorcentajeInmobiliaria,
-                        PropiedadesId = collection.Contrato.PropiedadesId                         
+                        PropiedadesId = collection.Contrato.PropiedadesId,
+                        PropietarioId = collection.Contrato.PropietarioId                     
                     };
+                    var inpu = collection.Impuestos.Split(',');
+                    foreach (var item in inpu)
+                    {
+                        if (contrato.ListaImpuestos == null)
+                            contrato.ListaImpuestos = new List<TipoImpuestosServicios>();
+                        contrato.ListaImpuestos.Add(new TipoImpuestosServicios() { Codigo = int.Parse(item.Trim()) });
+                    }
                     contratoBll.Add(contrato);
+                    ViewBag.TipoMsj = "Success";
+                    ViewBag.Message = "El contrato se registro con Exito!!!";
+                    return View();
                 }
-
-                return RedirectToAction("Index");
+                else
+                {
+                    ViewBag.TipoMsj = "Info";
+                    ViewBag.Message = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    return View(collection);
+                }                
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.TipoMsj = "Error";
+                ViewBag.Message = ex.Message;
+                return View(collection);
             }
         }
 
@@ -127,7 +146,7 @@ namespace Inmobiliar.Controllers
             var listPropiedad = propiedadList.GetAll();
             var ImpuesService = new ImpuestosBLL().GetAll();             
             var PropiedadName = (from prope in listPropiedad
-                                 where (prope.Domicilio.Calle.Contains(prop) || prope.Domicilio.Barrio.Contains(prop) || prope.Domicilio.Ciudad.Contains(prop) || prope.Domicilio.CP.Contains(prop))
+                                 where (prope.Domicilio.Calle.ToUpper().Contains(prop.ToUpper()) || prope.Domicilio.Barrio.ToUpper().Contains(prop.ToUpper()) || prope.Domicilio.Ciudad.ToUpper().Contains(prop.ToUpper()) || prope.Domicilio.CP.Contains(prop))
                             select new
                             {
                                 Calle = prope.Domicilio.Calle,

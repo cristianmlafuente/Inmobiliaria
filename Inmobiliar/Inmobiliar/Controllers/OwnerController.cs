@@ -54,13 +54,26 @@ namespace Inmobiliar.Controllers
                         Celular = collection.Celular
                     };
                     personasBll.Add(persona);
+                    ViewBag.TipoMsj = "Success";
+                    ViewBag.Message = "El cliente se registro con Exito!!!";
+                    return View();
                 }
-
-                return RedirectToAction("Index");
+                else
+                {
+                    ViewBag.TipoMsj = "Info";
+                    ViewBag.Message = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    return View(collection);
+                }
+                
+                
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.TipoMsj = "Error";
+                ViewBag.Message = ex.Message;
+                return View(collection);
             }
         }
 
@@ -117,7 +130,7 @@ namespace Inmobiliar.Controllers
             //var personViews = Mapper.Map<List<Personas>, List<PersonasModel>>(listPersons);
 
             var CityName = (from person in listPersons
-                            where (person.Nombre.Contains(nombre) || person.Apellido.Contains(nombre)|| person.DU.Contains(nombre))
+                            where (person.Nombre.ToUpper().Contains(nombre.ToUpper()) || person.Apellido.ToUpper().Contains(nombre.ToUpper()) || person.DU.Contains(nombre))
                             select new
                             {
                                 Nombre = person.Nombre,

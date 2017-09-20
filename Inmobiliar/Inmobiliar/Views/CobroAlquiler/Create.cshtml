@@ -11,6 +11,27 @@
                             <h3>Cobro Alquileres
                             </h3>
                         </div>
+                        @if (ViewBag.TipoMsj == "Info")
+                        {
+                            <div class="alert alert-info alert-inline">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong id="strMsj">@ViewBag.Message</strong>
+                            </div>
+                        }
+                        @if (ViewBag.TipoMsj == "Error")
+                        {
+                            <div class="alert alert-danger alert-inline margin-top-50 margin-bottom-50">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>@ViewBag.Message</strong>
+                            </div>
+                        }
+                        @if (ViewBag.TipoMsj == "Success")
+                        {
+                            <div class="alert alert-success alert-inline margin-top-50 margin-bottom-50">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>@ViewBag.Message</strong>
+                            </div>
+                        }
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -99,31 +120,33 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-6">
-                                                <div class="well">
-                                                    <form role="form" action="Create" method="post">
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading">
-                                                                Observaciones
+                                                <div class="well">                                                    
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            Observaciones
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="panel-group" id="accordion">
+                                                                <div class="panel panel-default" id="o0"></div>
+                                                                <div class="panel panel-default" id="o1"></div>
+                                                                <div class="panel panel-default" id="o2"></div>                                                                    
                                                             </div>
-                                                            <div class="panel-body">
-                                                                <div class="panel-group" id="accordion">
-                                                                    <div class="panel panel-default" id="o0"></div>
-                                                                    <div class="panel panel-default" id="o1"></div>
-                                                                    <div class="panel panel-default" id="o2"></div>                                                                    
-                                                                </div>
+                                                            <br />
+                                                            <div class="form-group">
+                                                                <label>Nueva Observación</label>
+                                                                @Html.TextAreaFor(Model => Model.NuevaNota, new { id = "NuevaNota" })
+                                                                @*<textarea class="form-control" rows="3"></textarea>*@
                                                                 <br />
-                                                                <div class="form-group">
-                                                                    <label>Nueva Observación</label>
-                                                                    <textarea class="form-control" rows="3"></textarea>
-                                                                    <br />
-                                                                    <input type="submit" class="btn btn-primary" value="Guardar" />
-                                                                </div>
+                                                                
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    </div>                                                    
                                                 </div>                                                                                                                                                                                                                                                                               
                                             </div>                                            
                                         </div>
+                                        <div class="panel-footer">
+                                            <input type="submit" class="btn btn-primary" value="Guardar" />                                            
+                                        </div>   
                                     </div>
                                 </div>
                             </div>

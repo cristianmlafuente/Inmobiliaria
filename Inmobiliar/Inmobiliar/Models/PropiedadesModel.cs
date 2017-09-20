@@ -8,7 +8,7 @@ namespace Inmobiliar.Models
 {
     public class PropiedadesModel
     {
-        //[Required]
+        [Required]
         [DataType(DataType.Text)]
         public DomiciliosModel domicilio { get; set; }
         public string Tipo { get; set; }

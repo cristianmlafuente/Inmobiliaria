@@ -39,12 +39,26 @@ namespace Inmobiliar.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
 
-                return RedirectToAction("Index");
+                    ViewBag.TipoMsj = "Success";
+                    ViewBag.Message = "El cobro se registro con Exito!!!";
+                    return View();
+                }
+                else
+                {
+                    ViewBag.TipoMsj = "Info";
+                    ViewBag.Message = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    return View(collection);
+                }
             }
-            catch
+            catch (Exception ex)
             {
+                ViewBag.TipoMsj = "Error";
+                ViewBag.Message = ex.Message;
                 return View();
             }
         }
@@ -97,9 +111,10 @@ namespace Inmobiliar.Controllers
         public JsonResult GetCobro(string fecha, string idContrato)
         {
             var contratoList = new ContratosBLL();
-            var contrato = contratoList.GetById(idContrato);
+            var contrato = contratoList.ObtenerMonto(fecha, idContrato);
             
            
+
 
 
             return Json(contrato, JsonRequestBehavior.AllowGet);

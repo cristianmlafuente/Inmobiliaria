@@ -13,11 +13,7 @@ namespace Inmobiliar.Controllers
 {
     public class PropiedadesController : Controller
     {
-        //private InmBLL.IGenericBLL<Propiedades> generic;
-        //public PropiedadesController(IGenericBLL<Propiedades> _generic)
-        //{
-        //    generic = _generic;
-        //}
+        
         // GET: Propiedades
         public ActionResult Index()
         {
@@ -47,7 +43,7 @@ namespace Inmobiliar.Controllers
                 var propiedades = new PropiedadesBLL();
                 var Domicilio = new DomiciliosBLL();
 
-               
+
                 if (ModelState.IsValid)
                 {
                     var domicilio = new Domicilios
@@ -76,14 +72,25 @@ namespace Inmobiliar.Controllers
                     };
 
                     var result = propiedades.Add(propiedad);
+                    ViewBag.TipoMsj = "Success";
+                    ViewBag.Message = "La propiedad se registro con Exito!!!";
+                    return View(); 
                 }
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                else
+                {
+                    ViewBag.TipoMsj = "Info";
+                    ViewBag.Message = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    return View(model); 
+                }
+                
             }
             catch(Exception ex)
             {
-                return View();
+                ViewBag.TipoMsj = "Error";
+                ViewBag.Message = ex.Message;
+                return View(model);
             }
         }
 

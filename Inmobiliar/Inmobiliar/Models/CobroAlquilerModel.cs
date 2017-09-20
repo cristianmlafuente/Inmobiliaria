@@ -14,8 +14,6 @@ namespace Inmobiliar.Models
         { 
             get
             {
-
-
                 var a = new List<PeriodosAdeudados>();
                 a.Add(new PeriodosAdeudados() { MesAño = DateTime.Now, Detalle = Enum.GetName(typeof(Meses), DateTime.Now.Month) + ' ' + DateTime.Now.Year });
                 var fe = DateTime.Now;
@@ -49,6 +47,8 @@ namespace Inmobiliar.Models
         }
 
         public Contratos Contrato { get; set; }
+
+        public string NuevaNota { get; set; }
 
         public CobroAlquilerModel()
         {

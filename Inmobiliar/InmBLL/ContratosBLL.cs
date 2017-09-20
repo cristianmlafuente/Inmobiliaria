@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InmBLL.Entities;
+using Microsoft.VisualBasic;
 
 namespace InmBLL
 {
@@ -33,10 +34,14 @@ namespace InmBLL
                 entityDAL.NroContrato = entity.NroContrato;
                 entityDAL.PeriodoMeses = entity.PeriodoMeses;
                 entityDAL.PorcentajeIncremento = entity.PorcentajeIncremento;
-                entityDAL.PorcentajeInmobiliaria = entity.PorcentajeInmobiliaria;
-            
+                entityDAL.PorcentajeInmobiliaria = entity.PorcentajeInmobiliaria;            
                 var response = genericDal.Add(entityDAL);
-
+                var listimpu = new List<InmDAL.Contrato_ImpuestoServicio>();
+                var newGenericDal = new InmDAL.GenericDAL<InmDAL.Contrato_ImpuestoServicio>();
+                foreach (var item in entity.ListaImpuestos)
+                {
+                    newGenericDal.Add(new InmDAL.Contrato_ImpuestoServicio() { CodImpuesto = item.Codigo, ContratosId = response, FechaAlta = DateTime.Now });                    
+                }                                               
                 return response;
             }
             catch (Exception ex)
@@ -154,5 +159,29 @@ namespace InmBLL
                 throw new Exception(ex.Message);
             }
         }
+
+        public string ObtenerMonto(string fecha, string idContrato)
+        {
+            try
+            {
+                var contrato = this.GetById(idContrato);                
+                var listcobros = new CobrosBLL().GetByContrato(idContrato);
+                var periodo = DateTime.Parse(fecha.Substring(6,2) + "/" + fecha.Substring(4,2) + "/" + fecha.Substring(0, 4));
+                if (listcobros.Any(xx => xx.Periodo.Value == periodo))
+                    throw new Exception("Ya existe cobro para el periodo Ingresado.");
+                decimal Monto = contrato.MontoInicialAlquiler.Value;
+                int incrementos = contrato.Incrementos.Value;
+                decimal porsIncre = contrato.PorcentajeIncremento.Value;
+                var meses = DateAndTime.DateDiff(DateInterval.Month, periodo, contrato.FechaContrato.Value);
+
+
+                return string.Empty;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+    
     }
 }

@@ -350,24 +350,43 @@
                 debugger;
             });
                        
-            var control = $('.controls'),
-                currentEntry = $(this).parents('.entry:first'),
-                newEntry = $(currentEntry.clone()).appendTo(control);
-            var sele = control.find('.entry .form-control');
+            //var control = $('.controls');
+            //var sele = control.find('.entry .form-control');
 
+            //control.currentEntry = $(this).parents('.entry:first'),
+            //    newEntry = $(control.clone()).appendTo(control);
+            var cbo = $("#Impuestos");
+            cbo.before('<div id="in' + str + '" ><input type="text" class="form-control" name="inImpuesto" value="' + sel + '" disabled=""><button id="' + str + '" class="btn btn-danger btn-remove" type="button"><span class="glyphicon glyphicon-minus"></span></button></div>');
+            var TipoImpuestosServicios = new Object();
+            TipoImpuestosServicios['Codigo'] = str;
+            TipoImpuestosServicios['Descripcion'] = sel;
+            if ($("#hImpuestos").val() != '')
+                $("#hImpuestos").val($("#hImpuestos").val() + ',' + str);
+            else
+                $("#hImpuestos").val(str);
+            //control.find('.entry:not(:last) .btn-add')
+            //    .removeClass('btn-add').addClass('btn-remove')
+            //    .removeClass('btn-success').addClass('btn-danger')
+            //    .html('<span class="glyphicon glyphicon-minus"></span>');
             
-
-            control.find('.entry:not(:last) .btn-add')
-                .removeClass('btn-add').addClass('btn-remove')
-                .removeClass('btn-success').addClass('btn-danger')
-                .html('<span class="glyphicon glyphicon-minus"></span>');
-            
-            sele.attr("id", "Impuestos" + str).before('<input type="text" class="form-control" id="inImpuesto" name="inImpuesto" value="' + sel + '" disabled="">');
-            //sele.hide();
+            //sele.attr("id", "Impuestos" + str).before('<input type="text" class="form-control" id="inImpuesto" name="inImpuesto" value="' + sel + '" disabled="">');
+            //sele.remove();
            
         }).on('click', '.btn-remove', function (e) {
-            $(this).parents('.entry:first').remove();
+            debugger;
+            //$(this).parents('.entry:first').remove();
+            var cant = $("#hImpuestos").val().split(',');
 
+            var id = $(this).attr("id");
+
+            cant = jQuery.grep(cant, function (value) {
+                return value != id;
+            });
+
+            debugger;
+            $("#hImpuestos").val(cant.toString());
+            $("#in" + id).remove();
+            //$(this).remove();
             e.preventDefault();
             return false;
         });
