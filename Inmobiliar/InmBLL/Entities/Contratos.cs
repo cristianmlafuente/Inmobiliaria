@@ -36,6 +36,7 @@ namespace InmBLL.Entities
         public Nullable<decimal> PorcentajeInmobiliaria { get; set; }
 
         public List<TipoImpuestosServicios> ListaImpuestos { get; set; }
+
         public string sPropietarioId
         {
             get

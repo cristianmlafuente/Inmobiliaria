@@ -1,4 +1,5 @@
 ﻿$(function () {
+    var list = [];
     $("#AltaContrato").val({
         debugger: true,
         rules: {
@@ -6,6 +7,22 @@
                 required: true,
             minLength:2}
         }
+    });
+
+    $('#btnAddImp').click( function () {
+
+        $("select option:selected").each(function () {
+            debugger;
+            str = $(this).val() + "";
+            sel = $(this).text();                   
+            var object = { "idImpuesto": $(this).val(), "descripcionImp": $(this).text() }
+            list.push(object);
+            $('#listImpuestos').val(JSON.parse(list));
+            $('#impuestoList').val(JSON.parse(list));
+            
+            debugger;
+        });
+       
     });
     $("#datosPropiedad").autocomplete({ 
         

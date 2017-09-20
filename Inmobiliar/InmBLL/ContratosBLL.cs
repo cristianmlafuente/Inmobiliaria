@@ -35,6 +35,7 @@ namespace InmBLL
                 entityDAL.PeriodoMeses = entity.PeriodoMeses;
                 entityDAL.PorcentajeIncremento = entity.PorcentajeIncremento;
                 entityDAL.PorcentajeInmobiliaria = entity.PorcentajeInmobiliaria;            
+                entityDAL.PropiedadesId = entity.PropiedadesId;
                 var response = genericDal.Add(entityDAL);
                 var listimpu = new List<InmDAL.Contrato_ImpuestoServicio>();
                 var newGenericDal = new InmDAL.GenericDAL<InmDAL.Contrato_ImpuestoServicio>();
