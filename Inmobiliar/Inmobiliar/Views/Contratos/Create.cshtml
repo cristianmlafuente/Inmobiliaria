@@ -176,38 +176,62 @@
                                                                 <div class="panel-heading">
                                                                     Buscar Garante_Propietario
                                                                 </div>
-                                                                <div class="panel-body">                                                                   
+                                                                <div class="panel-body">                                 
+                                                                    <div class="form-group has-success" id="divBuscar1er_Garante">
+                                                                        <label class="control-label" for="inputSuccess">GarantePropietario</label>
+                                                                        <input type="text" class="form-control" id="owner" name="Inquilino" data-detalle="Garante_Propietario">
+                                                                        @Html.HiddenFor(Model => Model.idPersonaGarantePropietario, new { id = "idGarantePropietario" })
+                                                                    </div>                                  
                                                                     <div class="form-group has-success">
                                                                         <label class="control-label" for="inputSuccess">Apellido</label>
-                                                                        <input type="text" class="form-control" id="garanteApellido" name="garanteApellido" placeholder="Apellido">
+                                                                        <input type="text" class="form-control" id="garanteApellido" name="garanteApellido" disabled="" placeholder="Apellido">                                                                        
                                                                     </div>
                                                                     <div class="form-group has-success">
                                                                         <label class="control-label" for="inputSuccess">Nombre</label>
-                                                                        <input type="text" class="form-control" id="garanteName" name="garanteNombre" placeholder="Nombre">
+                                                                        <input type="text" class="form-control" id="garanteName" name="garanteNombre" disabled="" placeholder="Nombre">
                                                                     </div>
                                                                     <div class="form-group has-success">
                                                                         <label class="control-label" for="inputSuccess">DU</label>
-                                                                        <input type="text" class="form-control" id="garanteDU" name="garanteDU" placeholder="Documento Único">
+                                                                        <input type="text" class="form-control" id="garanteDU" name="garanteDU" disabled="" placeholder="Documento Único">
                                                                     </div>
                                                                     <div class="form-group has-success">
                                                                         <label class="control-label" for="inputSuccess">TelefonoLaboral</label>
-                                                                        <input type="text" class="form-control" id="garanteTelefonoLaboral" name="garanteTelefonoLaboral" placeholder="Telefono Laboral">
+                                                                        <input type="text" class="form-control" id="garanteTelefonoLaboral" name="garanteTelefonoLaboral" disabled="" placeholder="Telefono Laboral">
                                                                     </div>
                                                                     <div class="form-group has-success">
-                                                                        <label class="control-label" for="inputSuccess">Domicilio</label>
-                                                                        <input type="text" class="form-control" id="garanteDomicilio" name="garanteDomicilio" placeholder="Domicilio">
+                                                                        <label class="control-label" for="inputSuccess">Calle</label>                                                                        
+                                                                        @Html.TextBoxFor(model => model.CalleGarantePropietario, new { @class = "form-control", @placeholder = "Calle" })
                                                                     </div>
                                                                     <div class="form-group has-success">
-                                                                        <label class="control-label" for="inputSuccess">Nro. Matricula</label>
-                                                                        <input type="text" class="form-control" id="garanteMatricula" name="garanteMatricula" placeholder="Matricula">
+                                                                        <label class="control-label" for="inputSuccess">Numero</label>
+                                                                        @Html.TextBoxFor(model => model.NumeroGarantePropietario, new { @class = "form-control", @placeholder = "Numero" })                                                                                                                                            
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Piso</label>                                                                        
+                                                                        @Html.TextBoxFor(model => model.PisoGarantePropietario, new { @class = "form-control", @placeholder = "Piso" })
+                                                                    </div>
+                                                                    <div class="form-group has-success col-lg-6">
+                                                                        <label class="control-label" for="inputSuccess">Ciudad</label>
+                                                                        @Html.TextBoxFor(model => model.CiudadGarantePropietario, new { @class = "form-control", @placeholder = "Ciudad" })                                                                        
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Departamento</label>                                                                       
+                                                                        @Html.TextBoxFor(model => model.DepartamentoGarantePropietario, new { @class = "form-control", @placeholder = "Departamento" })
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Barrio</label>                                                                        
+                                                                        @Html.TextBoxFor(model => model.BarrioGarantePropietario, new { @class = "form-control", @placeholder = "Barrio" })
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">CP</label>                                                                        
+                                                                        @Html.TextBoxFor(model => model.CPGarantePropietario, new { @class = "form-control", @placeholder = "CP" })
+                                                                    </div>
+                                                                    <div class="form-group has-success">
+                                                                        <label class="control-label" for="inputSuccess">Nro. Matricula</label>                                                                        
+                                                                        @Html.TextBoxFor(model => model.MatriculaGarantePropietario, new { @class = "form-control", @placeholder = "Matricula" })                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-                                                            @*@{
-                                                                Model.Contrato.Inquilino.Detalle = "Garante_Propietario";
-                                                                Html.RenderPartial("../Contratos/_GarantePropietario", Model.Contrato.GaranteLaboral1);
-                                                            }*@
                                                         </div>
                                                     </div>
                                                 </div>
@@ -399,27 +423,14 @@
                                             </div>
                                             <div class="form-group has-success col-lg-6">                                                
                                                     <br /><br /><br /> <br>                                               
-                                            </div>
-                                            @*<div class="form-group has-success col-lg-6">
-                                                <label class="control-label" for="inputSuccess">Impuestos/Servicios</label>
-                                                @Html.DropDownList("Impuestos", new SelectList(""), new { @class = "form-control" })
-                                            </div>
-                                            <div class="form-group has-success col-lg-6">
-                                                <br />
-                                                <input type="button" class="btn btn-primary" value="Agregar" id="Agregar" />
-                                                <input type="button" class="btn btn-primary" value="Eliminar" id="Eliminar" />
-                                            </div>*@
-
+                                            </div>                                         
                                             <div class="control-groupcol-lg-12">
                                                 <label class="control-label" for="inputSuccess">Impuestos/Servicios</label>
                                                 <div class="controls">
                                                     <div class="entry input-group col-lg-12">
                                                         @*<input class="form-control" name="fields[]" type="text" placeholder="Type something" />*@
                                                         @Html.HiddenFor(Model => Model.Impuestos, new { id = "hImpuestos" })
-                                                        @Html.DropDownList("Impuestos", new SelectList(""), new { @class = "form-control" })
-                                                        <input type="text" class="form-control" id="listImpuestos" name="" >
-                                                        @Html.HiddenFor(Model => Model.Contrato.impuesto, new { id = "impuestoList" })
-                                                        
+                                                        @Html.DropDownList("Impuestos", new SelectList(""), new { @class = "form-control" })                                                                                                                                                                     
                                                         <ul id="names-list">
                                                         </ul>
                                                         

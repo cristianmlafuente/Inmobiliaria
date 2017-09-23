@@ -12,12 +12,12 @@ namespace InmDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Contrato_ImpuestoServicio
+    public partial class sysdiagrams
     {
-        public int Contrato_ImpuestoServicioId { get; set; }
-
-        public Nullable<int> CodImpuesto { get; set; }
-        public Nullable<int> ContratosId { get; set; }
-        public Nullable<System.DateTime> FechaAlta { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

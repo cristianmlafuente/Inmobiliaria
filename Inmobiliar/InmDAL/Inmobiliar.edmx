@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ClientesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Contrato_ImpuestoServicio">
+          <Key>
+            <PropertyRef Name="Contrato_ImpuestoServicioId" />
+          </Key>
+          <Property Name="Contrato_ImpuestoServicioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodImpuesto" Type="int" />
+          <Property Name="ContratosId" Type="int" />
+          <Property Name="FechaAlta" Type="datetime" />
+        </EntityType>
         <EntityType Name="Contratos">
           <Key>
             <PropertyRef Name="ContratosId" />
@@ -115,11 +124,21 @@
           <Property Name="IdRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TiposImpuestosServicios">
           <Key>
-            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="TiposImpuestosServiciosID" />
           </Key>
-          <Property Name="Codigo" Type="int" Nullable="false" />
+          <Property Name="TiposImpuestosServiciosID" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Usuario_Rol">
@@ -158,24 +177,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Contrato_Propiedad">
-          <End Role="Propiedades" Type="Self.Propiedades" Multiplicity="0..1" />
-          <End Role="Contratos" Type="Self.Contratos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Propiedades">
-              <PropertyRef Name="PropiedadesId" />
-            </Principal>
-            <Dependent Role="Contratos">
-              <PropertyRef Name="IdEstate" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Pagos_Detalle_TiposImpuestosServicios">
           <End Role="TiposImpuestosServicios" Type="Self.TiposImpuestosServicios" Multiplicity="1" />
           <End Role="Pagos_Detalle" Type="Self.Pagos_Detalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TiposImpuestosServicios">
-              <PropertyRef Name="Codigo" />
+              <PropertyRef Name="TiposImpuestosServiciosID" />
             </Principal>
             <Dependent Role="Pagos_Detalle">
               <PropertyRef Name="TipoId" />
@@ -231,6 +238,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ClientesModelStoreContainer">
+          <EntitySet Name="Contrato_ImpuestoServicio" EntityType="Self.Contrato_ImpuestoServicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contratos" EntityType="Self.Contratos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Domicilios" EntityType="Self.Domicilios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GarantePropietario" EntityType="Self.GarantePropietario" Schema="dbo" store:Type="Tables" />
@@ -240,15 +248,12 @@
           <EntitySet Name="Personas" EntityType="Self.Personas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Propiedades" EntityType="Self.Propiedades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposImpuestosServicios" EntityType="Self.TiposImpuestosServicios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario_Rol" EntityType="Self.Usuario_Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Contrato_Inquilino" Association="Self.FK_Contrato_Inquilino">
             <End Role="Personas" EntitySet="Personas" />
-            <End Role="Contratos" EntitySet="Contratos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contrato_Propiedad" Association="Self.FK_Contrato_Propiedad">
-            <End Role="Propiedades" EntitySet="Propiedades" />
             <End Role="Contratos" EntitySet="Contratos" />
           </AssociationSet>
           <AssociationSet Name="FK_Pagos_Detalle_TiposImpuestosServicios" Association="Self.FK_Pagos_Detalle_TiposImpuestosServicios">
@@ -319,7 +324,6 @@
             <End Role="Propiedades" EntitySet="Propiedades" />
           </AssociationSet>
           <EntitySet Name="Contratos" EntityType="ClientesModel.Contratos" />
-          <EntitySet Name="TiposImpuestosServicios" EntityType="ClientesModel.TiposImpuestosServicios" />
           <AssociationSet Name="FK_Contrato_Inquilino" Association="ClientesModel.FK_Contrato_Inquilino">
             <End Role="Personas" EntitySet="Personas" />
             <End Role="Contratos" EntitySet="Contratos" />
@@ -349,12 +353,15 @@
           <AssociationSet Name="FK_Contrato_Propiedad1" Association="ClientesModel.FK_Contrato_Propiedad1">
             <End Role="Propiedades" EntitySet="Propiedades" />
             <End Role="Contratos" EntitySet="Contratos" />
-          </AssociationSet>          
+          </AssociationSet>
+          <EntitySet Name="Observaciones" EntityType="ClientesModel.Observaciones" />
+          <EntitySet Name="Contrato_ImpuestoServicio" EntityType="ClientesModel.Contrato_ImpuestoServicio" />
+          <EntitySet Name="sysdiagrams" EntityType="ClientesModel.sysdiagrams" />
+          <EntitySet Name="TiposImpuestosServicios" EntityType="ClientesModel.TiposImpuestosServicios" />
           <AssociationSet Name="FK_Pagos_Detalle_TiposImpuestosServicios" Association="ClientesModel.FK_Pagos_Detalle_TiposImpuestosServicios">
             <End Role="TiposImpuestosServicios" EntitySet="TiposImpuestosServicios" />
             <End Role="Pagos_Detalle" EntitySet="Pagos_Detalle" />
           </AssociationSet>
-          <EntitySet Name="Observaciones" EntityType="ClientesModel.Observaciones" />
         </EntityContainer>        
         <EntityType Name="Propiedades">
           <Key>
@@ -423,14 +430,6 @@
           <Property Name="PorcentajeInmobiliaria" Type="Decimal" Precision="5" Scale="2" />
           <NavigationProperty Name="Personas1" Relationship="ClientesModel.FK_Contrato_Inquilino1" FromRole="Contratos" ToRole="Personas" />
           <NavigationProperty Name="Propiedades1" Relationship="ClientesModel.FK_Contrato_Propiedad1" FromRole="Contratos" ToRole="Propiedades" />          
-        </EntityType>
-        <EntityType Name="TiposImpuestosServicios">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />          
-          <NavigationProperty Name="Pagos_Detalle" Relationship="ClientesModel.FK_Pagos_Detalle_TiposImpuestosServicios" FromRole="TiposImpuestosServicios" ToRole="Pagos_Detalle" />
         </EntityType>
         <Association Name="FK_Contrato_Inquilino">
           <End Type="ClientesModel.Personas" Role="Personas" Multiplicity="1" />
@@ -547,7 +546,7 @@
           <Property Name="Monto" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="PeriodoPago" Type="DateTime" Precision="0" />
           <NavigationProperty Name="TiposImpuestosServicios" Relationship="ClientesModel.FK_Pagos_Detalle_TiposImpuestosServicios" FromRole="Pagos_Detalle" ToRole="TiposImpuestosServicios" />
-        </EntityType>
+          </EntityType>
         <Association Name="FK_Contrato_Inquilino1">
           <End Type="ClientesModel.Personas" Role="Personas" Multiplicity="0..1" />
           <End Type="ClientesModel.Contratos" Role="Contratos" Multiplicity="*" />
@@ -571,18 +570,6 @@
               <PropertyRef Name="IdEstate" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>        
-        <Association Name="FK_Pagos_Detalle_TiposImpuestosServicios">
-          <End Type="ClientesModel.TiposImpuestosServicios" Role="TiposImpuestosServicios" Multiplicity="1" />
-          <End Type="ClientesModel.Pagos_Detalle" Role="Pagos_Detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TiposImpuestosServicios">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Pagos_Detalle">
-              <PropertyRef Name="TipoId" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
         <EntityType Name="Observaciones">
           <Key>
@@ -593,6 +580,45 @@
           <Property Name="Fecha" Type="DateTime" Precision="3" />
           <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Contrato_ImpuestoServicio">
+          <Key>
+            <PropertyRef Name="Contrato_ImpuestoServicioId" />
+          </Key>
+          <Property Name="Contrato_ImpuestoServicioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodImpuesto" Type="Int32" />
+          <Property Name="ContratosId" Type="Int32" />
+          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TiposImpuestosServicios">
+          <Key>
+            <PropertyRef Name="TiposImpuestosServiciosID" />
+          </Key>
+          <Property Name="TiposImpuestosServiciosID" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pagos_Detalle" Relationship="ClientesModel.FK_Pagos_Detalle_TiposImpuestosServicios" FromRole="TiposImpuestosServicios" ToRole="Pagos_Detalle" />
+        </EntityType>
+        <Association Name="FK_Pagos_Detalle_TiposImpuestosServicios">
+          <End Type="ClientesModel.TiposImpuestosServicios" Role="TiposImpuestosServicios" Multiplicity="1" />
+          <End Type="ClientesModel.Pagos_Detalle" Role="Pagos_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposImpuestosServicios">
+              <PropertyRef Name="TiposImpuestosServiciosID" />
+            </Principal>
+            <Dependent Role="Pagos_Detalle">
+              <PropertyRef Name="TipoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -662,14 +688,6 @@
                 <ScalarProperty Name="PropiedadesId" ColumnName="PropiedadesId" />
                 <ScalarProperty Name="NroContrato" ColumnName="NroContrato" />
                 <ScalarProperty Name="ContratosId" ColumnName="ContratosId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TiposImpuestosServicios">
-            <EntityTypeMapping TypeName="ClientesModel.TiposImpuestosServicios">
-              <MappingFragment StoreEntitySet="TiposImpuestosServicios">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -747,6 +765,35 @@
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="ContratosId" ColumnName="ContratosId" />
                 <ScalarProperty Name="ObservacionId" ColumnName="ObservacionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contrato_ImpuestoServicio">
+            <EntityTypeMapping TypeName="ClientesModel.Contrato_ImpuestoServicio">
+              <MappingFragment StoreEntitySet="Contrato_ImpuestoServicio">
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="ContratosId" ColumnName="ContratosId" />
+                <ScalarProperty Name="CodImpuesto" ColumnName="CodImpuesto" />
+                <ScalarProperty Name="Contrato_ImpuestoServicioId" ColumnName="Contrato_ImpuestoServicioId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ClientesModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposImpuestosServicios">
+            <EntityTypeMapping TypeName="ClientesModel.TiposImpuestosServicios">
+              <MappingFragment StoreEntitySet="TiposImpuestosServicios">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="TiposImpuestosServiciosID" ColumnName="TiposImpuestosServiciosID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

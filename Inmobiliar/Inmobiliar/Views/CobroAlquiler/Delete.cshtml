@@ -1,0 +1,143 @@
+﻿@model Inmobiliar.Models.CobroAlquilerModel
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-12">
+                @using (Html.BeginForm("Delete", "CobroAlquiler", FormMethod.Post))
+                {
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3>
+                                Anular Cobro Alquileres
+                            </h3>
+                        </div>
+                        @if (ViewBag.TipoMsj == "Info")
+                        {
+                            <div class="alert alert-info alert-inline">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong id="strMsj">@ViewBag.Message</strong>
+                            </div>
+                        }
+                        @if (ViewBag.TipoMsj == "Error")
+                        {
+                            <div class="alert alert-danger alert-inline margin-top-50 margin-bottom-50">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>@ViewBag.Message</strong>
+                            </div>
+                        }
+                        @if (ViewBag.TipoMsj == "Success")
+                        {
+                            <div class="alert alert-success alert-inline margin-top-50 margin-bottom-50">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>@ViewBag.Message</strong>
+                            </div>
+                        }
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Buscar Inquilino
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">Inquilino</label>
+                                                <input type="text" class="form-control" id="ownerInquilino" name="Inquilino">
+                                                @Html.HiddenFor(Model => Model.Contrato.sInquilinoId, new { id = "idInquilino" })
+                                                @Html.HiddenFor(Model => Model.Contrato.sIdContrato, new { id = "idContrato" })
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">Apellido</label>
+                                                <input type="text" class="form-control" id="InquilinoApellido" name="Apellido" disabled="">
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">Nombre</label>
+                                                <input type="text" class="form-control" id="InquilinoName" name="Nombre" disabled="">
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">DU</label>
+                                                <input type="text" class="form-control" id="InquilinoDU" name="DU" disabled="">
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">TelefonoLaboral</label>
+                                                <input type="text" class="form-control" id="InquilinoTelefonoLaboral" name="TelefonoLaboral" disabled="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" id="Propiedad">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            Buscar Propiedad
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Propiedad</label>
+                                                <input type="text" class="form-control required" id="datosPropiedad" name="prop">
+                                                @Html.HiddenFor(Model => Model.Contrato.sPropiedadId, new { id = "idPropiedad" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Calle</label>
+                                                <input type="text" class="form-control" id="PropiedadCalle" name="domicilio.Calle" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Numero</label>
+                                                <input type="text" class="form-control" id="PropiedadNumero" name="domicilio.Numero" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Piso</label>
+                                                <input type="text" class="form-control" id="PropiedadPiso" name="domicilio.Piso" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Departamento</label>
+                                                <input type="text" class="form-control" id="PropiedadDto" name="domicilio.Dto" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Barrio</label>
+                                                <input type="text" class="form-control" id="PropiedadBarrio" name="domicilio.Barrio" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">CP</label>
+                                                <input type="text" class="form-control" id="PropiedadCP" name="domicilio.CP" disabled="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12" id="Cobro">
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Detalles del Cobro
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="well">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(m => m.Periodos)
+                                                        @Html.DropDownList("Periodo", new SelectList(@ViewBag.Periodo == null ? "" : @ViewBag.Periodo), new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                }
+                                </div>
+                            </div>
+                        </div>
+</div>

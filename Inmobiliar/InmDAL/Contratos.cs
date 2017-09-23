@@ -14,37 +14,26 @@ namespace InmDAL
     
     public partial class Contratos
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Contratos()
-        {
-            this.Contrato_ImpuestoServicio = new HashSet<Contrato_ImpuestoServicio>();
-            this.Contrato_ImpuestoServicio1 = new HashSet<Contrato_ImpuestoServicio>();
-        }
-    
         public int ContratosId { get; set; }
         public string NroContrato { get; set; }
         public Nullable<int> PropiedadesId { get; set; }
         public Nullable<int> InquilinoId { get; set; }
         public Nullable<System.DateTime> FechaContrato { get; set; }
         public Nullable<int> PeriodoMeses { get; set; }
-        public Nullable<int> Incrementos { get; set; }        
+        public Nullable<int> Incrementos { get; set; }
+        public Nullable<decimal> PorcentajeIncremento { get; set; }
         public Nullable<int> IdGarantePropietario { get; set; }
         public Nullable<int> IdGaranteLaboral1 { get; set; }
-        public Nullable<int> IdGaranteLaboral2 { get; set; }        
+        public Nullable<int> IdGaranteLaboral2 { get; set; }
+        public Nullable<int> IdGaranteLaboral3 { get; set; }
         public Nullable<decimal> MontoInicialAlquiler { get; set; }
         public Nullable<int> IdEstate { get; set; }
         public Nullable<int> IdPropietario { get; set; }
-        public Nullable<decimal> PorcentajeIncremento { get; set; }
-        public Nullable<int> IdGaranteLaboral3 { get; set; }
         public Nullable<decimal> PorcentajeInmobiliaria { get; set; }
     
         public virtual Personas Personas { get; set; }
         public virtual Propiedades Propiedades { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contrato_ImpuestoServicio> Contrato_ImpuestoServicio { get; set; }
         public virtual Personas Personas1 { get; set; }
         public virtual Propiedades Propiedades1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contrato_ImpuestoServicio> Contrato_ImpuestoServicio1 { get; set; }
     }
 }

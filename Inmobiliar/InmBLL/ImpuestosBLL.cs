@@ -21,7 +21,7 @@ namespace InmBLL
             try
             {
                 var entityDAL = new InmDAL.TiposImpuestosServicios();
-                entityDAL.Codigo = entity.Codigo;
+                entityDAL.TiposImpuestosServiciosID = entity.Codigo;
                 entityDAL.Descripcion = entity.Descripcion;
                 var response = genericDal.Add(entityDAL);
 
@@ -38,7 +38,7 @@ namespace InmBLL
             try
             {
                 var entityDAL = new InmDAL.TiposImpuestosServicios();
-                entityDAL.Codigo = entity.Codigo;
+                entityDAL.TiposImpuestosServiciosID = entity.Codigo;
                 var response = genericDal.Delete(entityDAL);
                 return response;
             }
@@ -53,7 +53,7 @@ namespace InmBLL
             try
             {
                 var entityDAL = new InmDAL.TiposImpuestosServicios();
-                entityDAL.Codigo = entity.Codigo;
+                entityDAL.TiposImpuestosServiciosID = entity.Codigo;
                 entityDAL.Descripcion = entity.Descripcion;
                 var response = genericDal.Update(entityDAL);
                 return response;
@@ -74,7 +74,7 @@ namespace InmBLL
                 {
                     var data = new TipoImpuestosServicios
                     {
-                        Codigo = Tipo.Codigo,
+                        Codigo = Tipo.TiposImpuestosServiciosID,
                         Descripcion = Tipo.Descripcion                                                
                     };
                     listTipo.Add(data);
@@ -100,7 +100,7 @@ namespace InmBLL
                     if (response != null)
                         data = new TipoImpuestosServicios
                         {
-                            Codigo = response.Codigo,
+                            Codigo = response.TiposImpuestosServiciosID,
                             Descripcion = response.Descripcion     
                         };
                 }

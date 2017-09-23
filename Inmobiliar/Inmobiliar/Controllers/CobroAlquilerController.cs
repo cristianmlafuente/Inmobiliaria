@@ -86,7 +86,7 @@ namespace Inmobiliar.Controllers
         }
 
         // GET: CobroAlquiler/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete()
         {
             return View();
         }

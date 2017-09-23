@@ -38,8 +38,8 @@ namespace InmBLL.Entities
         public List<TipoImpuestosServicios> ListaImpuestos {
             get
             {
-                if (_impuestos == null)
-                    _impuestos = new List<TipoImpuestosServicios>();
+                if (_Impuestos == null)
+                    _Impuestos = new List<TipoImpuestosServicios>();
                 if (ContratosId != 0)
                 {
                     var lsImpu = new List<TipoImpuestosServicios>();
@@ -50,19 +50,20 @@ namespace InmBLL.Entities
                         var impGenericDal = new InmDAL.GenericDAL<InmDAL.TiposImpuestosServicios>();
                         foreach (var item in ListImpuestos)
 	                    {
-                            var a = impGenericDal.GetById(item.CodImpuesto.ToString());                            
-		                    _impuestos.Add(new TipoImpuestosServicios(){Codigo = a.Codigo, Descripcion = a.Descripcion});
+                            var a = impGenericDal.GetById(item.CodImpuesto.ToString());
+                            _Impuestos.Add(new TipoImpuestosServicios() { Codigo = a.TiposImpuestosServiciosID, Descripcion = a.Descripcion });
 	                    }
                     }                    
                 }
-                return _impuestos;
+                return _Impuestos;
             }
             set 
             {
-                _impuestos = value;
+                _Impuestos = value;
             }
         }        
         
+
         public string sPropietarioId
         {
             get
@@ -114,6 +115,25 @@ namespace InmBLL.Entities
                     InquilinoId = int.Parse(value);
             }
         }
+        public string sGarantePropietario 
+        {
+            get 
+            {
+                if (IdGarantePropietario != null && IdGarantePropietario != 0)
+
+                    return IdGarantePropietario.ToString();
+                else
+                    return "";
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    IdGarantePropietario = null;
+                else
+                    IdGarantePropietario = int.Parse(value);
+            }
+        }
+
         public string sIdGaranteLaboral1
         {
             get
@@ -190,7 +210,8 @@ namespace InmBLL.Entities
         private Personas _GaranteLaboral2;
         private Personas _GaranteLaboral3;
         private Propiedades _Propiedad;
-        private List<TipoImpuestosServicios> _impuestos;
+        private GarantePropietario _GarantePropietario;
+        private List<TipoImpuestosServicios> _Impuestos;
 
         public virtual Personas Inquilino
         {
@@ -282,6 +303,29 @@ namespace InmBLL.Entities
                 }
             }
         }
+        public GarantePropietario GarantePropietario
+        {
+            get
+            {
+                if (_GarantePropietario != null)
+                    return _GarantePropietario;
+                else
+                {
+                    if (IdGarantePropietario != 0)
+                    {
+                        _GarantePropietario = new GarantePropietarioBLL().GetById(IdGarantePropietario.ToString());
+                        return _GarantePropietario;
+                    }
+                    else
+                        return null;
+                }
+            }
+            set 
+            {
+                _GarantePropietario = value;
+            }
+        }
+
         public virtual Propiedades Propiedades
         {
             get

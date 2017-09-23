@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using InmBLL.Entities;
+using Microsoft.VisualBasic;
 
 namespace Inmobiliar.Controllers
 {
@@ -54,8 +55,7 @@ namespace Inmobiliar.Controllers
                         FechaContrato = collection.Contrato.FechaContrato,
                         IdGaranteLaboral1 = collection.Contrato.IdGaranteLaboral1,
                         IdGaranteLaboral2 = collection.Contrato.IdGaranteLaboral2,
-                        IdGaranteLaboral3 = collection.Contrato.IdGaranteLaboral3,
-                        IdGarantePropietario = collection.Contrato.IdGarantePropietario,
+                        IdGaranteLaboral3 = collection.Contrato.IdGaranteLaboral3,                                               
                         Incrementos = collection.Contrato.Incrementos,
                         InquilinoId = collection.Contrato.InquilinoId,
                         MontoInicialAlquiler = collection.Contrato.MontoInicialAlquiler,
@@ -64,7 +64,7 @@ namespace Inmobiliar.Controllers
                         PorcentajeIncremento = collection.Contrato.PorcentajeIncremento,
                         PorcentajeInmobiliaria = collection.Contrato.PorcentajeInmobiliaria,
                         PropiedadesId = collection.Contrato.PropiedadesId,
-                        PropietarioId = collection.Contrato.PropietarioId                     
+                        PropietarioId = collection.Contrato.PropietarioId
                     };
                     var inpu = collection.Impuestos.Split(',');
                     foreach (var item in inpu)
@@ -72,6 +72,22 @@ namespace Inmobiliar.Controllers
                         if (contrato.ListaImpuestos == null)
                             contrato.ListaImpuestos = new List<TipoImpuestosServicios>();
                         contrato.ListaImpuestos.Add(new TipoImpuestosServicios() { Codigo = int.Parse(item.Trim()) });
+                    }
+                    if (Information.IsNumeric(collection.idPersonaGarantePropietario))
+                    {
+                        var garProp = new GarantePropietario();
+                        garProp.Domicilio = new Domicilios();
+                        garProp.Domicilio.Barrio = collection.BarrioGarantePropietario;
+                        garProp.Domicilio.Calle = collection.CalleGarantePropietario;
+                        garProp.Domicilio.Ciudad = collection.CiudadGarantePropietario;
+                        garProp.Domicilio.CP = collection.CPGarantePropietario;
+                        garProp.Domicilio.Dto = collection.DepartamentoGarantePropietario;
+                        if (Information.IsNumeric(collection.NumeroGarantePropietario))                        
+                            garProp.Domicilio.Numero = int.Parse(collection.NumeroGarantePropietario);
+                        if (Information.IsNumeric(collection.PisoGarantePropietario))
+                            garProp.Domicilio.Piso = int.Parse(collection.PisoGarantePropietario);
+                        garProp.PersonasId = int.Parse(collection.idPersonaGarantePropietario);                        
+                        contrato.GarantePropietario = garProp;
                     }
                     contratoBll.Add(contrato);
                     ViewBag.TipoMsj = "Success";

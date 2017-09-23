@@ -175,7 +175,8 @@ namespace InmBLL
                 int incrementos = contrato.Incrementos.Value;
                 decimal porsIncre = contrato.PorcentajeIncremento.Value;
 
-                var meses = DateAndTime.DateDiff(DateInterval.Month, periodo, contrato.FechaContrato.Value);
+
+                //var meses = DateAndTime.DateDiff(DateInterval.Month, periodo, contrato.FechaContrato.Value);
 
 
                 return string.Empty;
