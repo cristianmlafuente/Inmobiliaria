@@ -50,6 +50,8 @@ namespace Inmobiliar.Models
 
         public string NuevaNota { get; set; }
 
+        public int id { get; set; }
+
         public CobroAlquilerModel()
         {
             this.Contrato = new Contratos();

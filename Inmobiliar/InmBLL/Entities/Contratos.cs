@@ -35,7 +35,23 @@ namespace InmBLL.Entities
         [Required(ErrorMessage = "Debe ingresar el porcentaje de la inmobiliaria")]
         public Nullable<decimal> PorcentajeInmobiliaria { get; set; }
 
-        public List<TipoImpuestosServicios> ListaImpuestos { get; set; }
+        public List<TipoImpuestosServicios> ListaImpuestos {
+            get {
+                var lsImpu = new List<TipoImpuestosServicios>();
+                if (ContratosId != 0)
+                {
+                   
+                    var newGenericDal = new InmDAL.GenericDAL<InmDAL.Contrato_ImpuestoServicio>();
+                    var a = newGenericDal.GetAll();
+                    
+                }
+                return lsImpu;
+            }
+            set 
+            {
+                _Impuestos = value;
+            }
+        }
 
         public string sPropietarioId
         {
@@ -88,6 +104,25 @@ namespace InmBLL.Entities
                     InquilinoId = int.Parse(value);
             }
         }
+        public string sGarantePropietario 
+        {
+            get 
+            {
+                if (IdGarantePropietario != null && IdGarantePropietario != 0)
+
+                    return IdGarantePropietario.ToString();
+                else
+                    return "";
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    IdGarantePropietario = null;
+                else
+                    IdGarantePropietario = int.Parse(value);
+            }
+        }
+
         public string sIdGaranteLaboral1
         {
             get
@@ -163,7 +198,10 @@ namespace InmBLL.Entities
         private Personas _GaranteLaboral1;
         private Personas _GaranteLaboral2;
         private Personas _GaranteLaboral3;
-        private Propiedades _Propiedad;        
+        private Propiedades _Propiedad;
+        private GarantePropietario _GarantePropietario;
+        private List<TipoImpuestosServicios> _Impuestos;
+
 
         public virtual Personas Inquilino { 
             get 
@@ -252,6 +290,29 @@ namespace InmBLL.Entities
                 }
             }
         }
+        public GarantePropietario GarantePropietario
+        {
+            get
+            {
+                if (_GarantePropietario != null)
+                    return _GarantePropietario;
+                else
+                {
+                    if (IdGarantePropietario != 0)
+                    {
+                        _GarantePropietario = new GarantePropietarioBLL().GetById(IdGarantePropietario.ToString());
+                        return _GarantePropietario;
+                    }
+                    else
+                        return null;
+                }
+            }
+            set 
+            {
+                _GarantePropietario = value;
+            }
+        }
+
         public virtual Propiedades Propiedades
         {
             get

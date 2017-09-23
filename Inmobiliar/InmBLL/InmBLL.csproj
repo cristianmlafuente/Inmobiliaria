@@ -59,6 +59,7 @@
     <Compile Include="CobrosBLL.cs" />
     <Compile Include="ContratosBLL.cs" />
     <Compile Include="DomiciliosBLL.cs" />
+    <Compile Include="Entities\GarantePropietario.cs" />
     <Compile Include="Entities\Impuestos.cs" />
     <Compile Include="Entities\Observacion.cs" />
     <Compile Include="Entities\PagoAlquiler.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Entities\Personas.cs" />
     <Compile Include="Entities\Propiedades.cs" />
     <Compile Include="Entities\TipoImpuestosServicios.cs" />
+    <Compile Include="GarantePropietarioBLL.cs" />
     <Compile Include="IGenericBLL.cs" />
     <Compile Include="ImpuestosBLL.cs" />
     <Compile Include="ObservacionesBLL.cs" />

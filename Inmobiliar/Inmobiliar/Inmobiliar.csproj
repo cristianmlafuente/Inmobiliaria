@@ -79,6 +79,7 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -301,6 +302,7 @@
     <Content Include="Views\Owner\_Busqueda.cshtml" />
     <Content Include="Views\Contratos\_GarantePropietario.cshtml" />
     <Content Include="Unity.config" />
+    <Content Include="Views\CobroAlquiler\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

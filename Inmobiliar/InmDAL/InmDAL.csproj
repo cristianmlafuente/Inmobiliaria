@@ -113,6 +113,9 @@
     <Compile Include="Roles.cs">
       <DependentUpon>Inmobiliar.tt</DependentUpon>
     </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>Inmobiliar.tt</DependentUpon>
+    </Compile>
     <Compile Include="TiposImpuestosServicios.cs">
       <DependentUpon>Inmobiliar.tt</DependentUpon>
     </Compile>

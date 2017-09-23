@@ -151,6 +151,49 @@
 
     });
 
+    $('input[data-detalle=Garante_Propietario]').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '/Owner/GetUser/',
+                data: "{ 'nombre': '" + request.term + "'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral + ', ' + item.PersonasId,
+                            value: "Seleccione..."
+                        };
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            debugger;
+            var arr = ui.item.label.split(',');
+            $('#idGarantePropietario').val($.trim(arr[4]));
+            $("#garanteApellido").val(arr[1]);
+            $("#garanteName").val(arr[0]);
+            $("#garanteDU").val(arr[2]);
+            $("#garanteTelefonoLaboral").val(arr[3]);
+        },
+        open: function () {
+            $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+        },
+        close: function () {
+            $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+        }
+
+    });
+
     $('input[data-detalle=1er_Garante]').autocomplete({        
         source: function (request, response) {
             $.ajax({

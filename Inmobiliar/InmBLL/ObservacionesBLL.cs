@@ -76,7 +76,7 @@ namespace InmBLL
                 {
                     var data = new Observacion
                     {
-                        ContratosId = observa.ContratosId,
+                        ContratosId = int.Parse(observa.ContratosId),
                         ObservacionId = observa.ObservacionId,
                         Descripcion = observa.Descripcion,
                         Fecha = observa.Fecha
@@ -104,7 +104,7 @@ namespace InmBLL
                     if (response != null)
                         data = new Observacion
                         {
-                            ContratosId = response.ContratosId,
+                            ContratosId = int.Parse(response.ContratosId),
                             ObservacionId = response.ObservacionId,
                             Descripcion = response.Descripcion,
                             Fecha = response.Fecha

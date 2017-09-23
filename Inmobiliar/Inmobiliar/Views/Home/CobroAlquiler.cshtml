@@ -3,8 +3,7 @@
     ViewBag.Title = "CobroAlquier";
 }
 
-<div id="page-wrapper">
-    <div id="page-inner">
+<div id="page-wrapper"> n
         <!-- Mensaje de error global -->
         @if (ViewBag.TipoMsj == "Info")
         {
@@ -46,10 +45,7 @@
                                         </li>
                                         <li>
                                             <a href="#2a" data-toggle="tab">Baja</a>
-                                        </li>
-                                        <li>
-                                            <a href="#3a" data-toggle="tab">Editar</a>
-                                        </li>
+                                        </li>                                        
                                     </ul>
 
                                     <div class="tab-content clearfix">
@@ -58,7 +54,8 @@
                                             @Html.ActionLink("Cobrar Alquiler", "../CobroAlquiler/Create")
                                         </div>
                                         <div class="tab-pane" id="2a">
-                                            <h3>We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab</h3>
+                                            <br />
+                                            @Html.ActionLink("Anular Cobrar Alquiler", "../CobroAlquiler/Delete")
                                         </div>
                                         <div class="tab-pane" id="3a">
                                             <h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>

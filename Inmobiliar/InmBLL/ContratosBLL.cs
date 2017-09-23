@@ -33,16 +33,26 @@ namespace InmBLL
                 entityDAL.MontoInicialAlquiler = entity.MontoInicialAlquiler;
                 entityDAL.NroContrato = entity.NroContrato;
                 entityDAL.PeriodoMeses = entity.PeriodoMeses;
+                entityDAL.Incrementos = entity.Incrementos;
                 entityDAL.PorcentajeIncremento = entity.PorcentajeIncremento;
                 entityDAL.PorcentajeInmobiliaria = entity.PorcentajeInmobiliaria;            
                 entityDAL.PropiedadesId = entity.PropiedadesId;
+                if (entity.GarantePropietario != null)
+                {
+                    var domBll = new DomiciliosBLL();
+                    entity.GarantePropietario.DomiciliosId = domBll.Add(entity.GarantePropietario.Domicilio);
+                    var garProp = new GarantePropietarioBLL();
+                    entityDAL.IdGarantePropietario = garProp.Add(entity.GarantePropietario);
+                }
+
                 var response = genericDal.Add(entityDAL);
                 var listimpu = new List<InmDAL.Contrato_ImpuestoServicio>();
                 var newGenericDal = new InmDAL.GenericDAL<InmDAL.Contrato_ImpuestoServicio>();
                 foreach (var item in entity.ListaImpuestos)
                 {
                     newGenericDal.Add(new InmDAL.Contrato_ImpuestoServicio() { CodImpuesto = item.Codigo, ContratosId = response, FechaAlta = DateTime.Now });                    
-                }                                               
+                }
+                
                 return response;
             }
             catch (Exception ex)
@@ -165,7 +175,8 @@ namespace InmBLL
         {
             try
             {
-                var contrato = this.GetById(idContrato);                
+                var contrato = this.GetById(idContrato);
+                var lst = contrato.ListaImpuestos;
                 var listcobros = new CobrosBLL().GetByContrato(idContrato);
                 var periodo = DateTime.Parse(fecha.Substring(6,2) + "/" + fecha.Substring(4,2) + "/" + fecha.Substring(0, 4));
                 if (listcobros.Any(xx => xx.Periodo.Value == periodo))
