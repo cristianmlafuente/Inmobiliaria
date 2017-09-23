@@ -165,14 +165,16 @@ namespace InmBLL
         {
             try
             {
-                var contrato = this.GetById(idContrato);                
+                var contrato = this.GetById(idContrato);
+                var a = contrato.ListaImpuestos;
                 var listcobros = new CobrosBLL().GetByContrato(idContrato);
-                var periodo = DateTime.Parse(fecha.Substring(6,2) + "/" + fecha.Substring(4,2) + "/" + fecha.Substring(0, 4));
-                if (listcobros.Any(xx => xx.Periodo.Value == periodo))
+                var periodo = DateTime.Now.ToString("dd/mm/YYYY");
+                if (listcobros.Any(xx => xx.Periodo.Value.ToString() == periodo))
                     throw new Exception("Ya existe cobro para el periodo Ingresado.");
                 decimal Monto = contrato.MontoInicialAlquiler.Value;
                 int incrementos = contrato.Incrementos.Value;
                 decimal porsIncre = contrato.PorcentajeIncremento.Value;
+
                 var meses = DateAndTime.DateDiff(DateInterval.Month, periodo, contrato.FechaContrato.Value);
 
 
