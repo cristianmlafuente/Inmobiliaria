@@ -18,7 +18,7 @@ namespace InmBLL.Entities
         [Required(ErrorMessage = "Debe seleccionar un Inquilino")]
         public Nullable<int> InquilinoId { get; set; }
         public Nullable<int> PropietarioId { get; set; }
-        [Required(ErrorMessage = "Debe Ingresar la fecha de inicio del contrato")]        
+        [Required(ErrorMessage = "Debe Ingresar la fecha de inicio del contrato")]
         public Nullable<System.DateTime> FechaContrato { get; set; }
         [Required(ErrorMessage = "Debe ingresar los meses del contrato")]
         public Nullable<int> PeriodoMeses { get; set; }
@@ -36,22 +36,33 @@ namespace InmBLL.Entities
         public Nullable<decimal> PorcentajeInmobiliaria { get; set; }
 
         public List<TipoImpuestosServicios> ListaImpuestos {
-            get {
-                var lsImpu = new List<TipoImpuestosServicios>();
+            get
+            {
+                if (_Impuestos == null)
+                    _Impuestos = new List<TipoImpuestosServicios>();
                 if (ContratosId != 0)
                 {
-                   
+                    var lsImpu = new List<TipoImpuestosServicios>();
                     var newGenericDal = new InmDAL.GenericDAL<InmDAL.Contrato_ImpuestoServicio>();
-                    var a = newGenericDal.GetAll();
-                    
+                    var ListImpuestos = newGenericDal.GetAll().Where(x => x.ContratosId == ContratosId);
+                    if (ListImpuestos != null)
+                    {
+                        var impGenericDal = new InmDAL.GenericDAL<InmDAL.TiposImpuestosServicios>();
+                        foreach (var item in ListImpuestos)
+	                    {
+                            var a = impGenericDal.GetById(item.CodImpuesto.ToString());
+                            _Impuestos.Add(new TipoImpuestosServicios() { Codigo = a.TiposImpuestosServiciosID, Descripcion = a.Descripcion });
+	                    }
+                    }                    
                 }
-                return lsImpu;
+                return _Impuestos;
             }
             set 
             {
                 _Impuestos = value;
             }
-        }
+        }        
+        
 
         public string sPropietarioId
         {
@@ -191,7 +202,7 @@ namespace InmBLL.Entities
                     ContratosId = int.Parse(value);
             }
         }
-   
+
 
         private Personas _Inquilino;
         private Personas _Propietario;
@@ -219,9 +230,10 @@ namespace InmBLL.Entities
                     else
                         return null;
                 }
-            } 
+            }
         }
-        public virtual Personas Propietario {
+        public virtual Personas Propietario
+        {
             get
             {
                 if (_Propietario != null)
@@ -238,7 +250,8 @@ namespace InmBLL.Entities
                 }
             }
         }
-        public virtual Personas GaranteLaboral1 {
+        public virtual Personas GaranteLaboral1
+        {
             get
             {
                 if (_GaranteLaboral1 != null)
@@ -326,16 +339,16 @@ namespace InmBLL.Entities
                     if (PropiedadesId != 0)
                     {
 
-                        _Propiedad = new PropiedadesBLL().GetById(PropiedadesId.ToString());    
-                       
+                        _Propiedad = new PropiedadesBLL().GetById(PropiedadesId.ToString());
+
                     }
-                    return _Propiedad; 
+                    return _Propiedad;
                 }
             }
         }
         public virtual List<Observacion> Observaciones
         {
-            get 
+            get
             {
                 var listObs = new List<Observacion>();
                 var observaciones = new ObservacionesBLL().GetAll();
@@ -351,12 +364,12 @@ namespace InmBLL.Entities
                            }).ToList();
 
                 return listObs;
-            }            
+            }
         }
 
-        public List<PeriodosAdeudados> PeriodosAdeudados 
+        public List<PeriodosAdeudados> PeriodosAdeudados
         {
-            get 
+            get
             {
                 if (_PeriodosAdeudados == null)
                 {
@@ -391,6 +404,7 @@ namespace InmBLL.Entities
             return response;
         }
 
+
         public List<PagoAlquiler> PeriodosPagados 
         {
             get 
@@ -408,9 +422,9 @@ namespace InmBLL.Entities
 
     public class PeriodosAdeudados
     {
-        public DateTime MesAño {get; set;}
-        public string Detalle {get; set;}
+        public DateTime MesAño { get; set; }
+        public string Detalle { get; set; }
         public string sMesAño { get; set; }
-    }    
-    
+    }
+
 }
