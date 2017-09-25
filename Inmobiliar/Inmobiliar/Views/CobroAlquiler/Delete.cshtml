@@ -4,7 +4,7 @@
     <div id="page-inner">
         <div class="row">
             <div class="col-lg-12">
-                @using (Html.BeginForm("Delete", "CobroAlquiler", FormMethod.Post))
+                @using (Html.BeginForm("Delete", "CobroAlquiler", FormMethod.Post, new {id = "frmdelete" }))
                 {
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -124,8 +124,6 @@
 
 
 
-
-
                                         </div>
                                     </div>
 
@@ -137,7 +135,7 @@
                         </div>
                     </div>
                 }
-                                </div>
-                            </div>
-                        </div>
+            </div>
+        </div>
+    </div>
 </div>

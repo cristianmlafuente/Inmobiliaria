@@ -208,6 +208,7 @@ namespace Inmobiliar.Controllers
                                      Barrio = contrato.Propiedades.Domicilio.Barrio,
                                      CP = contrato.Propiedades.Domicilio.CP,
                                      PeriodosAdeudados = contrato.PeriodosAdeudados,
+                                     PeriodosPagados = contrato.PeriodosPagados,
                                      Observaciones = contrato.Observaciones
                                  }).ToList();
             

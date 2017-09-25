@@ -15,6 +15,7 @@
                         return {
                             label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral + ', ' + item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Departamento + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.InquilinoId + ', ' + item.PropiedadId + ', ' + item.ContratoId,
                             periodos: item.PeriodosAdeudados,
+                            pagos: item.PeriodosPagados,
                             observaciones : item.Observaciones,
                             value: "Seleccione..."
                         };                        
@@ -46,8 +47,17 @@
             $("#PropiedadDto").val(arr[7]);
             $("#PropiedadBarrio").val(arr[8]);
             $("#PropiedadCP").val(arr[9]);
-                                  
-            var datos = ui.item.periodos;
+            debugger;
+            var datos;
+            if ($('form[name="frmSave"]').val() == "frmcreate")
+            {
+                datos = ui.item.periodos;
+            }
+            if ($('form[name="frmSave"]').val() == "frmdelete")
+            {
+                datos = ui.item.pagos;
+            }
+            
             var sele = $(document.createElement('option'));
             sele.text('Periodo...');
             sele.val('-1');
@@ -108,43 +118,6 @@
         }
         //alert(new Date(str.substr(4,4), str.substr(2, 2) -1, str.substr(0,2)));
     }).change();
-
-      
-
-
-    //$("#Periodo").change({        
-    //    source: function (request, response) {
-    //        $("#prueba").val('TOPU')
-    //        //source: function (request, response) {
-    //        //$.ajax({
-    //        //    url: '/CobroAlquiler/GetCobro/',
-    //        //    data: "{ 'periodo': '" + request.term + "'}",
-    //        //    dataType: "json",
-    //        //    type: "POST",
-    //        //    contentType: "application/json; charset=utf-8",
-    //        //    success: function (data) {
-    //        //        response($.map(data, function (item) {
-
-    //        //            return {
-                            
-    //        //                label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral + ', ' + item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Departamento + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.PersonasId + ', ' + item.PropiedadId,
-    //        //                object: item.PeriodosAdeudados,
-    //        //                value: "Seleccione..."
-    //        //            };
-    //        //        }))
-    //        //    },
-    //        //    error: function (response) {
-    //        //        alert(response.responseText);
-    //        //    },
-    //        //    failure: function (response) {
-    //        //        alert(response.responseText);
-    //        //    }
-    //        //});
-            
-    //        //},      
-    //    },
-    //    minLength: 1,
-        
-    //});
+          
 
 });

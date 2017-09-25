@@ -201,7 +201,8 @@ namespace InmBLL.Entities
         private Propiedades _Propiedad;
         private GarantePropietario _GarantePropietario;
         private List<TipoImpuestosServicios> _Impuestos;
-
+        private List<PeriodosAdeudados> _PeriodosAdeudados;
+        private List<PagoAlquiler> _PeriodosPagados;
 
         public virtual Personas Inquilino { 
             get 
@@ -357,21 +358,22 @@ namespace InmBLL.Entities
         {
             get 
             {
-                var a = new List<PeriodosAdeudados>();
-                a = GenerarPeriodos();
-                if (ContratosId != 0)
+                if (_PeriodosAdeudados == null)
                 {
-                    var PeriodosCobrados = new CobrosBLL().GetByContrato(ContratosId.ToString());
-                    foreach (var item in PeriodosCobrados)
+                    _PeriodosAdeudados = new List<PeriodosAdeudados>();
+                    _PeriodosAdeudados = GenerarPeriodos();
+                    if (ContratosId != 0)
                     {
-                        if (a.Any(x => x.MesAño.Month == item.Periodo.Value.Month && x.MesAño.Year == item.Periodo.Value.Year))
-                            a.RemoveAll(x => x.MesAño.Month == item.Periodo.Value.Month && x.MesAño.Year == item.Periodo.Value.Year);
+                        var pagos = PeriodosPagados;
+                        foreach (var item in pagos)
+                        {
+                            if (_PeriodosAdeudados.Any(x => x.MesAño.Month == item.Periodo.Value.Month && x.MesAño.Year == item.Periodo.Value.Year))
+                                _PeriodosAdeudados.RemoveAll(x => x.MesAño.Month == item.Periodo.Value.Month && x.MesAño.Year == item.Periodo.Value.Year);
+                        }                       
                     }
-                    //return PeriodosCobrados;
                 }
-                return a;
-            }
-            
+                return _PeriodosAdeudados;
+            }            
         }
 
         private List<PeriodosAdeudados> GenerarPeriodos()
@@ -387,7 +389,21 @@ namespace InmBLL.Entities
             }
 
             return response;
-        }        
+        }
+
+        public List<PagoAlquiler> PeriodosPagados 
+        {
+            get 
+            {
+                if (_PeriodosPagados == null)
+                {
+                    _PeriodosPagados = new CobrosBLL().GetByContrato(ContratosId.ToString());
+                }
+
+                return _PeriodosPagados;
+            }            
+        }
+
     }
 
     public class PeriodosAdeudados
