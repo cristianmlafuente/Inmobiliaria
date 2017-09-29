@@ -52,9 +52,12 @@ namespace Inmobiliar.Models
 
         public int id { get; set; }
 
+        public PagoAlquiler Pago { get; set; }
+
         public CobroAlquilerModel()
         {
             this.Contrato = new Contratos();
+            this.Pago = new PagoAlquiler();
         }
     }
 

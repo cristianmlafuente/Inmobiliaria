@@ -34,7 +34,7 @@ namespace InmBLL.Entities
         public Nullable<decimal> MontoInicialAlquiler { get; set; }
         [Required(ErrorMessage = "Debe ingresar el porcentaje de la inmobiliaria")]
         public Nullable<decimal> PorcentajeInmobiliaria { get; set; }
-
+        public Nullable<int> IdEstate { get; set; }
         public List<TipoImpuestosServicios> ListaImpuestos {
             get
             {
@@ -403,7 +403,6 @@ namespace InmBLL.Entities
 
             return response;
         }
-
 
         public List<PagoAlquiler> PeriodosPagados 
         {

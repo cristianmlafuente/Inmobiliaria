@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $("#ownerInquilino").autocomplete({     
+    $("#ownerInquilino").autocomplete({        
         source: function (request, response) {
             $.ajax({
                 url: '/Contratos/GetInquilino/',
@@ -11,7 +11,7 @@
                 {                               
                     response($.map(data, function (item)
                     {
-
+                        debugger;
                         return {
                             label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral + ', ' + item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Departamento + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.InquilinoId + ', ' + item.PropiedadId + ', ' + item.ContratoId,
                             periodos: item.PeriodosAdeudados,
@@ -48,29 +48,32 @@
             $("#PropiedadBarrio").val(arr[8]);
             $("#PropiedadCP").val(arr[9]);
             debugger;
-            var datos;
-            if ($('form[name="frmSave"]').val() == "frmcreate")
-            {
-                datos = ui.item.periodos;
-            }
-            if ($('form[name="frmSave"]').val() == "frmdelete")
-            {
-                datos = ui.item.pagos;
-            }
-            
             var sele = $(document.createElement('option'));
             sele.text('Periodo...');
             sele.val('-1');
             $("#Periodo").append(sele);
-
-            $(datos).each(function () {
-                var option = $(document.createElement('option'));
-                option.text(this.Detalle);
-                option.val(this.sMesAño);
-
-                $("#Periodo").append(option);
-            });
-            
+            var datos;
+            if ($('form[id="frmcreate"]').length > 0)
+            {                
+                datos = ui.item.periodos;
+                $(datos).each(function () {
+                    var option = $(document.createElement('option'));
+                    option.text(this.Detalle);
+                    option.val(this.sMesAño);
+                    $("#Periodo").append(option);
+                });
+            }
+            if ($('form[id="frmdelete"]').length > 0)
+            {
+                datos = ui.item.pagos;
+                $(datos).each(function () {
+                    var option = $(document.createElement('option'));
+                    option.text(this.Detalle);
+                    option.val(this.PagoId);
+                    $("#Periodo").append(option);
+                });
+            }
+                                               
             var obs = ui.item.observaciones;
             //obs.each(obj, function (key, value)
             $.each(obs, function (key, value)
@@ -96,25 +99,54 @@
 
         debugger;
         if (str != "") {
-            var indice = str.substr(4, 4) + str.substr(2, 2) + str.substr(0, 2);
+            var indice = "";
             var idContrato = $("#idContrato").val();
-            minLength: 1,
-            $.ajax({
-                url: '/CobroAlquiler/GetCobro/',
-                data: "{ 'fecha': '" + indice + "', 'idContrato': '" + idContrato + "'}",
-                dataType: "json",
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
+            if ($('form[id="frmcreate"]').length > 0) {
+                indice = str.substr(4, 4) + str.substr(2, 2) + str.substr(0, 2);
+                minLength: 1,
+                $.ajax({
+                    url: '/CobroAlquiler/GetCobro/',
+                    data: "{ 'fecha': '" + indice + "', 'idContrato': '" + idContrato + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
 
-                },
-                error: function (response) {
-                    alert(response.responseText);
-                },
-                failure: function (response) {
-                    alert(response.responseText);
-                }
-            });
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+            if ($('form[id="frmdelete"]').length > 0)
+            {
+                indice = str.trim();
+                minLength: 1,
+                $.ajax({
+                    url: '/CobroAlquiler/GetPago/',
+                    data: "{ 'idCobro': '" + indice + "', 'idContrato': '" + idContrato + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        
+                            debugger;
+                            $('#MontoPagado').val(data.MontoTotal);
+                            $('#FechaPago').val(data.FechaPago);
+                            $('#idPago').val(indice);
+                            $('#btnAnular').show();
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
         }
         //alert(new Date(str.substr(4,4), str.substr(2, 2) -1, str.substr(0,2)));
     }).change();

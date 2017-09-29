@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using InmBLL.Entities;
 using Microsoft.VisualBasic;
+using Common.Emum;
 
 namespace Inmobiliar.Controllers
 {
@@ -134,24 +135,31 @@ namespace Inmobiliar.Controllers
         }
 
         // GET: Contratos/Delete/5
-        public ActionResult Delete(int id)
+        [PermisoAtribute(Rol = RolesPermisos.Rol_Anular_Contrato)]
+        public ActionResult Delete()
         {
             return View();
         }
 
         // POST: Contratos/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(CobroAlquilerModel collection)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
+                var contratoBll = new ContratosBLL();
+                var a = contratoBll.GetById(collection.Contrato.ContratosId.ToString());
+                a.IdEstate = 1;
+                contratoBll.Update(a);
+                ViewBag.TipoMsj = "Success";
+                ViewBag.Message = "El contrato se Bloqueo con Exito!!!";
                 return View();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.TipoMsj = "Error";
+                ViewBag.Message = ex.Message;
+                return View(collection);
             }
         }
 
@@ -172,6 +180,11 @@ namespace Inmobiliar.Controllers
                                 Piso = prope.Domicilio.Piso,
                                 Dto = prope.Domicilio.Dto,
                                 CP = prope.Domicilio.CP,
+                                Ciudad = prope.Domicilio.Ciudad,
+                                NroContratoEpec = prope.NroContratoEpec,
+                                NomCatrastal = prope.NomenclaturaCatastral,
+                                NumeroCtaRenta = prope.NumeroCtaRenta,
+                                UnidadFacturacion = prope.UnidadFacturacion,
                                 IdPropiedad = prope.Domicilio.DomiciliosId,
                                 IdPropietario = prope.PersonasId,
                                 Apellido = prope.Personas.Apellido,
@@ -188,7 +201,7 @@ namespace Inmobiliar.Controllers
         public JsonResult GetInquilino(string nombre)
         {
             var contratoList = new ContratosBLL();
-            var listContrato = contratoList.GetAll();
+            var listContrato = contratoList.GetAll();            
 
             var inquilinoName = (from contrato in listContrato
                                  where (contrato.Inquilino.Nombre.ToLower().Contains(nombre.ToLower()) || contrato.Inquilino.Apellido.ToLower().Contains(nombre.ToLower()) || contrato.Inquilino.DU.Contains(nombre))
@@ -209,7 +222,19 @@ namespace Inmobiliar.Controllers
                                      CP = contrato.Propiedades.Domicilio.CP,
                                      PeriodosAdeudados = contrato.PeriodosAdeudados,
                                      PeriodosPagados = contrato.PeriodosPagados,
-                                     Observaciones = contrato.Observaciones
+                                     Observaciones = contrato.Observaciones,
+                                     Propietario = contrato.Propietario,
+                                     Garante1 = contrato.GaranteLaboral1,
+                                     Garante2 = contrato.GaranteLaboral2,
+                                     Garante3 = contrato.GaranteLaboral3,
+                                     GarantePropie = contrato.GarantePropietario,
+                                     NroContrato = contrato.NroContrato,
+                                     FechaInicio = contrato.FechaContrato.Value.ToShortDateString(),
+                                     Duracion = contrato.PeriodoMeses,
+                                     CantidadIncrementos = contrato.Incrementos,
+                                     PorcentajeIncremento = contrato.PorcentajeIncremento,
+                                     MontoIncial = contrato.MontoInicialAlquiler,
+                                     PorcentajeInmo = contrato.PorcentajeInmobiliaria
                                  }).ToList();
             
             return Json(inquilinoName, JsonRequestBehavior.AllowGet);

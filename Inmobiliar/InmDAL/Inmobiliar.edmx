@@ -81,9 +81,9 @@
         </EntityType>
         <EntityType Name="Pagos_Detalle">
           <Key>
-            <PropertyRef Name="PagoId" />
-            <PropertyRef Name="TipoId" />
+            <PropertyRef Name="Pagos_DetalleId" />            
           </Key>
+          <Property Name="Pagos_DetalleId" Type="int" Nullable="false" />
           <Property Name="PagoId" Type="int" Nullable="false" />
           <Property Name="TipoId" Type="int" Nullable="false" />
           <Property Name="Monto" Type="money" />
@@ -538,9 +538,9 @@
         </EntityType>
         <EntityType Name="Pagos_Detalle">
           <Key>
-            <PropertyRef Name="PagoId" />
-            <PropertyRef Name="TipoId" />
+            <PropertyRef Name="Pagos_DetalleId" />            
           </Key>
+          <Property Name="Pagos_DetalleId" Type="Int32" Nullable="false" />
           <Property Name="PagoId" Type="Int32" Nullable="false" />
           <Property Name="TipoId" Type="Int32" Nullable="false" />
           <Property Name="Monto" Type="Decimal" Precision="19" Scale="4" />
@@ -750,7 +750,8 @@
           </EntitySetMapping>
           <EntitySetMapping Name="Pagos_Detalle">
             <EntityTypeMapping TypeName="ClientesModel.Pagos_Detalle">
-              <MappingFragment StoreEntitySet="Pagos_Detalle">
+              <MappingFragment StoreEntitySet="Pagos_Detalle">                
+                <ScalarProperty Name="Pagos_DetalleId" ColumnName="Pagos_DetalleId" />
                 <ScalarProperty Name="PeriodoPago" ColumnName="PeriodoPago" />
                 <ScalarProperty Name="Monto" ColumnName="Monto" />
                 <ScalarProperty Name="TipoId" ColumnName="TipoId" />

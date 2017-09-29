@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InmDAL;
+using Common.Emum;
 
 namespace InmBLL.Entities
 {
     public class PagoAlquiler
     {
+        public int PagoId { get; set; }
         public Nullable<System.DateTime> Periodo { get; set; }
         public Nullable<System.DateTime> FechaPago { get; set; }
         public Nullable<int> InquilinoId { get; set; }
@@ -53,23 +55,24 @@ namespace InmBLL.Entities
             }
         }
 
-        public Contratos Contrato
-        {
-            get
-            {
-                if (_contrato == null)
-                {
-                    if (ContratoId != 0)
-                    {
-                        return _contrato = getContratos(ContratoId.ToString());
-                    }
-                    else
-                        return null;
-                }
-                else
-                    return _contrato;
-            }
-        }
+        //public Contratos Contrato
+        //{
+        //    get
+        //    {
+        //        if (_contrato == null)
+        //        {
+        //            if (ContratoId != 0)
+        //            {
+        //                return _contrato = getContratos(ContratoId.ToString());
+        //            }
+        //            else
+        //                return null;
+        //        }
+        //        else
+        //            return _contrato;
+        //    }
+        //}
+
         private Contratos getContratos(string id)
         {
             var contraBll = new ContratosBLL();
@@ -90,5 +93,24 @@ namespace InmBLL.Entities
 
         public string Observaciones { get; set; }
 
+        public string sMesAño { 
+            get 
+            {
+                if (Periodo == null)
+                    return "";
+                else
+                    return Periodo.Value.Day.ToString().PadLeft(2, '0') + Periodo.Value.Month.ToString().PadLeft(2, '0') + Periodo.Value.Year;
+            } 
+        }
+        public string Detalle
+        {
+            get
+            {
+                if (Periodo == null)
+                    return "";
+                else
+                    return Enum.GetName(typeof(Meses), Periodo.Value.Month) + ' ' + Periodo.Value.Year;
+            }
+        }
     }
 }

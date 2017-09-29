@@ -35,16 +35,20 @@ namespace Inmobiliar.Controllers
 
         // POST: CobroAlquiler/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(CobroAlquilerModel collection)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
 
+
+
+                    ViewBag.Imprimir = true;
                     ViewBag.TipoMsj = "Success";
                     ViewBag.Message = "El cobro se registro con Exito!!!";
-                    return View();
+
+                    return View(collection);
                 }
                 else
                 {
@@ -85,27 +89,32 @@ namespace Inmobiliar.Controllers
             }
         }
 
-        // GET: CobroAlquiler/Delete/5
-        public ActionResult Delete()
+        // GET: CobroAlquiler/Delete/5        
+        [PermisoAtribute(Rol = RolesPermisos.Rol_Anular_Cobro)]
+        public ActionResult Delete(int id = 0)
         {
+            if (id != 0)
+            {
+                ViewBag.Reimprimir = true;
+            }
             return View();
         }
 
         // POST: CobroAlquiler/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         [HttpPost]
         public JsonResult GetCobro(string fecha, string idContrato)
@@ -119,6 +128,48 @@ namespace Inmobiliar.Controllers
 
             return Json(contrato, JsonRequestBehavior.AllowGet);
         }
-    
+
+        [HttpPost]
+        public ActionResult Delete(CobroAlquilerModel collection)
+        {
+            try
+            {            
+                var cobbll = new CobrosBLL();
+                collection.Pago = cobbll.GetById(collection.Pago.PagoId.ToString());
+                var bCobro = cobbll.Delete(collection.Pago);
+                if (bCobro)
+                {
+                    ViewBag.TipoMsj = "Success";
+                    ViewBag.Message = "La anulación de cobro se realizó con exito. !!!";
+                    return View();
+                }
+                else
+                {
+                    ViewBag.TipoMsj = "Info";
+                    ViewBag.Message = "No pudo realizar la anulación";
+                    return View(collection);
+                }                
+            }
+            catch (Exception ex)
+            {
+                ViewBag.TipoMsj = "Error";
+                ViewBag.Message = ex.Message;
+                return View(collection);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult GetPago(string idCobro, string idContrato)
+        {
+            var pagobll = new CobrosBLL();
+            var pago = pagobll.GetById(idCobro);
+            var newPago = new
+            {
+                MontoTotal = pago.MontoTotal,
+                FechaPago = pago.FechaPago.Value.ToShortDateString()
+            };
+            return Json(newPago, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

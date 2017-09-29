@@ -148,8 +148,8 @@ namespace InmBLL
             }            
         }
 
-        
-        public byte[] GenerarReciboPropietario(PagoAlquiler Pago)
+
+        public byte[] GenerarReciboPropietario(PagoAlquiler Pago, Contratos Contrato)
         {
             OleDbConnection conexion = null;
             string PATH_DIRECTORIO_ARCHIVOS = ConfigurationManager.AppSettings["PathArchivosOriginal"];
@@ -200,9 +200,9 @@ namespace InmBLL
                             comando.ExecuteNonQuery();
                             comando.CommandText = "UPDATE [Hoja1 0$J17:J17] SET F1= '" + Enum.GetName(typeof(Meses), alquiler.PeriodoPago.Month) + "'";
                             comando.ExecuteNonQuery();
-                            comando.CommandText = "UPDATE [Hoja1 0$C18:C18] SET F1= '" + Pago.Contrato.PorcentajeInmobiliaria + "'";
+                            comando.CommandText = "UPDATE [Hoja1 0$C18:C18] SET F1= '" + Contrato.PorcentajeInmobiliaria + "'";
                             comando.ExecuteNonQuery();
-                            comando.CommandText = "UPDATE [Hoja1 0$J18:J18] SET F1= '" + Pago.Contrato.PorcentajeInmobiliaria + "'";
+                            comando.CommandText = "UPDATE [Hoja1 0$J18:J18] SET F1= '" + Contrato.PorcentajeInmobiliaria + "'";
                             comando.ExecuteNonQuery();
 
                         }

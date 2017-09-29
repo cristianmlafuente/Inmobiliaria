@@ -14,7 +14,7 @@ namespace InmDAL
     
     public partial class Pagos
     {
-        public int PagoId { get; set; }
+        public int PagosId { get; set; }
         public Nullable<int> InquilinoId { get; set; }
         public Nullable<int> PropiedadId { get; set; }
         public Nullable<int> ContratoId { get; set; }

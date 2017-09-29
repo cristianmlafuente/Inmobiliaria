@@ -37,9 +37,14 @@
                 {                    
                     response($.map(data, function (item)
                     {                                                                       
-                        return {
+                        return {                           
                             label: item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Dto + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.Apellido + ', ' + item.Nombre + ', ' + item.Du + ', ' + item.TelLabo + ', ' + item.IdPropiedad + ', ' + item.IdPropietario,
                             impuesto: item.Impuesto,
+                            ciudad: item.Ciudad,
+                            nrocontratoepec: item.NroContratoEpec,
+                            nomcatrastal: item.NomCatrastal,
+                            numeroctarenta: item.NumeroCtaRenta,
+                            unidadcacturacion: item.UnidadFacturacion,
                             value: item.Calle + ', ' + item.Numero
                         };                        
                     }))
@@ -54,7 +59,8 @@
         },
         minLength: 1, 
         select: function (event, ui)
-        {          
+        {
+            debugger;
             var idName = $("#owner").attr("data-detalle");
             var arr = ui.item.label.split(',');            
             $("#Calle").val(arr[0]);           
@@ -62,11 +68,17 @@
             $("#Piso").val(arr[2]);
             $("#Dto").val(arr[3]);
             $("#Barrio").val(arr[4]);
-            $("#CP").val(arr[5]);            
+            $("#CP").val(arr[5]);
+            $("#Ciudad").val(ui.item.ciudad);
             $("#datosPropiedad").addClass("data-idtarjeta=" + arr[10]);
             $("#idPropiedad").val($.trim(arr[10]));
             $("#datosPropiedad").attr("placeholder", "Seleccione...");
             $("#datosPropiedad").val('');
+            $("#NroContratoEpec").val(ui.item.nrocontratoepec);
+            $("#NomenclaturaCatastral").val(ui.item.nomcatrastal);
+            $("#NumeroCtaRenta").val(ui.item.numeroctarenta);
+            $("#UnidadFacturacion").val(ui.item.unidadcacturacion);
+            $("#idPersona").val($.trim(arr[11]));
             if ("Propietario" == idName)
             {
                 $("#idPropietario").val($.trim(arr[11]));
@@ -452,10 +464,90 @@
         });
     });
 
-    $("#RegistrarContrato").click({
-        //var isvalido: validarContrato(),
+    $("#contratoInquilino").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '/Contratos/GetInquilino/',
+                data: "{ 'nombre': '" + request.term + "'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    response($.map(data, function (item) {                        
+                        return {
+                            label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral + ', ' + item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Departamento + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.InquilinoId + ', ' + item.PropiedadId + ', ' + item.ContratoId,
+                            periodos: item.PeriodosAdeudados,
+                            pagos: item.PeriodosPagados,
+                            observaciones: item.Observaciones,
+                            propietario: item.Propietario,
+                            garante1: item.Garante1,
+                            garante2: item.Garante2,
+                            garante3: item.Garante3,
+                            garantePropie: item.GarantePropie,
+                            nroContrato: item.NroContrato,
+                            fechaInicio: item.FechaInicio,
+                            duracion: item.Duracion,
+                            cantidadIncrementos: item.CantidadIncrementos,
+                            porcentajeIncremento: item.PorcentajeIncremento,
+                            montoIncial: item.MontoIncial,
+                            porcentajeInmo: item.PorcentajeInmo,
+                            value: "Seleccione..."
+                        };
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        minLength: 1,
 
-        
+        select: function (event, ui)
+        {
+            debugger;
+            var arr = ui.item.label.split(',');                        
+            $('#idInquilino').val($.trim(arr[10]));
+            $('#idContrato').val($.trim(arr[12]));
+            $("#contratoApellidoInquilino").val(arr[1]);
+            $("#contratoInquilinoName").val(arr[0]);            
+            $("#contratoInquilinoDU").val(arr[2]);
+            $("#contratoInquilinoTelefonoLaboral").val(arr[3]);
+
+
+            $("#contratoCalle").val(arr[4]);
+            $("#contratoNumero").val(arr[5]);
+            $("#contratoPiso").val(arr[6]);
+            $("#contratoDto").val(arr[7]);
+            $("#contratoBarrio").val(arr[8]);
+            $("#contratoCP").val(arr[9]);
+
+            if (ui.item.propietario != null && ui.item.propietario.PersonasId != null) {
+                $("#ownerPropietario").val(ui.item.propietario.Apellido + ', ' + ui.item.propietario.Nombre);
+            }
+            if (ui.item.garante1 != null && ui.item.garante1.PersonasId != null) {
+                $("#ownerGarante1").val(ui.item.garante1.Apellido + ', ' + ui.item.garante1.Nombre);
+            }
+            if (ui.item.garante2 != null && ui.item.garante2.PersonasId != null) {
+                $("#ownerGarante2").val(ui.item.garante2.Apellido + ', ' + ui.item.garante2.Nombre);
+            }
+            if (ui.item.garante3 != null && ui.item.garante3.PersonasId != null) {
+                $("#ownerGarante3").val(ui.item.garante3.Apellido + ', ' + ui.item.garante3.Nombre);
+            }
+            if (ui.item.garantePropie != null && ui.item.garantePropie.PersonasId != null) {
+                $("#ownerGarantePropietario").val(ui.item.garantePropie.Apellido + ', ' + ui.item.garantePropie.Nombre);
+            }
+            $("#idNroContrato").val(ui.item.nroContrato);
+            $("#idFechaContrato").val(ui.item.fechaInicio);
+            $("#idPeriodoMeses").val(ui.item.duracion);
+            $("#idIncrementos").val(ui.item.cantidadIncrementos);
+            $("#idPorcentajeIncremento").val(ui.item.porcentajeIncremento);
+            $("#idMontoInicialAlquiler").val(ui.item.montoIncial);
+            $("#idPorcentajeInmobiliaria").val(ui.item.porcentajeInmo);
+
+        },
 
     });
 

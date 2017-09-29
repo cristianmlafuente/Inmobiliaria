@@ -14,6 +14,7 @@ namespace InmDAL
     
     public partial class Pagos_Detalle
     {
+        public int Pagos_DetalleId { get; set; }
         public int PagoId { get; set; }
         public int TipoId { get; set; }
         public Nullable<decimal> Monto { get; set; }

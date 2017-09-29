@@ -95,25 +95,67 @@ namespace Inmobiliar.Controllers
         }
 
         // GET: Propiedades/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id = 0)
         {
             return View();
         }
 
         // POST: Propiedades/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(PropiedadesModel model, int id = 0)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    var propiedades = new PropiedadesBLL();
+                    var Domicilio = new DomiciliosBLL();
 
-                return RedirectToAction("Index");
+                    var domicilio = new Domicilios
+                    {
+                        Barrio = model.domicilio.Barrio,
+                        Calle = model.domicilio.Calle,
+                        Ciudad = model.domicilio.Ciudad,
+                        CP = model.domicilio.CP,
+                        Numero = model.domicilio.Numero,
+                        Piso = model.domicilio.Piso,
+                        Dto = model.domicilio.Dto,
+                        DomiciliosId = model.domicilio.DomiciliosId
+                    };
+
+                    Domicilio.Update(domicilio);
+                    var propiedad = new Propiedades
+                    {
+                        PersonasId = model.Dueño.PersonasId,
+                        DomiciliosId = model.domicilio.DomiciliosId,
+                        NroFactura = model.UnidadFacturacion,
+                        NomenclaturaCatastral = model.NomenclaturaCatastral,
+                        NumeroCtaRenta = model.NumeroCtaRenta,
+                        NroContratoEpec = model.NroContratoEpec,
+                        UnidadFacturacion = model.UnidadFacturacion,
+                    };
+                    propiedades.Update(propiedad);
+
+                    var result = propiedades.Add(propiedad);
+                    ViewBag.TipoMsj = "Success";
+                    ViewBag.Message = "La propiedad se modifico con Exito!!!";
+                    return View();
+                }
+                else
+                {
+                    ViewBag.TipoMsj = "Info";
+                    ViewBag.Message = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    return View(model);
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
-            }
+                ViewBag.TipoMsj = "Error";
+                ViewBag.Message = ex.Message;
+                return View(model);
+            }                        
         }
 
         // GET: Propiedades/Delete/5

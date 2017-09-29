@@ -66,6 +66,12 @@ namespace InmDAL
 
         }
         
+        private static string GetSqlPairs(IEnumerable<string> keys, string separator = ", ")
+        {
+            var pairs = keys.Select(key => string.Format("{0}=@{0}", key)).ToList();
+            return string.Join(separator, pairs);
+        }
+
         private class PropertyContainer
         {
             private readonly Dictionary<string, object> _ids;
@@ -156,12 +162,51 @@ namespace InmDAL
 
         public bool Delete(T entity)
         {
-            throw new NotImplementedException();
+            bool okDel = false;
+            try
+            {
+                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AySConexionDesarrollo"].ConnectionString))
+                {
+                    db.Open();
+                    var typeName = typeof(T).Name;
+                    var validKeyNames = typeof(T).Name + "Id";
+                    var value = typeof(T).GetProperty(validKeyNames).GetValue(entity, null);
+                    var sqlQuery = string.Format("DELETE FROM [{0}] WHERE {0}ID = {1}", typeof(T).Name, value);
+                    db.Execute(sqlQuery);
+                    db.Close();
+                    okDel = true;
+                }
+            }
+            catch (Exception ex)
+            {                
+                throw new Exception(ex.Message);
+            }
+            return okDel;
         }
 
         public bool Update(T entity)
         {
-            throw new NotImplementedException();
+            bool okDel = false;
+            try
+            {
+                var propertyContainer = ParseProperties(entity);
+                var sqlIdPairs = GetSqlPairs(propertyContainer.IdNames);
+                var sqlValuePairs = GetSqlPairs(propertyContainer.ValueNames);
+                var sql = string.Format("UPDATE [{0}] SET {1} WHERE {2}", typeof(T).Name, sqlValuePairs, sqlIdPairs);
+                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["conn"].ConnectionString))
+                {
+                    db.Open();
+                    db.Execute(sql, propertyContainer.AllPairs);
+                    db.Close();
+                    okDel = true;
+                }                                
+            }
+            catch (Exception ex)
+            {                
+                throw new Exception(ex.Message);
+            }
+            return okDel;
+
         }
 
         public List<T> GetAll()

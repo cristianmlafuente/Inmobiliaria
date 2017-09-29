@@ -303,6 +303,8 @@
     <Content Include="Views\Contratos\_GarantePropietario.cshtml" />
     <Content Include="Unity.config" />
     <Content Include="Views\CobroAlquiler\Delete.cshtml" />
+    <Content Include="Views\Contratos\Delete.cshtml" />
+    <Content Include="Views\Propiedades\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

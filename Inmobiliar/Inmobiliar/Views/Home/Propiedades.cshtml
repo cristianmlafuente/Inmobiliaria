@@ -44,13 +44,13 @@
                                 <div id="exTab1" class="container">
                                     <ul class="nav nav-pills">
                                         <li class="active">
-                                            <a href="#1a" data-toggle="tab">Alta</a>
+                                            <a href="#1a" data-toggle="tab">Nueva</a>
                                         </li>
                                         <li>
-                                            <a href="#2a" data-toggle="tab">Baja</a>
+                                            <a href="#2a" data-toggle="tab">Eliminar</a>
                                         </li>
                                         <li>
-                                            <a href="#3a" data-toggle="tab">Editar</a>
+                                            <a href="#3a" data-toggle="tab">Modificar</a>
                                         </li>
                                     </ul>
 
@@ -64,7 +64,8 @@
                                             <h3>We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab</h3>
                                         </div>
                                         <div class="tab-pane" id="3a">
-                                            <h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>
+                                            <br />
+                                            @Html.ActionLink("Modificar Propiedad", "../Propiedades/Edit")
                                         </div>
                                         <div class="tab-pane" id="4a">
                                             <h3>We use css to change the background color of the content to be equal to the tab</h3>

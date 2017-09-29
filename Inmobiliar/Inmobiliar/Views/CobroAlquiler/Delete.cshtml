@@ -8,9 +8,18 @@
                 {
                     <div class="panel panel-primary">
                         <div class="panel-heading">
+                        @if (ViewBag.Reimprimir != null)
+                        {
+                            <h3>
+                                Reimprimir Cobro Alquileres
+                            </h3>
+                        }
+                        else
+                        {
                             <h3>
                                 Anular Cobro Alquileres
-                            </h3>
+                            </h3>                        
+                        }                                                            
                         </div>
                         @if (ViewBag.TipoMsj == "Info")
                         {
@@ -113,24 +122,57 @@
                                             Detalles del Cobro
                                         </div>
                                         <div class="panel-body">
-                                            <div class="col-md-6 col-sm-6">
+                                            @*<div class="col-md-6 col-sm-6">*@
                                                 <div class="well">
                                                     <div class="form-group">
                                                         @Html.LabelFor(m => m.Periodos)
                                                         @Html.DropDownList("Periodo", new SelectList(@ViewBag.Periodo == null ? "" : @ViewBag.Periodo), new { @class = "form-control" })
+                                                        @Html.HiddenFor(Model => Model.Pago.PagoId, new { id = "idPago" })
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="disabledSelect">Monto Pagado</label>
+                                                        <input type="text" class="form-control" id="MontoPagado" name="pago.Monto" disabled="">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="disabledSelect">Fecha Pago</label>
+                                                        <input type="text" class="form-control" id="FechaPago" name="pago.fecha" disabled="">
+                                                    </div>
+                                                </div>
+                                            @*</div>*@
+                                        </div>
+                                        <div class="panel-footer">
+
+                                            @*<input type="submit" id="btnAnular" class="btn btn-primary" value="Anular" onclick="return confirm('Esta seguro que desea anular el cobro?');" />*@
+                                        @if (ViewBag.Reimprimir != null)
+                                        {
+                                            <label class="control-label" for="inputSuccess">Reimprimir</label>
+                                        }
+                                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                                Anular
+                                            </button>
+
+                                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                            <h4 class="modal-title" id="myModalLabel">Confirmación</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            ¿Esta seguro que desea eliminar el cobro indicado. ?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <input type="submit" id="btnAnular" class="btn btn-primary" value="Si" />
+
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                                            @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
                                         </div>
                                     </div>
-
-
                                 </div>
-
-
                             </div>
                         </div>
                     </div>

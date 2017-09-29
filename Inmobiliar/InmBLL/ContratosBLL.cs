@@ -65,7 +65,7 @@ namespace InmBLL
             {
                 var entityDAL = new InmDAL.Contratos();
                 entityDAL.FechaContrato = entity.FechaContrato;
-                entityDAL.IdEstate = 0;
+                entityDAL.IdEstate = entity.IdEstate;
                 entityDAL.IdGaranteLaboral1 = entity.IdGaranteLaboral1;
                 entityDAL.IdGaranteLaboral2 = entity.IdGaranteLaboral2;
                 entityDAL.IdGaranteLaboral3 = entity.IdGaranteLaboral3;
@@ -97,6 +97,7 @@ namespace InmBLL
                     var data = new Contratos
                     {
                         ContratosId = propiedad.ContratosId,
+                        IdEstate = propiedad.IdEstate,
                         FechaContrato = propiedad.FechaContrato,
                         IdGaranteLaboral1 = propiedad.IdGaranteLaboral1,
                         IdGaranteLaboral2 = propiedad.IdGaranteLaboral2,
@@ -137,6 +138,7 @@ namespace InmBLL
                         {
                             ContratosId = response.ContratosId,
                             FechaContrato = response.FechaContrato,
+                            IdEstate = response.IdEstate,
                             IdGaranteLaboral1 = response.IdGaranteLaboral1,
                             IdGaranteLaboral2 = response.IdGaranteLaboral2,
                             IdGaranteLaboral3 = response.IdGaranteLaboral3,
@@ -174,10 +176,6 @@ namespace InmBLL
                 decimal Monto = contrato.MontoInicialAlquiler.Value;
                 int incrementos = contrato.Incrementos.Value;
                 decimal porsIncre = contrato.PorcentajeIncremento.Value;
-
-
-                //var meses = DateAndTime.DateDiff(DateInterval.Month, periodo, contrato.FechaContrato.Value);
-
 
                 return string.Empty;
             }

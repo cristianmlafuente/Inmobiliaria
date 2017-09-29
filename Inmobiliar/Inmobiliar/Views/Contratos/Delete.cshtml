@@ -1,0 +1,177 @@
+﻿@model Inmobiliar.Models.ContratosModel
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-12">
+                @using (Html.BeginForm("Delete", "Contratos", FormMethod.Post, new { id = "frmdelete" }))
+                {
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3>
+                                Anular Contrato
+                            </h3>
+                        </div>
+                        @if (ViewBag.TipoMsj == "Info")
+                        {
+                            <div class="alert alert-info alert-inline">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong id="strMsj">@ViewBag.Message</strong>
+                            </div>
+                        }
+                        @if (ViewBag.TipoMsj == "Error")
+                        {
+                            <div class="alert alert-danger alert-inline margin-top-50 margin-bottom-50">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>@ViewBag.Message</strong>
+                            </div>
+                        }
+                        @if (ViewBag.TipoMsj == "Success")
+                        {
+                            <div class="alert alert-success alert-inline margin-top-50 margin-bottom-50">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>@ViewBag.Message</strong>
+                            </div>
+                        }
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Buscar por Inquilino
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">Inquilino</label>
+                                                <input type="text" class="form-control" id="contratoInquilino" name="Inquilino">
+                                                @Html.HiddenFor(Model => Model.Contrato.sInquilinoId, new { id = "idInquilino" })
+                                                @Html.HiddenFor(Model => Model.Contrato.sIdContrato, new { id = "idContrato" })
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">Apellido</label>
+                                                <input type="text" class="form-control" id="contratoApellidoInquilino" name="Apellido" disabled="" placeholder="">
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">Nombre</label>
+                                                <input type="text" class="form-control" id="contratoInquilinoName" name="Nombre" disabled="">
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">DU</label>
+                                                <input type="text" class="form-control" id="contratoInquilinoDU" name="DU" disabled="">
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="control-label" for="inputSuccess">TelefonoLaboral</label>
+                                                <input type="text" class="form-control" id="contratoInquilinoTelefonoLaboral" name="TelefonoLaboral" disabled="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" id="Propiedad">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            Buscar por Propiedad
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Propiedad</label>
+                                                <input type="text" class="form-control required" id="datosPropiedad" name="prop">
+                                                @Html.HiddenFor(Model => Model.Contrato.sPropiedadId, new { id = "idPropiedad", required = "Campo requerido" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Calle</label>
+                                                <input type="text" class="form-control" id="contratoCalle" name="domicilio.Calle" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Numero</label>
+                                                <input type="text" class="form-control" id="contratoNumero" name="domicilio.Numero" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Piso</label>
+                                                <input type="text" class="form-control" id="contratoPiso" name="domicilio.Piso" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Departamento</label>
+                                                <input type="text" class="form-control" id="contratoDto" name="domicilio.Dto" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">Barrio</label>
+                                                <input type="text" class="form-control" id="contratoBarrio" name="domicilio.Barrio" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="disabledSelect">CP</label>
+                                                <input type="text" class="form-control" id="contratoCP" name="domicilio.CP" disabled="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Detalles del Contrato
+                                        </div>
+                                        <div class="panel-body">                                            
+                                            <div class="form-group has-success col-lg-12">
+                                                <label class="control-label" for="inputSuccess">Propietario</label>
+                                                <input type="text" class="form-control " id="ownerPropietario" name="Propietario" disabled="" placeholder="">
+                                            </div>
+                                            <div class="form-group has-success col-lg-12">
+                                                <label class="control-label" for="inputSuccess">Garante 1</label>
+                                                <input type="text" class="form-control" id="ownerGarante1" name="Garante1" disabled="" placeholder="">
+                                            </div>
+                                            <div class="form-group has-success col-lg-12">
+                                                <label class="control-label" for="inputSuccess">Garante 2</label>
+                                                <input type="text" class="form-control" id="ownerGarante2" name="Garante2" disabled="" placeholder="">
+                                            </div>
+                                            <div class="form-group has-success col-lg-12">
+                                                <label class="control-label" for="inputSuccess">Garante 3</label>
+                                                <input type="text" class="form-control" id="ownerGarante3" name="Garante3" disabled="" placeholder="">
+                                            </div>                                                                                    
+                                            <div class="form-group has-success col-lg-12">
+                                                <label class="control-label" for="inputSuccess">Garante Propietario</label>
+                                                <input type="text" class="form-control" id="ownerGarantePropietario" name="GarantePropietario" disabled="" placeholder="">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Nro Contrato</label>
+                                                @Html.TextBoxFor(model => model.Contrato.NroContrato, new { @class = "form-control", disabled = "", id = "idNroContrato" })
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Fecha de Inicio del Contrato</label>
+                                                @Html.TextBoxFor(model => model.Contrato.FechaContrato, new { @class = "form-control", disabled = "", id = "idFechaContrato" })
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Duracion Contrato</label>
+                                                @Html.TextBoxFor(model => model.Contrato.PeriodoMeses, new { @class = "form-control", disabled = "", id = "idPeriodoMeses" })                                                
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Cantidad de Incrementos</label>
+                                                @Html.TextBoxFor(model => model.Contrato.Incrementos, new { @class = "form-control", disabled = "", id = "idIncrementos" })                                                
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Porcentaje de cada Incremento</label>
+                                                @Html.TextBoxFor(model => model.Contrato.PorcentajeIncremento, new { @class = "form-control", disabled = "", id = "idPorcentajeIncremento" })                                                
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Monto Inicial Alquiler</label>
+                                                @Html.TextBoxFor(model => model.Contrato.MontoInicialAlquiler, new { @class = "form-control", disabled = "", id = "idMontoInicialAlquiler" })                                                
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Porcentaje Administracion Inmobiliaria</label>
+                                                @Html.TextBoxFor(model => model.Contrato.PorcentajeInmobiliaria, new { @class = "form-control", disabled = "", id = "idPorcentajeInmobiliaria" })                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="panel-footer">                            
+                            <input type="submit" class="btn btn-primary" value="Anular" id="AnularContrato" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
