@@ -151,5 +151,32 @@
         //alert(new Date(str.substr(4,4), str.substr(2, 2) -1, str.substr(0,2)));
     }).change();
           
-
+    $("#Reimprimir").click(function () {
+        var Contrato = $("#idContrato").val();
+        debugger;
+        var Pago = $('#idPago').val();
+        Pago = "1";
+        $.ajax({
+            url: '/CobroAlquiler/GetImprimir/',
+            data: "{ 'Contrato': '" + Contrato + "', 'Pago': '" + Pago + "'}",
+            dataType: "json",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (data)
+            {                    
+                response($.map(data, function (item)
+                {                                                                       
+                    return {                           
+                            
+                        value: item.Calle + ', ' + item.Numero
+                    };                        
+                }))
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            }});        
+    });
 });

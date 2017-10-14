@@ -44,6 +44,7 @@ namespace InmBLL
             try
             {
                 var data = new InmDAL.Personas();
+                data.PersonasId = entity.PersonasId.Value;
                 var response = genericDal.Delete(data);
                 if (response != null)
                     return true;
@@ -59,7 +60,18 @@ namespace InmBLL
         {
             try
             {
-                var data = new InmDAL.Personas();
+                var data = new InmDAL.Personas() 
+                {
+                    Apellido = entity.Apellido,
+                    Celular = entity.Celular,
+                    DU = entity.DU,
+                    Email = entity.Email,
+                    Nombre = entity.Nombre,
+                    PersonasId = entity.PersonasId.Value,
+                    Telefono = entity.Telefono,
+                    TelefonoLaboral = entity.TelefonoLaboral
+                };
+
                 var response = genericDal.Update(data);
                 if (response != null)
                     return true;
@@ -70,7 +82,6 @@ namespace InmBLL
                 throw new Exception(ex.Message);
             }
         }
-
 
         public List<Personas> GetAll()
         {

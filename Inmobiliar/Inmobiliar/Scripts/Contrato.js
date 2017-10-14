@@ -88,7 +88,11 @@
                 $("#DUPropietario").val(arr[8]);
                 $("#TelLaboralPropietario").val(arr[9]);
             }            
-            
+            if ("edit" == idName)
+            {
+                $("#idPersona").val($.trim(arr[11]));
+                $("#ownerName").val(arr[6] + ',' + arr[7]);
+            }
             var datos = ui.item.impuesto;
             var sele = $(document.createElement('option'));
             sele.text('Seleccione...');
@@ -353,9 +357,10 @@
                     response($.map(data, function (item)
                     {                                                                       
                         return {
-                            label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral,
-                            value: item.PersonasId
-                            };                        
+                            label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral + ', ' + item.Email + ', ' + item.Telefono + ', ' + item.Celular,
+                            value: "Seleccionar...",
+                            id: item.PersonasId
+                        };                        
                     }))
                 },
                 error: function (response) {
@@ -369,17 +374,31 @@
         minLength: 1, 
         select: function (event, ui)
         {
-            debugger;
             var arr = ui.item.label.split(',');
-            if ($("#ownerinquilino").attr("#data-id") == idName) {
-                $("#ownerInquilino").addClass("data-idtarjeta=" + value);
+            debugger;
+            if ($('form[id="frmEditOwner"]').length > 0)
+            {
+                $("#idInquilino").val(ui.item.id);
+                $("#NombreEdit").val(arr[0]);
+                $("#ApellidoEdit").val(arr[1]);
+                $("#DUEdit").val(arr[2]);
+                $("#TelefonoLaboralEdit").val(arr[3]);
+                $("#EmailEdit").val(arr[4]);
+                $("#TelefonoEdit").val(arr[5]);
+                $("#CelularEdit").val(arr[6]);
             }
-            $("#divBuscarPropietario" + idName).hide();
-            $("#"+ idName + "PropietarioownerApellido").val(arr[1]);
-            $("#" + idName + "ownerName").val(arr[0]);
-            $("#" + idName + "DU").val(arr[8]);
-            $("#" + idName + "TelefonoLaboral").val(arr[9]);
-
+            else
+            {                                
+                if ($("#ownerinquilino").attr("#data-id") == idName) {
+                    $("#ownerInquilino").addClass("data-idtarjeta=" + ui.item.id);
+                }
+                $("#divBuscarPropietario" + idName).hide();
+                $("#"+ idName + "PropietarioownerApellido").val(arr[1]);
+                $("#" + idName + "ownerName").val(arr[0]);
+                $("#" + idName + "DU").val(arr[8]);
+                $("#" + idName + "TelefonoLaboral").val(arr[9]);
+                
+            }
 
         },
         open: function() {

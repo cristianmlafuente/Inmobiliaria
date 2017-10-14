@@ -171,5 +171,19 @@ namespace Inmobiliar.Controllers
             return Json(newPago, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult GetImprimir(string Contrato, string Pago)
+        {
+            try
+            {
+                var a = "";
+                return Json(a, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {                
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

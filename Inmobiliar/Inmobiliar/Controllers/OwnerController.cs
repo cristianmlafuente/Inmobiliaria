@@ -78,24 +78,51 @@ namespace Inmobiliar.Controllers
         }
 
         // GET: Owner/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id = 0)
         {
             return View();
         }
 
         // POST: Owner/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(PersonasModel collection)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    var ddlOwner = new PersonasBLL();
+                    var persona = new Personas()
+                    {
+                        PersonasId = collection.PersonasId,
+                        Apellido = collection.Apellido,
+                        Celular = collection.Celular,
+                        DU = collection.DU,
+                        Email = collection.Email,
+                        Telefono = collection.Telefono,
+                        Nombre = collection.Nombre,
+                        TelefonoLaboral = collection.TelefonoLaboral
+                    };
+                    ddlOwner.Update(persona);
+                    ViewBag.TipoMsj = "Success";
+                    ViewBag.Message = "El cliente se registro con Exito!!!";
+                    return View();
+                }
+                else
+                {
+                    ViewBag.TipoMsj = "Info";
+                    ViewBag.Message = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    return View(collection);                    
+                }
+                
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.TipoMsj = "Error";
+                ViewBag.Message = ex.Message;
+                return View(collection);
             }
         }
 
@@ -137,7 +164,10 @@ namespace Inmobiliar.Controllers
                                 Apellido = person.Apellido,
                                 DU = person.DU != null ? person.DU : "",
                                 TelefonoLaboral = person.TelefonoLaboral != null ? person.TelefonoLaboral : "",
-                                PersonasId = person.PersonasId
+                                PersonasId = person.PersonasId,
+                                Email = person.Email,
+                                Telefono = person.Telefono,
+                                Celular = person.Celular
                             }).ToList();
            return Json(CityName, JsonRequestBehavior.AllowGet);
         }
