@@ -222,6 +222,7 @@ namespace Inmobiliar.Controllers
                                      CP = contrato.Propiedades.Domicilio.CP,
                                      PeriodosAdeudados = contrato.PeriodosAdeudados,
                                      PeriodosPagados = contrato.PeriodosPagados,
+                                     ListaImpuestos = contrato.ListaImpuestos,
                                      Observaciones = contrato.Observaciones,
                                      Propietario = contrato.Propietario,
                                      Garante1 = contrato.GaranteLaboral1,

@@ -16,6 +16,7 @@
                             label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral + ', ' + item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Departamento + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.InquilinoId + ', ' + item.PropiedadId + ', ' + item.ContratoId,
                             periodos: item.PeriodosAdeudados,
                             pagos: item.PeriodosPagados,
+                            impuestos: item.ListaImpuestos,
                             observaciones : item.Observaciones,
                             value: "Seleccione..."
                         };                        
@@ -56,11 +57,19 @@
             if ($('form[id="frmcreate"]').length > 0)
             {                
                 datos = ui.item.periodos;
+                datosImpustos = ui.item.impuestos;
                 $(datos).each(function () {
                     var option = $(document.createElement('option'));
                     option.text(this.Detalle);
                     option.val(this.sMesAño);
                     $("#Periodo").append(option);
+                });
+
+                $(datosImpustos).each(function () {
+                    var option = $(document.createElement('option'));
+                    option.text(this.Detalle);
+                    option.val(this.sMesAño);
+                    $("#Impuestos").append(option);
                 });
             }
             if ($('form[id="frmdelete"]').length > 0)
