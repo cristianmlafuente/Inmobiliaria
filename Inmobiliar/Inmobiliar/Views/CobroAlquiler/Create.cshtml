@@ -121,7 +121,15 @@
                                                     <div class="form-group">                                                        
                                                         @Html.LabelFor(m => m.Periodos)
                                                         @Html.DropDownList("Periodo", new SelectList(@ViewBag.Periodo == null ? "" : @ViewBag.Periodo), new { @class = "form-control" })                                                                                                    
-                                                    </div>                                                    
+                                                    </div>   
+                                                    <div class="form-group ">
+                                                        @Html.LabelFor(m => m.Contrato.ListaImpuestos)
+                                                        @*@Html.CheckBox()*@
+                                                    </div>            
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="disabledSelect">Monto</label>
+                                                        <input type="text" class="form-control" id="PropiedadCP" name="" disabled="">
+                                                    </div>                                 
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-6">

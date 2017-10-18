@@ -167,6 +167,10 @@ namespace InmBLL
         {
             try
             {
+                //fecha "20170808" string 
+                //fecha contrato {08/07/2017 12:00:00 a.m.} datetime
+                // incrementos 3
+
                 var contrato = this.GetById(idContrato);
                 var a = contrato.ListaImpuestos;
                 var listcobros = new CobrosBLL().GetByContrato(idContrato);
@@ -177,7 +181,33 @@ namespace InmBLL
                 int incrementos = contrato.Incrementos.Value;
                 decimal porsIncre = contrato.PorcentajeIncremento.Value;
 
-                return string.Empty;
+                var calculoPeriodo = contrato.PeriodoMeses / (incrementos + 1);
+
+                Dictionary<string, DateTime> dictionary = new Dictionary<string, DateTime>();
+                for (int i = 1; i < (incrementos+1); i++)
+                {
+                    int addMonth = ((int)calculoPeriodo * i);
+                    var contratofecha =  contrato.FechaContrato.Value.AddMonths(addMonth);
+                    dictionary.Add(i.ToString(), contratofecha);
+                }
+                DateTime dateFilter = DateTime.ParseExact(fecha, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                foreach (var item in dictionary)
+                {
+                    var result = DateTime.Compare(item.Value, dateFilter);
+                    var key = Convert.ToDecimal(item.Key);
+                    if (result == 0 || result == 1)
+                    {
+                        if (key == 0)
+                        {
+                            return Monto.ToString();
+                        }
+                        var montoNew = (Monto * (((key-1) * porsIncre)/100));
+
+                        return (Monto + Monto).ToString();
+                    }
+ 
+                }
+                    return string.Empty;
             }
             catch (Exception ex)
             {
