@@ -93,6 +93,11 @@
                 $("#idPersona").val($.trim(arr[11]));
                 $("#ownerName").val(arr[6] + ',' + arr[7]);
             }
+            if ($('form[id="frmedit"]').length > 0)
+            {
+                $("#ownerNameEdit").val(arr[6] + ',' + arr[7]);
+                $("#idPersona").val($.trim(arr[11]));
+            }
             var datos = ui.item.impuesto;
             var sele = $(document.createElement('option'));
             sele.text('Seleccione...');

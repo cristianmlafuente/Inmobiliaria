@@ -42,33 +42,37 @@ namespace InmBLL
                     conexion.Open();
                     using (OleDbCommand comando = conexion.CreateCommand())
                     {
-                        comando.CommandText = "UPDATE [Hoja1 0$E2:E2] SET F1= '" + Pago.FechaPago.Value.ToShortDateString() + "'";
+                        comando.CommandText = "UPDATE [Hoja1$E2:E2] SET F1= '" + Pago.FechaPago.Value.ToShortDateString() + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$L2:L2] SET F1= '" + Pago.FechaPago.Value.ToShortDateString() + "'";
+                        comando.CommandText = "UPDATE [Hoja1$L2:L2] SET F1= '" + Pago.FechaPago.Value.ToShortDateString() + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$B7:B7] SET F1= '" + Pago.Propiedad.Domicilio.Calle + "'";
+                        var dom = string.IsNullOrWhiteSpace(Pago.Propiedad.Domicilio.Calle) ? "" : Pago.Propiedad.Domicilio.Calle.ToUpper();
+                        if (Pago.Propiedad.Domicilio.Piso != null) dom += " Piso " + Pago.Propiedad.Domicilio.Piso + " " + Pago.Propiedad.Domicilio.Dto; 
+                        dom += string.IsNullOrWhiteSpace(Pago.Propiedad.Domicilio.Barrio) ? "" : " " + Pago.Propiedad.Domicilio.Barrio.ToUpper();
+                        
+                        comando.CommandText = "UPDATE [Hoja1$B7:B7] SET F1= '" + dom + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$I7:I7] SET F1= '" + Pago.Propiedad.Domicilio.Calle + "'";
+                        comando.CommandText = "UPDATE [Hoja1$I7:I7] SET F1= '" + dom + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$B8:B8] SET F1= '" + Pago.Inquilino.Apellido + "'";
+                        comando.CommandText = "UPDATE [Hoja1$B8:B8] SET F1= '" + Pago.Inquilino.Apellido.ToUpper() + " " + Pago.Inquilino.Nombre.ToUpper() + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$I8:I8] SET F1= '" + Pago.Inquilino.Apellido + "'";
+                        comando.CommandText = "UPDATE [Hoja1$I8:I8] SET F1= '" + Pago.Inquilino.Apellido.ToUpper() + " " + Pago.Inquilino.Nombre.ToUpper() + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$C12:C12] SET F1= '" + Pago.Inquilino.Apellido + "'";
+                        comando.CommandText = "UPDATE [Hoja1$C12:C12] SET F1= '" + Pago.Inquilino.Apellido.ToUpper() + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$J12:J12] SET F1= '" + Pago.Inquilino.Apellido + "'";
+                        comando.CommandText = "UPDATE [Hoja1$J12:J12] SET F1= '" + Pago.Inquilino.Apellido.ToUpper() + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$A13:A13] SET F1= '" + Funciones.NumeroALetras(Pago.MontoTotal.ToString()) + "'";
+                        comando.CommandText = "UPDATE [Hoja1$A13:A13] SET F1= '" + Funciones.NumeroALetras(Pago.MontoTotal.ToString()).ToUpper() + ".---'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$H13:H13] SET F1= '" + Funciones.NumeroALetras(Pago.MontoTotal.ToString()) + "'";
+                        comando.CommandText = "UPDATE [Hoja1$H13:H13] SET F1= '" + Funciones.NumeroALetras(Pago.MontoTotal.ToString()).ToUpper() + ".---'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$C17:C17] SET F1= '" + Enum.GetName(typeof(Meses), Pago.Periodo.Value.Month) + "'";
+                        comando.CommandText = "UPDATE [Hoja1$D14:D14] SET F1= '" + Enum.GetName(typeof(Meses), Pago.Periodo.Value.Month).ToUpper() + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$J17:J17] SET F1= '" + Enum.GetName(typeof(Meses), Pago.Periodo.Value.Month) + "'";
+                        comando.CommandText = "UPDATE [Hoja1$K14:K14] SET F1= '" + Enum.GetName(typeof(Meses), Pago.Periodo.Value.Month).ToUpper() + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$A29:A29] SET F1= '" + Pago.Observaciones + "'";
+                        comando.CommandText = "UPDATE [Hoja1$A29:A29] SET F1= '" + Pago.Observaciones + "'";
                         comando.ExecuteNonQuery();
-                        comando.CommandText = "UPDATE [Hoja1 0$H29:H29] SET F1= '" + Pago.Observaciones + "'";
+                        comando.CommandText = "UPDATE [Hoja1$H29:H29] SET F1= '" + Pago.Observaciones + "'";
                         comando.ExecuteNonQuery();
                         foreach (PagoAlquiler_Detalle item in Pago.DetallePago)
                         {
@@ -118,13 +122,13 @@ namespace InmBLL
                                     fila = 27;
                                     break;
                             }
-                            comando.CommandText = "UPDATE [Hoja1 0$C{f}:C{f}] SET F1= '" + Enum.GetName(typeof(Meses), item.PeriodoPago.Month) + "'";
+                            comando.CommandText = string.Format("UPDATE [Hoja1$C{0}:C{0}] SET F1= '" + Enum.GetName(typeof(Meses), item.PeriodoPago.Month).ToUpper() + "'", fila);
                             comando.ExecuteNonQuery();
-                            comando.CommandText = "UPDATE [Hoja1 0$E{f}:E{f}] SET F1= '" + item.Monto + "'";
+                            comando.CommandText = string.Format("UPDATE [Hoja1$E{0}:E{0}] SET F1= '" + item.Monto + "'", fila);
                             comando.ExecuteNonQuery();
-                            comando.CommandText = "UPDATE [Hoja1 0$J{f}:J{f}] SET F1= '" + Enum.GetName(typeof(Meses), item.PeriodoPago.Month) + "'";
+                            comando.CommandText = string.Format("UPDATE [Hoja1$J{0}:J{0}] SET F1= '" + Enum.GetName(typeof(Meses), item.PeriodoPago.Month).ToUpper() + "'", fila);
                             comando.ExecuteNonQuery();
-                            comando.CommandText = "UPDATE [Hoja1 0$L{f}:L{f}] SET F1= '" + item.Monto + "'";
+                            comando.CommandText = string.Format("UPDATE [Hoja1$L{0}:L{0}] SET F1= '" + item.Monto + "'", fila);
                             comando.ExecuteNonQuery();
                         }
                         
@@ -137,7 +141,9 @@ namespace InmBLL
 
                 SautinSoft.ExcelToPdf pdf = new ExcelToPdf();
                 pdf.OutputFormat = SautinSoft.ExcelToPdf.eOutputFormat.Pdf;
+                pdf.ConvertFile(ArchivoFinalRecibo, "C:\\work\\Temp\\prueba.pdf");
                 var response = pdf.ConvertFiletoBytes(ArchivoFinalRecibo);
+                //pdf.ConvertByteToFile(response, "C:\\work\\Temp\\");
                 return response;                
                 
             }

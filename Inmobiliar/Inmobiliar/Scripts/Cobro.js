@@ -151,11 +151,10 @@
         //alert(new Date(str.substr(4,4), str.substr(2, 2) -1, str.substr(0,2)));
     }).change();
           
-    $("#Reimprimir").click(function () {
+    $("#Reimprimiro").click(function () {
         var Contrato = $("#idContrato").val();
         debugger;
-        var Pago = $('#idPago').val();
-        Pago = "1";
+        var Pago = $('#idPago').val();        
         $.ajax({
             url: '/CobroAlquiler/GetImprimir/',
             data: "{ 'Contrato': '" + Contrato + "', 'Pago': '" + Pago + "'}",
@@ -173,9 +172,11 @@
                 }))
             },
             error: function (response) {
+                debugger;
                 alert(response.responseText);
             },
             failure: function (response) {
+                debugger;
                 alert(response.responseText);
             }});        
     });

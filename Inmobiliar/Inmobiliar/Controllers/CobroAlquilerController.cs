@@ -5,6 +5,7 @@ using InmBLL.Entities;
 using Inmobiliar.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -134,6 +135,7 @@ namespace Inmobiliar.Controllers
         {
             try
             {            
+              
                 var cobbll = new CobrosBLL();
                 collection.Pago = cobbll.GetById(collection.Pago.PagoId.ToString());
                 var bCobro = cobbll.Delete(collection.Pago);
@@ -172,12 +174,35 @@ namespace Inmobiliar.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetImprimir(string Contrato, string Pago)
+        public ActionResult GetImprimir(string Contrato, string Pago)
         {
             try
             {
-                var a = "";
-                return Json(a, JsonRequestBehavior.AllowGet);
+                var a = "";               
+                var pagobll = new CobrosBLL();
+                var pago = pagobll.GetById(Pago);
+                var admAlqui = new AdministradoraAlquileres();
+                byte[] bytes = admAlqui.GenerarRecibo(pago);
+
+
+                //var pdf = new string(resultFactura.ArchivoArray.Select(Convert.ToChar).ToArray());
+                //byte[] bytes = pdf.Select(Convert.ToByte).ToArray();
+
+                var streamDownload = new MemoryStream(bytes);
+                streamDownload.Flush();
+                streamDownload.Position = 0;
+                return File(streamDownload, "application/pdf", Pago);
+               
+                //var stream = new MemoryStream(bytes);
+                //Response.Clear();
+                //Response.ContentType = "application/pdf";
+                //Response.AddHeader("content-disposition", "inline; filename=" + Pago);
+                //Response.AddHeader("content-length", stream.Length.ToString());
+                //Response.BinaryWrite(stream.ToArray());
+                //Response.Flush();
+                //Response.End();
+
+                //return View();
             }
             catch (Exception ex)
             {                
