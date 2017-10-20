@@ -54,10 +54,13 @@ namespace Inmobiliar.Models
 
         public PagoAlquiler Pago { get; set; }
 
+        public string ImpuestosPresentados { get; set; }
+
         public CobroAlquilerModel()
         {
             this.Contrato = new Contratos();
             this.Pago = new PagoAlquiler();
+            this.Contrato.ListaImpuestos = new List<TipoImpuestosServicios>();            
         }
     }
 

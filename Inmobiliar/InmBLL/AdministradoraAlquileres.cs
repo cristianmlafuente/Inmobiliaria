@@ -138,13 +138,14 @@ namespace InmBLL
                     conexion.Dispose();
                     conexion = null;
                 }
+                byte[] bytes = System.IO.File.ReadAllBytes(ArchivoFinalRecibo);
 
-                SautinSoft.ExcelToPdf pdf = new ExcelToPdf();
-                pdf.OutputFormat = SautinSoft.ExcelToPdf.eOutputFormat.Pdf;
-                pdf.ConvertFile(ArchivoFinalRecibo, "C:\\work\\Temp\\prueba.pdf");
-                var response = pdf.ConvertFiletoBytes(ArchivoFinalRecibo);
+                //SautinSoft.ExcelToPdf pdf = new ExcelToPdf();
+                //pdf.OutputFormat = SautinSoft.ExcelToPdf.eOutputFormat.Pdf;
+                //pdf.ConvertFile(ArchivoFinalRecibo, "C:\\work\\Temp\\prueba.pdf");
+                //var response = pdf.ConvertFiletoBytes(ArchivoFinalRecibo);
                 //pdf.ConvertByteToFile(response, "C:\\work\\Temp\\");
-                return response;                
+                return bytes;                
                 
             }
             catch (Exception ex)

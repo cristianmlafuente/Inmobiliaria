@@ -10,5 +10,6 @@ namespace InmBLL.Entities
     {
         public int Codigo { get; set; }
         public string Descripcion { get; set; }
+        public bool Selected { get; set; }
     }
 }

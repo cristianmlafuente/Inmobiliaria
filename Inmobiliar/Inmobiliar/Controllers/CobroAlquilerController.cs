@@ -134,11 +134,32 @@ namespace Inmobiliar.Controllers
         public ActionResult Delete(CobroAlquilerModel collection)
         {
             try
-            {            
-              
+            {
+                var bCobro = false;
                 var cobbll = new CobrosBLL();
                 collection.Pago = cobbll.GetById(collection.Pago.PagoId.ToString());
-                var bCobro = cobbll.Delete(collection.Pago);
+                if (true)
+                {
+                    var a = "";
+                    var pagobll = new CobrosBLL();
+                    //var pago = pagobll.GetById(Pago);
+                    var admAlqui = new AdministradoraAlquileres();
+                    //byte[] bytes = admAlqui.GenerarRecibo(pago);
+                    byte[] bytes = admAlqui.GenerarRecibo(collection.Pago);
+
+                    //var pdf = new string(resultFactura.ArchivoArray.Select(Convert.ToChar).ToArray());
+                    //byte[] bytes = pdf.Select(Convert.ToByte).ToArray();
+
+                    var streamDownload = new MemoryStream(bytes);
+                    streamDownload.Flush();
+                    streamDownload.Position = 0;
+                    return File(streamDownload, "application/xls", "Comprobante" + DateTime.Now.ToShortDateString() + "_" + collection.Pago.PagoId.ToString() + ".xlsx");
+                }
+                else
+                { 
+
+                bCobro = cobbll.Delete(collection.Pago);
+                }
                 if (bCobro)
                 {
                     ViewBag.TipoMsj = "Success";

@@ -203,7 +203,7 @@ namespace InmBLL
                         }
                         var montoNew = (Monto * (((key-1) * porsIncre)/100));
 
-                        return (Monto + Monto).ToString();
+                        return (Monto + montoNew).ToString();
                     }
  
                 }

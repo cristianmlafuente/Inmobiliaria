@@ -117,19 +117,27 @@
                                         </div>
                                         <div class="panel-body">
                                             <div class="col-md-6 col-sm-6">
-                                                <div class="well">                                                   
-                                                    <div class="form-group">                                                        
-                                                        @Html.LabelFor(m => m.Periodos)
-                                                        @Html.DropDownList("Periodo", new SelectList(@ViewBag.Periodo == null ? "" : @ViewBag.Periodo), new { @class = "form-control" })                                                                                                    
-                                                    </div>   
-                                                    <div class="form-group ">
-                                                        @Html.LabelFor(m => m.Contrato.ListaImpuestos)
-                                                        @*@Html.CheckBox()*@
-                                                    </div>            
+                                                <div class="well">
                                                     <div class="form-group">
-                                                        <label class="control-label" for="disabledSelect">Monto</label>
-                                                        <input type="text" class="form-control" id="PropiedadCP" name="" disabled="">
-                                                    </div>                                 
+                                                        @Html.LabelFor(m => m.Periodos)
+                                                        @Html.DropDownList("Periodo", new SelectList(@ViewBag.Periodo == null ? "" : @ViewBag.Periodo), new { @class = "form-control" })
+                                                    </div>
+                                                    <div id="DetallePago" style="display: none;">
+                                                        <div class="form-group">
+                                                            <label class="control-label" for="disabledSelect">Monto</label>
+                                                            <input type="text" class="form-control" id="Monto" name="" disabled="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label" for="disabledSelect">Impuestos a Presentar</label>
+
+                                                            @*@Html.CheckBoxListFor(m => m.SelectedGroups, m => m.Contrato.ListaImpuestos, x => x.Codigo, x => x.Descripcion, m => m.Contrato.ListaImpuestos)*@
+
+                                                        </div>
+                                                        <div class="form-group" id="Impue">
+                                                            @Html.HiddenFor(Model => Model.ImpuestosPresentados, new { id = "checkPresentados" })
+                                                            @*@Html.CheckBoxList("Impuestos", m => m.Contrato.ListaImpuestos, m => m.Codigo, m => m.Descripcion, m => m.Selected)*@
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-6">

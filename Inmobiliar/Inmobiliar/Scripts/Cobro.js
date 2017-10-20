@@ -10,8 +10,7 @@
                 success: function (data) 
                 {                               
                     response($.map(data, function (item)
-                    {
-                        debugger;
+                    {                       
                         return {
                             label: item.Nombre + ', ' + item.Apellido + ', ' + item.DU + ', ' + item.TelefonoLaboral + ', ' + item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Departamento + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.InquilinoId + ', ' + item.PropiedadId + ', ' + item.ContratoId,
                             periodos: item.PeriodosAdeudados,
@@ -47,8 +46,7 @@
             $("#PropiedadPiso").val(arr[6]);
             $("#PropiedadDto").val(arr[7]);
             $("#PropiedadBarrio").val(arr[8]);
-            $("#PropiedadCP").val(arr[9]);
-            debugger;
+            $("#PropiedadCP").val(arr[9]);            
             var sele = $(document.createElement('option'));
             sele.text('Periodo...');
             sele.val('-1');
@@ -65,11 +63,11 @@
                     $("#Periodo").append(option);
                 });
 
-                $(datosImpustos).each(function () {
-                    var option = $(document.createElement('option'));
-                    option.text(this.Detalle);
-                    option.val(this.sMesAño);
-                    $("#Impuestos").append(option);
+                $(datosImpustos).each(function ()
+                {
+                    debugger;
+                    var checkbox = "<div class='checkbox'><label><input type='checkbox' value='' id='" + this.Codigo + "' class='myCheck'>" + this.Descripcion +"</label></div>";
+                    $("#Impue").append(checkbox);                    
                 });
             }
             if ($('form[id="frmdelete"]').length > 0)
@@ -121,6 +119,8 @@
                     contentType: "application/json; charset=utf-8",
                     success: function (data) {
 
+                        $("#DetallePago").show();
+                        $("#Monto").val(data);                       
                     },
                     error: function (response) {
                         alert(response.responseText);
@@ -188,5 +188,17 @@
                 debugger;
                 alert(response.responseText);
             }});        
+    });
+
+    $('#2').change(function ()
+    {
+        debugger;
+        if ($('.checkbox').is(':checked'))
+        {
+            var id = $('.checkbox').attr("id").val();
+
+        }
+        else {
+        }
     });
 });
