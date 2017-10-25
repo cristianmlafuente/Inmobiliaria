@@ -30,6 +30,16 @@ namespace InmBLL
                 PropiedadId = entity.PropiedadId
             };
             var response = genericDal.Add(data);
+            var newgenericDal = new InmDAL.GenericDAL<InmDAL.Pagos_Detalle>();
+            foreach (var item in entity.DetallePago)
+	        {
+                var deta = new InmDAL.Pagos_Detalle();
+                deta.Monto = item.Monto;
+                deta.TipoId = item.TipoId;
+                deta.PagoId = response;
+                deta.PeriodoPago = item.PeriodoPago;
+                item.Pagos_DetalleId = newgenericDal.Add(deta);
+	        }            
             return response;
         }
 

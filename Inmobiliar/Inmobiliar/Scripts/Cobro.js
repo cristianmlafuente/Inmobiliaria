@@ -62,13 +62,37 @@
                     option.val(this.sMesAño);
                     $("#Periodo").append(option);
                 });
+                if (datosImpustos != null)
+                    {
+                    $(datosImpustos).each(function ()
+                    {                        
+                        var checkbox = "<div class='checkbox'><label><input type='checkbox'  id='" + this.Codigo + "' class='myCheck'>" + this.Descripcion +"</label></div>";
+                        $("#Impue").append(checkbox);                    
+                    });
 
-                $(datosImpustos).each(function ()
-                {
-                    debugger;
-                    var checkbox = "<div class='checkbox'><label><input type='checkbox' value='' id='" + this.Codigo + "' class='myCheck'>" + this.Descripcion +"</label></div>";
-                    $("#Impue").append(checkbox);                    
-                });
+                    $('.myCheck').on('change', function ()
+                    {
+                        var id = this.id;
+                        if (this.checked)
+                        {                            
+                            if ($("#checkPresentados").val() != '')
+                                $("#checkPresentados").val($("#checkPresentados").val() + ',' + id);
+                            else
+                                $("#checkPresentados").val(id);
+                        }
+                        else
+                        {
+                            var cant = $("#checkPresentados").val().split(',');
+                            
+                            cant = jQuery.grep(cant, function (value) {
+                                return value != id;
+                            });
+                            
+                            $("#checkPresentados").val(cant.toString());
+                        }
+                    });
+                    
+                }
             }
             if ($('form[id="frmdelete"]').length > 0)
             {
@@ -120,7 +144,8 @@
                     success: function (data) {
 
                         $("#DetallePago").show();
-                        $("#Monto").val(data);                       
+                        $("#Pago_MontoTotal").val(data);
+                        $('#idPago').val(indice);
                     },
                     error: function (response) {
                         alert(response.responseText);
@@ -190,15 +215,20 @@
             }});        
     });
 
-    $('#2').change(function ()
-    {
-        debugger;
-        if ($('.checkbox').is(':checked'))
-        {
-            var id = $('.checkbox').attr("id").val();
 
-        }
-        else {
-        }
-    });
+    
+
+    //$('.myCheck').change(function ()
+    //{
+    //    debugger;
+
+    //    //if ($('.checkbox').is(':checked'))
+    //    //{
+    //    //    var id = $('.checkbox').attr("id").val();
+
+    //    //}
+    //    //else {
+    //    //}
+    //    var a = $('.myCheck').val();
+    //});
 });

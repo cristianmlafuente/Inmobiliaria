@@ -56,6 +56,8 @@ namespace Inmobiliar.Models
 
         public string ImpuestosPresentados { get; set; }
 
+        public string sPeriodo { get; set; }
+
         public CobroAlquilerModel()
         {
             this.Contrato = new Contratos();

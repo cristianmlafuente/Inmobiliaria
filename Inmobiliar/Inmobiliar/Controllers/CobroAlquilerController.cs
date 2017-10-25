@@ -40,9 +40,26 @@ namespace Inmobiliar.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
+                //if (ModelState.IsValid)
+                //{
+                    var pagoentity  = new PagoAlquiler();
+                    pagoentity.ContratoId = int.Parse(collection.Contrato.sIdContrato);
+                    pagoentity.FechaPago = DateTime.Now;
+                    pagoentity.InquilinoId = int.Parse(collection.Contrato.sInquilinoId);
+                    pagoentity.PropiedadId = int.Parse(collection.Contrato.sPropiedadId);
+                    pagoentity.MontoTotal = collection.Pago.MontoTotal;
+                    pagoentity.Observaciones = collection.Pago.Observaciones;
+                    pagoentity.Periodo = DateTime.Parse(collection.sPeriodo.Substring(4, 2) + "/" + collection.sPeriodo.Substring(6, 2) + "/" + collection.sPeriodo.Substring(0, 4));
+                    pagoentity.Observaciones = collection.Pago.Observaciones;    
+                    var detallePago = new PagoAlquiler_Detalle();
+                    detallePago.Monto = collection.Pago.MontoTotal.Value;
+                    detallePago.TipoId = 6;
+                    detallePago.PeriodoPago = pagoentity.Periodo.Value;
+                    pagoentity.DetallePago = new List<PagoAlquiler_Detalle>();
 
+                    pagoentity.DetallePago.Add(detallePago);
+                    var pagoBll = new CobrosBLL();
+                    pagoBll.Add(pagoentity);
 
 
                     ViewBag.Imprimir = true;
@@ -50,15 +67,15 @@ namespace Inmobiliar.Controllers
                     ViewBag.Message = "El cobro se registro con Exito!!!";
 
                     return View(collection);
-                }
-                else
-                {
-                    ViewBag.TipoMsj = "Info";
-                    ViewBag.Message = string.Join("; ", ModelState.Values
-                                        .SelectMany(x => x.Errors)
-                                        .Select(x => x.ErrorMessage));
-                    return View(collection);
-                }
+                //}
+                //else
+                //{
+                //    ViewBag.TipoMsj = "Info";
+                //    ViewBag.Message = string.Join("; ", ModelState.Values
+                //                        .SelectMany(x => x.Errors)
+                //                        .Select(x => x.ErrorMessage));
+                //    return View(collection);
+                //}
             }
             catch (Exception ex)
             {
