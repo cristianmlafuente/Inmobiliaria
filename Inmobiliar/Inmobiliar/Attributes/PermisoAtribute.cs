@@ -28,18 +28,30 @@ namespace Inmobiliar.Controllers
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                 {
                     controller = "Home",
-                    action = "Index"
+                    action = "Index",
+                    TipoMsj = "Error",
+                    Message = "Debe estar logueado para poder acceder a esta funcionalidad. "                   
+    
                 }));
             }
             else
             {
                 if (!user.Roles.Any(xx => xx.IdRol == (int)this.Rol))
                 {
+                                            
                     filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                     {
                         controller = "Home",
-                        action = "Index"
+                        action = "Index",
+                        TipoMsj = "Error",
+                        Message = "No tiene permiso para acceder a esta funcionalidad. "
                     }));
+                    //filterContext.HttpContext.Request.Headers.Add("TipoMsj", "Info");
+                    //filterContext.HttpContext.Request.Headers.Add("Message", "No tiene permiso");
+                    //filterContext.HttpContext.Response.Headers.Add("TipoMsj", "Info");
+                    //filterContext.HttpContext.Response.Headers.Add("Message", "No tiene permiso");
+                    //filterContext.Controller.ViewBag.TipoMsj = "Info";
+                    //filterContext.Controller.ViewBag.Message = "No tiene permiso.";
                 }
             }
         }

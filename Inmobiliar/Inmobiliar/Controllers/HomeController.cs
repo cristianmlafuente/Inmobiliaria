@@ -6,13 +6,22 @@ using System.Web.Mvc;
 using InmBLL;
 using InmDAL;
 using Common.Emum;
+using System.Reflection;
 
 namespace Inmobiliar.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
-        {            
+        {
+            
+            var tipomsj = Request.QueryString["TipoMsj"];
+            var Message = Request.QueryString["Message"];
+            if (!string.IsNullOrWhiteSpace(tipomsj))
+            {
+                ViewBag.TipoMsj = tipomsj;
+                ViewBag.Message = Message;                
+            }
             if (Session["Usuario"] != null)
                 ViewBag.UsuarioLogueado = true;
             else

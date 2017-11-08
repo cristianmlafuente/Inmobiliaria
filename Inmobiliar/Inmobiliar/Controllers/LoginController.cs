@@ -46,7 +46,7 @@ namespace Inmobiliar.Controllers
                     {
                         ViewBag.TipoMsj = "Info";
                         ViewBag.Message = "El usuario ingresado no se encuentra registrado en el sistema.";
-                        return RedirectToAction("Index");
+                        return View(collection);
                     }
                 }
                 else
@@ -62,7 +62,7 @@ namespace Inmobiliar.Controllers
             {
                 ViewBag.TipoMsj = "Error";
                 ViewBag.Message = ex.Message;
-                return RedirectToAction("Index");
+                return View("~/Views/Home/Login.cshtml", collection);                                
             }
         }
 

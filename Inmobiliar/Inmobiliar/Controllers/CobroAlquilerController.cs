@@ -49,7 +49,7 @@ namespace Inmobiliar.Controllers
                     pagoentity.PropiedadId = int.Parse(collection.Contrato.sPropiedadId);
                     pagoentity.MontoTotal = collection.Pago.MontoTotal;
                     pagoentity.Observaciones = collection.Pago.Observaciones;
-                    pagoentity.Periodo = DateTime.Parse(collection.sPeriodo.Substring(4, 2) + "/" + collection.sPeriodo.Substring(6, 2) + "/" + collection.sPeriodo.Substring(0, 4));
+                    pagoentity.Periodo = DateTime.Parse(collection.sPeriodo.Substring(6, 2) + "/" + collection.sPeriodo.Substring(4, 2) + "/" + collection.sPeriodo.Substring(0, 4));
                     pagoentity.Observaciones = collection.Pago.Observaciones;    
                     var detallePago = new PagoAlquiler_Detalle();
                     detallePago.Monto = collection.Pago.MontoTotal.Value;
