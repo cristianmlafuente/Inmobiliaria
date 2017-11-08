@@ -1,4 +1,4 @@
-﻿@*@model Inmobiliar.Models.Login*@
+﻿@using MvcSiteMapProvider.Web.Html
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,13 +50,18 @@
 
         </nav>
         <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - GAC Application</p>
-            </footer>
+            <div id="page-wrapper-breadcumb">
+                @*<div id="page-inner">*@
+                @Html.MvcSiteMap().SiteMapPath()
+                @*</div>*@
+            </div>
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - GAC Application</p>
+                </footer>
+            </div>
         </div>
-    </div>
         
 
         @Scripts.Render("~/bundles/jquery")
