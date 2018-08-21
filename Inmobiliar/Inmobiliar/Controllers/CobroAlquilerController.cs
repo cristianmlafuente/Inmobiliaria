@@ -2,6 +2,7 @@
 using Common.Emum;
 using InmBLL;
 using InmBLL.Entities;
+using Inmobiliar.Attributes;
 using Inmobiliar.Models;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,7 @@ namespace Inmobiliar.Controllers
 
         // POST: CobroAlquiler/Create
         [HttpPost]
+        [MultipleButton(Name = "action", Argument = "Create")]
         public ActionResult Create(CobroAlquilerModel collection)
         {
             try
@@ -47,10 +49,11 @@ namespace Inmobiliar.Controllers
                     pagoentity.FechaPago = DateTime.Now;
                     pagoentity.InquilinoId = int.Parse(collection.Contrato.sInquilinoId);
                     pagoentity.PropiedadId = int.Parse(collection.Contrato.sPropiedadId);
-                    pagoentity.MontoTotal = collection.Pago.MontoTotal;
+                    
                     pagoentity.Observaciones = collection.Pago.Observaciones;
                     pagoentity.Periodo = DateTime.Parse(collection.sPeriodo.Substring(6, 2) + "/" + collection.sPeriodo.Substring(4, 2) + "/" + collection.sPeriodo.Substring(0, 4));
-                    pagoentity.Observaciones = collection.Pago.Observaciones;    
+                    pagoentity.Observaciones = collection.Pago.Observaciones;
+
                     var detallePago = new PagoAlquiler_Detalle();
                     detallePago.Monto = collection.Pago.MontoTotal.Value;
                     detallePago.TipoId = 6;
@@ -58,9 +61,21 @@ namespace Inmobiliar.Controllers
                     pagoentity.DetallePago = new List<PagoAlquiler_Detalle>();
 
                     pagoentity.DetallePago.Add(detallePago);
+                    foreach (var item in collection.OtrosPagos)
+                    {
+                        if (!string.IsNullOrEmpty(item.Monto))
+                        {
+                            pagoentity.DetallePago.Add(new PagoAlquiler_Detalle(){TipoId = item.Codigo, Monto = decimal.Parse(item.Monto), PeriodoPago = pagoentity.Periodo.Value});
+                            collection.Pago.MontoTotal += decimal.Parse(item.Monto);
+                        }
+                    }
+                    pagoentity.MontoTotal = collection.Pago.MontoTotal;
                     var pagoBll = new CobrosBLL();
-                    pagoBll.Add(pagoentity);
+                    int cod = pagoBll.Add(pagoentity);
+                    collection.Pago = pagoentity;
+                    collection.Pago.PagoId = cod;
 
+                    string impu = collection.ImpuestosPresentados;
 
                     ViewBag.Imprimir = true;
                     ViewBag.TipoMsj = "Success";
@@ -116,38 +131,27 @@ namespace Inmobiliar.Controllers
                 ViewBag.Reimprimir = true;
             }
             return View();
-        }
-
-        // POST: CobroAlquiler/Delete/5
-        //[HttpPost]
-        //public ActionResult Delete(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add delete logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        }        
 
         [HttpPost]
         public JsonResult GetCobro(string fecha, string idContrato)
         {
-            var contratoList = new ContratosBLL();
-            var contrato = contratoList.ObtenerMonto(fecha, idContrato);
-            
-           
-
-
-
-            return Json(contrato, JsonRequestBehavior.AllowGet);
+            try
+            {            
+                var contratoList = new ContratosBLL();
+                var contrato = contratoList.ObtenerMonto(fecha, idContrato);                      
+                return Json(contrato, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                ViewBag.TipoMsj = "Info";
+                ViewBag.Message = "No pudo realizar la consulta en este momento";
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpPost]
+        [MultipleButton(Name = "action", Argument = "Delete")]
         public ActionResult Delete(CobroAlquilerModel collection)
         {
             try
@@ -155,28 +159,8 @@ namespace Inmobiliar.Controllers
                 var bCobro = false;
                 var cobbll = new CobrosBLL();
                 collection.Pago = cobbll.GetById(collection.Pago.PagoId.ToString());
-                if (true)
-                {
-                    var a = "";
-                    var pagobll = new CobrosBLL();
-                    //var pago = pagobll.GetById(Pago);
-                    var admAlqui = new AdministradoraAlquileres();
-                    //byte[] bytes = admAlqui.GenerarRecibo(pago);
-                    byte[] bytes = admAlqui.GenerarRecibo(collection.Pago);
-
-                    //var pdf = new string(resultFactura.ArchivoArray.Select(Convert.ToChar).ToArray());
-                    //byte[] bytes = pdf.Select(Convert.ToByte).ToArray();
-
-                    var streamDownload = new MemoryStream(bytes);
-                    streamDownload.Flush();
-                    streamDownload.Position = 0;
-                    return File(streamDownload, "application/xls", "Comprobante" + DateTime.Now.ToShortDateString() + "_" + collection.Pago.PagoId.ToString() + ".xlsx");
-                }
-                else
-                { 
-
-                bCobro = cobbll.Delete(collection.Pago);
-                }
+                
+                bCobro = cobbll.Delete(collection.Pago);                
                 if (bCobro)
                 {
                     ViewBag.TipoMsj = "Success";
@@ -201,50 +185,50 @@ namespace Inmobiliar.Controllers
         [HttpPost]
         public JsonResult GetPago(string idCobro, string idContrato)
         {
-            var pagobll = new CobrosBLL();
-            var pago = pagobll.GetById(idCobro);
-            var newPago = new
+            var newPago = new object();
+            try
             {
-                MontoTotal = pago.MontoTotal,
-                FechaPago = pago.FechaPago.Value.ToShortDateString()
-            };
+                var pagobll = new CobrosBLL();
+                var pago = pagobll.GetById(idCobro);
+                newPago = new
+                {
+                    MontoTotal = pago.MontoTotal,
+                    FechaPago = pago.FechaPago.Value.ToShortDateString()
+                };
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.TipoMsj = "Error";
+                ViewBag.Message = ex.Message;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
             return Json(newPago, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult GetImprimir(string Contrato, string Pago)
+        [MultipleButton(Name = "action", Argument = "GetImprimir")]
+        public ActionResult GetImprimir(CobroAlquilerModel collection)
         {
             try
             {
                 var a = "";               
                 var pagobll = new CobrosBLL();
-                var pago = pagobll.GetById(Pago);
+                var pago = pagobll.GetById(collection.Pago.PagoId.ToString());
                 var admAlqui = new AdministradoraAlquileres();
                 byte[] bytes = admAlqui.GenerarRecibo(pago);
-
-
-                //var pdf = new string(resultFactura.ArchivoArray.Select(Convert.ToChar).ToArray());
-                //byte[] bytes = pdf.Select(Convert.ToByte).ToArray();
+                Server.MapPath("");
 
                 var streamDownload = new MemoryStream(bytes);
                 streamDownload.Flush();
                 streamDownload.Position = 0;
-                return File(streamDownload, "application/pdf", Pago);
-               
-                //var stream = new MemoryStream(bytes);
-                //Response.Clear();
-                //Response.ContentType = "application/pdf";
-                //Response.AddHeader("content-disposition", "inline; filename=" + Pago);
-                //Response.AddHeader("content-length", stream.Length.ToString());
-                //Response.BinaryWrite(stream.ToArray());
-                //Response.Flush();
-                //Response.End();
-
-                //return View();
+                return File(streamDownload, "application/pdf", "Comprobante" + DateTime.Now.ToShortDateString() + "_" + collection.Pago.PagoId.ToString() + ".xlsx");                              
             }
             catch (Exception ex)
-            {                
-                throw new Exception(ex.Message);
+            {
+                ViewBag.TipoMsj = "Error";
+                ViewBag.Message = ex.Message;
+                return View("Delete", collection);
             }
         }
 

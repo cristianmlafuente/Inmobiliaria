@@ -9,7 +9,7 @@ namespace InmBLL.Entities
 {
     public class Observacion
     {
-        public int ObservacionId { get; set; }
+        public int ObservacionesId { get; set; }
         public int ContratosId { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
         public String Descripcion { get; set; }

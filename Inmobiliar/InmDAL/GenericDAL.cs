@@ -165,7 +165,10 @@ namespace InmDAL
             bool okDel = false;
             try
             {
-                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AySConexionDesarrollo"].ConnectionString))
+                var bas = ConfigurationManager.AppSettings["CadBase"];
+                var ent = ConfigurationManager.AppSettings["EntornoEjecucion"];
+                var Cadena = bas + "Conexion" + ent;
+                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings[Cadena].ConnectionString))
                 {
                     db.Open();
                     var typeName = typeof(T).Name;
@@ -213,7 +216,10 @@ namespace InmDAL
         {
             try
             {
-                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AySConexionDesarrollo"].ConnectionString))
+                var bas = ConfigurationManager.AppSettings["CadBase"];
+                var ent = ConfigurationManager.AppSettings["EntornoEjecucion"];
+                var Cadena = bas + "Conexion" + ent;
+                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings[Cadena].ConnectionString))
                 {
                     db.Open();
                     var sqlQuery = string.Format("SELECT * FROM [{0}]", typeof(T).Name);
@@ -230,7 +236,10 @@ namespace InmDAL
         {
             try
             {
-                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AySConexionDesarrollo"].ConnectionString))
+                var bas = ConfigurationManager.AppSettings["CadBase"];
+                var ent = ConfigurationManager.AppSettings["EntornoEjecucion"];
+                var Cadena = bas + "Conexion" + ent;
+                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings[Cadena].ConnectionString))
                 {
                     int i = 0;
 

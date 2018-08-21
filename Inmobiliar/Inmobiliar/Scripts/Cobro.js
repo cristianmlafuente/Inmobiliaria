@@ -16,6 +16,7 @@
                             periodos: item.PeriodosAdeudados,
                             pagos: item.PeriodosPagados,
                             impuestos: item.ListaImpuestos,
+                            otrosCobros: item.OtrosPagos,
                             observaciones : item.Observaciones,
                             value: "Seleccione..."
                         };                        
@@ -56,6 +57,7 @@
             {                
                 datos = ui.item.periodos;
                 datosImpustos = ui.item.impuestos;
+                OtrosPagos = ui.item.otrosCobros;
                 $(datos).each(function () {
                     var option = $(document.createElement('option'));
                     option.text(this.Detalle);
@@ -92,6 +94,15 @@
                         }
                     });
                     
+                }
+                debugger;
+                if (OtrosPagos != null)
+                {
+                    var cobroshtml = "";
+                    $(OtrosPagos).each(function () {
+                        cobroshtml += "<div class='form-group'><label class='control-label' for='disabledSelect'>" + this.Descripcion + "</label><input type='text' class='form-control' data-val='true' id='Pago_MontoTotal' name='Pago.MontoTotal' value=''></div>";
+                    });
+                    $("#cobroshtml").append(cobroshtml);
                 }
             }
             if ($('form[id="frmdelete"]').length > 0)
@@ -215,20 +226,18 @@
             }});        
     });
 
+    $("#chkOtrosPagos").on('change', function () {
+        var id = this.id;
+        if (this.checked)
+        {
+            $("#OtrosPagos").show();
+            
+        }
+        else
+        {
+            $("#OtrosPagos").hide();
+        }
+    });
 
-    
 
-    //$('.myCheck').change(function ()
-    //{
-    //    debugger;
-
-    //    //if ($('.checkbox').is(':checked'))
-    //    //{
-    //    //    var id = $('.checkbox').attr("id").val();
-
-    //    //}
-    //    //else {
-    //    //}
-    //    var a = $('.myCheck').val();
-    //});
 });

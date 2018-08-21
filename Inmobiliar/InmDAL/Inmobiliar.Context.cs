@@ -39,5 +39,6 @@ namespace InmDAL
         public virtual DbSet<Contrato_ImpuestoServicio> Contrato_ImpuestoServicio { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TiposImpuestosServicios> TiposImpuestosServicios { get; set; }
+        public virtual DbSet<Empresa> Empresa { get; set; }
     }
 }

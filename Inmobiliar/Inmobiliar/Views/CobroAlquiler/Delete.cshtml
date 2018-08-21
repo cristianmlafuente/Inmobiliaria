@@ -52,7 +52,7 @@
                                         <div class="panel-body">
                                             <div class="form-group has-success">
                                                 <label class="control-label" for="inputSuccess">Inquilino</label>
-                                                <input type="text" class="form-control" id="ownerInquilino" name="Inquilino">
+                                                <input type="text" class="form-control" id="ownerInquilino" name="Inquilino" data-detalle="DeleteCobro">
                                                 @Html.HiddenFor(Model => Model.Contrato.sInquilinoId, new { id = "idInquilino" })
                                                 @Html.HiddenFor(Model => Model.Contrato.sIdContrato, new { id = "idContrato" })
                                             </div>
@@ -88,27 +88,27 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="disabledSelect">Calle</label>
-                                                <input type="text" class="form-control" id="PropiedadCalle" name="domicilio.Calle" disabled="">
+                                                <input type="text" class="form-control" id="Calle" name="domicilio.Calle" disabled="">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="disabledSelect">Numero</label>
-                                                <input type="text" class="form-control" id="PropiedadNumero" name="domicilio.Numero" disabled="">
+                                                <input type="text" class="form-control" id="Numero" name="domicilio.Numero" disabled="">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="disabledSelect">Piso</label>
-                                                <input type="text" class="form-control" id="PropiedadPiso" name="domicilio.Piso" disabled="">
+                                                <input type="text" class="form-control" id="Piso" name="domicilio.Piso" disabled="">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="disabledSelect">Departamento</label>
-                                                <input type="text" class="form-control" id="PropiedadDto" name="domicilio.Dto" disabled="">
+                                                <input type="text" class="form-control" id="Dto" name="domicilio.Dto" disabled="">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="disabledSelect">Barrio</label>
-                                                <input type="text" class="form-control" id="PropiedadBarrio" name="domicilio.Barrio" disabled="">
+                                                <input type="text" class="form-control" id="Barrio" name="domicilio.Barrio" disabled="">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="disabledSelect">CP</label>
-                                                <input type="text" class="form-control" id="PropiedadCP" name="domicilio.CP" disabled="">
+                                                <input type="text" class="form-control" id="CP" name="domicilio.CP" disabled="">
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +146,7 @@
                                         @if (ViewBag.Reimprimir != null)
                                         {
                                             @*<button type="button" class="fa fa-print fa-2x btn-primary" id="Reimprimir" name=""></button>*@
-                                            <input id="Reimprimir" type="submit" class="fa fa-print fa-2x btn-primary" name="GetImprimir" />
+                                            <input id="Reimprimir" type="submit" class="btn btn-primary" name="action:GetImprimir" value="Imprimir" />
                                         }
                                         else
                                         {
@@ -165,7 +165,7 @@
                                                             ¿Esta seguro que desea eliminar el cobro indicado. ?
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <input type="submit" id="btnAnular" class="btn btn-primary" value="Si" name="Delete" />
+                                                            <input type="submit" id="btnAnular" class="btn btn-primary" value="Si" name="action:Delete" />
 
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                                                             @*<button type="button" class="btn btn-primary">Save changes</button>*@

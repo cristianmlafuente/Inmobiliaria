@@ -18,8 +18,13 @@ namespace InmBLL.Entities
         public Nullable<int> UnidadFacturacion { get; set; }
         public Nullable<int> NroFactura { get; set; }
         public Nullable<int> NroContratoEpec { get; set; }
+		public string ClienteEpecNro { get; set; }
+		public int NumeroFacturaAgua { get; set; }
+		public string NroMedidorGas { get; set; }
         private Domicilios _domicilio { get; set; }
         private Personas _personas { get; set; }
+        public string Tipo { get; set; }
+        public bool Estado { get; set; }
 
         public Domicilios Domicilio {
             get {
@@ -54,7 +59,9 @@ namespace InmBLL.Entities
                 }
             } 
         }
-        
+
+        public Nullable<decimal> PrecioVenta { get; set; }
+        public Nullable<int> TelExpensas { get; set; }
     }
 
     

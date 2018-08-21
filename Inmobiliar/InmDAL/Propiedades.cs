@@ -31,6 +31,13 @@ namespace InmDAL
         public Nullable<int> UnidadFacturacion { get; set; }
         public Nullable<int> NroFactura { get; set; }
         public Nullable<int> NroContratoEpec { get; set; }
+        public Nullable<int> Tipo { get; set; }
+        public Nullable<bool> Estado { get; set; }
+        public string ClienteEpecNro { get; set; }
+        public string NroMedidorGas { get; set; }
+        public Nullable<decimal> PrecioVenta { get; set; }
+        public Nullable<int> TelExpensas { get; set; }
+
     
         public virtual Domicilios Domicilios { get; set; }
         public virtual Personas Personas { get; set; }

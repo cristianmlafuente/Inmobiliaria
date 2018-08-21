@@ -46,7 +46,7 @@
                                         <div class="panel-body">
                                             <div class="form-group">
                                                 <label class="control-label" for="disabledSelect">Propiedad</label>
-                                                <input type="text" class="form-control required" id="datosPropiedad" name="prop">                                               
+                                                <input type="text" class="form-control required" id="datosPropiedadSinAlquiler" name="prop" data-detalle="CreateContrato">                                               
                                                 @Html.HiddenFor(Model => Model.Contrato.sPropiedadId, new { id = "idPropiedad", required = "Campo requerido" })                                               
                                             </div>
                                             <div class="form-group">
@@ -84,7 +84,7 @@
                                         <div class="panel-body">
                                             <div class="form-group has-success" id="divBuscarPropietario">
                                                 <label class="control-label" for="inputSuccess">Propietario</label>
-                                                <input type="text" class="form-control" id="owner" name="Inquilino" data-detalle="Propietario">
+                                                <input type="text" class="form-control" id="PropietarioSinAlquiar" name="Inquilino" data-detalle="Propietario">
                                                 @Html.HiddenFor(Model => Model.Contrato.sPropietarioId, new { id = "idPropietario" })
                                             </div>
                                             <div class="form-group has-success">
@@ -133,7 +133,7 @@
                                                                 <div class="panel-body">
                                                                     <div class="form-group has-success" id="divBuscarInquilino">
                                                                         <label class="control-label" for="inputSuccess">Inquilino</label>
-                                                                        <input type="text" class="form-control" id="owner" name="Inquilino" data-detalle="Inquilino">
+                                                                        <input type="text" class="form-control" id="ownerinq" name="Inquilino" data-detalle="Inquilino">
                                                                         @Html.HiddenFor(Model => Model.Contrato.sInquilinoId, new { id = "idInquilino" })
                                                                     </div>
                                                                     <div class="form-group has-success">
@@ -179,7 +179,7 @@
                                                                 <div class="panel-body">                                 
                                                                     <div class="form-group has-success" id="divBuscar1er_Garante">
                                                                         <label class="control-label" for="inputSuccess">GarantePropietario</label>
-                                                                        <input type="text" class="form-control" id="owner" name="Inquilino" data-detalle="Garante_Propietario">
+                                                                        <input type="text" class="form-control" id="ownergarprop" name="Inquilino" data-detalle="Garante_Propietario">
                                                                         @Html.HiddenFor(Model => Model.idPersonaGarantePropietario, new { id = "idGarantePropietario" })
                                                                     </div>                                  
                                                                     <div class="form-group has-success">
@@ -252,7 +252,7 @@
                                                                 <div class="panel-body">
                                                                     <div class="form-group has-success" id="divBuscar1er_Garante">
                                                                         <label class="control-label" for="inputSuccess">1er_Garante</label>
-                                                                        <input type="text" class="form-control" id="owner" name="Inquilino" data-detalle="1er_Garante">
+                                                                        <input type="text" class="form-control" id="ownerprigar" name="Inquilino" data-detalle="1er_Garante">
                                                                         @Html.HiddenFor(Model => Model.Contrato.sIdGaranteLaboral1, new { id = "idGaranteLaboral1" })                                                                        
                                                                     </div>
                                                                     <div class="form-group has-success">
@@ -298,7 +298,7 @@
                                                                 <div class="panel-body">
                                                                     <div class="form-group has-success" id="divBuscar2do_Garante">
                                                                         <label class="control-label" for="inputSuccess">2do_Garante</label>
-                                                                        <input type="text" class="form-control" id="owner" name="Inquilino" data-detalle="2do_Garante">
+                                                                        <input type="text" class="form-control" id="ownerseggara" name="Inquilino" data-detalle="2do_Garante">
                                                                         @Html.HiddenFor(Model => Model.Contrato.sIdGaranteLaboral2, new { id = "idGaranteLaboral2" })                                                                        
                                                                     </div>
                                                                     <div class="form-group has-success">
@@ -344,7 +344,7 @@
                                                                 <div class="panel-body">
                                                                     <div class="form-group has-success" id="divBuscar3er_Garante">
                                                                         <label class="control-label" for="inputSuccess">3er_Garante</label>
-                                                                        <input type="text" class="form-control" id="owner" name="Inquilino" data-detalle="3er_Garante">
+                                                                        <input type="text" class="form-control" id="ownertergara" name="Inquilino" data-detalle="3er_Garante">
                                                                         @Html.HiddenFor(Model => Model.Contrato.sIdGaranteLaboral3, new { id = "idGaranteLaboral3" })                                                                        
                                                                     </div>
                                                                     <div class="form-group has-success">

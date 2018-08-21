@@ -21,7 +21,7 @@ namespace InmBLL
             try
             {
                 var entityDAL = new InmDAL.Observaciones();
-                entityDAL.ObservacionId = entity.ObservacionId;
+                entityDAL.ContratosId = entity.ContratosId.ToString();
                 entityDAL.Descripcion = entity.Descripcion;
                 entityDAL.Fecha = entity.Fecha;            
                 var response = genericDal.Add(entityDAL);
@@ -39,7 +39,7 @@ namespace InmBLL
             try
             {
                 var entityDAL = new InmDAL.Observaciones();
-                entityDAL.ObservacionId = entity.ObservacionId;
+                entityDAL.ObservacionesId = entity.ObservacionesId;
                 var response = genericDal.Delete(entityDAL);
                 return response;
             }
@@ -55,8 +55,7 @@ namespace InmBLL
             {
                 var entityDAL = new InmDAL.Observaciones();
                 entityDAL.Descripcion = entity.Descripcion;
-                entityDAL.Fecha = entity.Fecha;
-                entityDAL.ObservacionId = entity.ObservacionId;
+                entityDAL.Fecha = entity.Fecha;                
                 var response = genericDal.Update(entityDAL);
                 return response;
             }
@@ -77,7 +76,7 @@ namespace InmBLL
                     var data = new Observacion
                     {
                         ContratosId = int.Parse(observa.ContratosId),
-                        ObservacionId = observa.ObservacionId,
+                        ObservacionesId = observa.ObservacionesId,
                         Descripcion = observa.Descripcion,
                         Fecha = observa.Fecha
                     };
@@ -105,7 +104,7 @@ namespace InmBLL
                         data = new Observacion
                         {
                             ContratosId = int.Parse(response.ContratosId),
-                            ObservacionId = response.ObservacionId,
+                            ObservacionesId = response.ObservacionesId,
                             Descripcion = response.Descripcion,
                             Fecha = response.Fecha
                         };

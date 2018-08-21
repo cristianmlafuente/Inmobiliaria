@@ -147,6 +147,7 @@ namespace Inmobiliar.Controllers
                 return View();
             }
         }
+        
         [HttpPost]
         public JsonResult GetUser(string nombre)
         {
@@ -171,5 +172,7 @@ namespace Inmobiliar.Controllers
                             }).ToList();
            return Json(CityName, JsonRequestBehavior.AllowGet);
         }
+    
+    
     }
 }

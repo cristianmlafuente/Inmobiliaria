@@ -48,6 +48,14 @@
           <Property Name="Numero" Type="int" />
           <Property Name="Barrio" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="EmpresaId" />
+          </Key>
+          <Property Name="EmpresaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="500" />
+          <Property Name="Domicilio" Type="varchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="GarantePropietario">
           <Key>
             <PropertyRef Name="GarantePropietarioId" />
@@ -59,18 +67,18 @@
         </EntityType>
         <EntityType Name="Observaciones">
           <Key>
-            <PropertyRef Name="ObservacionId" />
+            <PropertyRef Name="ObservacionesId" />
           </Key>
-          <Property Name="ObservacionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ObservacionesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ContratosId" Type="nchar" MaxLength="10" />
           <Property Name="Fecha" Type="datetime" />
           <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="Pagos">
           <Key>
-            <PropertyRef Name="PagoId" />
+            <PropertyRef Name="PagosId" />
           </Key>
-          <Property Name="PagoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PagosId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InquilinoId" Type="int" />
           <Property Name="PropiedadId" Type="int" />
           <Property Name="ContratoId" Type="int" />
@@ -81,9 +89,9 @@
         </EntityType>
         <EntityType Name="Pagos_Detalle">
           <Key>
-            <PropertyRef Name="Pagos_DetalleId" />            
+            <PropertyRef Name="Pagos_DetalleId" />
           </Key>
-          <Property Name="Pagos_DetalleId" Type="int" Nullable="false" />
+          <Property Name="Pagos_DetalleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PagoId" Type="int" Nullable="false" />
           <Property Name="TipoId" Type="int" Nullable="false" />
           <Property Name="Monto" Type="money" />
@@ -116,6 +124,10 @@
           <Property Name="UnidadFacturacion" Type="int" />
           <Property Name="NroFactura" Type="int" />
           <Property Name="NroContratoEpec" Type="int" />
+          <Property Name="Tipo" Type="int" />
+          <Property Name="Estado" Type="bit" />
+          <Property Name="ClienteEpecNro" Type="varchar" MaxLength="50" />
+          <Property Name="NroMedidorGas" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -140,6 +152,7 @@
           </Key>
           <Property Name="TiposImpuestosServiciosID" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Pagar" Type="bit" />
         </EntityType>
         <EntityType Name="Usuario_Rol">
           <Key>
@@ -241,6 +254,7 @@
           <EntitySet Name="Contrato_ImpuestoServicio" EntityType="Self.Contrato_ImpuestoServicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contratos" EntityType="Self.Contratos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Domicilios" EntityType="Self.Domicilios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GarantePropietario" EntityType="Self.GarantePropietario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Observaciones" EntityType="Self.Observaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
@@ -362,6 +376,7 @@
             <End Role="TiposImpuestosServicios" EntitySet="TiposImpuestosServicios" />
             <End Role="Pagos_Detalle" EntitySet="Pagos_Detalle" />
           </AssociationSet>
+          <EntitySet Name="Empresa" EntityType="ClientesModel.Empresa" />
         </EntityContainer>        
         <EntityType Name="Propiedades">
           <Key>
@@ -381,6 +396,10 @@
           <NavigationProperty Name="Personas" Relationship="ClientesModel.FK_Propiedades_Propietario" FromRole="Propiedades" ToRole="Personas" />
           <NavigationProperty Name="Contratos" Relationship="ClientesModel.FK_Contrato_Propiedad" FromRole="Propiedades" ToRole="Contratos" />
           <NavigationProperty Name="Contratos1" Relationship="ClientesModel.FK_Contrato_Propiedad1" FromRole="Propiedades" ToRole="Contratos" />
+          <Property Name="Tipo" Type="Int32" />
+          <Property Name="Estado" Type="Boolean" />
+          <Property Name="ClienteEpecNro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NroMedidorGas" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Propiedades_Domicilios">
           <End Type="ClientesModel.Domicilios" Role="Domicilios" Multiplicity="0..1" />
@@ -525,9 +544,8 @@
         </EntityType>
         <EntityType Name="Pagos">
           <Key>
-            <PropertyRef Name="PagoId" />
+            <PropertyRef Name="PagosId" />
           </Key>
-          <Property Name="PagoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InquilinoId" Type="Int32" />
           <Property Name="PropiedadId" Type="Int32" />
           <Property Name="ContratoId" Type="Int32" />
@@ -535,6 +553,7 @@
           <Property Name="FechaPago" Type="DateTime" Precision="0" />
           <Property Name="MontoTotal" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PagosId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="Pagos_Detalle">
           <Key>
@@ -573,12 +592,12 @@
         </Association>
         <EntityType Name="Observaciones">
           <Key>
-            <PropertyRef Name="ObservacionId" />
+            <PropertyRef Name="ObservacionesId" />
           </Key>
-          <Property Name="ObservacionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ContratosId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Fecha" Type="DateTime" Precision="3" />
           <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ObservacionesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="Contrato_ImpuestoServicio">
           <Key>
@@ -606,6 +625,7 @@
           <Property Name="TiposImpuestosServiciosID" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Pagos_Detalle" Relationship="ClientesModel.FK_Pagos_Detalle_TiposImpuestosServicios" FromRole="TiposImpuestosServicios" ToRole="Pagos_Detalle" />
+          <Property Name="Pagar" Type="Boolean" />
         </EntityType>
         <Association Name="FK_Pagos_Detalle_TiposImpuestosServicios">
           <End Type="ClientesModel.TiposImpuestosServicios" Role="TiposImpuestosServicios" Multiplicity="1" />
@@ -619,6 +639,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="EmpresaId" />
+          </Key>
+          <Property Name="EmpresaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Domicilio" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -656,6 +684,10 @@
           <EntitySetMapping Name="Propiedades">
             <EntityTypeMapping TypeName="ClientesModel.Propiedades">
               <MappingFragment StoreEntitySet="Propiedades">
+                <ScalarProperty Name="NroMedidorGas" ColumnName="NroMedidorGas" />
+                <ScalarProperty Name="ClienteEpecNro" ColumnName="ClienteEpecNro" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="NroContratoEpec" ColumnName="NroContratoEpec" />
                 <ScalarProperty Name="NroFactura" ColumnName="NroFactura" />
                 <ScalarProperty Name="UnidadFacturacion" ColumnName="UnidadFacturacion" />
@@ -737,6 +769,7 @@
           <EntitySetMapping Name="Pagos">
             <EntityTypeMapping TypeName="ClientesModel.Pagos">
               <MappingFragment StoreEntitySet="Pagos">
+                <ScalarProperty Name="PagosId" ColumnName="PagosId" />
                 <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
                 <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
                 <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
@@ -744,7 +777,6 @@
                 <ScalarProperty Name="ContratoId" ColumnName="ContratoId" />
                 <ScalarProperty Name="PropiedadId" ColumnName="PropiedadId" />
                 <ScalarProperty Name="InquilinoId" ColumnName="InquilinoId" />
-                <ScalarProperty Name="PagoId" ColumnName="PagoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -762,10 +794,10 @@
           <EntitySetMapping Name="Observaciones">
             <EntityTypeMapping TypeName="ClientesModel.Observaciones">
               <MappingFragment StoreEntitySet="Observaciones">
+                <ScalarProperty Name="ObservacionesId" ColumnName="ObservacionesId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="ContratosId" ColumnName="ContratosId" />
-                <ScalarProperty Name="ObservacionId" ColumnName="ObservacionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -793,8 +825,18 @@
           <EntitySetMapping Name="TiposImpuestosServicios">
             <EntityTypeMapping TypeName="ClientesModel.TiposImpuestosServicios">
               <MappingFragment StoreEntitySet="TiposImpuestosServicios">
+                <ScalarProperty Name="Pagar" ColumnName="Pagar" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="TiposImpuestosServiciosID" ColumnName="TiposImpuestosServiciosID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresa">
+            <EntityTypeMapping TypeName="ClientesModel.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

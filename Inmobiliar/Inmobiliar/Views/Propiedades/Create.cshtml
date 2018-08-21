@@ -1,5 +1,4 @@
 ﻿@model Inmobiliar.Models.PropiedadesModel
-@Scripts.Render("~/Scripts/Propiedades");
 @*@{
         ViewBag.Title = "Create";
     }*@
@@ -39,70 +38,113 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <form role="form" action="Create" method="post">
-                                    <div class="form-group has-success col-lg-6">
-                                        <label class="control-label" for="inputSuccess">Calle</label>
-                                        <input type="text" class="form-control" id="" name="domicilio.Calle" required >
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            Domicilio de la Propiedad
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Calle</label>
+                                                <input type="text" class="form-control" id="" name="domicilio.Calle" required>
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Número</label>
+                                                <input type="text" class="form-control" id="" name="domicilio.Numero" required>
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Piso</label>
+                                                <input type="text" class="form-control" id="" name="domicilio.Piso">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Dto</label>
+                                                <input type="text" class="form-control" id="" name="domicilio.Dto">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Barrio</label>
+                                                <input type="text" class="form-control" id="" name="domicilio.Barrio" required>
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Ciudad</label>
+                                                <input type="text" class="form-control" id="inputSuccess" name="domicilio.Ciudad" required>
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">CP</label>
+                                                <input type="text" class="form-control" id="" name="domicilio.CP" required>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group has-success col-lg-6">
-                                        <label class="control-label" for="inputSuccess">Número</label>
-                                        <input type="text" class="form-control" id="" name="domicilio.Numero" required>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            Datos de la Unidad
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Cliente Epec Nro</label>
+                                                <input type="text" class="form-control" id="" name="ClienteEpecNro">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Nro Contrato Epec</label>
+                                                <input type="text" class="form-control" id="" name="NroContratoEpec">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Nomenclatura Catastral</label>
+                                                <input type="text" class="form-control" id="inputSuccess" name="NomenclaturaCatastral">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Numero Cuenta Renta</label>
+                                                <input type="text" class="form-control" id="" name="NumeroCtaRenta">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Unidad Facturacion</label>
+                                                <input type="text" class="form-control" id="inputSuccess" name="UnidadFacturacion">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Nro de Medidor Gas</label>
+                                                <input type="text" class="form-control" id="inputSuccess" name="NroMedidorGas">
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Numero de Factura Agua</label>
+                                                <input type="text" class="form-control" id="inputSuccess" name="NumeroFacturaAgua">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group has-success col-lg-6">
-                                        <label class="control-label" for="inputSuccess">Piso</label>
-                                        <input type="text" class="form-control" id="" name="domicilio.Piso">
-                                    </div>
-                                    <div class="form-group has-success col-lg-6">
-                                        <label class="control-label" for="inputSuccess">Dto</label>
-                                        <input type="text" class="form-control" id="" name="domicilio.Dto">
-                                    </div>
-                                    <div class="form-group has-success col-lg-6">
-                                        <label class="control-label" for="inputSuccess">Barrio</label>
-                                        <input type="text" class="form-control" id="" name="domicilio.Barrio" required>
-                                    </div>
-                                    <div class="form-group has-success col-lg-6">
-                                        <label class="control-label" for="inputSuccess">Ciudad</label>
-                                        <input type="text" class="form-control" id="inputSuccess" name="domicilio.Ciudad" required>
-                                    </div>
-                                    <div class="form-group has-success col-lg-6">
-                                        <label class="control-label" for="inputSuccess">CP</label>
-                                        <input type="text" class="form-control" id="" name="domicilio.CP" required>
-                                    </div>
-                                    <div class="form-group has-success col-lg-6">
-                                        <br /><br /><br />
-                                    </div>
-                                    <div class="form-group has-success col-lg-6">
-                                        <label class="control-label" for="inputSuccess">Nro Contrato Epec</label>
-                                        <input type="text" class="form-control" id="" name="NroContratoEpec">
-                                    </div>
-                                    <div class="form-group has-success col-lg-6">
-                                        <label class="control-label" for="inputSuccess">Nomenclatura Catastral</label>
-                                        <input type="text" class="form-control" id="inputSuccess" name="NomenclaturaCatastral">
-                                    </div>
-                                    <div class="form-group has-success col-lg-6">
-                                        <label class="control-label" for="inputSuccess">Numero Cuenta Renta</label>
-                                        <input type="text" class="form-control" id="" name="NumeroCtaRenta">
-                                    </div>
-                                    <div class="form-group has-success col-lg-6">
-                                        <label class="control-label" for="inputSuccess">Unidad Facturacion</label>
-                                        <input type="text" class="form-control" id="inputSuccess" name="UnidadFacturacion">
-                                    </div>
-                                    <div class="form-group has-error col-lg-6">
-                                        <label class="control-label" for="inputError">Dueño</label>
-                                        <input type="text" class="form-control" id="ownerName" name=""/>
-                                        <input type="hidden" name="Dueño.PersonasId" value="" id="idPersona" required />
-
-                                    </div>
-                                    <div class="form-group has-success col-lg-6">
-                                        <br /><br /><br />
-                                    </div>
-                                    <div class="form-group has-success col-lg-6">
-                                        <br /><br /><br />
-                                    </div>
-                                    <div class="controls col-lg-6">
-                                        <input type="submit" class="btn btn-primary" value="Enviar" />
-                                    </div>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            Propietario
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group has-error col-lg-6">
+                                                <label class="control-label" for="inputError">Dueño</label>
+                                                <input type="text" class="form-control" id="ownerName" name="" />
+                                                <input type="hidden" name="Dueño.PersonasId" value="" id="idPersona" required />
+                                            </div>
+                                            <div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Alquiler/Venta</label>
+                                                <select id="Tipo" class="form-control" name="Tipo">
+                                                    <option value="-1"> Seleccione...</option>
+                                                    <option value="1">Alquiler</option>
+                                                    <option value="2">Venta</option>
+                                                </select>                                                
+                                            </div>
+                                            <div id="DetalleVenta" style="display: none;">
+                                                <div class="form-group has-warning col-lg-6">
+                                                    <label class="control-label" for="inputError">Precio</label>
+                                                    <input type="text" class="form-control" id="MontoVenta" name="MontoVenta">
+                                                </div>
+                                            </div>
+                                            <div id="DetalleAlquiler" style="display: none;">
+                                                <div class="form-group has-warning col-lg-6">
+                                                    <label class="control-label" for="inputError">Telefono Expensas</label>
+                                                    <input type="text" class="form-control" id="TelExpensas" name="TelExpensas">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-footer">
+                                            <input type="submit" class="btn btn-primary" value="Guardar" />
+                                        </div>
+                                    </div>                                    
                                 </form>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                 </div>

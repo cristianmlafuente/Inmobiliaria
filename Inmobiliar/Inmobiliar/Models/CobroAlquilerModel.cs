@@ -5,6 +5,7 @@ using System.Web;
 using Common.Emum;
 using InmBLL.Entities;
 using System.Web.Mvc;
+using InmBLL;
 
 namespace Inmobiliar.Models
 {
@@ -58,11 +59,16 @@ namespace Inmobiliar.Models
 
         public string sPeriodo { get; set; }
 
+        public List<OtroPago> OtrosPagos { get; set; }
+
         public CobroAlquilerModel()
         {
             this.Contrato = new Contratos();
             this.Pago = new PagoAlquiler();
-            this.Contrato.ListaImpuestos = new List<TipoImpuestosServicios>();            
+            this.Contrato.ListaImpuestos = new List<TipoImpuestosServicios>();
+            this.OtrosPagos = new List<OtroPago>(); 
+            List<TipoImpuestosServicios> Impu = new ImpuestosBLL().GetAllByEsPago(true);
+            Impu.ForEach(x => OtrosPagos.Add(new OtroPago() { Codigo = x.Codigo, Detalle = x.Descripcion, Monto = "" }));
         }
     }
 
@@ -78,5 +84,12 @@ namespace Inmobiliar.Models
         public string fecha {get; set;}
         public string detalle {get; set;}
 
+    }
+
+    public class OtroPago
+    {
+        public int Codigo { get; set; }
+        public string Detalle { get; set; }
+        public string Monto { get; set; }
     }
 }

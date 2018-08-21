@@ -5,16 +5,29 @@
 
   <mvcSiteMapNode title="Home" controller="Home" action="Index">
     <mvcSiteMapNode title="About" controller="Home" action="About"/>  
-  <mvcSiteMapNode title="Propiedades" controller="Home" action="Propiedades">
-    <mvcSiteMapNode title="Details" controller="Propiedades" action="Details"/>
-    <mvcSiteMapNode title="Create" controller="Propiedades" action="Create"/>
-    <mvcSiteMapNode title="Edit" controller="Propiedades" action="Edit"/>
-    <mvcSiteMapNode title="Delete" controller="Propiedades" action="Delete"/>
-  </mvcSiteMapNode>
+    <mvcSiteMapNode title="Propiedades" controller="Home" action="Propiedades">
+      <mvcSiteMapNode title="Details" controller="Propiedades" action="Details"/>
+      <mvcSiteMapNode title="Nuevo" controller="Propiedades" action="Create"/>
+      <mvcSiteMapNode title="Modificar" controller="Propiedades" action="Edit"/>
+      <mvcSiteMapNode title="Delete" controller="Propiedades" action="Delete"/>
+    </mvcSiteMapNode>
     <mvcSiteMapNode title="Clientes" controller="Home" action="Clientes">
-    <mvcSiteMapNode title="Details" controller="Owner" action="Details"/>
-    <mvcSiteMapNode title="Create" controller="Owner" action="Create"/>
-    <mvcSiteMapNode title="Edit" controller="Owner" action="Edit"/>
-  </mvcSiteMapNode>
+      <mvcSiteMapNode title="Details" controller="Owner" action="Details"/>
+      <mvcSiteMapNode title="Nuevo" controller="Owner" action="Create"/>
+      <mvcSiteMapNode title="Modificar" controller="Owner" action="Edit"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Contratos" controller="Home" action="Contratos">
+      <mvcSiteMapNode title="Details" controller="Contratos" action="Details"/>
+      <mvcSiteMapNode title="Nuevo" controller="Contratos" action="Create"/>
+      <mvcSiteMapNode title="Modificar" controller="Contratos" action="Edit"/>
+      <mvcSiteMapNode title="Anular" controller="Contratos" action="Delete"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Cobro Alquiler" controller="Home" action="CobroAlquiler">
+      <mvcSiteMapNode title="Details" controller="CobroAlquiler" action="Details"/>
+      <mvcSiteMapNode title="Nuevo" controller="CobroAlquiler" action="Create"/>
+      <mvcSiteMapNode title="Modificar" controller="CobroAlquiler" action="Edit"/>
+      <mvcSiteMapNode title="Anular" controller="CobroAlquiler" action="Delete"/>
+      <mvcSiteMapNode title="Reimprimir" controller="CobroAlquiler" preservedRouteParameters="id" action="Delete" key="1"/>
+    </mvcSiteMapNode>
   </mvcSiteMapNode>
 </mvcSiteMap>

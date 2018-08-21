@@ -24,6 +24,7 @@
         });
        
     });
+
     $("#datosPropiedad").autocomplete({ 
         
         source: function (request, response) {
@@ -45,7 +46,11 @@
                             nomcatrastal: item.NomCatrastal,
                             numeroctarenta: item.NumeroCtaRenta,
                             unidadcacturacion: item.UnidadFacturacion,
-                            value: item.Calle + ', ' + item.Numero
+                            value: item.Calle + ', ' + item.Numero,
+                            periodos: item.PeriodosAdeudados,
+                            pagos: item.PeriodosPagados,
+                            ContratosId: item.ContratoId,
+                            observaciones: item.Observaciones
                         };                        
                     }))
                 },
@@ -112,8 +117,82 @@
                 $("#Impuestos").append(option);
             });
 
+            idName = $("#ownerInquilino").attr("data-detalle");
+            if ("DeleteCobro" == idName || "CreateCobro" == idName)
+            {
+                $('#idInquilino').val($.trim(arr[11]));
+                $("#InquilinoName").val(arr[7]);
+                $("#InquilinoApellido").val(arr[6]);
+                $("#InquilinoDU").val(arr[8]);
+                $("#InquilinoTelefonoLaboral").val(arr[9]);
+                $("#idPropiedad").val(arr[10]);
+                $("#PropiedadCalle").val(arr[0]);
+                $("#PropiedadNumero").val(arr[1]);
+                $("#PropiedadPiso").val(arr[2]);
+                $("#PropiedadDto").val(arr[3]);
+                $("#PropiedadBarrio").val(arr[4]);
+                $("#PropiedadCP").val(arr[5]);
+                $("#idContrato").val(ui.item.ContratosId);
 
-            
+                var sele = $(document.createElement('option'));
+                sele.text('Periodo...');
+                sele.val('-1');
+                $("#Periodo").append(sele);
+
+                var datos;
+                if ($('form[id="frmcreate"]').length > 0)
+                {
+                    datos = ui.item.periodos;
+                    datosImpustos = ui.item.impuesto;
+                    $(datos).each(function () {
+                        var option = $(document.createElement('option'));
+                        option.text(this.Detalle);
+                        option.val(this.sMesAño);
+                        $("#Periodo").append(option);
+                    });
+                    if (datosImpustos != null) {
+                        $(datosImpustos).each(function () {
+                            var checkbox = "<div class='checkbox'><label><input type='checkbox'  id='" + this.Codigo + "' class='myCheck'>" + this.Descripcion + "</label></div>";
+                            $("#Impue").append(checkbox);
+                        });
+
+                        $('.myCheck').on('change', function () {
+                            var id = this.id;
+                            if (this.checked) {
+                                if ($("#checkPresentados").val() != '')
+                                    $("#checkPresentados").val($("#checkPresentados").val() + ',' + id);
+                                else
+                                    $("#checkPresentados").val(id);
+                            }
+                            else {
+                                var cant = $("#checkPresentados").val().split(',');
+
+                                cant = jQuery.grep(cant, function (value) {
+                                    return value != id;
+                                });
+
+                                $("#checkPresentados").val(cant.toString());
+                            }
+                        });
+
+                    }
+                }
+                if ($('form[id="frmdelete"]').length > 0) {
+                    datos = ui.item.pagos;
+                    $(datos).each(function () {
+                        var option = $(document.createElement('option'));
+                        option.text(this.Detalle);
+                        option.val(this.PagoId);
+                        $("#Periodo").append(option);
+                    });
+                }
+                var obs = ui.item.observaciones;
+                //obs.each(obj, function (key, value)
+                $.each(obs, function (key, value) {
+                    //$("#o1").append("viva lura");
+                    $("#o" + key).append("<div class='panel-heading'><h4 class='panel-title'><a data-toggle='collapse' data-parent='#accordion' href='#collapse" + key + "' class='collapsed'>" + value.sFecha + "</a></h4></div><div id='collapse" + key + "' class='panel-collapse collapse' style='height: 0px;'><div class='panel-body'>" + value.Descripcion + "</div> </div>");
+                })
+            }
     },
     open: function() {
         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
@@ -121,6 +200,109 @@
     close: function() {
         $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
     }
+    });
+
+    $("#datosPropiedadSinAlquiler").autocomplete({
+
+        source: function (request, response) {
+            $.ajax({
+                url: '/Contratos/GetPropiedadSinAlquiler/',
+                data: "{ 'prop': '" + request.term + "'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            value: item.Calle + ',' + item.Numero + ',' + item.Piso + ',' + item.Dto + ',' + item.Barrio + ',' + item.CP + ',' + item.Apellido + ',' + item.Nombre + ',' + item.Du + ',' + item.TelLabo + ',' + item.IdPropiedad + ',' + item.IdPropietario,
+                            impuesto: item.Impuesto,
+                            ciudad: item.Ciudad,
+                            nrocontratoepec: item.NroContratoEpec,
+                            nomcatrastal: item.NomCatrastal,
+                            numeroctarenta: item.NumeroCtaRenta,
+                            unidadcacturacion: item.UnidadFacturacion,
+                            propiedadId: item.PropiedadId,
+                            clienteEpecNro: item.ClienteEpecNro,
+                            nroMedidorGas: item.NroMedidorGas,
+                            numeroFacturaAgua: item.NumeroFacturaAgua,
+                            label: item.Calle + ' ' + item.Numero + ' ' + item.Piso + ' ' + item.Dto + ' ' + item.Barrio + ' Dueño: ' + item.Nombre
+                        };
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            debugger;
+            //cambio id a datosPropiedadSinAlquiler por el Create de contrato.
+            var idName = $("#datosPropiedadSinAlquiler").attr("data-detalle");
+            var arr = ui.item.value.split(',');
+            $("#Calle").val(arr[0]);
+            $("#Numero").val(arr[1]);
+            $("#Piso").val(arr[2]);
+            $("#Dto").val(arr[3]);
+            $("#Barrio").val(arr[4]);
+            $("#CP").val(arr[5]);
+            $("#Ciudad").val(ui.item.ciudad);
+            $("#datosPropiedad").addClass("data-idtarjeta=" + arr[10]);
+            $("#idPropiedad").val($.trim(arr[10]));
+            $("#datosPropiedad").attr("placeholder", "Seleccione...");
+            $("#datosPropiedad").val('');
+            $("#NroContratoEpec").val(ui.item.nrocontratoepec);
+            $("#ClienteEpecNro").val(ui.item.clienteEpecNro);
+            $("#NroMedidorGas").val(ui.item.nroMedidorGas);
+            $("#NumeroFacturaAgua").val(ui.item.numeroFacturaAgua);
+            $("#NomenclaturaCatastral").val(ui.item.nomcatrastal);
+            $("#NumeroCtaRenta").val(ui.item.numeroctarenta);
+            $("#UnidadFacturacion").val(ui.item.unidadcacturacion);
+            $("#PropiedadesId").val(ui.item.propiedadId);
+            $("#idPersona").val($.trim(arr[11]));
+            debugger;
+            if ("Propietario" == idName || "CreateContrato" == idName) {
+                $("#idPropietario").val($.trim(arr[11]));
+                $("#divBuscarPropietario").hide();
+                $("#ownerApellidoPropietario").val(arr[6]);
+                $("#ownerNamePropietario").val(arr[7]);
+                $("#DUPropietario").val(arr[8]);
+                $("#TelLaboralPropietario").val(arr[9]);
+            }
+            if ("edit" == idName) {
+                $("#idPersona").val($.trim(arr[11]));
+                $("#ownerName").val(arr[6] + ',' + arr[7]);
+            }
+            if ($('form[id="frmedit"]').length > 0) {
+                $("#ownerNameEdit").val(arr[6] + ',' + arr[7]);
+                $("#idPersona").val($.trim(arr[11]));
+            }
+            var datos = ui.item.impuesto;
+            var sele = $(document.createElement('option'));
+            sele.text('Seleccione...');
+            sele.val('-1');
+            $("#Impuestos").append(sele);
+
+            $(datos).each(function () {
+                var option = $(document.createElement('option'));
+                option.text(this.Descripcion);
+                option.val(this.Codigo);
+
+                $("#Impuestos").append(option);
+            });
+
+
+
+        },
+        open: function () {
+            $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+        },
+        close: function () {
+            $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+        }
     });
 
     $('input[data-detalle=Inquilino]').autocomplete({ 
@@ -413,23 +595,7 @@
             $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
         }
 
-    });
-
-    //$(".btn-add").click(function (event)
-    //    {
-    //        event.preventDefault();
-            
-    //        var control = $('.controls'),
-    //            currentEntry = $(this).parents('.entry:first'),
-    //            newEntry = $(currentEntry.clone()).appendTo(control);
-
-    //        controlForm.find('.entry:not(:last) .btn-add')
-    //        .removeClass('btn-add').addClass('btn-remove')
-    //        .removeClass('btn-success').addClass('btn-danger')
-    //        .html('<span class="glyphicon glyphicon-minus"></span>');
-    //    }
-    //).click();
-
+    });    
 
     $(function () {
         $(document).on('click', '.btn-add', function (e) {
@@ -574,15 +740,71 @@
         },
 
     });
+    
+    $("#PropietarioSinAlquiar").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '/Contratos/GetPropietarios/',
+                data: "{ 'nombre': '" + request.term + "', 'sinAlquilar': '" + true + "'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    response($.map(data, function (item) {                        
+                        return {
+                            label: item.Apellido + ', ' + item.Nombre + ', ' + item.Calle + ' ' + item.Numero + ', ' + item.Piso + ', ' + item.Dto + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.Du,
+                            impuesto: item.Impuesto,
+                            datos: item.Calle + ', ' + item.Numero + ', ' + item.Piso + ', ' + item.Dto + ', ' + item.Barrio + ', ' + item.CP + ', ' + item.Apellido + ', ' + item.Nombre + ', ' + item.Du + ', ' + item.TelLabo + ', ' + item.IdPropiedad + ', ' + item.IdPropietario,
 
-    var validarContrato = function ()
-    {
 
 
+                        };
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        minLength: 1,
+
+        select: function (event, ui)
+        {
+            var arr = ui.item.datos.split(',');
+            $("#Calle").val(arr[0]);
+            $("#Numero").val(arr[1]);
+            $("#Piso").val(arr[2]);
+            $("#Dto").val(arr[3]);
+            $("#Barrio").val(arr[4]);
+            $("#CP").val(arr[5]);
+            $("#Ciudad").val(ui.item.ciudad);
+            $("#idPropiedad").val($.trim(arr[10]));
+            $("#idPropietario").val($.trim(arr[11]));
+            $("#ownerApellidoPropietario").val(arr[6]);
+            $("#ownerNamePropietario").val(arr[7]);
+            $("#DUPropietario").val(arr[8]);
+            $("#TelLaboralPropietario").val(arr[9]);
+
+            var datosImpu = ui.item.impuesto;
+            var sele = $(document.createElement('option'));
+            sele.text('Seleccione...');
+            sele.val('-1');
+            $("#Impuestos").append(sele);
+
+            $(datosImpu).each(function () {
+                var option = $(document.createElement('option'));
+                option.text(this.Descripcion);
+                option.val(this.Codigo);
+
+                $("#Impuestos").append(option);
+            });
 
 
-        return true;
-    }
+        },
 
+    });
 });
 

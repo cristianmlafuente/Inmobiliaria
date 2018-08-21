@@ -28,9 +28,17 @@ namespace InmBLL
                     DomiciliosId = entity.DomiciliosId,
                     NomenclaturaCatastral = entity.NomenclaturaCatastral,
                     NroContratoEpec = entity.NroContratoEpec,
+                    NumeroCtaRenta = entity.NumeroCtaRenta,
                     PersonasId = entity.PersonasId,
                     UnidadFacturacion = entity.UnidadFacturacion,
-                    NroFactura = entity.NroFactura
+                    NroFactura = entity.NroFactura,
+                    Tipo = int.Parse(entity.Tipo),
+                    Estado = entity.Estado,
+					ClienteEpecNro = entity.ClienteEpecNro,					
+					NroMedidorGas = entity.NroMedidorGas,
+                    PrecioVenta = entity.PrecioVenta,
+                    TelExpensas = entity.TelExpensas
+                    
                 };
                 var response = genericDal.Add(entityDAL);
 
@@ -65,12 +73,19 @@ namespace InmBLL
                 entityDAL.DomiciliosId = entity.DomiciliosId;
                 entityDAL.IdAdmConsorcio = entity.DomiciliosId;
                 entityDAL.NomenclaturaCatastral = entity.NomenclaturaCatastral;
-                entity.NroContratoEpec = entity.NroContratoEpec;
+                entityDAL.NroContratoEpec = entity.NroContratoEpec;
                 entityDAL.NroFactura = entity.NroFactura;
                 entityDAL.NumeroCtaRenta = entity.NumeroCtaRenta;
                 entityDAL.PersonasId = entity.PersonasId;
                 entityDAL.PropiedadesId = entity.PropiedadesId;
                 entityDAL.UnidadFacturacion = entity.UnidadFacturacion;
+                entityDAL.Tipo = int.Parse(entity.Tipo);
+                entityDAL.Estado = entity.Estado;
+				entityDAL.ClienteEpecNro = entity.ClienteEpecNro;
+				
+				entityDAL.NroMedidorGas = entity.NroMedidorGas;
+                entityDAL.PrecioVenta = entity.PrecioVenta;
+                entityDAL.TelExpensas = entity.TelExpensas;
                 var response = genericDal.Update(entityDAL);
                 return response;
             }
@@ -98,8 +113,12 @@ namespace InmBLL
                         NumeroCtaRenta = propiedad.NumeroCtaRenta,
                         PersonasId = propiedad.PersonasId,
                         PropiedadesId = propiedad.PropiedadesId,
-                        UnidadFacturacion = propiedad.UnidadFacturacion
-
+                        UnidadFacturacion = propiedad.UnidadFacturacion,
+                        Tipo = propiedad.Tipo.ToString(),
+                        Estado = propiedad.Estado != null ? propiedad.Estado.Value : false,
+                        ClienteEpecNro = propiedad.ClienteEpecNro,
+                        
+                        NroMedidorGas = propiedad.NroMedidorGas
                     };
                     listPropie.Add(data);
                 }
@@ -132,8 +151,11 @@ namespace InmBLL
                             NumeroCtaRenta = response.NumeroCtaRenta,
                             PersonasId = response.PersonasId,
                             PropiedadesId = response.PropiedadesId,
-                            UnidadFacturacion = response.UnidadFacturacion
-
+                            UnidadFacturacion = response.UnidadFacturacion,
+                            Tipo = response.Tipo.ToString(),
+                            Estado = response.Estado.Value,
+                            ClienteEpecNro = response.ClienteEpecNro,
+                            NroMedidorGas = response.NroMedidorGas
                         };
                 }
                 return propie;

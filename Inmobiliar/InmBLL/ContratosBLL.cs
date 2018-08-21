@@ -34,7 +34,8 @@ namespace InmBLL
                 entityDAL.NroContrato = entity.NroContrato;
                 entityDAL.PeriodoMeses = entity.PeriodoMeses;
                 entityDAL.PorcentajeIncremento = entity.PorcentajeIncremento;
-                entityDAL.PorcentajeInmobiliaria = entity.PorcentajeInmobiliaria;            
+                entityDAL.PorcentajeInmobiliaria = entity.PorcentajeInmobiliaria;
+                entityDAL.Incrementos = entity.Incrementos;
                 entityDAL.PropiedadesId = entity.PropiedadesId;
                 var response = genericDal.Add(entityDAL);
                 var listimpu = new List<InmDAL.Contrato_ImpuestoServicio>();
@@ -77,6 +78,7 @@ namespace InmBLL
                 entityDAL.PeriodoMeses = entity.PeriodoMeses;
                 entityDAL.PorcentajeIncremento = entity.PorcentajeIncremento;
                 entityDAL.PorcentajeInmobiliaria = entity.PorcentajeInmobiliaria;
+                entityDAL.Incrementos = entity.Incrementos;
                 var response = genericDal.Update(entityDAL);
                 return response;
             }
@@ -177,17 +179,28 @@ namespace InmBLL
                 var periodo = DateTime.Now.ToString("dd/mm/YYYY");
                 if (listcobros.Any(xx => xx.Periodo.Value.ToString() == periodo))
                     throw new Exception("Ya existe cobro para el periodo Ingresado.");
+                return CalcularMonto(contrato, fecha);                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string CalcularMonto(Contratos contrato, string fecha)
+        {
+            try
+            {
                 decimal Monto = contrato.MontoInicialAlquiler.Value;
                 int incrementos = contrato.Incrementos.Value;
                 decimal porsIncre = contrato.PorcentajeIncremento.Value;
-
                 var calculoPeriodo = contrato.PeriodoMeses / (incrementos + 1);
 
                 Dictionary<string, DateTime> dictionary = new Dictionary<string, DateTime>();
-                for (int i = 1; i < (incrementos+1); i++)
+                for (int i = 0; i < (incrementos + 1); i++)
                 {
                     int addMonth = ((int)calculoPeriodo * i);
-                    var contratofecha =  contrato.FechaContrato.Value.AddMonths(addMonth);
+                    var contratofecha = contrato.FechaContrato.Value.AddMonths(addMonth);
                     dictionary.Add(i.ToString(), contratofecha);
                 }
                 DateTime dateFilter = DateTime.ParseExact(fecha, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
@@ -195,25 +208,25 @@ namespace InmBLL
                 {
                     var result = DateTime.Compare(item.Value, dateFilter);
                     var key = Convert.ToDecimal(item.Key);
-                    if (result == 0 || result == 1)
+                    //if (result == 0 || result == 1)
+                        if (result>0)
                     {
                         if (key == 0)
                         {
                             return Monto.ToString();
                         }
-                        var montoNew = (Monto * (((key-1) * porsIncre)/100));
+                        var montoNew = (Monto * (((key - 1) * porsIncre) / 100));
 
                         return (Monto + montoNew).ToString();
                     }
- 
+
                 }
-                    return string.Empty;
+                return string.Empty;
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+             catch (Exception ex)
+             {
+                 throw new Exception(ex.Message);
+             }
         }
-    
     }
 }

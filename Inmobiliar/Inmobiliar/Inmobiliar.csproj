@@ -79,7 +79,7 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.VisualBasic" />      
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="MvcCheckBoxList, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvcCheckBoxList.1.4.5\lib\net45\MvcCheckBoxList.dll</HintPath>
     </Reference>
@@ -183,6 +183,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Attributes\MultipleButton.cs" />
     <Compile Include="Attributes\PermisoAtribute.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\CobroAlquilerController.cs" />
@@ -196,6 +197,7 @@
     </Compile>
     <Compile Include="Models\CobroAlquilerModel.cs" />
     <Compile Include="Models\ContratosModel.cs" />
+    <Compile Include="Models\DatosInmobiliariaModel.cs" />
     <Compile Include="Models\DatosUsuario.cs" />
     <Compile Include="Models\DomiciliosModel.cs" />
     <Compile Include="Models\Login.cs" />
@@ -261,7 +263,9 @@
     <Content Include="fonts\fontawesome-webfontba72.ttf" />
     <Content Include="fonts\fontawesome-webfontba72.woff" />
     <Content Include="fonts\fontawesome-webfontd41d.eot" />
-    <Content Include="Mvc.sitemap" />    
+    <Content Include="Mvc.sitemap" />
+    <Content Include="Archivos\RECIBO DE ALQUILER.xlsx" />
+    <Content Include="Archivos\RECIBO PROPIETARIO.xlsx" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\Cobro.js" />
     <Content Include="Scripts\Contrato.js" />

@@ -74,6 +74,9 @@
     <Compile Include="Domicilios.cs">
       <DependentUpon>Inmobiliar.tt</DependentUpon>
     </Compile>
+    <Compile Include="Empresa.cs">
+      <DependentUpon>Inmobiliar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Encriptador.cs" />
     <Compile Include="GarantePropietario.cs">
       <DependentUpon>Inmobiliar.tt</DependentUpon>

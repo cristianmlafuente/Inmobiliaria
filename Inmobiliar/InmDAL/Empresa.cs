@@ -12,15 +12,10 @@ namespace InmDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Pagos
+    public partial class Empresa
     {
-        public Nullable<int> InquilinoId { get; set; }
-        public Nullable<int> PropiedadId { get; set; }
-        public Nullable<int> ContratoId { get; set; }
-        public Nullable<System.DateTime> Periodo { get; set; }
-        public Nullable<System.DateTime> FechaPago { get; set; }
-        public Nullable<decimal> MontoTotal { get; set; }
-        public string Observaciones { get; set; }
-        public int PagosId { get; set; }
+        public int EmpresaId { get; set; }
+        public string Nombre { get; set; }
+        public string Domicilio { get; set; }
     }
 }

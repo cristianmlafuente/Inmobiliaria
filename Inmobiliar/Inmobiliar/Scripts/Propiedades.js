@@ -58,4 +58,28 @@
             $("#idPersona").val(ui.item.id);
         }
     });
+
+    $("#Tipo").change(function () 
+    {
+        debugger;
+        var str = "";
+        $("select option:selected").each(function () 
+        {
+            str = $(this).val();
+            switch(str)
+            {
+                case "1":
+                    $("#DetalleVenta").hide();
+                    $("#DetalleAlquiler").show();
+                    break;
+                case "2":
+                    $("#DetalleVenta").show();
+                    $("#DetalleAlquiler").hide();
+                    break;
+                default: 
+                    $("#DetalleVenta").hide();
+                    $("#DetalleAlquiler").hide();
+            }            
+        });
+    }).change();
 });

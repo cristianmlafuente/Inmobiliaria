@@ -23,6 +23,7 @@ namespace InmBLL
                 var entityDAL = new InmDAL.TiposImpuestosServicios();
                 entityDAL.TiposImpuestosServiciosID = entity.Codigo;
                 entityDAL.Descripcion = entity.Descripcion;
+                entityDAL.Pagar = entity.Pagar;
                 var response = genericDal.Add(entityDAL);
 
                 return response;
@@ -55,6 +56,7 @@ namespace InmBLL
                 var entityDAL = new InmDAL.TiposImpuestosServicios();
                 entityDAL.TiposImpuestosServiciosID = entity.Codigo;
                 entityDAL.Descripcion = entity.Descripcion;
+                entityDAL.Pagar = entity.Pagar;
                 var response = genericDal.Update(entityDAL);
                 return response;
             }
@@ -75,7 +77,8 @@ namespace InmBLL
                     var data = new TipoImpuestosServicios
                     {
                         Codigo = Tipo.TiposImpuestosServiciosID,
-                        Descripcion = Tipo.Descripcion                                                
+                        Descripcion = Tipo.Descripcion,
+                        Pagar = Tipo.Pagar != null ? Tipo.Pagar.Value : false
                     };
                     listTipo.Add(data);
                 }
@@ -101,13 +104,28 @@ namespace InmBLL
                         data = new TipoImpuestosServicios
                         {
                             Codigo = response.TiposImpuestosServiciosID,
-                            Descripcion = response.Descripcion     
+                            Descripcion = response.Descripcion, 
+                            Pagar = response.Pagar != null ? response.Pagar.HasValue : false     
                         };
                 }
                 return data;
             }
             catch (Exception ex)
             {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<TipoImpuestosServicios> GetAllByEsPago(bool EsPago)
+        {
+            try
+            {
+                var listTipo = GetAll();
+                listTipo = listTipo.Where(x => x.Pagar == EsPago).ToList();
+                return listTipo;
+            }
+            catch (Exception ex)
+            {                
                 throw new Exception(ex.Message);
             }
         }

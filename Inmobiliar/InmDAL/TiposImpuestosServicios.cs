@@ -22,6 +22,7 @@ namespace InmDAL
     
         public int TiposImpuestosServiciosID { get; set; }
         public string Descripcion { get; set; }
+        public Nullable<bool> Pagar { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pagos_Detalle> Pagos_Detalle { get; set; }

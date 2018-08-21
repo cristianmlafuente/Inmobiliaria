@@ -1,4 +1,5 @@
-﻿using InmBLL.Entities;
+﻿using Common.Emum;
+using InmBLL.Entities;
 using InmDAL;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,9 @@ namespace InmBLL
                 deta.PagoId = response;
                 deta.PeriodoPago = item.PeriodoPago;
                 item.Pagos_DetalleId = newgenericDal.Add(deta);
-	        }            
+	        }
+            var obser = new ObservacionesBLL();
+            obser.Add(new Observacion() { ContratosId = entity.ContratoId.Value, Descripcion = entity.Observaciones, Fecha = DateTime.Now });
             return response;
         }
 
@@ -216,5 +219,41 @@ namespace InmBLL
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<PagoPediente> GetPagosPendientes(string fecha = "")
+        {
+            try
+            {
+                var PagosPendientes = new PagoPediente();
+                List<PagoPediente> lstPagos = new List<PagoPediente>();
+
+                var Contratos = new ContratosBLL();
+                var lstConta = Contratos.GetAll();
+                
+                DateTime fec = new DateTime(DateTime.Now.Year,DateTime.Now.Month,1);
+                foreach (var item in lstConta)
+	            {
+                    var PagPend = (from Peri in item.PeriodosAdeudados
+                                       where Peri.MesAño < fec
+                                           select new PagoPediente
+                                       {
+                                           Fecha = Enum.GetName(typeof(Meses), Peri.MesAño.Month) + ", " + Peri.MesAño.Year + " Contrato: " + item.NroContrato,
+                                           Nombre = item.Inquilino.Apellido + ", " + item.Inquilino.Nombre, 
+                                           Telefono = (string.IsNullOrEmpty(item.Inquilino.Celular) ? "" : item.Inquilino.Celular) + " " + (string.IsNullOrEmpty(item.Inquilino.Telefono) ? "" : item.Inquilino.Telefono) + " " + (string.IsNullOrEmpty(item.Inquilino.TelefonoLaboral) ? "" : item.Inquilino.TelefonoLaboral),
+                                           Email = item.Inquilino.Email,
+                                           Monto = Contratos.CalcularMonto(item, Peri.MesAño.ToString("yyyyMMdd"))
+                                       }).ToList();
+
+                    lstPagos.AddRange(PagPend);
+	            }
+
+                return lstPagos;
+            }
+            catch (Exception ex)
+            {                
+                throw new Exception(ex.Message);
+            }
+        } 
+    
     }
 }

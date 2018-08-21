@@ -21,15 +21,15 @@ body {
     padding: 15px 15px;
     min-height: 600px;
     background:#E5EBF2;
-   
+    min-width:95%;   
 }
 
 #page-wrapper-breadcumb{
     padding: 15px 15px;
     min-height: 0;
     background:#E5EBF2;
-    margin: 0 22.8% 0;
-   
+    margin: 0 15% 0;
+    min-width: 95%;
 }
 
 #page-inner {
@@ -412,7 +412,7 @@ line-height: 1.428571429;
  
  @media(min-width:768px) {
      #page-wrapper{
-               margin: 0 0 0 260px;
+               margin: 0 0 0 15%;
         padding: 15px 30px;
         min-height: 1200px;
 		
@@ -422,7 +422,7 @@ line-height: 1.428571429;
     .navbar-side {
         z-index: 1;
         position: absolute;
-        width: 260px;
+        width: 16%;
     }
 
    .navbar {
@@ -438,7 +438,7 @@ line-height: 1.428571429;
         margin: 0 0 0 260px;
         padding: 15px 30px;
         min-height: 1200px;
-		
+		min-width:300px;
     }
 }
  @media(max-width:480px) {

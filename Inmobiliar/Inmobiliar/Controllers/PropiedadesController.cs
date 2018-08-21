@@ -27,7 +27,7 @@ namespace Inmobiliar.Controllers
         }
 
         // GET: Propiedades/Create
-        //[PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Propiedades)]
+        [PermisoAtribute(Rol = RolesPermisos.Rol_Alta_Propiedades)]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +46,12 @@ namespace Inmobiliar.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    if (model.Tipo == "-1")
+                    {
+                        ViewBag.TipoMsj = "Error";
+                        ViewBag.Message = "Debe indicar si el tipo propiedad es para alquilar o vender.";
+                        return View(model);
+                    }
                     var domicilio = new Domicilios
                     {
                         Barrio = model.domicilio.Barrio,
@@ -64,11 +70,18 @@ namespace Inmobiliar.Controllers
                     {
                         PersonasId = model.Dueño.PersonasId,
                         DomiciliosId = idDomicilio,
-                        NroFactura = model.UnidadFacturacion,
+                        NroFactura = model.NumeroFacturaAgua,
                         NomenclaturaCatastral = model.NomenclaturaCatastral,
                         NumeroCtaRenta = model.NumeroCtaRenta,
                         NroContratoEpec = model.NroContratoEpec,
                         UnidadFacturacion = model.UnidadFacturacion,
+                        Tipo = model.Tipo,
+                        Estado = false,
+						ClienteEpecNro = model.ClienteEpecNro,
+						NumeroFacturaAgua = model.NumeroFacturaAgua,
+						NroMedidorGas = model.NroMedidorGas,
+                        PrecioVenta = model.MontoVenta,
+                        TelExpensas = model.TelefonoExpensas
                     };
 
                     var result = propiedades.Add(propiedad);
@@ -128,15 +141,19 @@ namespace Inmobiliar.Controllers
                     {
                         PersonasId = model.Dueño.PersonasId,
                         DomiciliosId = model.domicilio.DomiciliosId,
-                        NroFactura = model.UnidadFacturacion,
+                        NroFactura = model.NumeroFacturaAgua,
                         NomenclaturaCatastral = model.NomenclaturaCatastral,
                         NumeroCtaRenta = model.NumeroCtaRenta,
                         NroContratoEpec = model.NroContratoEpec,
                         UnidadFacturacion = model.UnidadFacturacion,
+                        PropiedadesId = model.PropiedadesId,
+                        Tipo = model.Tipo,
+						ClienteEpecNro = model.ClienteEpecNro,						
+						NroMedidorGas = model.NroMedidorGas,
+                        PrecioVenta = model.MontoVenta,
+                        TelExpensas = model.TelefonoExpensas
                     };
-                    propiedades.Update(propiedad);
-
-                    var result = propiedades.Add(propiedad);
+                    propiedades.Update(propiedad);                    
                     ViewBag.TipoMsj = "Success";
                     ViewBag.Message = "La propiedad se modifico con Exito!!!";
                     return View();

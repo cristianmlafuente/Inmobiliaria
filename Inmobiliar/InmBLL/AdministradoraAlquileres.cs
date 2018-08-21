@@ -10,6 +10,7 @@ using System.IO;
 using Common.Emum;
 using Common.Funciones;
 using SautinSoft;
+using System.Web;
 
 namespace InmBLL
 {
@@ -32,11 +33,11 @@ namespace InmBLL
             try
             {
                 string ArchivoOriginalRecibo = PATH_DIRECTORIO_ARCHIVOS + ReciboAlquiler;
-                string ArchivoFinalRecibo = PATH_DIRECTORIO_TEMP + NombreArchFinal + "." + ReciboAlquiler.Split('.')[1];
-                if (File.Exists(ArchivoFinalRecibo))
-                    File.Delete(ArchivoFinalRecibo);
-                File.Copy(ArchivoOriginalRecibo, ArchivoFinalRecibo);
-                string cadenaConexion = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + ArchivoFinalRecibo + ";Extended Properties='Excel 12.0 Xml;HDR=NO';";
+                string ArchivoFinalRecibo = PATH_DIRECTORIO_TEMP + NombreArchFinal + "." + ReciboAlquiler.Split('.')[1];                
+                if (File.Exists(HttpContext.Current.Server.MapPath(ArchivoFinalRecibo)))
+                    File.Delete(HttpContext.Current.Server.MapPath(ArchivoFinalRecibo));
+                File.Copy(HttpContext.Current.Server.MapPath(ArchivoOriginalRecibo), HttpContext.Current.Server.MapPath(ArchivoFinalRecibo));
+                string cadenaConexion = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + HttpContext.Current.Server.MapPath(ArchivoFinalRecibo) + ";Extended Properties='Excel 12.0 Xml;HDR=NO';";
                 using (conexion = new OleDbConnection(cadenaConexion))
                 {
                     conexion.Open();
@@ -124,21 +125,24 @@ namespace InmBLL
                             }
                             comando.CommandText = string.Format("UPDATE [Hoja1$C{0}:C{0}] SET F1= '" + Enum.GetName(typeof(Meses), item.PeriodoPago.Month).ToUpper() + "'", fila);
                             comando.ExecuteNonQuery();
-                            comando.CommandText = string.Format("UPDATE [Hoja1$E{0}:E{0}] SET F1= '" + item.Monto + "'", fila);
+                            comando.CommandText = string.Format("UPDATE [Hoja1$E{0}:E{0}] SET F1= '" + decimal.Round(item.Monto, 2, MidpointRounding.AwayFromZero) + "'", fila);
                             comando.ExecuteNonQuery();
                             comando.CommandText = string.Format("UPDATE [Hoja1$J{0}:J{0}] SET F1= '" + Enum.GetName(typeof(Meses), item.PeriodoPago.Month).ToUpper() + "'", fila);
                             comando.ExecuteNonQuery();
-                            comando.CommandText = string.Format("UPDATE [Hoja1$L{0}:L{0}] SET F1= '" + item.Monto + "'", fila);
+                            comando.CommandText = string.Format("UPDATE [Hoja1$L{0}:L{0}] SET F1= '" + decimal.Round(item.Monto, 2, MidpointRounding.AwayFromZero) + "'", fila);
                             comando.ExecuteNonQuery();
                         }
-                        
+                        comando.CommandText = "UPDATE [Hoja1$E28:E28] SET F1= '" + Pago.MontoTotal + "'";
+                        comando.ExecuteNonQuery();
+                        comando.CommandText = "UPDATE [Hoja1$L28:L28] SET F1= '" + Pago.MontoTotal + "'";
+                        comando.ExecuteNonQuery();
                     }
 
                     conexion.Close();
                     conexion.Dispose();
                     conexion = null;
                 }
-                byte[] bytes = System.IO.File.ReadAllBytes(ArchivoFinalRecibo);
+                byte[] bytes = System.IO.File.ReadAllBytes(HttpContext.Current.Server.MapPath(ArchivoFinalRecibo));
 
                 //SautinSoft.ExcelToPdf pdf = new ExcelToPdf();
                 //pdf.OutputFormat = SautinSoft.ExcelToPdf.eOutputFormat.Pdf;

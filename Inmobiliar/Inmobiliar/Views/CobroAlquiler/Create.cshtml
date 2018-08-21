@@ -10,11 +10,7 @@
                         <div class="panel-heading">
                             <h3>
                                 Cobro Alquileres                                
-                            </h3>
-                            @if (ViewBag.Imprimir != null)
-                            {
-                               
-                            }
+                            </h3>                            
                         </div>
                         @if (ViewBag.TipoMsj == "Info")
                         {
@@ -47,9 +43,9 @@
                                         <div class="panel-body">                                           
                                             <div class="form-group has-success">
                                                 <label class="control-label" for="inputSuccess">Inquilino</label>
-                                                <input type="text" class="form-control" id="ownerInquilino" name="Inquilino">
-                                                @Html.HiddenFor(Model => Model.Contrato.sInquilinoId, new { id = "idInquilino" })
-                                                @Html.HiddenFor(Model => Model.Contrato.sIdContrato, new { id = "idContrato" })                                                
+                                                <input type="text" class="form-control" id="ownerInquilino" name="Inquilino" data-detalle="CreateCobro">
+                                                @Html.HiddenFor(x => x.Contrato.sInquilinoId, new { id = "idInquilino" })
+                                                @Html.HiddenFor(x => x.Contrato.sIdContrato, new { id = "idContrato" })                                                
                                             </div>
                                             <div class="form-group has-success">
                                                 <label class="control-label" for="inputSuccess">Apellido</label>
@@ -79,7 +75,7 @@
                                             <div class="form-group">
                                                 <label class="control-label" for="disabledSelect">Propiedad</label>
                                                 <input type="text" class="form-control required" id="datosPropiedad" name="prop">
-                                                @Html.HiddenFor(Model => Model.Contrato.sPropiedadId, new { id = "idPropiedad" })
+                                                @Html.HiddenFor(x => x.Contrato.sPropiedadId, new { id = "idPropiedad" })
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="disabledSelect">Calle</label>
@@ -119,26 +115,45 @@
                                             <div class="col-md-6 col-sm-6">
                                                 <div class="well">
                                                     <div class="form-group">
-                                                        @Html.LabelFor(m => m.Periodos)
+                                                        @Html.LabelFor(x => x.Periodos)
                                                         @Html.DropDownList("Periodo", new SelectList(@ViewBag.Periodo == null ? "" : @ViewBag.Periodo), new { @class = "form-control" })
                                                     </div>
                                                     <div id="DetallePago" style="display: none;">
                                                         <div class="form-group">
                                                             <label class="control-label" for="disabledSelect">Monto</label>
-                                                            @Html.EditorFor(m => m.Pago.MontoTotal, new { @class="form-control", disabled = "", id = "Monto" })
-                                                            @*<input type="text" class="form-control" id="Monto" name="" disabled="">*@
                                                         </div>
+                                                        @*@Html.LabelFor(m => m.Pago.MontoTotal)*@
+                                                        <div class="form-group">
+                                                            @Html.EditorFor(x => x.Pago.MontoTotal, new { @class = "form-control", disabled = "disabled", @readonly = "readonly", id = "Monto" })
+                                                        </div>
+                                                        
                                                         <div class="form-group">
                                                             <label class="control-label" for="disabledSelect">Impuestos a Presentar</label>
-
                                                             @*@Html.CheckBoxListFor(m => m.SelectedGroups, m => m.Contrato.ListaImpuestos, x => x.Codigo, x => x.Descripcion, m => m.Contrato.ListaImpuestos)*@
-
                                                         </div>
                                                         <div class="form-group" id="Impue">
-                                                            @Html.HiddenFor(Model => Model.ImpuestosPresentados, new { id = "checkPresentados" })
-                                                            @Html.HiddenFor(Model => Model.sPeriodo, new { id = "idPago" })
-                                                            
+                                                            @Html.HiddenFor(x => x.ImpuestosPresentados, new { id = "checkPresentados" })
+                                                            @Html.HiddenFor(x => x.sPeriodo, new { id = "idPago" })
+
                                                             @*@Html.CheckBoxList("Impuestos", m => m.Contrato.ListaImpuestos, m => m.Codigo, m => m.Descripcion, m => m.Selected)*@
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label" for="disabledSelect">Otros Cobros</label>
+                                                            <div class='checkbox'><label><input type='checkbox' id='chkOtrosPagos' class='myChecked'>Agregar Otros Cobros</label></div>
+                                                        </div>
+                                                        <div id="OtrosPagos" style="display: none;">
+                                                            @for( int i = 0; i < Model.OtrosPagos.Count(); ++i)
+                                                            {
+                                                                <div class="form-group">
+                                                                    <label class="control-label" for="disabledSelect">
+                                                                        @Model.OtrosPagos[i].Detalle
+                                                                    </label>                                                                    
+                                                                    <div class="form-group">
+                                                                        @Html.HiddenFor(m => m.OtrosPagos[i].Codigo)
+                                                                        @Html.EditorFor(m => m.OtrosPagos[i].Monto, new { htmlAttributes = new { @type = "number", @min = "0", @step = "0.01", @value = "0" } })
+                                                                    </div>
+                                                                </div>
+                                                            }                                                                                                                                                                                                                                                      
                                                         </div>
                                                     </div>
                                                 </div>
@@ -158,7 +173,7 @@
                                                             <br />
                                                             <div class="form-group">
                                                                 <label>Nueva Observación</label>
-                                                                @Html.TextAreaFor(m => m.Pago.Observaciones, new { id = "NuevaNota" })
+                                                                @Html.TextAreaFor(m => m.Pago.Observaciones, new { @class = "form-control", id = "NuevaNota" })
                                                                 @*<textarea class="form-control" rows="3"></textarea>*@
                                                                 <br />
                                                                 
@@ -170,7 +185,16 @@
                                         </div>
                                         <div class="panel-footer">
 
-                                            <input type="submit" class="btn btn-primary" value="Guardar" />                                            
+                                            
+                                            @if (ViewBag.Imprimir != null && ViewBag.Imprimir)
+                                            {
+                                                @Html.HiddenFor(m => m.Pago.PagoId)
+                                                <input id="Reimprimir" type="submit" class="btn btn-primary" name="action:GetImprimir" value="Imprimir" />
+                                            }
+                                            else
+                                            {
+                                                <input type="submit" class="btn btn-primary" value="Guardar" name="action:Create" />
+                                            }                                  
                                         </div>   
                                     </div>
                                 </div>

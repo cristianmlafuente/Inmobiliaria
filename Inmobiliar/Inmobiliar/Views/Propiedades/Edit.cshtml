@@ -43,24 +43,32 @@
                                         <div class="panel-body">
                                             <div class="form-group has-success col-lg-12">
                                                 <label class="control-label" for="inputSuccess">Propiedad</label>
-                                                <input type="text" class="form-control required" id="datosPropiedad" name="prop">
-                                                @Html.HiddenFor(Model => Model.domicilio.DomiciliosId, new { id = "idPropiedad" })
+                                                <input type="text" class="form-control required" id="datosPropiedadSinAlquiler" name="prop" data-detalle="Propietario">
+                                                @Html.HiddenFor(Model => Model.PropiedadesId, new { id = "PropiedadesId" })
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            Domicilio de la Propiedad
+                                            @Html.HiddenFor(Model => Model.domicilio.DomiciliosId, new { id = "idPropiedad" })
+                                        </div>
+                                        <div class="panel-body">
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Calle</label>
-                                                @Html.TextBoxFor(Model => Model.domicilio.Calle, new { id = "Calle", @class = "form-control", required = "" })                                                
+                                                @Html.TextBoxFor(Model => Model.domicilio.Calle, new { id = "Calle", @class = "form-control", required = "" })
                                             </div>
                                             <div class="form-group has-success col-lg-6">
-                                                <label class="control-label" for="inputSuccess">Número</label>                                                
-                                                @Html.TextBoxFor(Model => Model.domicilio.Numero, new { id = "Numero", @class = "form-control", required = "" })                                                
+                                                <label class="control-label" for="inputSuccess">Número</label>
+                                                @Html.TextBoxFor(Model => Model.domicilio.Numero, new { id = "Numero", @class = "form-control", required = "" })
                                             </div>
                                             <div class="form-group has-success col-lg-6">
-                                                <label class="control-label" for="inputSuccess">Piso</label>                                                
+                                                <label class="control-label" for="inputSuccess">Piso</label>
                                                 @Html.TextBoxFor(Model => Model.domicilio.Piso, new { id = "Piso", @class = "form-control", required = "" })
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Dto</label>
-                                                @Html.TextBoxFor(Model => Model.domicilio.Dto, new { id = "Dto", @class = "form-control"})
+                                                @Html.TextBoxFor(Model => Model.domicilio.Dto, new { id = "Dto", @class = "form-control" })
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Barrio</label>
@@ -68,31 +76,57 @@
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Ciudad</label>
-                                                @Html.TextBoxFor(Model => Model.domicilio.Ciudad, new { id = "Ciudad", @class = "form-control", required = "" })                                                
+                                                @Html.TextBoxFor(Model => Model.domicilio.Ciudad, new { id = "Ciudad", @class = "form-control", required = "" })
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">CP</label>
-                                                @Html.TextBoxFor(Model => Model.domicilio.CP, new { id = "CP", @class = "form-control", required = "" })                                                
+                                                @Html.TextBoxFor(Model => Model.domicilio.CP, new { id = "CP", @class = "form-control", required = "" })
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            Datos de la Unidad
+                                            @Html.HiddenFor(Model => Model.Estado, new { id = "Estado"})
+                                        </div>
+                                        <div class="panel-body">
                                             <div class="form-group has-success col-lg-6">
-                                                <br /><br /><br />
+                                                <label class="control-label" for="inputSuccess">Cliente Epec Nro</label>
+                                                @Html.TextBoxFor(Model => Model.ClienteEpecNro, new { id = "ClienteEpecNro", @class = "form-control" })
                                             </div>
-                                            <div class="form-group has-success col-lg-6">
+											<div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Nro Contrato Epec</label>
-                                                @Html.TextBoxFor(Model => Model.NroContratoEpec, new { id = "NroContratoEpec", @class = "form-control" })                                                
+                                                @Html.TextBoxFor(Model => Model.NroContratoEpec, new { id = "NroContratoEpec", @class = "form-control" })
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Nomenclatura Catastral</label>
-                                                @Html.TextBoxFor(Model => Model.NomenclaturaCatastral, new { id = "NomenclaturaCatastral", @class = "form-control" })                                                
+                                                @Html.TextBoxFor(Model => Model.NomenclaturaCatastral, new { id = "NomenclaturaCatastral", @class = "form-control" })
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Numero Cuenta Renta</label>
-                                                @Html.TextBoxFor(Model => Model.NumeroCtaRenta, new { id = "NumeroCtaRenta", @class = "form-control" })                                                
+                                                @Html.TextBoxFor(Model => Model.NumeroCtaRenta, new { id = "NumeroCtaRenta", @class = "form-control" })
                                             </div>
                                             <div class="form-group has-success col-lg-6">
                                                 <label class="control-label" for="inputSuccess">Unidad Facturacion</label>
-                                                @Html.TextBoxFor(Model => Model.UnidadFacturacion, new { id = "UnidadFacturacion", @class = "form-control" })                                                
+                                                @Html.TextBoxFor(Model => Model.UnidadFacturacion, new { id = "UnidadFacturacion", @class = "form-control" })
                                             </div>
+											<div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Nro de Medidor Gas</label>
+                                                @Html.TextBoxFor(Model => Model.NroMedidorGas, new { id = "NroMedidorGas", @class = "form-control" })
+                                            </div>
+											<div class="form-group has-success col-lg-6">
+                                                <label class="control-label" for="inputSuccess">Numero de Factura Agua</label>
+                                                @Html.TextBoxFor(Model => Model.NumeroFacturaAgua, new { id = "NumeroFacturaAgua", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            Propietario
+                                        </div>
+                                        <div class="panel-body">
                                             <div class="form-group has-error col-lg-6">
                                                 <label class="control-label" for="inputError">Dueño</label>
                                                 <input type="text" class="form-control" id="ownerNameEdit" name="" data-detalle="edit" />
@@ -102,14 +136,30 @@
 
                                             </div>
                                             <div class="form-group has-success col-lg-6">
-                                                <br /><br /><br />
+                                                <label class="control-label" for="inputSuccess">Alquiler/Venta</label>
+                                                <select id="Tipo" class="form-control" name="Tipo">
+                                                    <option value="-1"> Seleccione...</option>
+                                                    <option value="1">Alquiler</option>
+                                                    <option value="2">Venta</option>
+                                                </select>
                                             </div>
-
+                                            <div id="DetalleVenta" style="display: none;">
+                                                <div class="form-group has-warning col-lg-6">
+                                                    <label class="control-label" for="inputError">Precio</label>
+                                                    <input type="text" class="form-control" id="" name="MontoVenta">
+                                                </div>
+                                            </div>
+                                            <div id="DetalleAlquiler" style="display: none;">
+                                                <div class="form-group has-warning col-lg-6">
+                                                    <label class="control-label" for="inputError">Telefono Expensas</label>
+                                                    <input type="text" class="form-control" id="" name="TelExpensas">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>                        
                         <div class="panel-footer">
                             <input type="submit" class="btn btn-primary" value="Modificar" />
                         </div>

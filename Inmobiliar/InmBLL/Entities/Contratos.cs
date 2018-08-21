@@ -50,8 +50,12 @@ namespace InmBLL.Entities
                         var impGenericDal = new InmDAL.GenericDAL<InmDAL.TiposImpuestosServicios>();
                         foreach (var item in ListImpuestos)
 	                    {
-                            var a = impGenericDal.GetById(item.CodImpuesto.ToString());
-                            _Impuestos.Add(new TipoImpuestosServicios() { Codigo = a.TiposImpuestosServiciosID, Descripcion = a.Descripcion });
+                            var a = impGenericDal.GetById(item.CodImpuesto.ToString());                            
+                            _Impuestos.Add(new TipoImpuestosServicios() {
+                                Codigo = a.TiposImpuestosServiciosID, 
+                                Descripcion = a.Descripcion, 
+                                Pagar = a.Pagar != null ? a.Pagar.HasValue : false 
+                            });
 	                    }
                     }                    
                 }
@@ -358,7 +362,7 @@ namespace InmBLL.Entities
                            select new Observacion
                            {
                                ContratosId = obse.ContratosId,
-                               ObservacionId = obse.ObservacionId,
+                               ObservacionesId = obse.ObservacionesId,
                                Descripcion = obse.Descripcion,
                                Fecha = obse.Fecha
                            }).ToList();
