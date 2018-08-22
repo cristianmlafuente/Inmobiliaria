@@ -16,6 +16,20 @@ namespace InmBLL
 {
     public class AdministradoraAlquileres
     {
+        #region propertys
+
+        private string PATH_DIRECTORIO_ARCHIVOS { get; set; }
+        private string ReciboAlquiler { get; set; }
+        private string PATH_DIRECTORIO_TEMP { get; set; }
+        private string NombreArchFinal { get; set; }
+        private string ArchivoOriginalRecibo { 
+            get { 
+                return PATH_DIRECTORIO_ARCHIVOS + ReciboAlquiler; 
+            } 
+        }
+
+        #endregion
+
         #region "Recibos Alquileres"
 
         public void RegistrarPagoAlquiler()
@@ -26,17 +40,22 @@ namespace InmBLL
         public byte[] GenerarRecibo(PagoAlquiler Pago)
         {
             OleDbConnection conexion = null;
-            string PATH_DIRECTORIO_ARCHIVOS = ConfigurationManager.AppSettings["PathArchivosOriginal"];
-            string ReciboAlquiler = ConfigurationManager.AppSettings["ArchivoReciboAlquiler"];
-            string PATH_DIRECTORIO_TEMP = ConfigurationManager.AppSettings["PathArchivosTemp"];
+            string error = "";
             string NombreArchFinal = ReciboAlquiler.Split('.')[0] + Pago.Periodo.Value.ToString("MMyy") + Pago.InquilinoId.ToString() + Pago.PropiedadId.ToString();
+            string ArchivoFinalRecibo = "";
             try
-            {
-                string ArchivoOriginalRecibo = PATH_DIRECTORIO_ARCHIVOS + ReciboAlquiler;
-                string ArchivoFinalRecibo = PATH_DIRECTORIO_TEMP + NombreArchFinal + "." + ReciboAlquiler.Split('.')[1];                
+            {                
+                ArchivoFinalRecibo = PATH_DIRECTORIO_TEMP + NombreArchFinal + "." + ReciboAlquiler.Split('.')[1];
+                error = "Arma el nombre del archivo final ok";
                 if (File.Exists(HttpContext.Current.Server.MapPath(ArchivoFinalRecibo)))
+                {
                     File.Delete(HttpContext.Current.Server.MapPath(ArchivoFinalRecibo));
+                    error = "Ingresa a verificar q existe el archivo final y lo borra ok";
+                }
+                error = "Ingresa a verificar si existe el archivo final, no existe sale ok.";
+
                 File.Copy(HttpContext.Current.Server.MapPath(ArchivoOriginalRecibo), HttpContext.Current.Server.MapPath(ArchivoFinalRecibo));
+                error = "Crea un nuevo archivo final ok." ;
                 string cadenaConexion = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + HttpContext.Current.Server.MapPath(ArchivoFinalRecibo) + ";Extended Properties='Excel 12.0 Xml;HDR=NO';";
                 using (conexion = new OleDbConnection(cadenaConexion))
                 {
@@ -154,8 +173,8 @@ namespace InmBLL
             }
             catch (Exception ex)
             {
-                
-                throw new Exception(ex.Message);
+
+                throw new Exception("Llega hasta: " + error + ". Path Origen: " + HttpContext.Current.Server.MapPath(ArchivoOriginalRecibo) + ". Path Final: " + HttpContext.Current.Server.MapPath(ArchivoFinalRecibo) + ex.Message);
             }            
         }
 
@@ -235,7 +254,16 @@ namespace InmBLL
             }
         }
 
+
+
         #endregion
+
+        public AdministradoraAlquileres()
+        {
+            PATH_DIRECTORIO_ARCHIVOS = ConfigurationManager.AppSettings["PathArchivosOriginal"];
+            ReciboAlquiler = ConfigurationManager.AppSettings["ArchivoReciboAlquiler"];
+            PATH_DIRECTORIO_TEMP = ConfigurationManager.AppSettings["PathArchivosTemp"];
+        }
     }
 }
 
